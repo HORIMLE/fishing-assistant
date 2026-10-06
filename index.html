@@ -738,4 +738,28 @@ function calculate(){
  if(!floats.length){window._currentTrip.floatId=null;window._currentTrip.floatName='';window._currentTrip.floatLead=lead}
  saveTripSession();$('result').scrollIntoView({behavior:'smooth'})
 }
+</script><script>
+async function tripWeatherV132(){
+ const t=window._currentTrip||{},st=$('weatherStatus');
+ $('baitPlace').value=t.place||'';$('baitPlace').readOnly=true;
+ if(t.lat==null||t.lon==null)return;
+ try{
+  st.textContent='正在读取所选钓场的实时天气…';
+  const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+t.lat+'&longitude='+t.lon+'&current=temperature_2m,weather_code,wind_speed_10m&timezone=auto');
+  const w=await r.json(),c=w.current||{},weather=weatherCodeCN(c.weather_code);
+  if(c.temperature_2m!==undefined)$('baitTemp').value=c.temperature_2m;
+  if([...$('baitWeather').options].some(o=>o.value===weather))$('baitWeather').value=weather;
+  window._baitCoords={lat:t.lat,lon:t.lon};
+  st.textContent='所选钓场：'+t.place+' · '+weather+' · '+(c.temperature_2m??'-')+'℃ · 风速 '+(c.wind_speed_10m??'-')+'km/h';
+ }catch(e){st.textContent='钓场已选择，但天气读取失败：'+e.message}
+}
+function goToBaitFromFloat(){
+ const t=window._currentTrip||{};
+ if(!t.place)return alert('请先选择钓场。');
+ if((window._floats||[]).length&&!t.floatName)return alert('请先选择本次实际使用的浮漂。');
+ $('baitPlace').value=t.place;$('baitPlace').readOnly=true;
+ if(t.depth)$('baitDepth').value=t.depth;
+ if(t.fishText&&[...$('baitFish').options].some(o=>o.value===t.fishText))$('baitFish').value=t.fishText;
+ saveTripSession();openPanel('bait');setTimeout(tripWeatherV132,80)
+}
 </script></body></html>
