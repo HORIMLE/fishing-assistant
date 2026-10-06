@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.26</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.27</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -77,6 +77,23 @@
 .voice-status-card{background:#fff!important;color:var(--ink)!important;margin-top:0!important}
 .voice-main-btn{margin-top:12px}.voice-hint{background:#fff;border-radius:10px;padding:10px;line-height:1.5}
 @media(max-width:430px){.place-entry-grid{grid-template-columns:1fr}.place-entry-card{min-height:120px}}
+
+.voice-orb{position:relative;overflow:visible}
+.mic-glyph{position:relative;z-index:2}
+.mic-wave{position:absolute;left:50%;bottom:17px;transform:translateX(-50%);display:flex;align-items:flex-end;gap:3px;height:18px;opacity:0}
+.mic-wave i{display:block;width:3px;height:5px;border-radius:3px;background:#fff}
+.voice-orb.listening .mic-wave{opacity:1}
+.voice-orb.listening .mic-wave i:nth-child(1){animation:micBar1527 .65s infinite .05s}
+.voice-orb.listening .mic-wave i:nth-child(2){animation:micBar1527 .55s infinite .12s}
+.voice-orb.listening .mic-wave i:nth-child(3){animation:micBar1527 .72s infinite .02s}
+.voice-orb.listening .mic-wave i:nth-child(4){animation:micBar1527 .58s infinite .18s}
+.voice-orb.listening .mic-wave i:nth-child(5){animation:micBar1527 .68s infinite .09s}
+.voice-orb.speaking{animation:voiceSpeak1527 1.3s infinite}
+.voice-orb.processing{animation:voiceProcess1527 1s infinite}
+@keyframes micBar1527{0%,100%{height:4px}50%{height:18px}}
+@keyframes voiceSpeak1527{0%,100%{box-shadow:0 0 0 10px #ffffff0b}50%{box-shadow:0 0 0 24px #ffffff15}}
+@keyframes voiceProcess1527{0%{transform:rotate(0)}50%{transform:rotate(2deg)}100%{transform:rotate(0)}}
+.voice-live-label{font-size:12px;margin-top:6px;opacity:.75}
 </style><script src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'></script></head><body><div id="authScreen" class="auth-screen" style="display:flex!important"><div class="auth-box"><div class="auth-lang-row"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select></div><div class="auth-brand"><div class="icon">🎣</div><h1>钓鱼助手</h1><p>登录后进入你的钓鱼数据和 AI 助手</p></div><div id="loginView"><h2>登录</h2><div class="field"><label>邮箱</label><input id="loginEmail" type="email" inputmode="email" autocomplete="email" placeholder="请输入邮箱"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="请输入密码"></div><button class="primary" onclick="signIn()">登录</button><div class="auth-bottom"><button class="auth-link" type="button" onclick="requestPasswordReset()">忘记密码？重置密码</button><br>还没有账号？ <button class="auth-link" type="button" onclick="showAuthPane('register')">创建账号</button></div></div><div id="registerView" style="display:none"><h2>创建账号</h2><div class="field"><label>邮箱</label><input id="registerEmail" type="email" inputmode="email" autocomplete="email" placeholder="用于登录和邮箱确认"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="registerPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入密码</label><input id="registerPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="signUp()">创建账号</button><div class="auth-bottom">已有账号？ <button class="auth-link" type="button" onclick="showAuthPane('login')">返回登录</button></div></div><div id="resetView" style="display:none"><h2>设置新密码</h2><p class="auth-help">已通过密码重置链接验证。请输入新的登录密码。</p><div class="field"><label>新密码</label><input id="resetPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入新密码</label><input id="resetPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="updatePassword()">保存新密码</button></div><div id="authStatus" class="ai-status"></div></div></div><div id="appShell" class="app-shell" hidden style="display:none!important"><header><h1>🎣 钓鱼选漂助手</h1><p>水深 · 线组 · 风浪 · 走水 · 竿长综合推荐</p></header><div class="account-bar"><b id="authUser">已登录</b><div class="account-actions"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select><button class="logout-btn" onclick="signOut()">退出登录</button></div></div><main class="wrap"><div class='tabs'><button class='tab on' data-p='places'>钓场</button><button class='tab' data-p='calc'>选漂</button><button class='tab' data-p='bait'>AI饵料</button><button class='tab' data-p='trip'>本次作钓</button><button class='tab' data-p='stats'>统计</button><button class='tab' data-p='log'>钓鱼记录</button><button class='tab' data-p='community'>鱼获广场</button><button class='tab' data-p='box'>我的漂盒</button><button class='tab' data-p='guide'>说明</button></div>
 <section id='calc' class='panel'><div id='calcModeNotice' class='notice' style='display:none;margin-bottom:10px'></div><div id='tripBungalowCard' class='card'><h2>🏠 钓鱼房 / 방가로（可选）</h2><p class='why' id='tripBungalowHint'>如果这次使用钓鱼房/방가로，选择“是”并填写房间号。保存后，下次在钓场目录中会显示“有钓鱼房”。</p><div class='grid'><div class='field'><label>本次使用钓鱼房</label><select id='tripUsedBungalow' onchange='updateTripRoomInfo()'><option value='0' selected>否</option><option value='1'>是</option></select></div><div class='field'><label>房间/钓位号</label><input id='tripRoomNo' placeholder='例如 3号 / 7번 / A동 2호' oninput='updateTripRoomInfo()' disabled></div><div class='field full'><label>位置备注（可选）</label><input id='tripRoomNote' placeholder='例如 左侧、最里面、桥旁' oninput='updateTripRoomInfo()' disabled></div></div></div><div class='card'><h2>今天怎么钓？</h2><div class='grid'>
 <div class='field'><label>目标鱼</label><select id='fish'><option value='crucian'>鲫鱼</option><option value='carp'>鲤鱼</option><option value='mixed'>综合鱼</option><option value='big'>大型鱼</option></select></div><div class='field full'><label>鱼竿配置</label><p class='why'>每根鱼竿可以单独设置长度、主线、子线和浮漂。</p><div id='rodSetupList'></div><button type='button' class='secondary' onclick='addRodSetupV15()'>＋ 添加鱼竿</button><input id='rod' type='hidden' value='5.4'></div>
@@ -177,7 +194,7 @@
     <div><b>🎙️ 智能语音作钓</b><div id='voiceStepLabelV1526' class='small'>准备开始</div></div>
   </div>
   <div class='voice-orb-wrap'>
-    <div id='voiceOrbV1526' class='voice-orb'>🎙️</div>
+    <div id='voiceOrbV1526' class='voice-orb'><span class='mic-glyph'>🎙️</span><span class='mic-wave'><i></i><i></i><i></i><i></i><i></i></span></div>
     <div id='voiceQuestionV1526' class='voice-question'>点击开始后，我会一步一步询问你的作钓条件。</div>
     <div id='voiceHeardV1526' class='voice-heard'></div>
   </div>
@@ -191,7 +208,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.26":["낚시 찌 선택 도우미 v15.26","Fishing Float Assistant v15.26"],
+"钓鱼选漂助手 v15.27":["낚시 찌 선택 도우미 v15.27","Fishing Float Assistant v15.27"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -293,7 +310,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.26');
+ document.title=trStatic('钓鱼选漂助手 v15.27');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -3102,43 +3119,113 @@ Object.assign(I18N_STATIC,{
 })();
 </script><script>
 (function(){
- const V={active:false,stage:'idle',rodIndex:0,data:{},results:[],recognition:null};
+ const V={active:false,stage:'idle',rodIndex:0,data:{},results:[],recognition:null,listenToken:0,retryCount:0,maxAutoRetry:4,lastPrompt:'',lastHandler:null};
 
  function vEl(){return $('smartTripVoiceStatus')}
  function vStatus(html){
   const el=vEl();if(!el)return;el.style.display='block';el.innerHTML=html
  }
+ function vMicState(state,heard=''){
+  const orb=$('voiceOrbV1526'),btn=$('smartTripVoiceBtn'),h=$('voiceHeardV1526');
+  if(orb){
+   orb.classList.remove('listening','speaking','processing');
+   if(state)orb.classList.add(state)
+  }
+  if(h&&heard!==undefined){
+   h.textContent=heard?('我听到：'+heard):(state==='listening'?'正在听，请说话…':state==='speaking'?'正在提问…':state==='processing'?'正在理解你的回答…':'')
+  }
+  if(btn){
+   btn.disabled=state==='listening'||state==='speaking'||state==='processing';
+   btn.textContent=state==='listening'?'🎙️ 正在听…':state==='speaking'?'🔊 正在提问…':state==='processing'?'🧠 正在理解…':(V.active?'🎙️ 继续语音':'🎙️ 智能语音作钓设置')
+  }
+ }
  function vSpeak(text,after){
+  V.lastPrompt=text;
+  vMicState('speaking','');
   try{
    speechSynthesis.cancel();
    const u=new SpeechSynthesisUtterance(text);
    u.lang='zh-CN';u.rate=.96;
-   u.onend=()=>setTimeout(()=>after&&after(),250);
-   speechSynthesis.speak(u)
+   let done=false;
+   const finish=()=>{if(done)return;done=true;setTimeout(()=>after&&after(),180)};
+   u.onend=finish;u.onerror=finish;
+   speechSynthesis.speak(u);
+   // Android occasionally fails to fire onend after audio focus changes.
+   setTimeout(finish,Math.max(2200,Math.min(9000,text.length*150)))
   }catch(_){after&&after()}
  }
  function vRecLang(stage){return stage==='place_query'?'ko-KR':'zh-CN'}
- function vListen(handler){
+ function vListen(handler,isRetry=false){
   const C=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!C){vStatus('当前浏览器不支持网页语音识别。建议使用 Android Chrome 或 Samsung Internet。');V.active=false;return}
+  if(!C){vStatus('当前浏览器不支持网页语音识别。建议使用 Android Chrome 或 Samsung Internet。');V.active=false;vMicState('');return}
+  V.lastHandler=handler;
+  const token=++V.listenToken,stageAtStart=V.stage;
   try{V.recognition?.abort()}catch(_){}
-  const r=new C();V.recognition=r;r.lang=vRecLang(V.stage);r.interimResults=false;r.continuous=false;r.maxAlternatives=4;
-  const btn=$('smartTripVoiceBtn');if(btn){btn.disabled=true;btn.textContent='🎙️ 正在听…'}
+  const r=new C();V.recognition=r;window.__smartVoiceAbortV1527=()=>{V.active=false;V.listenToken++;try{r.abort()}catch(_){};vMicState('')};
+  r.lang=vRecLang(stageAtStart);
+  r.interimResults=true;
+  r.continuous=false;
+  r.maxAlternatives=5;
+  let answered=false,restartScheduled=false,lastText='';
+  const stillCurrent=()=>V.active&&V.listenToken===token&&V.stage===stageAtStart;
+  const autoRestart=(reason)=>{
+   if(restartScheduled||answered||!V.active||V.stage!==stageAtStart)return;
+   restartScheduled=true;
+   if(V.retryCount>=V.maxAutoRetry){
+    vMicState('');
+    vStatus('⚠ 暂时没有听到回答。当前问题没有丢失。<br><span class="small">点击“继续语音”后会从这一题继续，不会重新开始。</span>');
+    return
+   }
+   V.retryCount++;
+   vStatus("<b>🎙️ "+escapeHtml(V.lastPrompt)+"</b><div class='small' style='margin-top:5px'>"+(reason==='no-speech'?'刚才没有听清，麦克风将自动重新开启。':'麦克风短暂断开，正在自动恢复…')+"</div>");
+   setTimeout(()=>{if(V.active&&V.stage===stageAtStart)vListen(handler,true)},450)
+  };
+  r.onstart=()=>{if(stillCurrent())vMicState('listening','')};
+  r.onspeechstart=()=>{if(stillCurrent())vMicState('listening',lastText)};
   r.onresult=e=>{
-   const alts=[...(e.results?.[0]||[])].map(x=>x.transcript).filter(Boolean);
-   handler((alts[0]||'').trim(),alts)
+   if(!stillCurrent())return;
+   let interim='',finalText='';
+   for(let i=e.resultIndex;i<e.results.length;i++){
+    const t=e.results[i]?.[0]?.transcript||'';
+    if(e.results[i].isFinal)finalText+=t;else interim+=t
+   }
+   lastText=(finalText||interim||lastText).trim();
+   if(lastText)vMicState('listening',lastText);
+   if(finalText.trim()){
+    answered=true;V.retryCount=0;
+    vMicState('processing',finalText.trim());
+    // Invalidate this recognition before advancing to the next question.
+    V.listenToken++;
+    try{r.stop()}catch(_){}
+    setTimeout(()=>handler(finalText.trim(),[...e.results[e.results.length-1]].map(x=>x.transcript).filter(Boolean)),120)
+   }
   };
   r.onerror=e=>{
-   const msg=e.error==='not-allowed'?'没有麦克风权限。请允许此网站使用麦克风。':e.error==='no-speech'?'没有听清。点击按钮后再回答当前问题。':'语音识别失败：'+e.error;
-   vStatus('⚠ '+msg+'<br><span class="small">当前步骤会保留，再点“继续语音”即可。</span>')
+   if(!V.active||V.stage!==stageAtStart)return;
+   if(e.error==='aborted')return;
+   if(e.error==='not-allowed'||e.error==='service-not-allowed'){
+    V.active=false;vMicState('');
+    vStatus('⚠ 没有麦克风权限。请在浏览器网站权限中允许麦克风后重新开始。');return
+   }
+   if(e.error==='no-speech'||e.error==='audio-capture'||e.error==='network'){
+    autoRestart(e.error==='no-speech'?'no-speech':'disconnect');return
+   }
+   autoRestart('disconnect')
   };
-  r.onend=()=>{if(btn){btn.disabled=false;btn.textContent=V.active?'🎙️ 继续语音':'🎙️ 智能语音作钓设置'}};
-  try{r.start()}catch(e){vStatus('无法启动语音识别：'+escapeHtml(e.message))}
+  r.onend=()=>{
+   if(answered)return;
+   if(V.active&&V.stage===stageAtStart&&V.listenToken===token)autoRestart('disconnect')
+  };
+  try{r.start()}catch(e){
+   if(/already started/i.test(String(e.message)))return;
+   autoRestart('disconnect')
+  }
  }
  function ask(prompt,handler){
   if(!V.active)return;
-  vStatus("<b>🎙️ "+escapeHtml(prompt)+"</b><div class='small' style='margin-top:5px'>请直接说答案。</div>");
-  vSpeak(prompt,()=>vListen(handler))
+  V.lastPrompt=prompt;V.lastHandler=handler;V.retryCount=0;
+  vStatus("<b>🎙️ "+escapeHtml(prompt)+"</b><div class='small voice-live-label'>提问结束后麦克风会自动开启；如果浏览器短暂断开，会自动恢复当前问题。</div>");
+  vSpeak(prompt,()=>{if(V.active)vListen(handler)})
  }
  function norm(s){return String(s||'').toLowerCase().replace(/[\s,，。.!！?？]/g,'')}
  const cnDigit={'零':'0','〇':'0','一':'1','二':'2','两':'2','三':'3','四':'4','五':'5','六':'6','七':'7','八':'8','九':'9'};
@@ -3170,8 +3257,8 @@ Object.assign(I18N_STATIC,{
  function isAuto(s){return /自动|推荐|系统配|你来定/.test(String(s||''))}
  function fishFrom(s){
   const x=norm(s);
-  if(/鲫|붕어/.test(x))return 'crucian';
-  if(/鲤|잉어/.test(x))return 'carp';
+  if(/鲫|鲫鱼|即鱼|鲫鱼鱼|붕어/.test(x))return 'crucian';
+  if(/鲤|鲤鱼|里鱼|鲤鱼鱼|잉어/.test(x))return 'carp';
   if(/大鱼|大型|대물/.test(x))return 'big';
   if(/综合|混合|都钓/.test(x))return 'mixed';
   return null
@@ -3195,7 +3282,7 @@ Object.assign(I18N_STATIC,{
   const arr=['一','二','三','四','五','六','七','八','九','十'];for(let i=0;i<arr.length;i++)if(x.includes('第'+arr[i])||x===arr[i])return i;
   return -1
  }
- function setStage(stage){V.stage=stage;setTimeout(nextStep,100)}
+ function setStage(stage){V.stage=stage;window.__smartVoiceStageV1526=stage;vMicState('processing','');setTimeout(nextStep,320)}
  function currentRod(){return V.data.rods?.[V.rodIndex]}
  function nextRodOrEnv(){
   V.rodIndex++;
@@ -3328,7 +3415,7 @@ Object.assign(I18N_STATIC,{
  }
  window.startSmartTripVoiceV1525=function(){
   if(!V.active){
-   V.active=true;V.stage='place_query';V.rodIndex=0;V.data={};V.results=[];
+   V.active=true;V.stage='place_query';V.rodIndex=0;V.data={};V.results=[];V.listenToken++;V.retryCount=0;window.__smartVoiceStageV1526='place_query';
    nextStep();
   }else{
    // Resume the current stage after a recognition error.
@@ -3355,6 +3442,7 @@ Object.assign(I18N_STATIC,{
  };
  window.backPlaceModeV1526=function(){
   try{speechSynthesis.cancel()}catch(_){}
+  try{window.__smartVoiceAbortV1527?.()}catch(_){}
   const chooser=$('placeModeChooser'),manual=$('placeManualMode'),voice=$('placeVoiceMode');
   if(chooser)chooser.style.display='block';if(manual)manual.style.display='none';if(voice)voice.style.display='none';
   window.scrollTo({top:0,behavior:'smooth'})
@@ -3388,7 +3476,7 @@ Object.assign(I18N_STATIC,{
   const label=$('voiceStepLabelV1526'),q=$('voiceQuestionV1526'),orb=$('voiceOrbV1526'),h=$('voiceHeardV1526');
   if(label)label.textContent=stageNames[stage]||'智能语音设置';
   if(q&&qmap[stage])q.textContent=qmap[stage];
-  if(orb)orb.classList.toggle('listening',!!listening);
+  if(orb&&typeof window.__smartVoiceAbortV1527!=='function')orb.classList.toggle('listening',!!listening);
   if(h)h.textContent=heard?('我听到：'+heard):'';
  }
  window._syncVoiceUiV1526=syncVoiceUiV1526;
