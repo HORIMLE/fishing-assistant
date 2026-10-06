@@ -601,7 +601,7 @@ async function finishFishingSession(){
   let {error}=await sb.from('fishing_logs').insert({
    user_id:currentUser.id,recommendation_id:window._lastBaitRecommendationId||null,spot_id:spotId,location_name:t.place,
    target_fish:t.baitFish||t.fishText||null,latitude:coords?.lat??null,longitude:coords?.lon??null,
-   water_depth_m:t.baitDepth||t.depth||null,rod_length_m:t.rod||null,rod_lengths_m:(t.rodLengths&&t.rodLengths.length?t.rodLengths:[t.rod].filter(Boolean)),main_line:t.mainLine||null,leader_line:t.leaderLine||null,float_buoyancy_g:t.lead||null,
+   water_depth_m:t.baitDepth||t.depth||null,rod_length_m:t.rod||null,rod_lengths_m:(t.rodLengths&&t.rodLengths.length?t.rodLengths:[t.rod].filter(Boolean)),rod_setups:t.rodSetups||[],main_line:t.mainLine||null,leader_line:t.leaderLine||null,float_buoyancy_g:t.lead||null,
    air_temp_c:t.baitTemp||null,water_temp_c:t.baitWaterTemp||null,season:currentSeason(),weather_condition:t.baitWeather||null,
    bite_condition:t.baitBite||null,current_condition:t.baitCurrent||null,
    used_bungalow:t.usedBungalow===true,bungalow_room_no:t.usedBungalow?(t.roomNo||null):null,bungalow_position_note:t.usedBungalow?(t.roomNote||null):null,
@@ -838,7 +838,7 @@ function compactRecipeV14(text){
 }
 async function loadStatsRowsV14(){
  if(!currentUser)return[];
- const {data,error}=await sb.from('fishing_logs').select('fished_at,location_name,spot_id,target_fish,rod_length_m,rod_lengths_m,bait_recipe,catch_count,catch_weight_kg,duration_minutes,effectiveness_score,bungalow_room_no,weather_condition,air_temp_c,season').order('fished_at',{ascending:false}).limit(500);
+ const {data,error}=await sb.from('fishing_logs').select('fished_at,location_name,spot_id,target_fish,rod_length_m,rod_lengths_m,rod_setups,bait_recipe,catch_count,catch_weight_kg,duration_minutes,effectiveness_score,bungalow_room_no,weather_condition,air_temp_c,season').order('fished_at',{ascending:false}).limit(500);
  return error?[]:(data||[])
 }
 async function renderFishingStats(){
@@ -862,7 +862,7 @@ async function generateStatsAI(){
  st.textContent='正在根据真实作钓记录总结经验…';out.innerHTML='';
  const all=await loadStatsRowsV14(),spot=$('statsSpotFilter')?.value||'',rows=spot?all.filter(x=>x.location_name===spot):all;
  if(!rows.length){st.textContent='没有可分析的作钓记录。';return}
- const compact=rows.slice(0,80).map(x=>({日期:x.fished_at,钓场:x.location_name,鱼种:x.target_fish,鱼竿:x.rod_lengths_m||[x.rod_length_m].filter(Boolean),配方:compactRecipeV14(x.bait_recipe?.text),尾数:x.catch_count,重量:x.catch_weight_kg,时长分钟:x.duration_minutes,评分:x.effectiveness_score,房间:x.bungalow_room_no,天气:x.weather_condition,气温:x.air_temp_c,季节:x.season}));
+ const compact=rows.slice(0,80).map(x=>({日期:x.fished_at,钓场:x.location_name,鱼种:x.target_fish,鱼竿配置:x.rod_setups?.length?x.rod_setups:(x.rod_lengths_m||[x.rod_length_m].filter(Boolean)),配方:compactRecipeV14(x.bait_recipe?.text),尾数:x.catch_count,重量:x.catch_weight_kg,时长分钟:x.duration_minutes,评分:x.effectiveness_score,房间:x.bungalow_room_no,天气:x.weather_condition,气温:x.air_temp_c,季节:x.season}));
  const prompt='你是钓鱼数据分析助手。以下是用户真实历史记录='+JSON.stringify(compact)+'。'+aiLanguageInstruction()+' 请总结：1. 哪些钓场表现较好；2. 哪些配方在有足够样本时出鱼率更高；3. 哪些房间/钓位可能更好；4. 不同鱼竿长度是否有可观察差异；5. 给下一次作钓的可执行建议。必须标明样本量，小于3次的配方或地点只能说“证据不足”，不能把偶然结果说成规律。';
  try{const text=await gemini(prompt,st);st.textContent='AI总结已生成。';out.innerHTML="<div class='recipe'>"+escapeHtml(text).replace(/\n/g,'<br>')+"</div>"}catch(e){st.textContent='AI总结失败：'+e.message}
 }
