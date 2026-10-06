@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.17</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.18</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -26,6 +26,16 @@
 .rod-depth-state{display:inline-block;padding:4px 7px;border-radius:999px;font-size:11px;font-weight:800;background:#fff3d6;color:#8a5a10}
 .rod-depth-state.ok{background:#e7f3ed;color:#155f45}
 .rod-depth-help{font-size:11px;color:var(--muted);line-height:1.45;margin-top:5px}
+
+.bait-multi-toolbar{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:10px}
+.bait-multi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.bait-multi-card{border:1px solid var(--line);border-radius:14px;background:#fff;padding:11px}
+.bait-multi-card.duplicate{border-color:#d49a28;background:#fffaf0}
+.bait-multi-head{display:flex;align-items:center;gap:8px;justify-content:space-between;margin-bottom:8px}
+.bait-multi-head label{display:flex;align-items:center;gap:6px;font-weight:800}
+.bait-dup-badge{display:inline-block;font-size:11px;padding:3px 7px;border-radius:999px;background:#fff0cc;color:#8a5a10;font-weight:800}
+.bait-confidence{font-size:11px;color:var(--muted)}
+.bait-multi-card .field{margin-top:7px}
 </style><script src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'></script></head><body><div id="authScreen" class="auth-screen" style="display:flex!important"><div class="auth-box"><div class="auth-lang-row"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select></div><div class="auth-brand"><div class="icon">🎣</div><h1>钓鱼助手</h1><p>登录后进入你的钓鱼数据和 AI 助手</p></div><div id="loginView"><h2>登录</h2><div class="field"><label>邮箱</label><input id="loginEmail" type="email" inputmode="email" autocomplete="email" placeholder="请输入邮箱"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="请输入密码"></div><button class="primary" onclick="signIn()">登录</button><div class="auth-bottom"><button class="auth-link" type="button" onclick="requestPasswordReset()">忘记密码？重置密码</button><br>还没有账号？ <button class="auth-link" type="button" onclick="showAuthPane('register')">创建账号</button></div></div><div id="registerView" style="display:none"><h2>创建账号</h2><div class="field"><label>邮箱</label><input id="registerEmail" type="email" inputmode="email" autocomplete="email" placeholder="用于登录和邮箱确认"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="registerPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入密码</label><input id="registerPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="signUp()">创建账号</button><div class="auth-bottom">已有账号？ <button class="auth-link" type="button" onclick="showAuthPane('login')">返回登录</button></div></div><div id="resetView" style="display:none"><h2>设置新密码</h2><p class="auth-help">已通过密码重置链接验证。请输入新的登录密码。</p><div class="field"><label>新密码</label><input id="resetPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入新密码</label><input id="resetPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="updatePassword()">保存新密码</button></div><div id="authStatus" class="ai-status"></div></div></div><div id="appShell" class="app-shell" hidden style="display:none!important"><header><h1>🎣 钓鱼选漂助手</h1><p>水深 · 线组 · 风浪 · 走水 · 竿长综合推荐</p></header><div class="account-bar"><b id="authUser">已登录</b><div class="account-actions"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select><button class="logout-btn" onclick="signOut()">退出登录</button></div></div><main class="wrap"><div class='tabs'><button class='tab on' data-p='places'>钓场</button><button class='tab' data-p='calc'>选漂</button><button class='tab' data-p='bait'>AI饵料</button><button class='tab' data-p='trip'>本次作钓</button><button class='tab' data-p='stats'>统计</button><button class='tab' data-p='log'>钓鱼记录</button><button class='tab' data-p='box'>我的漂盒</button><button class='tab' data-p='guide'>说明</button></div>
 <section id='calc' class='panel'><div id='calcModeNotice' class='notice' style='display:none;margin-bottom:10px'></div><div id='tripBungalowCard' class='card'><h2>🏠 钓鱼房 / 방가로（可选）</h2><p class='why' id='tripBungalowHint'>如果这次使用钓鱼房/방가로，选择“是”并填写房间号。保存后，下次在钓场目录中会显示“有钓鱼房”。</p><div class='grid'><div class='field'><label>本次使用钓鱼房</label><select id='tripUsedBungalow' onchange='updateTripRoomInfo()'><option value='0' selected>否</option><option value='1'>是</option></select></div><div class='field'><label>房间/钓位号</label><input id='tripRoomNo' placeholder='例如 3号 / 7번 / A동 2호' oninput='updateTripRoomInfo()' disabled></div><div class='field full'><label>位置备注（可选）</label><input id='tripRoomNote' placeholder='例如 左侧、最里面、桥旁' oninput='updateTripRoomInfo()' disabled></div></div></div><div class='card'><h2>今天怎么钓？</h2><div class='grid'>
 <div class='field'><label>目标鱼</label><select id='fish'><option value='crucian'>鲫鱼</option><option value='carp'>鲤鱼</option><option value='mixed'>综合鱼</option><option value='big'>大型鱼</option></select></div><div class='field full'><label>鱼竿配置</label><p class='why'>每根鱼竿可以单独设置长度、主线、子线和浮漂。</p><div id='rodSetupList'></div><button type='button' class='secondary' onclick='addRodSetupV15()'>＋ 添加鱼竿</button><input id='rod' type='hidden' value='5.4'></div>
@@ -43,7 +53,7 @@
 
 <section id='bait' class='panel'><div id='baitModeNotice' class='notice' style='display:none;margin-bottom:10px'></div>
 <div class='card'><h2>🤖 AI 饵料助手</h2><p class='why'>拍摄或上传你现有的饵料包装，AI识别后加入“我的饵料库”。配饵时只从你的库存中选择。</p><div id='currentTripSummary' class='recipe' style='display:none'></div></div>
-<div class='card'><h2>📷 添加我的饵料</h2><div class='field'><label>选择图片来源</label><div class='upload-actions'><label class='upload-btn camera-btn' for='baitCamera'>📷 拍照识别</label><label class='upload-btn gallery-btn' for='baitGallery'>🖼️ 从相册选择</label></div><input id='baitCamera' class='hidden-file' type='file' accept='image/*' capture='environment' onchange='selectBaitImages(event,false)'><input id='baitGallery' class='hidden-file' type='file' accept='image/*' multiple onchange='selectBaitImages(event,true)'></div><div id='baitQueue' class='queue'></div><img id='baitPreview' class='bait-photo'><button class='primary' onclick='recognizeBait()'>AI识别当前图片</button><div id='recognizeStatus' class='ai-status'></div>
+<div class='card'><h2>📷 添加我的饵料</h2><div class='field'><label>选择图片来源</label><div class='upload-actions'><label class='upload-btn camera-btn' for='baitCamera'>📷 拍照识别</label><label class='upload-btn gallery-btn' for='baitGallery'>🖼️ 从相册选择</label></div><input id='baitCamera' class='hidden-file' type='file' accept='image/*' capture='environment' onchange='selectBaitImages(event,false)'><input id='baitGallery' class='hidden-file' type='file' accept='image/*' multiple onchange='selectBaitImages(event,true)'></div><div id='baitQueue' class='queue'></div><img id='baitPreview' class='bait-photo'><button class='primary' onclick='recognizeBait()'>AI识别当前图片</button><div id='recognizeStatus' class='ai-status'></div><div id='baitMultiResults' style='display:none;margin-top:12px'></div>
 <div id='baitEdit' style='display:none;margin-top:12px'><div class='grid'><div class='field'><label>品牌</label><input id='baitBrand'></div><div class='field'><label>名称</label><input id='baitName'></div><div class='field'><label>类型/定位</label><input id='baitType' placeholder='基础饵/主攻饵/状态饵'></div><div class='field'><label>味型</label><input id='baitFlavor' placeholder='腥/香/谷物等'></div><div class='field full'><label>适合鱼种/备注</label><input id='baitTargets'></div></div><button class='secondary' onclick='saveBait()'>确认加入我的饵料库</button></div></div>
 <div class='card'><h2>我的饵料库</h2><button class='secondary' onclick='manualBait()'>＋ 手动添加饵料</button><div id='baitList'></div></div>
 <div class='card'><h2>🌦️ 按今天环境配饵</h2><div class='grid'><div class='field full'><label>推荐范围</label><select id='baitRecommendMode'><option value='inventory'>只用我的饵料</option><option value='korea'>韩国可购买饵料</option><option value='mixed'>优先我的饵料，不足时补充韩国可买饵料</option></select></div><div class='field full'><label>钓点</label><input id='baitPlace' placeholder='可选：填写钓点名称'></div><div class='field'><label>目标鱼</label><select id='baitFish'><option>鲫鱼</option><option>鲤鱼</option><option>草鱼</option><option>青鱼</option><option>综合鱼</option><option>大型鱼</option></select><div id='baitFishSyncHint' class='small' style='margin-top:5px'></div></div><div class='field'><label>场景</label><select id='baitScene'><option>野钓</option><option>水库</option><option>黑坑</option><option>河流</option></select></div><div class='field'><label>气温 ℃</label><input id='baitTemp' type='number' placeholder='自动读取' value=''></div><div class='field'><label>水温 ℃（可选）</label><input id='baitWaterTemp' type='number' step='.1' placeholder='不知道可留空'></div><div class='field'><label>参考水深 m（多杆取平均）</label><input id='baitDepth' type='number' step='.1' value='2.5'></div><div class='field'><label>天气</label><select id='baitWeather'><option value='' selected>自动读取</option><option>晴</option><option>多云</option><option>阴</option><option>小雨</option><option>雨后</option><option>雷雨</option><option>雪</option><option>雾</option></select></div><div class='field'><label>鱼口</label><select id='baitBite'><option>正常</option><option>轻口</option><option>活跃</option><option>停口/很差</option></select></div><div class='field'><label>走水</label><select id='baitCurrent'><option>无</option><option>轻微</option><option>明显</option></select></div><div class='field'><label>季节（自动）</label><select id='baitSeason'><option>春</option><option>夏</option><option>秋</option><option>冬</option></select></div></div><button class='secondary' onclick='useCurrentConditions()'>📍 自动定位并读取当地天气</button><div id='weatherStatus' class='ai-status'>等待读取当前位置的实时天气…</div><div id='historyInsight' class='recipe' style='display:none'></div><button class='primary' onclick='recommendBait()'>AI推荐现有饵料搭配</button><div id='baitRecipeStatus' class='ai-status'></div><div id='baitRecipe'></div><div id='baitShoppingLinks'></div><div id='saveTripPlanCard' class='card'><h2>🎣 保存本次作钓</h2><p class='why'>AI配饵完成后先保存本次作钓计划。钓鱼结束后，再到“本次作钓”填写鱼获结果并保存到钓鱼记录。</p><button id='saveTripPlanBtn' class='primary' onclick='saveTripPlanV1512()'>保存本次作钓计划</button><div id='saveTripPlanStatus' class='ai-status'></div></div>
@@ -104,7 +114,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.17":["낚시 찌 선택 도우미 v15.17","Fishing Float Assistant v15.17"],
+"钓鱼选漂助手 v15.18":["낚시 찌 선택 도우미 v15.18","Fishing Float Assistant v15.18"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -206,7 +216,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.17');
+ document.title=trStatic('钓鱼选漂助手 v15.18');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -1992,4 +2002,145 @@ updateToolModeNoticeV1516();
  if(mode==='guided'&&Object.keys(guidedContext).length)window._currentTrip=guidedContext;
  applyModeUI();
 })();
+</script><script>
+let baitMultiCandidatesV1518=[];
+
+function cleanMultiBaitJSONV1518(text){
+ let raw=String(text||'').trim();
+ const fenced=raw.match(/\`\`\`(?:json)?\s*([\s\S]*?)\`\`\`/i);
+ if(fenced)raw=fenced[1];
+ const a=raw.indexOf('{'),b=raw.lastIndexOf('}');
+ if(a<0||b<a)throw Error('AI返回格式无法解析');
+ const obj=JSON.parse(raw.slice(a,b+1));
+ let items=Array.isArray(obj)?obj:(Array.isArray(obj.items)?obj.items:Array.isArray(obj.baits)?obj.baits:[obj]);
+ return items.map((x,i)=>({
+   brand:String(x.brand??x.品牌??'').trim(),
+   name:String(x.name??x.product_name??x.产品名??x.名称??'').trim(),
+   type:String(x.type??x.category??x.类型??x.定位??'').trim(),
+   flavor:String(x.flavor??x.味型??'').trim(),
+   targets:Array.isArray(x.targets)?x.targets.join('、'):String(x.targets??x.target??x.适合鱼种??x.用途??'').trim(),
+   confidence:Number(x.confidence??x.confidence_score??0)||0,
+   selected:true,
+   sourceIndex:i
+ })).filter(x=>x.brand||x.name);
+}
+
+function normBaitTextV1518(v){
+ return String(v||'').toLowerCase().replace(/[\s·._\-()（）【】\[\]]+/g,'');
+}
+function findDuplicateBaitV1518(x){
+ const existing=window._baits||[];
+ const nn=normBaitTextV1518(x.name),nb=normBaitTextV1518(x.brand);
+ if(!nn)return null;
+ return existing.find(y=>{
+   const yn=normBaitTextV1518(y.name),yb=normBaitTextV1518(y.brand);
+   const nameMatch=yn===nn || (yn.length>=4&&nn.length>=4&&(yn.includes(nn)||nn.includes(yn)));
+   const brandMatch=!nb||!yb||nb===yb||nb.includes(yb)||yb.includes(nb);
+   return nameMatch&&brandMatch
+ })||null;
+}
+function escAttrV1518(v){return escapeHtml(String(v??'')).replace(/'/g,'&#39;')}
+
+function renderBaitMultiV1518(){
+ const box=$('baitMultiResults');if(!box)return;
+ if(!baitMultiCandidatesV1518.length){box.style.display='none';box.innerHTML='';return}
+ box.style.display='block';
+ box.innerHTML="<div class='bait-multi-toolbar'><div><b>识别到 "+baitMultiCandidatesV1518.length+" 个饵料</b><div class='small'>可修改、取消勾选后批量保存。标记“可能已存在”的项目默认不勾选。</div></div><button class='primary' style='margin:0;width:auto' onclick='saveSelectedBaitsV1518()'>批量保存已勾选</button></div>"+
+ "<div class='bait-multi-grid'>"+baitMultiCandidatesV1518.map((x,i)=>{
+   const dup=findDuplicateBaitV1518(x);
+   if(dup&&x._dupInit!==true){x.selected=false;x._dupInit=true}
+   const conf=x.confidence?Math.round(Math.min(1,x.confidence)*100):null;
+   return "<div class='bait-multi-card "+(dup?'duplicate':'')+"'>"+
+    "<div class='bait-multi-head'><label><input type='checkbox' "+(x.selected?'checked':'')+" onchange='updateBaitCandidateV1518("+i+",\"selected\",this.checked)'> 饵料 "+(i+1)+"</label>"+
+    "<div>"+(dup?"<span class='bait-dup-badge'>可能已存在</span>":"")+(conf!==null?" <span class='bait-confidence'>"+conf+"%</span>":"")+"</div></div>"+
+    "<div class='field'><label>品牌</label><input value='"+escAttrV1518(x.brand)+"' oninput='updateBaitCandidateV1518("+i+",\"brand\",this.value,false)'></div>"+
+    "<div class='field'><label>名称</label><input value='"+escAttrV1518(x.name)+"' oninput='updateBaitCandidateV1518("+i+",\"name\",this.value,false)'></div>"+
+    "<div class='field'><label>类型/定位</label><input value='"+escAttrV1518(x.type)+"' oninput='updateBaitCandidateV1518("+i+",\"type\",this.value,false)'></div>"+
+    "<div class='field'><label>味型</label><input value='"+escAttrV1518(x.flavor)+"' oninput='updateBaitCandidateV1518("+i+",\"flavor\",this.value,false)'></div>"+
+    "<div class='field'><label>适合鱼种/备注</label><input value='"+escAttrV1518(x.targets)+"' oninput='updateBaitCandidateV1518("+i+",\"targets\",this.value,false)'></div>"+
+    "<button class='danger' style='margin-top:8px' onclick='removeBaitCandidateV1518("+i+")'>移除</button></div>"
+ }).join('')+"</div>";
+}
+function updateBaitCandidateV1518(i,key,val,rerender=true){
+ const x=baitMultiCandidatesV1518[i];if(!x)return;x[key]=val;if(rerender)renderBaitMultiV1518()
+}
+function removeBaitCandidateV1518(i){baitMultiCandidatesV1518.splice(i,1);renderBaitMultiV1518()}
+
+recognizeBait=async function(){
+ if(!baitImageData)return alert('请先拍照或选择图片');
+ const st=$('recognizeStatus');st.textContent='正在识别图片中的多个饵料包装…';
+ if($('baitEdit'))$('baitEdit').style.display='none';
+ baitMultiCandidatesV1518=[];renderBaitMultiV1518();
+ try{
+  const [head,b64]=baitImageData.split(',');
+  const mime=(head.match(/data:(.*?);/)||[])[1]||'image/jpeg';
+  const prompt='你是淡水台钓饵料包装识别助手。请检查整张图片，识别图片中每一个独立饵料包装，不要只识别最大的一包。包装可能有中文、韩文、日文或英文。不要把同一个包装重复识别。只根据清晰可见文字和可靠常识判断；看不清的字段写空字符串，不要编造。最多识别20个。仅返回严格JSON对象，格式：{"items":[{"brand":"品牌","name":"产品名","type":"基础饵/主攻饵/状态饵/添加剂/颗粒/其他","flavor":"味型或空","targets":"适合鱼种/用途或空","confidence":0到1}]}。不要markdown，不要解释。商品原名保持包装上的语言。';
+  const txt=await gemini([{type:'text',text:prompt},{type:'image',data:b64,mime_type:mime}],st);
+  baitMultiCandidatesV1518=cleanMultiBaitJSONV1518(txt);
+  if(!baitMultiCandidatesV1518.length)throw Error('没有识别出可保存的饵料包装，请换一张更清晰的照片或手动录入。');
+  for(const x of baitMultiCandidatesV1518){if(findDuplicateBaitV1518(x)){x.selected=false;x._dupInit=true}}
+  renderBaitMultiV1518();
+  st.textContent='识别完成：找到 '+baitMultiCandidatesV1518.length+' 个饵料。请检查名称后批量保存。';
+ }catch(e){st.textContent='识别失败：'+e.message}
+};
+
+async function saveSelectedBaitsV1518(){
+ const selected=baitMultiCandidatesV1518.filter(x=>x.selected&&x.name.trim());
+ if(!selected.length)return alert('请至少勾选一个有名称的饵料。');
+ const st=$('recognizeStatus');st.textContent='正在批量保存 '+selected.length+' 个饵料…';
+ try{
+  if(currentUser){
+   let image_path='';
+   if(baitImageData)image_path=await uploadBaitImage(baitImageData);
+   const rows=selected.map((x,idx)=>({
+    user_id:currentUser.id,
+    brand:x.brand||null,
+    name:x.name,
+    bait_type:x.type||null,
+    flavor:x.flavor||null,
+    target_fish:x.targets?x.targets.split(/[,，、/]/).map(v=>v.trim()).filter(Boolean):[],
+    image_path:image_path||null,
+    ai_metadata:{recognized:true,multi_image:true,source_item_index:x.sourceIndex??idx,confidence:x.confidence||null}
+   }));
+   const {error}=await sb.from('baits').insert(rows);
+   if(error){
+    if(image_path)try{await sb.storage.from('fishing-images').remove([image_path])}catch(_){}
+    throw error
+   }
+  }else{
+   const a=JSON.parse(localStorage.baits||'[]');
+   selected.forEach(x=>a.push({brand:x.brand,name:x.name,type:x.type,flavor:x.flavor,targets:x.targets,image:baitImageData,ai_metadata:{recognized:true,multi_image:true}}));
+   localStorage.baits=JSON.stringify(a)
+  }
+  const saved=selected.length;
+  baitMultiCandidatesV1518=[];renderBaitMultiV1518();
+  baitImageData='';baitImageQueue=[];baitQueueIndex=0;
+  if($('baitCamera'))$('baitCamera').value='';if($('baitGallery'))$('baitGallery').value='';
+  if($('baitPreview'))$('baitPreview').style.display='none';if($('baitQueue'))$('baitQueue').innerHTML='';
+  await renderBaits();
+  st.textContent='已批量保存 '+saved+' 个饵料到“我的饵料库”。';
+ }catch(e){st.textContent='批量保存失败：'+(e?.message||e)}
+}
+
+// Shared multi-item source image: only delete storage object after the last bait using it is removed.
+delBait=async function(i){
+ const a=window._baits||[],x=a[i];if(!x)return;
+ if(currentUser){
+  let canRemove=false;
+  if(x.image_path){
+   const {count}=await sb.from('baits').select('id',{count:'exact',head:true}).eq('image_path',x.image_path);
+   canRemove=Number(count||0)<=1
+  }
+  const {error}=await sb.from('baits').delete().eq('id',x.id);if(error)return alert(error.message);
+  if(canRemove&&x.image_path)try{await sb.storage.from('fishing-images').remove([x.image_path])}catch(_){}
+ }else{a.splice(i,1);localStorage.baits=JSON.stringify(a)}
+ renderBaits()
+};
+
+Object.assign(I18N_STATIC,{
+"识别到":["인식됨","Detected"],
+"批量保存已勾选":["선택 항목 일괄 저장","Save selected"],
+"可能已存在":["이미 있을 수 있음","Possible duplicate"],
+"移除":["제거","Remove"]
+});
 </script></body></html>
