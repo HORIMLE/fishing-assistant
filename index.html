@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.21</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.22</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -117,7 +117,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.21":["낚시 찌 선택 도우미 v15.21","Fishing Float Assistant v15.21"],
+"钓鱼选漂助手 v15.22":["낚시 찌 선택 도우미 v15.22","Fishing Float Assistant v15.22"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -219,7 +219,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.21');
+ document.title=trStatic('钓鱼选漂助手 v15.22');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -2604,6 +2604,114 @@ Object.assign(I18N_STATIC,{
  Object.assign(I18N_STATIC,{
   "已二次校正裁剪，只保留目标包装":["2차 크롭 보정 완료","Crop refined to target package"],
   "品牌（未可靠识别，留空）":["브랜드(신뢰도 부족, 비움)","Brand (not reliable, left blank)"]
+ });
+})();
+</script><script>
+(function(){
+ async function isolateSinglePackageV1522(item,index,total,st){
+  let cur=item?.cropImage||'';
+  if(!cur)return {...item,isolationOk:false,isolationReason:'no_crop'};
+  let lastVisible=99,lastBox=null,passes=0;
+  for(let pass=1;pass<=3;pass++){
+   try{
+    if(st)st.textContent='正在分离第 '+(index+1)+'/'+total+' 个包装 · 第 '+pass+' 次校正…';
+    const [head,b64]=cur.split(',');
+    const mime=(head.match(/data:(.*?);/)||[])[1]||'image/webp';
+    const prompt='你只做“单个包装分离”。当前图片可能同时包含多个饵料包装。目标是保留画面中心附近、面积最大、最完整的那一包，并排除所有相邻包装。请先数出当前图片中明显可见的独立包装数量 visible_packages。然后给出目标单包的 bbox=[x,y,w,h]，0到1000归一化坐标。bbox宁可稍微切掉背景，也不要包含第二包饵料；但尽量保留目标包装主体和主要文字。若当前已经只有一个包装，single=true，并给出尽量覆盖该单包的bbox。仅返回严格JSON：{"visible_packages":整数,"single":true或false,"bbox":[x,y,w,h],"reliable":true或false}。不要识别品牌和产品名，不要markdown。';
+    const txt=await gemini([{type:'text',text:prompt},{type:'image',data:b64,mime_type:mime}],st);
+    const x=parseObjV1521(txt);
+    lastVisible=Math.max(1,Number(x.visible_packages||1)||1);
+    lastBox=Array.isArray(x.bbox)?x.bbox:null;
+    if(!x.reliable||!lastBox||lastBox.length<4){
+      return {...item,cropImage:cur,isolationOk:lastVisible===1,visiblePackages:lastVisible,isolationPasses:passes,isolationReason:'unreliable_bbox'}
+    }
+    const next=await cropBaitImageV1519(cur,{x:Number(lastBox[0]),y:Number(lastBox[1]),w:Number(lastBox[2]),h:Number(lastBox[3])});
+    if(next){cur=next;passes=pass}
+    if(x.single===true&&lastVisible<=1){
+      return {...item,cropImage:cur,isolationOk:true,visiblePackages:1,isolationPasses:passes,refinedBbox:lastBox,relocalizeReliable:true}
+    }
+   }catch(e){
+    return {...item,cropImage:cur,isolationOk:false,visiblePackages:lastVisible,isolationPasses:passes,isolationReason:String(e?.message||e)}
+   }
+  }
+  return {...item,cropImage:cur,isolationOk:lastVisible<=1,visiblePackages:lastVisible,isolationPasses:passes,refinedBbox:lastBox,relocalizeReliable:lastVisible<=1,isolationReason:lastVisible>1?'multiple_packages_remain':''}
+ }
+
+ const prevRender=renderBaitMultiV1518;
+ renderBaitMultiV1518=function(){
+  prevRender();
+  const box=$('baitMultiResults'); if(!box)return;
+  [...box.querySelectorAll('.bait-multi-card')].forEach((card,i)=>{
+    const x=baitMultiCandidatesV1518[i]; if(!x)return;
+    const note=card.querySelector('.bait-crop-note');
+    if(note){
+      if(x.isolationOk===true)note.textContent='单包分离成功 · 已去除相邻包装';
+      else if(x.isolationOk===false)note.textContent='⚠ 仍检测到多个包装，已停止自动识别以避免误判';
+    }
+    if(x.isolationOk===false){
+      card.style.borderColor='#c45b45';
+      card.querySelectorAll('input[type="text"],input:not([type])').forEach(()=>{});
+      const head=card.querySelector('.bait-multi-head>div:last-child');
+      if(head&&!head.textContent.includes('需重新拍摄'))head.insertAdjacentHTML('afterbegin',"<span class='bait-dup-badge' style='background:#ffe4de;color:#9b3326'>需重新拍摄/单包裁剪</span> ");
+    }
+  })
+ };
+
+ const oldIdentify=identifyFinalBaitV1521;
+ identifyFinalBaitV1521=async function(item,index,total,st){
+  if(item?.isolationOk===false){
+    return {...item,brand:'',brandConfidence:0,brandEvidence:'',name:'',nameOriginal:'',nameZh:'',flavor:'',flavorOriginal:'',flavorZh:'',targets:'',targetsOriginal:'',targetsZh:'',refined:false,refinementError:'裁剪中仍包含多个包装，已跳过商品识别，避免把两包信息混在一起。'}
+  }
+  return oldIdentify(item,index,total,st)
+ };
+
+ // Replace only the latest recognizer with stricter isolate-first pipeline.
+ recognizeBait=async function(){
+  if(!baitImageData)return alert('请先拍照或选择图片');
+  const st=$('recognizeStatus');st.textContent='第一阶段：正在检测整张图片中的各个包装…';
+  if($('baitEdit'))$('baitEdit').style.display='none';
+  baitMultiCandidatesV1518=[];renderBaitMultiV1518();
+  try{
+   const [head,b64]=baitImageData.split(',');
+   const mime=(head.match(/data:(.*?);/)||[])[1]||'image/jpeg';
+   const p1='只做整图目标检测。找出每一个独立淡水钓鱼饵料包装，最多20个。重点是 bbox 准确，不识别品牌。每个 bbox=[x,y,w,h] 使用0到1000归一化整数。要求每个bbox尽量只覆盖一包，不要把相邻包装放进同一个框。仅返回严格JSON：{"items":[{"brand":"","brand_confidence":0,"name":"","type":"","flavor":"","targets":"","confidence":0,"bbox":[x,y,w,h]}]}。不要markdown。';
+   const txt=await gemini([{type:'text',text:p1},{type:'image',data:b64,mime_type:mime}],st);
+   baitMultiCandidatesV1518=cleanMultiBaitJSONV1518(txt);
+   if(!baitMultiCandidatesV1518.length)throw Error('没有识别出可保存的饵料包装。');
+   baitMultiCandidatesV1518.forEach(x=>{x.brand='';x.brandConfidence=0;x.brandEvidence=''});
+   await buildBaitCropsV1519(baitMultiCandidatesV1518,baitImageData);
+   renderBaitMultiV1518();
+
+   let doDeep=true;
+   if(baitMultiCandidatesV1518.length>8){
+    doDeep=confirm('识别到 '+baitMultiCandidatesV1518.length+' 个饵料。高精度模式会逐个进行“最多3次单包分离 + 最终识别”，耗时会更长。\n\n确定：高精度识别\n取消：只看初步裁剪');
+   }
+   if(doDeep){
+    const out=[];
+    for(let i=0;i<baitMultiCandidatesV1518.length;i++){
+      let x=await isolateSinglePackageV1522(baitMultiCandidatesV1518[i],i,baitMultiCandidatesV1518.length,st);
+      x=await identifyFinalBaitV1521(x,i,baitMultiCandidatesV1518.length,st);
+      out.push(x);
+      baitMultiCandidatesV1518=out.concat(baitMultiCandidatesV1518.slice(i+1));
+      renderBaitMultiV1518();
+    }
+    baitMultiCandidatesV1518=out;
+   }else{
+    baitMultiCandidatesV1518.forEach(x=>{x.brand='';x.brandConfidence=0;x.refined=false;x.isolationOk=null});
+   }
+
+   for(const x of baitMultiCandidatesV1518){if(findDuplicateBaitV1518(x)){x.selected=false;x._dupInit=true}}
+   renderBaitMultiV1518();
+   const ok=baitMultiCandidatesV1518.filter(x=>x.isolationOk===true).length;
+   const bad=baitMultiCandidatesV1518.filter(x=>x.isolationOk===false).length;
+   st.textContent='识别完成：'+baitMultiCandidatesV1518.length+' 个；成功分离单包 '+ok+' 个'+(bad?'；'+bad+' 个仍包含多个包装，已停止识别避免误判':'')+'。';
+  }catch(e){st.textContent='识别失败：'+(e?.message||e)}
+ };
+
+ Object.assign(I18N_STATIC,{
+  "单包分离成功 · 已去除相邻包装":["단일 포장 분리 성공 · 주변 포장 제거","Single package isolated · adjacent packages removed"],
+  "⚠ 仍检测到多个包装，已停止自动识别以避免误判":["⚠ 여러 포장이 남아 자동 인식을 중단했습니다","⚠ Multiple packages remain; recognition stopped to avoid errors"],
+  "需重新拍摄/单包裁剪":["재촬영/단일 포장 크롭 필요","Retake / single-package crop needed"]
  });
 })();
 </script></body></html>
