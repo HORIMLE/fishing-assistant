@@ -710,4 +710,32 @@ async function renderFloats(){
  window._floats=a;
  $('floatList').innerHTML=a.length?a.map((x,i)=>"<div class='item float-card'>"+(x.image?"<img class='float-photo' src='"+x.image+"' alt=''>":"<div class='no-photo'>🎣</div>")+"<div><button class='danger' onclick='delFloat("+i+")'>删除</button><b>"+escapeHtml(x.name)+"</b><span class='small'>吃铅 "+x.lead+" g</span></div></div>").join(''):"<div class='empty'>还没有录入浮漂</div>"
 }
+</script><script>
+function floatPickHtmlV132(x,recommendedLead){
+ const t=window._currentTrip||{},selected=(t.floatId&&t.floatId===x.id)||(!t.floatId&&t.floatName===x.name&&Number(t.floatLead)===Number(x.lead));
+ const diff=Math.abs(Number(x.lead)-Number(recommendedLead||0)).toFixed(2);
+ return "<button type='button' class='float-pick "+(selected?'on':'')+"' onclick='selectTripFloatV132("+JSON.stringify(String(x.id||''))+","+JSON.stringify(x.name)+","+Number(x.lead)+")'><div class='float-pick-inner'>"+(x.image?"<img src='"+x.image+"' alt=''>":"<div class='no-photo'>🎣</div>")+"<div><b>"+escapeHtml(x.name)+"</b><div class='small'>吃铅 "+x.lead+"g · 与推荐值相差 "+diff+"g</div>"+(selected?"<span class='pill'>✓ 已选择本次浮漂</span>":'')+"</div></div></button>"
+}
+function selectTripFloatV132(id,name,lead){
+ window._currentTrip={...(window._currentTrip||{}),floatId:id||null,floatName:name,floatLead:Number(lead)};
+ saveTripSession();
+ const rec=Number((window._currentTrip||{}).recommendedLead||lead);
+ $('owned').innerHTML="<p><b>请选择本次使用的浮漂：</b></p>"+(window._recommendedFloats||[]).slice(0,5).map(x=>floatPickHtmlV132(x,rec)).join('')
+}
+function calculate(){
+ const d=+$('depth').value||2,r=+$('rod').value||5.4,w=+$('wind').value,c=+$('current').value,b=$('bite').value,[autoM,sub]=lineRec(),m=+$('mainline').value||autoM;
+ const base=(m+d)/2;let factor=1+(Math.max(0,r-5.4)*.035)+(w*.07)+(c*.1);
+ if(b==='light')factor-=.09;if($('method').value==='fine')factor-=.06;if($('method').value==='corn')factor+=.1;
+ let lead=Math.max(.6,base*factor),lo=Math.max(.5,lead*.9),hi=lead*1.1;lo=Math.round(lo*10)/10;hi=Math.round(hi*10)/10;lead=Math.round(lead*10)/10;
+ $('lead').textContent=lo+' ~ '+hi+' g（优先 '+lead+'g 左右）';
+ $('tags').innerHTML="<span class='pill'>主线 "+m+"号</span><span class='pill'>子线约 "+sub+"号</span><span class='pill'>水深 "+d+"m</span><span class='pill'>竿长 "+r+"m</span>";
+ const why=['基础值约 '+(Math.round(base*10)/10)+'g'];if(r>5.4)why.push('长竿增加抛投稳定性修正');if(w)why.push('风力上调');if(c)why.push('走水上调');if(b==='light')why.push('轻口下调灵敏度区间');
+ $('reason').textContent='计算逻辑：'+why.join('；')+'。建议从优先值开始，现场每次约0.2~0.3g微调。';
+ const floats=(window._floats||[]).map(x=>({...x,diff:Math.abs(Number(x.lead)-lead)})).sort((a,b)=>a.diff-b.diff);window._recommendedFloats=floats;
+ $('owned').innerHTML=floats.length?"<p><b>请选择本次使用的浮漂：</b></p>"+floats.slice(0,5).map(x=>floatPickHtmlV132(x,lead)).join(''):"<p class='small'>漂盒还没有浮漂，将按推荐吃铅值记录。</p>";
+ $('result').style.display='block';
+ window._currentTrip={...(window._currentTrip||{}),depth:d,rod:r,mainLine:m,leaderLine:sub,recommendedLead:lead,fishCode:$('fish').value,fishText:{crucian:'鲫鱼',carp:'鲤鱼',mixed:'综合鱼',big:'大型鱼'}[$('fish').value]||'综合鱼'};
+ if(!floats.length){window._currentTrip.floatId=null;window._currentTrip.floatName='';window._currentTrip.floatLead=lead}
+ saveTripSession();$('result').scrollIntoView({behavior:'smooth'})
+}
 </script></body></html>
