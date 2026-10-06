@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.14</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.15</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -104,7 +104,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.14":["낚시 찌 선택 도우미 v15.14","Fishing Float Assistant v15.14"],
+"钓鱼选漂助手 v15.15":["낚시 찌 선택 도우미 v15.15","Fishing Float Assistant v15.15"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -206,7 +206,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.14');
+ document.title=trStatic('钓鱼选漂助手 v15.15');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -1740,5 +1740,40 @@ syncBaitFishFromTripV159=function(){
 Object.assign(I18N_STATIC,{
 "独立配饵模式：可自由选择鱼种，不关联钓场流程。":["독립 미끼 배합 모드: 어종을 자유롭게 선택하며 낚시터 흐름과 연결되지 않습니다.","Standalone bait mode: choose the fish freely; it is not linked to the fishing-spot workflow."],
 "独立工具模式：已带入刚才选漂的鱼种和水深，可继续自由修改。":["독립 도구 모드: 방금 찌 선택에서 사용한 어종과 수심을 가져왔으며 자유롭게 수정할 수 있습니다.","Standalone tool mode: fish and depth were carried over from Float and remain editable."]
+});
+</script><script>
+function isFishingRelatedPlaceV1515(x){
+ const text=((x?.name||'')+' '+(x?.category||'')).toLowerCase();
+ return /낚시|좌대|하우스|실내낚시|fishing|어장|유료터|낚시카페/.test(text);
+}
+function fishingPlaceCard(x){
+ const key=fishingPlaceKey(x);
+ window._placeLookup=window._placeLookup||{};
+ window._placeLookup[key]=x;
+ const d=x.distance!=null?(x.distance<1000?Math.round(x.distance)+'m':(x.distance/1000).toFixed(1)+'km'):'';
+ const roomBadge=x.has_room_history===true?'<span class="pill">🏠 有钓鱼房</span>':'';
+ const webUrl='https://search.naver.com/search.naver?query='+encodeURIComponent((x.name||'')+' 낚시터');
+ const phone=String(x.phone||'').trim();
+ const callBtn=phone
+  ? "<a class='secondary' style='margin:0;padding:8px;flex:1;text-align:center;text-decoration:none' href='"+phoneHref(phone)+"'>📞 打电话</a>"
+  : "<button class='secondary' style='margin:0;padding:8px;flex:1;opacity:.55' type='button' disabled>📞 未提供电话</button>";
+ return "<div class='item'><b>"+escapeHtml(x.name||'未命名钓场')+"</b><div class='small'>"+(d?d+' · ':'')+escapeHtml(x.address||'地址未知')+"</div>"+(roomBadge?"<div style='margin-top:6px'>"+roomBadge+"</div>":"")+(phone?"<div class='small'>☎ "+escapeHtml(phone)+"</div>":"")+"<div style='display:flex;flex-wrap:wrap;gap:8px;margin-top:8px'><button class='secondary' style='margin:0;padding:8px;flex:1' onclick='selectDiscoveredPlaceByKey("+JSON.stringify(key)+")'>设为本次钓点</button>"+callBtn+(x.place_url?"<a class='secondary' style='margin:0;padding:8px;flex:1;text-align:center;text-decoration:none' target='_blank' rel='noopener' href='"+x.place_url+"'>Kakao地图</a>":"")+"<a class='secondary' style='margin:0;padding:8px;flex:1;text-align:center;text-decoration:none' target='_blank' rel='noopener' href='"+webUrl+"'>🌐 相关网站</a></div></div>"
+}
+async function searchManualFishingPlaces(){
+ const q=$('manualPlaceQuery').value.trim(),st=$('manualPlaceStatus');
+ if(!q)return st.textContent=t('places.manual_required');
+ st.textContent='正在搜索“'+q+'”…';$('manualPlaceList').innerHTML='';
+ try{
+  const data=await invokeFishingPlaces({mode:'manual',query:q});
+  const filtered=(data.items||[]).filter(isFishingRelatedPlaceV1515);
+  const enriched=await enrichFishingPlaces(filtered);
+  renderFishingPlaces('manualPlaceList',enriched);
+  st.textContent=filtered.length
+   ? '找到 '+filtered.length+' 个与钓场/钓鱼相关的结果。'
+   : '没有找到与钓场/钓鱼相关的结果。请尝试输入更完整的钓场名称。';
+ }catch(e){st.textContent='搜索失败：'+e.message}
+}
+Object.assign(I18N_STATIC,{
+"📞 未提供电话":["📞 전화번호 없음","📞 No phone listed"]
 });
 </script></body></html>
