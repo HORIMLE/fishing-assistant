@@ -679,4 +679,35 @@ async function searchRegionFishingPlaces(){
 function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 
 $('baitSeason').value=currentSeason();renderRods();loadAISettings();loadTripSession();initAuth();setTimeout(()=>{$('manualPlaceQuery')?.addEventListener('keydown',e=>{if(e.key==='Enter')searchManualFishingPlaces()})},0);
+</script><script>
+let floatImageDataV132='';
+async function selectFloatPhoto(e){
+ const file=e.target.files&&e.target.files[0]; if(!file)return;
+ try{floatImageDataV132=await compressImage(file,1200,.82)}catch(_){floatImageDataV132=await fileToDataURL(file)}
+ $('floatPhotoPreview').src=floatImageDataV132;$('floatPhotoPreview').style.display='block'
+}
+async function uploadFloatImageV132(dataUrl){
+ if(!currentUser||!dataUrl)return '';
+ const blob=await dataUrlToBlob(dataUrl);
+ const path=currentUser.id+'/float/'+Date.now()+'-'+Math.random().toString(36).slice(2)+'.webp';
+ const {error}=await sb.storage.from('fishing-images').upload(path,blob,{contentType:'image/webp',upsert:false});
+ if(error)throw error;return path
+}
+async function addFloat(){
+ const name=$('floatName').value.trim(),lead=+$('floatLead').value;if(!name||!lead)return;
+ if(currentUser){
+  try{const image_path=await uploadFloatImageV132(floatImageDataV132);const {error}=await sb.from('floats').insert({user_id:currentUser.id,name,buoyancy_g:lead,image_path});if(error)throw error}
+  catch(e){return alert('保存浮漂失败：'+e.message)}
+ }else{const a=JSON.parse(localStorage.floats||'[]');a.push({name,lead,image:floatImageDataV132});localStorage.floats=JSON.stringify(a)}
+ $('floatName').value='';$('floatLead').value='';$('floatPhoto').value='';$('floatPhotoPreview').style.display='none';floatImageDataV132='';await renderFloats()
+}
+async function renderFloats(){
+ let a=[];
+ if(currentUser){
+  const {data,error}=await sb.from('floats').select('id,name,buoyancy_g,image_path').order('created_at',{ascending:false});
+  if(!error)a=await Promise.all((data||[]).map(async x=>({id:x.id,name:x.name,lead:Number(x.buoyancy_g),image_path:x.image_path,image:x.image_path?await signedImage(x.image_path):''})))
+ }else a=JSON.parse(localStorage.floats||'[]');
+ window._floats=a;
+ $('floatList').innerHTML=a.length?a.map((x,i)=>"<div class='item float-card'>"+(x.image?"<img class='float-photo' src='"+x.image+"' alt=''>":"<div class='no-photo'>🎣</div>")+"<div><button class='danger' onclick='delFloat("+i+")'>删除</button><b>"+escapeHtml(x.name)+"</b><span class='small'>吃铅 "+x.lead+" g</span></div></div>").join(''):"<div class='empty'>还没有录入浮漂</div>"
+}
 </script></body></html>
