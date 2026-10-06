@@ -762,4 +762,9 @@ function goToBaitFromFloat(){
  if(t.fishText&&[...$('baitFish').options].some(o=>o.value===t.fishText))$('baitFish').value=t.fishText;
  saveTripSession();openPanel('bait');setTimeout(tripWeatherV132,80)
 }
+</script><script>
+const _calc132=calculate;
+calculate=function(){_calc132();const t=window._currentTrip||{};if(!(window._floats||[]).length&&t.recommendedLead!=null){t.lead=t.recommendedLead;saveTripSession()}};
+const _pick132=selectTripFloatV132;
+selectTripFloatV132=function(id,name,lead){_pick132(id,name,lead);const t=window._currentTrip||{};t.lead=Number(lead);saveTripSession()};
 </script></body></html>
