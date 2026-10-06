@@ -83,7 +83,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v13.3":["낚시 찌 선택 도우미 v13.3","Fishing Float Assistant v13.3"],
+"钓鱼选漂助手 v14":["낚시 찌 선택 도우미 v14","Fishing Float Assistant v14"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -185,7 +185,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v13.3');
+ document.title=trStatic('钓鱼选漂助手 v14');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -874,4 +874,22 @@ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
  if(b.dataset.p==='trip')setTimeout(renderTripSummary,50)
 });
 renderRods();renderTripSummary();
+</script><script>
+Object.assign(I18N_STATIC,{
+"本次作钓":["이번 낚시","Current Trip"],
+"统计":["통계","Stats"],
+"🎣 本次作钓":["🎣 이번 낚시","🎣 Current Trip"],
+"作钓结束后再填写下面的实际鱼获。未结束前可以关闭页面，当前作钓信息会保留在本机。":["낚시가 끝난 뒤 실제 조과를 입력하세요. 종료 전에는 페이지를 닫아도 현재 출조 정보가 기기에 보관됩니다.","Enter the actual catch after fishing ends. The current trip is kept on this device until then."],
+"🎣 已准备好本次作钓":["🎣 이번 낚시 준비 완료","🎣 Trip Ready"],
+"现在去钓鱼即可。结束后进入“本次作钓”填写鱼获结果。":["이제 낚시를 시작하세요. 종료 후 '이번 낚시'에서 조과를 입력하세요.","Go fishing now. Afterward, open Current Trip and enter the result."],
+"结束后填写结果":["종료 후 결과 입력","Enter Result After Fishing"],
+"📊 作钓统计":["📊 낚시 통계","📊 Fishing Stats"],
+"按钓场、配方、房间和历史鱼获汇总。记录越多，经验判断越可靠。":["낚시터, 배합, 방/좌대와 과거 조과를 기준으로 집계합니다. 기록이 많을수록 판단이 더 신뢰할 수 있습니다.","Summarized by spot, bait mix, room/position and past catches. More records make the conclusions more reliable."],
+"钓场筛选":["낚시터 필터","Fishing spot filter"],
+"全部钓场":["전체 낚시터","All fishing spots"],
+"🧠 AI经验总结":["🧠 AI 경험 요약","🧠 AI Experience Summary"],
+"生成AI经验总结":["AI 경험 요약 생성","Generate AI Summary"],
+"鱼竿长度（可多选）":["낚싯대 길이 (복수 선택)","Rod length (multiple selection)"],
+"请选择本次使用的浮漂：":["이번에 사용할 찌를 선택하세요:","Choose the float to use:"]
+});
 </script></body></html>
