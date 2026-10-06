@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v9</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -13,7 +13,36 @@
 <div class='field full'><label>主线号（留空则自动推荐）</label><input id='mainline' type='number' step='.1' placeholder='自动'></div></div><button class='primary' onclick='calculate()'>立即推荐</button></div>
 <div id='result' class='card result'><h2>推荐结果</h2><div class='small'>建议浮漂吃铅</div><div class='hero' id='lead'></div><div id='tags'></div><p class='why' id='reason'></p><div id='owned'></div><div class='notice'>这是基于常见台钓经验建立的辅助模型，不是绝对公式。实际还应根据漂型、自重、饵重、线径、抛投距离和当天鱼情微调。</div></div></section>
 <section id='box' class='panel'><div class='card'><h2>我的漂盒</h2><div class='grid'><div class='field'><label>浮漂名称</label><input id='floatName' placeholder='例如 黄金眼 2号'></div><div class='field'><label>吃铅（g）</label><input id='floatLead' type='number' step='.01' placeholder='2.35'></div></div><button class='primary' onclick='addFloat()'>加入漂盒</button></div><div class='card' id='floatList'></div></section>
-<section id='log' class='panel'><div class='card'><h2>记录一次钓鱼</h2><div class='grid'><div class='field'><label>地点</label><input id='place' placeholder='水库/钓场'></div><div class='field'><label>目标鱼</label><input id='logFish' placeholder='鲫鱼/鲤鱼'></div><div class='field'><label>鱼获数量（尾）</label><input id='logCatchCount' type='number' min='0' step='1'></div><div class='field'><label>鱼获重量（kg）</label><input id='logCatchWeight' type='number' min='0' step='.1'></div><div class='field'><label>作钓时长（分钟）</label><input id='logDuration' type='number' min='0' step='10'></div><div class='field'><label>效果评分</label><select id='logScore'><option value=''>未评分</option><option value='1'>1 - 很差</option><option value='2'>2 - 较差</option><option value='3'>3 - 一般</option><option value='4'>4 - 较好</option><option value='5'>5 - 很好</option></select></div><div class='field'><label>气温 ℃</label><input id='logTemp' type='number' step='.1'></div><div class='field'><label>水温 ℃（可选）</label><input id='logWaterTemp' type='number' step='.1'></div><div class='field'><label>水深 m</label><input id='logDepth' type='number' step='.1'></div><div class='field'><label>浮漂吃铅 g</label><input id='logLead' type='number' step='.01'></div><div class='field full'><label>实际饵料配方</label><input id='logRecipe' placeholder='例如 蓝鲫40% + 九一八40% + 速攻20%'></div><div class='field full'><label>备注</label><input id='memo' placeholder='鱼口、风浪、走水、调整过程等'></div></div><button class='primary' onclick='addLog()'>保存记录</button></div><div class='card' id='logList'></div></section>
+<section id='log' class='panel'>
+<div class='card'><h2>📍 钓点与作钓记录</h2>
+<button class='secondary' onclick='useLogCurrentConditions()'>自动定位并读取当前天气</button>
+<div id='logLocationStatus' class='ai-status'>可自动记录经纬度、气温、天气和风速。</div>
+<div class='grid' style='margin-top:12px'>
+<div class='field full'><label>钓点名称</label><input id='place' placeholder='例如：宋田水库北岸 / 某某钓场'></div>
+<div class='field'><label>水域类型</label><select id='logWaterType'><option>水库</option><option>河流</option><option>野塘</option><option>黑坑</option><option>湖泊</option><option>其他</option></select></div>
+<div class='field'><label>目标鱼</label><input id='logFish' placeholder='鲫鱼/鲤鱼'></div>
+<div class='field'><label>天气</label><input id='logWeather' placeholder='自动读取/手动填写'></div>
+<div class='field'><label>气温 ℃</label><input id='logTemp' type='number' step='.1'></div>
+<div class='field'><label>风速 km/h</label><input id='logWind' type='number' step='.1'></div>
+<div class='field'><label>水温 ℃（可选）</label><input id='logWaterTemp' type='number' step='.1'></div>
+<div class='field'><label>水深 m</label><input id='logDepth' type='number' step='.1'></div>
+<div class='field'><label>鱼竿 m</label><input id='logRod' type='number' step='.1' placeholder='5.4'></div>
+<div class='field'><label>主线号</label><input id='logMainLine' type='number' step='.1'></div>
+<div class='field'><label>子线号</label><input id='logLeaderLine' type='number' step='.1'></div>
+<div class='field'><label>浮漂吃铅 g</label><input id='logLead' type='number' step='.01'></div>
+<div class='field'><label>鱼口</label><select id='logBite'><option>正常</option><option>轻口</option><option>活跃</option><option>停口/很差</option></select></div>
+<div class='field'><label>走水</label><select id='logCurrent'><option>无</option><option>轻微</option><option>明显</option><option>较强</option></select></div>
+<div class='field'><label>钓法</label><select id='logMethod'><option>拉饵</option><option>搓饵</option><option>玉米/颗粒</option><option>其他</option></select></div>
+<div class='field'><label>鱼获数量（尾）</label><input id='logCatchCount' type='number' min='0' step='1'></div>
+<div class='field'><label>鱼获重量（kg）</label><input id='logCatchWeight' type='number' min='0' step='.1'></div>
+<div class='field'><label>作钓时长（分钟）</label><input id='logDuration' type='number' min='0' step='10'></div>
+<div class='field'><label>效果评分</label><select id='logScore'><option value=''>未评分</option><option value='1'>1 - 很差</option><option value='2'>2 - 较差</option><option value='3'>3 - 一般</option><option value='4'>4 - 较好</option><option value='5'>5 - 很好</option></select></div>
+<div class='field full'><label>实际饵料配方</label><input id='logRecipe' placeholder='例如 蓝鲫40% + 九一八40% + 速攻20%'></div>
+<div class='field full'><label>备注</label><input id='memo' placeholder='鱼口变化、风浪、走水、调整过程等'></div>
+</div><button class='primary' onclick='addLog()'>保存本次作钓记录</button></div>
+<div class='card'><h2>我的常用钓点</h2><div id='spotList'><div class='empty'>暂无钓点记录</div></div></div>
+<div class='card'><h2>历史作钓记录</h2><div id='logList'></div></div>
+</section>
 
 <section id='bait' class='panel'>
 <div class='card'><h2>🤖 AI 饵料助手</h2><p class='why'>拍摄或上传你现有的饵料包装，AI识别后加入“我的饵料库”。配饵时只从你的库存中选择。</p></div>
@@ -69,21 +98,59 @@ async function updatePassword(){
  let {data:{session}}=await sb.auth.getSession();currentUser=session?.user||null;updateAuthUI();if(currentUser)await refreshCloud()
 }
 async function signOut(){passwordRecoveryMode=false;let {error}=await sb.auth.signOut({scope:'local'});if(error)return alert('退出失败：'+authErrorCN(error.message));currentUser=null;updateAuthUI();showAuthPane('login')}
-async function refreshCloud(){if(!currentUser){renderFloats();renderLogs();renderBaits();return}await Promise.all([renderFloats(),renderLogs(),renderBaits()])}
+async function refreshCloud(){if(!currentUser){renderFloats();renderLogs();renderBaits();return}await Promise.all([renderFloats(),renderLogs(),renderBaits(),renderSpots()])}
 const $=id=>document.getElementById(id);
 const rodLengths=[2.7,3.6,3.9,4.2,4.5,4.8,5.4,5.7,6.0,6.3,6.6,7.2,7.5,8.1,9.0];
 function renderRods(){const box=$('rodOptions'),selected=+$('rod').value;box.innerHTML=rodLengths.map(r=>`<button type='button' class='rod-btn ${r===selected?'on':''}' onclick='selectRod(${r})'>${r.toFixed(1)}<span class='rod-unit'>m</span></button>`).join('')}
 function selectRod(r){$('rod').value=r;renderRods()}
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab,.panel').forEach(x=>x.classList.remove('on'));b.classList.add('on');$(b.dataset.p).classList.add('on')});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab,.panel').forEach(x=>x.classList.remove('on'));b.classList.add('on');$(b.dataset.p).classList.add('on');if(b.dataset.p==='bait')setTimeout(()=>useCurrentConditions(true),150);if(b.dataset.p==='log')setTimeout(()=>renderSpots(),80)});
 function lineRec(){let f=$('fish').value,s=$('size').value;let map={small:[.8,.4],medium:[1.2,.7],large:[2,.12],xl:[3,.2]};let [m,sub]=map[s];if(f==='carp'||f==='big'){m*=1.2;sub*=1.25}return [Math.round(m*10)/10,Math.round(sub*10)/10]}
 function calculate(){let d=+$('depth').value||2,r=+$('rod').value||5.4,w=+$('wind').value,c=+$('current').value,b=$('bite').value,[autoM,sub]=lineRec(),m=+$('mainline').value||autoM;let base=(m+d)/2;let factor=1+(Math.max(0,r-5.4)*.035)+(w*.07)+(c*.1);if(b==='light')factor-=.09;if($('method').value==='fine')factor-=.06;if($('method').value==='corn')factor+=.1;let lead=Math.max(.6,base*factor),lo=Math.max(.5,lead*.9),hi=lead*1.1;lo=Math.round(lo*10)/10;hi=Math.round(hi*10)/10;lead=Math.round(lead*10)/10;$('lead').textContent=`${lo} ~ ${hi} g（优先 ${lead}g 左右）`;$('tags').innerHTML=`<span class='pill'>主线 ${m}号</span><span class='pill'>子线约 ${sub}号</span><span class='pill'>水深 ${d}m</span><span class='pill'>竿长 ${r}m</span>`;let why=[`基础值约 ${Math.round(base*10)/10}g`];if(r>5.4)why.push('长竿增加抛投稳定性修正');if(w)why.push('风力上调');if(c)why.push('走水上调');if(b==='light')why.push('轻口下调灵敏度区间');$('reason').textContent='计算逻辑：'+why.join('；')+'。建议从优先值开始，现场每次约0.2~0.3g微调。';let floats=(window._floats||JSON.parse(localStorage.floats||'[]')).map(x=>({...x,diff:Math.abs(x.lead-lead)})).sort((a,b)=>a.diff-b.diff);$('owned').innerHTML=floats.length?`<p><b>你的漂盒优先：</b>${floats.slice(0,2).map(x=>`${x.name}（${x.lead}g）`).join(' / ')}</p>`:'';$('result').style.display='block';$('result').scrollIntoView({behavior:'smooth'});}
 async function addFloat(){let n=$('floatName').value.trim(),l=+$('floatLead').value;if(!n||!l)return;if(currentUser){let {error}=await sb.from('floats').insert({user_id:currentUser.id,name:n,buoyancy_g:l});if(error)return alert(error.message)}else{let a=JSON.parse(localStorage.floats||'[]');a.push({name:n,lead:l});localStorage.floats=JSON.stringify(a)}$('floatName').value='';$('floatLead').value='';renderFloats()}
 async function renderFloats(){let a=[];if(currentUser){let {data,error}=await sb.from('floats').select('id,name,buoyancy_g').order('created_at',{ascending:false});if(!error)a=(data||[]).map(x=>({id:x.id,name:x.name,lead:Number(x.buoyancy_g)}))}else a=JSON.parse(localStorage.floats||'[]');window._floats=a;$('floatList').innerHTML=a.length?a.map((x,i)=>`<div class='item'><button class='danger' onclick='delFloat(${i})'>删除</button><b>${escapeHtml(x.name)}</b><span class='small'>吃铅 ${x.lead} g</span></div>`).join(''):`<div class='empty'>还没有录入浮漂</div>`}
 async function delFloat(i){let a=window._floats||[];if(currentUser){let {error}=await sb.from('floats').delete().eq('id',a[i].id);if(error)return alert(error.message)}else{a.splice(i,1);localStorage.floats=JSON.stringify(a)}renderFloats()}
 function currentSeason(){let m=new Date().getMonth()+1;return m>=3&&m<=5?'春':m>=6&&m<=8?'夏':m>=9&&m<=11?'秋':'冬'}
-async function addLog(){let x={place:$('place').value.trim(),fish:$('logFish').value.trim(),count:$('logCatchCount').value,weight:$('logCatchWeight').value,duration:$('logDuration').value,score:$('logScore').value,temp:$('logTemp').value,waterTemp:$('logWaterTemp').value,depth:$('logDepth').value,lead:$('logLead').value,recipe:$('logRecipe').value.trim(),memo:$('memo').value.trim()};if(currentUser){let {error}=await sb.from('fishing_logs').insert({user_id:currentUser.id,location_name:x.place||null,target_fish:x.fish||null,water_depth_m:x.depth||null,float_buoyancy_g:x.lead||null,air_temp_c:x.temp||null,water_temp_c:x.waterTemp||null,season:currentSeason(),duration_minutes:x.duration||null,catch_count:x.count===''?null:Number(x.count),catch_weight_kg:x.weight||null,effectiveness_score:x.score||null,bait_recipe:{text:x.recipe},catch_result:{text:x.count?`${x.fish||'鱼获'} ${x.count}尾`:x.fish||'',count:x.count===''?null:Number(x.count),weight_kg:x.weight===''?null:Number(x.weight)},notes:x.memo});if(error)return alert(error.message)}else{let a=JSON.parse(localStorage.logs||'[]');a.unshift({...x,date:new Date().toLocaleDateString()});localStorage.logs=JSON.stringify(a)}renderLogs()}
-async function renderLogs(){let a=[];if(currentUser){let {data,error}=await sb.from('fishing_logs').select('id,fished_at,location_name,target_fish,water_depth_m,float_buoyancy_g,air_temp_c,water_temp_c,season,duration_minutes,catch_count,catch_weight_kg,effectiveness_score,bait_recipe,catch_result,notes').order('fished_at',{ascending:false});if(!error)a=(data||[]).map(x=>({id:x.id,date:new Date(x.fished_at).toLocaleDateString(),place:x.location_name,fish:x.target_fish,count:x.catch_count,weight:x.catch_weight_kg,duration:x.duration_minutes,score:x.effectiveness_score,temp:x.air_temp_c,waterTemp:x.water_temp_c,season:x.season,recipe:x.bait_recipe?.text||'',depth:x.water_depth_m,lead:x.float_buoyancy_g,memo:x.notes}))}else a=JSON.parse(localStorage.logs||'[]');window._logs=a;$('logList').innerHTML=a.length?a.map((x,i)=>`<div class='item'><button class='danger' onclick='delLog(${i})'>删除</button><b>${escapeHtml(x.date)} · ${escapeHtml(x.place||'未填写地点')}</b><span class='small'>${escapeHtml(x.fish||'未填鱼种')} · ${x.count??'-'}尾 ${x.weight?`· ${x.weight}kg`:''} · ${x.duration?`${x.duration}分钟`:''} ${x.score?`· 效果${x.score}/5`:''}</span><div class='small'>${x.recipe?`配方：${escapeHtml(x.recipe)}<br>`:''}${x.temp!==null&&x.temp!==undefined&&x.temp!==''?`气温 ${x.temp}℃ `:''}${x.waterTemp?`· 水温 ${x.waterTemp}℃ `:''}${x.depth?`· 水深 ${x.depth}m`:''}</div><div class='small'>${escapeHtml(x.memo||'')}</div></div>`).join(''):`<div class='empty'>还没有钓鱼记录。保存鱼获后，同一钓点的下一次 AI 配饵会参考这些记录。</div>`}
-async function delLog(i){let a=window._logs||[];if(currentUser){let {error}=await sb.from('fishing_logs').delete().eq('id',a[i].id);if(error)return alert(error.message)}else{a.splice(i,1);localStorage.logs=JSON.stringify(a)}renderLogs()}
+async function useLogCurrentConditions(){
+ let st=$('logLocationStatus');if(!window.isSecureContext)return st.textContent='定位需要 HTTPS 网站。';if(!navigator.geolocation)return st.textContent='当前浏览器不支持定位。';
+ st.textContent='正在读取当前位置和实时天气…';
+ navigator.geolocation.getCurrentPosition(async pos=>{
+  try{
+   let lat=pos.coords.latitude,lon=pos.coords.longitude;window._logCoords={lat,lon};
+   let [wr,place,nearby]=await Promise.all([
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m&timezone=auto`),
+    reversePlace(lat,lon),findNearbySpot(lat,lon)
+   ]);
+   if(!wr.ok)throw Error('天气服务暂时不可用');
+   let w=await wr.json(),c=w?.current||{},weather=weatherCodeCN(c.weather_code);
+   if(nearby){$('place').value=nearby.name;if(nearby.water_type)$('logWaterType').value=nearby.water_type;if(nearby.default_depth_m)$('logDepth').value=nearby.default_depth_m}
+   else if(place&&!$('place').value.trim())$('place').value=place;
+   if(c.temperature_2m!==undefined)$('logTemp').value=c.temperature_2m;
+   if(c.wind_speed_10m!==undefined)$('logWind').value=c.wind_speed_10m;
+   $('logWeather').value=weather;
+   st.textContent=`定位成功：${nearby?'识别为历史钓点 '+nearby.name+'（约'+nearby.distance+'m）':place||'当前位置'} · ${weather} · ${c.temperature_2m??'-'}℃ · 风速 ${c.wind_speed_10m??'-'}km/h`;
+  }catch(e){st.textContent='定位成功，但天气读取失败：'+e.message}
+ },e=>{st.textContent=e.code===1?'定位权限被拒绝。请允许此网站使用位置。':e.code===2?'暂时无法取得当前位置，请确认手机定位已开启。':'定位超时，请重试。'}, {enableHighAccuracy:true,timeout:15000,maximumAge:180000})
+}
+async function addLog(){
+ let x={place:$('place').value.trim(),waterType:$('logWaterType').value,fish:$('logFish').value.trim(),weather:$('logWeather').value.trim(),wind:$('logWind').value,temp:$('logTemp').value,waterTemp:$('logWaterTemp').value,depth:$('logDepth').value,rod:$('logRod').value,mainLine:$('logMainLine').value,leaderLine:$('logLeaderLine').value,lead:$('logLead').value,bite:$('logBite').value,current:$('logCurrent').value,method:$('logMethod').value,count:$('logCatchCount').value,weight:$('logCatchWeight').value,duration:$('logDuration').value,score:$('logScore').value,recipe:$('logRecipe').value.trim(),memo:$('memo').value.trim()};
+ if(!x.place)return alert('请填写钓点名称，或先使用自动定位。');
+ if(currentUser){
+  let coords=window._logCoords||window._baitCoords||null,spotId=await ensureSpot(x.place,x.waterType,x.depth,coords);
+  let {error}=await sb.from('fishing_logs').insert({user_id:currentUser.id,spot_id:spotId,location_name:x.place,target_fish:x.fish||null,latitude:coords?.lat??null,longitude:coords?.lon??null,water_depth_m:x.depth||null,rod_length_m:x.rod||null,main_line:x.mainLine||null,leader_line:x.leaderLine||null,float_buoyancy_g:x.lead||null,air_temp_c:x.temp||null,water_temp_c:x.waterTemp||null,season:currentSeason(),weather_condition:x.weather||null,wind_speed_kmh:x.wind||null,bite_condition:x.bite||null,current_condition:x.current||null,fishing_method:x.method||null,duration_minutes:x.duration||null,catch_count:x.count===''?null:Number(x.count),catch_weight_kg:x.weight||null,effectiveness_score:x.score||null,bait_recipe:{text:x.recipe},catch_result:{count:x.count===''?null:Number(x.count),weight_kg:x.weight===''?null:Number(x.weight)},notes:x.memo});
+  if(error)return alert('保存失败：'+error.message)
+ }else{let a=JSON.parse(localStorage.logs||'[]');a.unshift({...x,date:new Date().toLocaleDateString()});localStorage.logs=JSON.stringify(a)}
+ await Promise.all([renderLogs(),renderSpots()]);alert('本次作钓记录已保存。')
+}
+async function renderLogs(){
+ let a=[];
+ if(currentUser){
+  let {data,error}=await sb.from('fishing_logs').select('id,fished_at,spot_id,location_name,target_fish,water_depth_m,rod_length_m,main_line,leader_line,float_buoyancy_g,air_temp_c,water_temp_c,season,weather_condition,wind_speed_kmh,bite_condition,current_condition,fishing_method,duration_minutes,catch_count,catch_weight_kg,effectiveness_score,bait_recipe,notes').order('fished_at',{ascending:false});
+  if(!error)a=(data||[]).map(x=>({id:x.id,date:new Date(x.fished_at).toLocaleDateString(),place:x.location_name,fish:x.target_fish,count:x.catch_count,weight:x.catch_weight_kg,duration:x.duration_minutes,score:x.effectiveness_score,temp:x.air_temp_c,waterTemp:x.water_temp_c,season:x.season,weather:x.weather_condition,wind:x.wind_speed_kmh,bite:x.bite_condition,current:x.current_condition,method:x.fishing_method,recipe:x.bait_recipe?.text||'',depth:x.water_depth_m,rod:x.rod_length_m,mainLine:x.main_line,leaderLine:x.leader_line,lead:x.float_buoyancy_g,memo:x.notes}))
+ }else a=JSON.parse(localStorage.logs||'[]');
+ window._logs=a;
+ $('logList').innerHTML=a.length?a.map((x,i)=>`<div class='item'><button class='danger' onclick='delLog(${i})'>删除</button><b>${escapeHtml(x.date)} · ${escapeHtml(x.place||'未填写地点')}</b><span class='small'>${escapeHtml(x.fish||'未填鱼种')} · ${x.count??'-'}尾${x.weight?' · '+x.weight+'kg':''}${x.duration?' · '+x.duration+'分钟':''}${x.score?' · 效果'+x.score+'/5':''}</span><div class='small'>${x.weather?escapeHtml(x.weather):''}${x.temp!==null&&x.temp!==undefined&&x.temp!==''?' · '+x.temp+'℃':''}${x.wind?' · 风 '+x.wind+'km/h':''}${x.depth?' · 水深 '+x.depth+'m':''}${x.rod?' · '+x.rod+'m竿':''}<br>${x.mainLine?'主线'+x.mainLine+' ':''}${x.leaderLine?'· 子线'+x.leaderLine+' ':''}${x.lead?'· 吃铅'+x.lead+'g ':''}${x.bite?'· '+escapeHtml(x.bite):''}${x.current?' · 走水'+escapeHtml(x.current):''}</div>${x.recipe?`<div class='small'>配方：${escapeHtml(x.recipe)}</div>`:''}<div class='small'>${escapeHtml(x.memo||'')}</div></div>`).join(''):`<div class='empty'>还没有作钓记录。第一次保存后，这些数据会成为后续 AI 推荐的个人经验依据。</div>`
+}
+async function delLog(i){let a=window._logs||[];if(currentUser){let {error}=await sb.from('fishing_logs').delete().eq('id',a[i].id);if(error)return alert(error.message)}else{a.splice(i,1);localStorage.logs=JSON.stringify(a)}await Promise.all([renderLogs(),renderSpots()])}
 let baitImageData='';let pendingBait={};let baitImageQueue=[];let baitQueueIndex=0;
 function loadAISettings(){localStorage.removeItem('geminiKey');localStorage.removeItem('geminiModel');}
 function fileToDataURL(f){return new Promise(ok=>{let r=new FileReader();r.onload=()=>ok(r.result);r.readAsDataURL(f)})}
@@ -118,11 +185,46 @@ function weatherCodeCN(code){
 }
 async function reversePlace(lat,lon){
  try{
-  let r=await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?latitude=${lat}&longitude=${lon}&language=zh&count=1`);
+  let r=await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=zh`);
   if(!r.ok)return '';
-  let j=await r.json(),x=j?.results?.[0];
-  return x?[x.name,x.admin2,x.admin1].filter(Boolean).join(' · '):''
+  let x=await r.json();
+  return [x.locality||x.city,x.localityInfo?.administrative?.[2]?.name,x.principalSubdivision].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i).join(' · ')
  }catch{return ''}
+}
+function distanceMeters(a,b,c,d){
+ const R=6371000,toRad=x=>x*Math.PI/180,dLat=toRad(c-a),dLon=toRad(d-b);
+ const q=Math.sin(dLat/2)**2+Math.cos(toRad(a))*Math.cos(toRad(c))*Math.sin(dLon/2)**2;
+ return 2*R*Math.asin(Math.sqrt(q))
+}
+async function loadFishingSpots(){
+ if(!currentUser)return[];
+ let {data,error}=await sb.from('fishing_spots').select('id,name,latitude,longitude,water_type,default_depth_m,notes,created_at').order('created_at',{ascending:false});
+ return error?[]:(data||[])
+}
+async function findNearbySpot(lat,lon,maxMeters=500){
+ let spots=await loadFishingSpots(),best=null,bestD=Infinity;
+ for(let x of spots){if(x.latitude==null||x.longitude==null)continue;let d=distanceMeters(lat,lon,x.latitude,x.longitude);if(d<bestD){best=x;bestD=d}}
+ return best&&bestD<=maxMeters?{...best,distance:Math.round(bestD)}:null
+}
+async function ensureSpot(name,waterType,depth,coords){
+ if(!currentUser||!name)return null;
+ let {data:found}=await sb.from('fishing_spots').select('id,name,latitude,longitude,water_type,default_depth_m').ilike('name',name).limit(1).maybeSingle();
+ if(found){
+  let patch={updated_at:new Date().toISOString()};
+  if(coords?.lat!=null&&coords?.lon!=null){patch.latitude=coords.lat;patch.longitude=coords.lon}
+  if(waterType)patch.water_type=waterType;if(depth)patch.default_depth_m=depth;
+  await sb.from('fishing_spots').update(patch).eq('id',found.id);
+  return found.id
+ }
+ let {data,error}=await sb.from('fishing_spots').insert({user_id:currentUser.id,name,latitude:coords?.lat??null,longitude:coords?.lon??null,water_type:waterType||null,default_depth_m:depth||null}).select('id').single();
+ return error?null:data.id
+}
+async function renderSpots(){
+ if(!$('spotList')||!currentUser)return;
+ let spots=await loadFishingSpots();
+ let {data:logs}=await sb.from('fishing_logs').select('spot_id,catch_count,duration_minutes').not('spot_id','is',null);
+ let stats={};for(let x of (logs||[])){let z=stats[x.spot_id]||(stats[x.spot_id]={visits:0,fish:0,minutes:0});z.visits++;z.fish+=Number(x.catch_count||0);z.minutes+=Number(x.duration_minutes||0)}
+ $('spotList').innerHTML=spots.length?spots.map(x=>{let z=stats[x.id]||{visits:0,fish:0,minutes:0};let rate=z.minutes?((z.fish/(z.minutes/60)).toFixed(1)+'尾/小时'):'暂无效率数据';return `<div class='item'><b>${escapeHtml(x.name)}</b><span class='small'>${escapeHtml(x.water_type||'未分类')}${x.default_depth_m?' · 常用水深 '+x.default_depth_m+'m':''} · 作钓${z.visits}次 · ${z.fish}尾 · ${rate}</span></div>`}).join(''):`<div class='empty'>还没有钓点。保存第一次作钓记录后会自动建立。</div>`
 }
 async function useCurrentConditions(auto=false){
  let st=$('weatherStatus');$('baitSeason').value=currentSeason();
@@ -142,6 +244,7 @@ async function useCurrentConditions(auto=false){
    if([...$('baitWeather').options].some(o=>o.value===weather))$('baitWeather').value=weather;
    if(place&&!$('baitPlace').value.trim())$('baitPlace').value=place;
    window._baitWeather={temperature:t,apparent:c.apparent_temperature,weather,wind:c.wind_speed_10m,lat,lon};
+   let nearby=await findNearbySpot(lat,lon);if(nearby){$('baitPlace').value=nearby.name;place=nearby.name+`（历史钓点，约${nearby.distance}m）`}
    st.textContent=`实时天气已更新：${place?place+' · ':''}${weather}${t!==undefined?' · '+t+'℃':''}${c.wind_speed_10m!==undefined?' · 风速 '+c.wind_speed_10m+'km/h':''}${c.time?' · 数据时间 '+c.time:''}。水温仍单独填写。`;
   }catch(e){st.textContent='定位成功，但天气读取失败：'+e.message}
  },e=>{
@@ -149,14 +252,14 @@ async function useCurrentConditions(auto=false){
    st.textContent=msg;
  },{enableHighAccuracy:true,timeout:15000,maximumAge:300000})
 }
-async function getSimilarFishingHistory(place,fish){if(!currentUser)return[];let q=sb.from('fishing_logs').select('fished_at,location_name,target_fish,air_temp_c,water_temp_c,season,bait_recipe,catch_count,catch_weight_kg,duration_minutes,effectiveness_score,notes').order('fished_at',{ascending:false}).limit(12);if(place)q=q.ilike('location_name',place);let {data,error}=await q;if(error)return[];let rows=data||[];if(fish){let same=rows.filter(x=>!x.target_fish||x.target_fish===fish);if(same.length)rows=same}return rows.slice(0,8)}
+async function getSimilarFishingHistory(place,fish){if(!currentUser)return[];let q=sb.from('fishing_logs').select('fished_at,spot_id,location_name,target_fish,air_temp_c,water_temp_c,season,weather_condition,wind_speed_kmh,bite_condition,current_condition,fishing_method,bait_recipe,catch_count,catch_weight_kg,duration_minutes,effectiveness_score,notes').order('fished_at',{ascending:false}).limit(20);if(place){let {data:spot}=await sb.from('fishing_spots').select('id').ilike('name',place).limit(1).maybeSingle();q=spot?.id?q.eq('spot_id',spot.id):q.ilike('location_name',place)}let {data,error}=await q;if(error)return[];let rows=data||[];if(fish){let same=rows.filter(x=>!x.target_fish||x.target_fish===fish);if(same.length)rows=same}return rows.slice(0,10)}
 async function autoLoadConditions(){
  try{
   if(!navigator.geolocation||!window.isSecureContext)return;
   useCurrentConditions(true);
  }catch{}
 }
-async function recommendBait(){let a=window._baits||JSON.parse(localStorage.baits||'[]');if(!a.length)return alert('请先加入至少一种你现有的饵料');let st=$('baitRecipeStatus');st.textContent='正在结合季节、环境、库存和历史鱼获分析…';$('baitRecipe').innerHTML='';let place=$('baitPlace').value.trim(),fish=$('baitFish').value;let env={钓点:place||'未填写',目标鱼:fish,场景:$('baitScene').value,气温:$('baitTemp').value+'℃',水温:$('baitWaterTemp').value?$('baitWaterTemp').value+'℃':'未知，不得把气温当水温',水深:$('baitDepth').value+'m',天气:$('baitWeather').value,鱼口:$('baitBite').value,走水:$('baitCurrent').value,季节:$('baitSeason').value};let stock=a.map((x,i)=>({id:i+1,brand:x.brand,name:x.name,type:x.type,flavor:x.flavor,targets:x.targets}));let history=await getSimilarFishingHistory(place,fish);let historySummary=history.map(x=>({日期:x.fished_at,钓点:x.location_name,目标鱼:x.target_fish,气温:x.air_temp_c,水温:x.water_temp_c,季节:x.season,实际配方:x.bait_recipe?.text||'',鱼获尾数:x.catch_count,鱼获重量kg:x.catch_weight_kg,作钓分钟:x.duration_minutes,效果评分:x.effectiveness_score,备注:x.notes}));let prompt=`你是有经验的中国淡水台钓配饵助手。当前环境=${JSON.stringify(env)}。用户现有饵料=${JSON.stringify(stock)}。该用户相同/相近钓点的历史实战记录=${JSON.stringify(historySummary)}。必须只使用库存中的饵料，禁止推荐用户没有的商品。先参考个人历史实战：只有当历史记录的钓点、季节/温度、目标鱼等条件具有可比性时才提高其权重；一次好鱼获不能直接视为最佳配方；多次相似条件下稳定有效才应提高权重。若没有可用历史，再依据主流淡水台钓的季节性搭配原则、目标鱼、气温、水温、天气、水深、鱼口和走水推荐。水温未知时必须明确说明，不得把气温当作水温。输出简体中文，包含：历史依据（无则写暂无可比历史）、主方案(各饵百分比且合计100%)、饵水比、拉饵或搓饵、开饵方法、推荐理由、备用方案、现场如何根据鱼口微调。不要声称配方一定有效。`;try{let t=await gemini(prompt,st);st.textContent=history.length?`已参考 ${history.length} 条历史记录。`:place?'该钓点暂无可比历史，先按当前环境和季节推荐。':'';$('baitRecipe').innerHTML=`<div class='recipe'>${escapeHtml(t).replace(/\n/g,'<br>')}</div>`}catch(e){st.textContent='推荐失败：'+e.message}}
+async function recommendBait(){let a=window._baits||JSON.parse(localStorage.baits||'[]');if(!a.length)return alert('请先加入至少一种你现有的饵料');let st=$('baitRecipeStatus');st.textContent='正在结合季节、环境、库存和历史鱼获分析…';$('baitRecipe').innerHTML='';let place=$('baitPlace').value.trim(),fish=$('baitFish').value;let env={钓点:place||'未填写',目标鱼:fish,场景:$('baitScene').value,气温:$('baitTemp').value+'℃',水温:$('baitWaterTemp').value?$('baitWaterTemp').value+'℃':'未知，不得把气温当水温',水深:$('baitDepth').value+'m',天气:$('baitWeather').value,鱼口:$('baitBite').value,走水:$('baitCurrent').value,季节:$('baitSeason').value};let stock=a.map((x,i)=>({id:i+1,brand:x.brand,name:x.name,type:x.type,flavor:x.flavor,targets:x.targets}));let history=await getSimilarFishingHistory(place,fish);let historySummary=history.map(x=>({日期:x.fished_at,钓点:x.location_name,目标鱼:x.target_fish,气温:x.air_temp_c,水温:x.water_temp_c,季节:x.season,天气:x.weather_condition,风速:x.wind_speed_kmh,鱼口:x.bite_condition,走水:x.current_condition,钓法:x.fishing_method,实际配方:x.bait_recipe?.text||'',鱼获尾数:x.catch_count,鱼获重量kg:x.catch_weight_kg,作钓分钟:x.duration_minutes,每小时鱼获:x.duration_minutes?Number(((x.catch_count||0)/(x.duration_minutes/60)).toFixed(2)):null,效果评分:x.effectiveness_score,备注:x.notes}));let prompt=`你是有经验的中国淡水台钓配饵助手。当前环境=${JSON.stringify(env)}。用户现有饵料=${JSON.stringify(stock)}。该用户相同/相近钓点的历史实战记录=${JSON.stringify(historySummary)}。必须只使用库存中的饵料，禁止推荐用户没有的商品。先参考个人历史实战：只有当历史记录的钓点、季节/温度、目标鱼等条件具有可比性时才提高其权重；一次好鱼获不能直接视为最佳配方；多次相似条件下稳定有效才应提高权重。若没有可用历史，再依据主流淡水台钓的季节性搭配原则、目标鱼、气温、水温、天气、水深、鱼口和走水推荐。水温未知时必须明确说明，不得把气温当作水温。输出简体中文，包含：历史依据（无则写暂无可比历史）、主方案(各饵百分比且合计100%)、饵水比、拉饵或搓饵、开饵方法、推荐理由、备用方案、现场如何根据鱼口微调。不要声称配方一定有效。`;try{let t=await gemini(prompt,st);st.textContent=history.length?`已参考 ${history.length} 条历史记录。`:place?'该钓点暂无可比历史，先按当前环境和季节推荐。':'';$('baitRecipe').innerHTML=`<div class='recipe'>${escapeHtml(t).replace(/\n/g,'<br>')}</div>`}catch(e){st.textContent='推荐失败：'+e.message}}
 function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 
 $('baitSeason').value=currentSeason();renderRods();loadAISettings();initAuth();setTimeout(autoLoadConditions,700);
