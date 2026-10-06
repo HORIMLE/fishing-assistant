@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.27</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.28</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -65,18 +65,18 @@
 .place-entry-card b{display:block;font-size:18px;margin:8px 0 6px}.place-entry-card small{display:block;line-height:1.45;opacity:.78}
 .place-entry-icon{font-size:34px;display:block}.mode-header{display:flex;justify-content:space-between;gap:10px;align-items:center}
 .compact-btn{width:auto!important;margin:0!important;padding:8px 12px!important}
-.voice-screen-v1526{min-height:calc(100dvh - 180px);background:linear-gradient(180deg,#12372a 0,#176b4d 44%,#f3f5f1 44%);border-radius:18px;padding:14px;margin-top:8px}
-.voice-screen-top{display:flex;align-items:center;gap:12px;color:#fff}.voice-screen-top b{font-size:19px}
+.voice-screen-v1526{min-height:calc(100dvh - 180px);background:#f3f5f1;border-radius:18px;padding:14px;margin-top:8px;overflow:visible}
+.voice-screen-top{display:flex;align-items:center;gap:12px;color:#fff;background:#12372a;margin:-14px -14px 0;padding:18px 14px 8px;border-radius:18px 18px 0 0}.voice-screen-top b{font-size:19px}
 .voice-back-btn{border:0;background:#ffffff18;color:#fff;border-radius:10px;padding:8px 11px;font-weight:800}
-.voice-orb-wrap{text-align:center;color:#fff;padding:30px 8px 26px}
+.voice-orb-wrap{text-align:center;color:#fff;background:linear-gradient(180deg,#12372a,#176b4d);margin:0 -14px 18px;padding:28px 20px 34px;border-radius:0 0 18px 18px;min-height:390px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .voice-orb{width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;margin:0 auto 20px;background:#ffffff20;border:2px solid #ffffff55;box-shadow:0 0 0 10px #ffffff0b}
 .voice-orb.listening{animation:voicePulse1526 1.1s infinite;background:#ffffff33}
 @keyframes voicePulse1526{0%,100%{transform:scale(1);box-shadow:0 0 0 10px #ffffff0b}50%{transform:scale(1.05);box-shadow:0 0 0 22px #ffffff08}}
-.voice-question{font-size:20px;font-weight:850;line-height:1.45;max-width:520px;margin:auto}
+.voice-question{font-size:20px;font-weight:850;line-height:1.5;max-width:520px;margin:0 auto;width:100%;overflow-wrap:anywhere}
 .voice-heard{margin-top:12px;font-size:13px;opacity:.8;min-height:20px}
 .voice-status-card{background:#fff!important;color:var(--ink)!important;margin-top:0!important}
 .voice-main-btn{margin-top:12px}.voice-hint{background:#fff;border-radius:10px;padding:10px;line-height:1.5}
-@media(max-width:430px){.place-entry-grid{grid-template-columns:1fr}.place-entry-card{min-height:120px}}
+@media(max-width:430px){.place-entry-grid{grid-template-columns:1fr}.place-entry-card{min-height:120px}.voice-orb-wrap{min-height:420px;padding:24px 18px 38px}.voice-question{font-size:18px}.voice-orb{width:96px;height:96px;margin-bottom:18px}}
 
 .voice-orb{position:relative;overflow:visible}
 .mic-glyph{position:relative;z-index:2}
@@ -208,7 +208,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.27":["낚시 찌 선택 도우미 v15.27","Fishing Float Assistant v15.27"],
+"钓鱼选漂助手 v15.28":["낚시 찌 선택 도우미 v15.28","Fishing Float Assistant v15.28"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -310,7 +310,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.27');
+ document.title=trStatic('钓鱼选漂助手 v15.28');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -3305,68 +3305,68 @@ Object.assign(I18N_STATIC,{
       const data=await invokeFishingPlaces({mode:'manual',query:text});
       const list=await enrichFishingPlaces((data.items||[]).filter(isFishingRelatedPlaceV1515));
       V.results=list;window._manualFishingResultsV1524=list;renderFishingPlaces('manualPlaceList',list);
-      if(!list.length){vStatus('没有找到钓场。再点“继续语音”重新说钓场名称。');return}
+      if(!list.length){vMicState('');vStatus('没有找到钓场。请点“继续语音”重新说钓场名称。');return}
       if(list.length===1){await applyPlace(list[0]);setStage('fish');return}
       V.stage='place_select';
       ask('找到了 '+Math.min(list.length,10)+' 个结果。请说第几个，例如第一个。',async ans=>{
        const idx=parseOrdinal(ans);
-       if(idx<0||idx>=V.results.length){vStatus('没有听懂序号。请再点继续语音，说第一个、第两个。');return}
+       if(idx<0||idx>=V.results.length){vMicState('');vStatus('没有听懂序号。请点“继续语音”，说第一个、第二个。');return}
        await applyPlace(V.results[idx]);setStage('fish')
       })
-     }catch(e){vStatus('钓场搜索失败：'+escapeHtml(e.message))}
+     }catch(e){vMicState('');vStatus('钓场搜索失败：'+escapeHtml(e.message)+'<br><span class="small">请点“继续语音”重试当前步骤。</span>')}
     });break;
    case 'fish':
     ask('今天主要钓什么鱼？可以说鲫鱼、鲤鱼、综合鱼或者大型鱼。',text=>{
-     const v=fishFrom(text);if(!v){vStatus('没有听懂鱼种。请再点继续语音回答鱼种。');return}
+     const v=fishFrom(text);if(!v){vMicState('');vStatus('没有听懂鱼种。请点“继续语音”重新回答鱼种。');return}
      V.data.fish=v;$('fish').value=v;setStage('size')
     });break;
    case 'size':
     ask('预计鱼的个体多大？说小、中、大，或者很大。',text=>{
-     const v=sizeFrom(text);if(!v){vStatus('没有听懂大小。请再回答小、中、大或者很大。');return}
+     const v=sizeFrom(text);if(!v){vMicState('');vStatus('没有听懂大小。请点“继续语音”重新回答小、中、大或者很大。');return}
      V.data.size=v;$('size').value=v;setStage('rod_count')
     });break;
    case 'rod_count':
     ask('这次准备使用几根鱼竿？请说一根、两根、三根这样的数量。',text=>{
-     const n=voiceInt(text);if(!Number.isFinite(n)||n<1||n>6){vStatus('目前语音设置支持1到6根鱼竿。请重新回答。');return}
+     const n=voiceInt(text);if(!Number.isFinite(n)||n<1||n>6){vMicState('');vStatus('目前语音设置支持1到6根鱼竿。请点“继续语音”重新回答。');return}
      V.data.rods=Array.from({length:n},()=>({length:null,mainLine:null,leaderLine:null,depthM:''}));
      V.rodIndex=0;setStage('rod_length')
     });break;
    case 'rod_length':
     ask('第 '+(V.rodIndex+1)+' 根鱼竿多长？例如说五点四米。',text=>{
-     const n=voiceNum(text);if(!Number.isFinite(n)||n<2||n>10){vStatus('没有听懂鱼竿长度。请说例如五点四米。');return}
+     const n=voiceNum(text);if(!Number.isFinite(n)||n<2||n>10){vMicState('');vStatus('没有听懂鱼竿长度。请点“继续语音”，说例如五点四米。');return}
      const nearest=rodLengths.reduce((a,b)=>Math.abs(b-n)<Math.abs(a-n)?b:a,rodLengths[0]);
      currentRod().length=nearest;setStage('rod_main')
     });break;
    case 'rod_main':
     ask('第 '+(V.rodIndex+1)+' 根鱼竿主线多少号？可以说一点二号，也可以说自动。',text=>{
      const lr=lineRec(),n=voiceNum(text);currentRod().mainLine=isAuto(text)?lr[0]:n;
-     if(!Number.isFinite(currentRod().mainLine)||currentRod().mainLine<=0){vStatus('没有听懂主线号。可以说一点二号，或者说自动。');return}
+     if(!Number.isFinite(currentRod().mainLine)||currentRod().mainLine<=0){vMicState('');vStatus('没有听懂主线号。请点“继续语音”，可以说一点二号，或者说自动。');return}
      setStage('rod_leader')
     });break;
    case 'rod_leader':
     ask('第 '+(V.rodIndex+1)+' 根鱼竿子线多少号？也可以说自动。',text=>{
      const lr=lineRec(),n=voiceNum(text);currentRod().leaderLine=isAuto(text)?lr[1]:n;
-     if(!Number.isFinite(currentRod().leaderLine)||currentRod().leaderLine<=0){vStatus('没有听懂子线号。可以说零点八号，或者说自动。');return}
+     if(!Number.isFinite(currentRod().leaderLine)||currentRod().leaderLine<=0){vMicState('');vStatus('没有听懂子线号。请点“继续语音”，可以说零点八号，或者说自动。');return}
      setStage('rod_depth')
     });break;
    case 'rod_depth':
     ask('第 '+(V.rodIndex+1)+' 根杆现在知道实测水深吗？知道就说例如两点五米，不知道就说不知道。',text=>{
      if(isUnknown(text))currentRod().depthM='';
-     else{const n=voiceNum(text);if(!Number.isFinite(n)||n<=0||n>20){vStatus('没有听懂水深。可以说两点五米，或者说不知道。');return}currentRod().depthM=n}
+     else{const n=voiceNum(text);if(!Number.isFinite(n)||n<=0||n>20){vMicState('');vStatus('没有听懂水深。请点“继续语音”，可以说两点五米，或者说不知道。');return}currentRod().depthM=n}
      nextRodOrEnv()
     });break;
    case 'wind':
-    ask('现在风大吗？说无风、微风、明显或者较大。',text=>{const v=windFrom(text);if(v===null){vStatus('没有听懂风力。请说无风、微风、明显或较大。');return}V.data.wind=v;setStage('current')});break;
+    ask('现在风大吗？说无风、微风、明显或者较大。',text=>{const v=windFrom(text);if(v===null){vMicState('');vStatus('没有听懂风力。请点“继续语音”重新回答。');return}V.data.wind=v;setStage('current')});break;
    case 'current':
-    ask('水里走水情况怎么样？说无、轻微、明显或者较强。',text=>{const v=currentFrom(text);if(v===null){vStatus('没有听懂走水。请重新回答。');return}V.data.current=v;setStage('bite')});break;
+    ask('水里走水情况怎么样？说无、轻微、明显或者较强。',text=>{const v=currentFrom(text);if(v===null){vMicState('');vStatus('没有听懂走水。请点“继续语音”重新回答。');return}V.data.current=v;setStage('bite')});break;
    case 'bite':
-    ask('目前鱼口怎么样？说正常、轻口或者活跃。',text=>{const v=biteFrom(text);if(!v){vStatus('没有听懂鱼口。请重新回答。');return}V.data.bite=v;setStage('method')});break;
+    ask('目前鱼口怎么样？说正常、轻口或者活跃。',text=>{const v=biteFrom(text);if(!v){vMicState('');vStatus('没有听懂鱼口。请点“继续语音”重新回答。');return}V.data.bite=v;setStage('method')});break;
    case 'method':
-    ask('准备怎么钓？可以说搓饵拉饵钓底、精细钓鲫，或者玉米颗粒守大鱼。',text=>{const v=methodFrom(text);if(!v){vStatus('没有听懂钓法。请重新回答。');return}V.data.method=v;setStage('scene')});break;
+    ask('准备怎么钓？可以说搓饵拉饵钓底、精细钓鲫，或者玉米颗粒守大鱼。',text=>{const v=methodFrom(text);if(!v){vMicState('');vStatus('没有听懂钓法。请点“继续语音”重新回答。');return}V.data.method=v;setStage('scene')});break;
    case 'scene':
-    ask('这个钓点属于什么场景？说野钓、水库、黑坑或者河流。',text=>{const v=sceneFrom(text);if(!v){vStatus('没有听懂场景。请说野钓、水库、黑坑或河流。');return}V.data.scene=v;setStage('bait_mode')});break;
+    ask('这个钓点属于什么场景？说野钓、水库、黑坑或者河流。',text=>{const v=sceneFrom(text);if(!v){vMicState('');vStatus('没有听懂场景。请点“继续语音”，说野钓、水库、黑坑或河流。');return}V.data.scene=v;setStage('bait_mode')});break;
    case 'bait_mode':
-    ask('AI配饵希望用哪种范围？说只用我的饵料、韩国可购买，或者混合推荐。',text=>{const v=baitModeFrom(text);if(!v){vStatus('没有听懂配饵范围。请说我的饵料、韩国可购买或混合。');return}V.data.baitMode=v;setStage('confirm')});break;
+    ask('AI配饵希望用哪种范围？说只用我的饵料、韩国可购买，或者混合推荐。',text=>{const v=baitModeFrom(text);if(!v){vMicState('');vStatus('没有听懂配饵范围。请点“继续语音”，说我的饵料、韩国可购买或混合。');return}V.data.baitMode=v;setStage('confirm')});break;
    case 'confirm':{
     const rods=V.data.rods.map((r,i)=>(i+1)+'号杆 '+r.length+'米 主'+r.mainLine+' 子'+r.leaderLine+(r.depthM?' 水深'+r.depthM+'米':' 水深未测')).join('；');
     const fish={crucian:'鲫鱼',carp:'鲤鱼',mixed:'综合鱼',big:'大型鱼'}[V.data.fish];
