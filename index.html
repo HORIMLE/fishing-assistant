@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.12</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.13</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -49,8 +49,7 @@
 <div class='card'><h2>🌦️ 按今天环境配饵</h2><div class='grid'><div class='field full'><label>推荐范围</label><select id='baitRecommendMode'><option value='inventory'>只用我的饵料</option><option value='korea'>韩国可购买饵料</option><option value='mixed'>优先我的饵料，不足时补充韩国可买饵料</option></select></div><div class='field full'><label>钓点</label><input id='baitPlace' placeholder='请先从钓场页面选择' readonly></div><div class='field'><label>目标鱼</label><select id='baitFish'><option>鲫鱼</option><option>鲤鱼</option><option>草鱼</option><option>青鱼</option><option>综合鱼</option><option>大型鱼</option></select><div id='baitFishSyncHint' class='small' style='margin-top:5px'></div></div><div class='field'><label>场景</label><select id='baitScene'><option>野钓</option><option>水库</option><option>黑坑</option><option>河流</option></select></div><div class='field'><label>气温 ℃</label><input id='baitTemp' type='number' placeholder='自动读取' value=''></div><div class='field'><label>水温 ℃（可选）</label><input id='baitWaterTemp' type='number' step='.1' placeholder='不知道可留空'></div><div class='field'><label>参考水深 m（多杆取平均）</label><input id='baitDepth' type='number' step='.1' value='2.5'></div><div class='field'><label>天气</label><select id='baitWeather'><option value='' selected>自动读取</option><option>晴</option><option>多云</option><option>阴</option><option>小雨</option><option>雨后</option><option>雷雨</option><option>雪</option><option>雾</option></select></div><div class='field'><label>鱼口</label><select id='baitBite'><option>正常</option><option>轻口</option><option>活跃</option><option>停口/很差</option></select></div><div class='field'><label>走水</label><select id='baitCurrent'><option>无</option><option>轻微</option><option>明显</option></select></div><div class='field'><label>季节（自动）</label><select id='baitSeason'><option>春</option><option>夏</option><option>秋</option><option>冬</option></select></div></div><button class='secondary' onclick='useCurrentConditions()'>📍 自动定位并读取当地天气</button><div id='weatherStatus' class='ai-status'>等待读取当前位置的实时天气…</div><div id='historyInsight' class='recipe' style='display:none'></div><button class='primary' onclick='recommendBait()'>AI推荐现有饵料搭配</button><div id='baitRecipeStatus' class='ai-status'></div><div id='baitRecipe'></div><div id='baitShoppingLinks'></div><div class='card'><h2>🎣 保存本次作钓</h2><p class='why'>AI配饵完成后先保存本次作钓计划。钓鱼结束后，再到“本次作钓”填写鱼获结果并保存到钓鱼记录。</p><button id='saveTripPlanBtn' class='primary' onclick='saveTripPlanV1512()'>保存本次作钓计划</button><div id='saveTripPlanStatus' class='ai-status'></div></div>
 </section>
 <section id='trip' class='panel'>
-<div class='card'><h2>🎣 本次作钓</h2><div id='tripPageSummary' class='recipe'></div><div id='tripSavedState' class='ai-status'></div><p class='why'>本次作钓计划先单独保存。实际钓鱼结束后，再填写下面的鱼获结果，最后保存到“钓鱼记录”。</p></div>
-<div id='finishTripBox' class='card' style='display:none;margin-top:12px'><h2>✅ 结束本次作钓</h2><p class='why'>前面的钓场、选漂和AI配饵会自动保存到记录中。这里只填写实际结果。</p><div class='grid'><div class='field'><label>鱼获数量（尾）</label><input id='tripCatchCount' type='number' min='0' step='1'></div><div class='field'><label>鱼获重量（kg）</label><input id='tripCatchWeight' type='number' min='0' step='.1'></div><div class='field'><label>作钓时长（分钟）</label><input id='tripDuration' type='number' min='0' step='10'></div><div class='field'><label>效果评分</label><select id='tripScore'><option value=''>未评分</option><option value='1'>1 - 很差</option><option value='2'>2 - 较差</option><option value='3'>3 - 一般</option><option value='4'>4 - 较好</option><option value='5'>5 - 很好</option></select></div><div class='field full'><label>备注</label><input id='tripMemo' placeholder='鱼口变化、调整过程等'></div></div><button id='finishTripBtn' class='primary' onclick='finishFishingSession()'>保存本次鱼获</button></div>
+<div class='card'><h2>🎣 本次作钓</h2><div id='tripPageSummary' class='recipe'></div><div id='tripSavedState' class='ai-status'></div><p class='why'>这里仅用于查看当前作钓计划。钓鱼结束后，请到“钓鱼记录”中的对应记录填写鱼获结果。</p></div>
 </section>
 <section id='stats' class='panel'>
 <div class='card'><h2>📊 作钓统计</h2><p class='why'>按钓场、配方、房间和历史鱼获汇总。记录越多，经验判断越可靠。</p>
@@ -105,7 +104,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.12":["낚시 찌 선택 도우미 v15.12","Fishing Float Assistant v15.12"],
+"钓鱼选漂助手 v15.13":["낚시 찌 선택 도우미 v15.13","Fishing Float Assistant v15.13"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -207,7 +206,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.12');
+ document.title=trStatic('钓鱼选漂助手 v15.13');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -1407,9 +1406,8 @@ async function loadTripDraftV1511(){
  renderTripSummary();
 }
 function updateTripSavedStateV1511(){
- const t=window._currentTrip||{},el=$('tripSavedState'),box=$('finishTripBox');
- if(el)el.textContent=t.planSaved?'作钓计划已保存。钓鱼结束后填写结果即可。':'作钓计划尚未保存。请先在AI饵料页面完成推荐并保存。';
- if(box)box.style.display=t.planSaved?'block':'none';
+ const t=window._currentTrip||{},el=$('tripSavedState');
+ if(el)el.textContent=t.planSaved?'作钓计划已保存。钓鱼结束后请到“钓鱼记录”填写结果。':'作钓计划尚未保存。请先在AI饵料页面完成推荐并保存。';
 }
 const _renderTripSummaryV1511=renderTripSummary;
 renderTripSummary=function(){
@@ -1540,14 +1538,69 @@ renderLogs=async function(){
   const planned=x.status==='planned';
   const status=planned?"<span class='pill' style='background:#fff3d6;color:#8a5a10'>作钓中 / 待填写结果</span>":"<span class='pill'>已完成</span>";
   const rods=(x.rodSetups||[]).length?(x.rodSetups||[]).map((r,idx)=>(idx+1)+"号杆 "+(r.length||'')+"m"+(r.floatName?" · "+escapeHtml(r.floatName):"")+(r.depthM?" · 水深"+r.depthM+"m":"")).join("<br>"):(x.rod?'鱼竿 '+x.rod+'m':'');
-  const result=planned?"鱼获结果：钓鱼结束后填写":`${x.count??'-'}尾${x.weight?' · '+x.weight+'kg':''}${x.duration?' · '+x.duration+'分钟':''}${x.score?' · 效果'+x.score+'/5':''}`;
-  return `<div class='item'><button class='danger' onclick='delLog(${i})'>删除</button><div>${status}</div><b>${escapeHtml(x.date)} · ${escapeHtml(x.place||'未填写地点')}${x.usedBungalow&&x.roomNo?' · 🏠 '+escapeHtml(x.roomNo):''}</b><span class='small'>${escapeHtml(x.fish||'未填鱼种')} · ${result}</span>${rods?`<div class='small' style='margin-top:6px'>${rods}</div>`:''}<div class='small'>${x.weather?escapeHtml(x.weather):''}${x.temp!==null&&x.temp!==undefined&&x.temp!==''?' · '+x.temp+'℃':''}${x.depth?' · 参考水深 '+Number(x.depth).toFixed(1)+'m':''}</div>${x.recipe?`<div class='recipe' style='margin-top:8px'><b>使用饵料 / AI配方</b><br>${escapeHtml(x.recipe).replace(/\n/g,'<br>')}</div>`:''}${x.memo?`<div class='small'>备注：${escapeHtml(x.memo)}</div>`:''}</div>`
+  const resultText=planned?"鱼获结果：待填写":`${x.count??'-'}尾${x.weight?' · '+x.weight+'kg':''}${x.duration?' · '+x.duration+'分钟':''}${x.score?' · 效果'+x.score+'/5':''}`;
+  const resultForm=planned?`
+   <div class='card' style='margin:10px 0 0;padding:12px;background:#f8faf8'>
+    <b>填写本次作钓结果</b>
+    <div class='grid' style='margin-top:8px'>
+      <div class='field'><label>鱼获数量（尾）</label><input id='logCatchCount_${i}' type='number' min='0' step='1'></div>
+      <div class='field'><label>鱼获重量（kg）</label><input id='logCatchWeight_${i}' type='number' min='0' step='.1'></div>
+      <div class='field'><label>作钓时长（分钟）</label><input id='logDuration_${i}' type='number' min='0' step='10'></div>
+      <div class='field'><label>效果评分</label><select id='logScore_${i}'><option value=''>未评分</option><option value='1'>1 - 很差</option><option value='2'>2 - 较差</option><option value='3'>3 - 一般</option><option value='4'>4 - 较好</option><option value='5'>5 - 很好</option></select></div>
+      <div class='field full'><label>备注</label><input id='logMemo_${i}' placeholder='鱼口变化、调整过程等'></div>
+    </div>
+    <button class='primary' onclick='completeFishingLogV1513(${i})'>保存作钓结果</button>
+   </div>`:''; 
+  return `<details class='place-group' ${planned?'open':''}>
+   <summary><span>${escapeHtml(x.date)} · ${escapeHtml(x.place||'未填写地点')}</span><span class='group-count'>${planned?'待结果':'已完成'}</span></summary>
+   <div class='group-body' style='padding:12px'>
+    <div style='display:flex;justify-content:space-between;gap:8px;align-items:center'><div>${status}</div><button class='danger' onclick='event.preventDefault();delLog(${i})'>删除</button></div>
+    <div style='margin-top:8px'><b>${escapeHtml(x.fish||'未填鱼种')} · ${resultText}</b></div>
+    ${rods?`<div class='small' style='margin-top:6px'>${rods}</div>`:''}
+    <div class='small' style='margin-top:6px'>${x.weather?escapeHtml(x.weather):''}${x.temp!==null&&x.temp!==undefined&&x.temp!==''?' · '+x.temp+'℃':''}${x.depth?' · 参考水深 '+Number(x.depth).toFixed(1)+'m':''}</div>
+    ${x.recipe?`<details style='margin-top:10px'><summary style='cursor:pointer;font-weight:800'>使用饵料 / AI配方</summary><div class='recipe' style='margin-top:8px'>${escapeHtml(x.recipe).replace(/\n/g,'<br>')}</div></details>`:''}
+    ${x.memo?`<div class='small' style='margin-top:8px'>备注：${escapeHtml(x.memo)}</div>`:''}
+    ${resultForm}
+   </div>
+  </details>`
  }).join(''):"<div class='empty'>还没有作钓记录。</div>";
 };
+async function completeFishingLogV1513(i){
+ const x=(window._logs||[])[i];if(!x||!currentUser)return;
+ const btn=event?.currentTarget;if(btn){btn.disabled=true;btn.textContent='正在保存…'}
+ try{
+  const count=$('logCatchCount_'+i).value,weight=$('logCatchWeight_'+i).value,duration=$('logDuration_'+i).value,score=$('logScore_'+i).value,memo=$('logMemo_'+i).value.trim();
+  const {error}=await sb.from('fishing_logs').update({
+   duration_minutes:duration===''?null:Number(duration),
+   catch_count:count===''?null:Number(count),
+   catch_weight_kg:weight===''?null:Number(weight),
+   effectiveness_score:score===''?null:Number(score),
+   catch_result:{count:count===''?null:Number(count),weight_kg:weight===''?null:Number(weight)},
+   notes:memo||null,
+   trip_status:'completed',
+   completed_at:new Date().toISOString()
+  }).eq('id',x.id).eq('user_id',currentUser.id);
+  if(error)throw error;
+  const t=window._currentTrip||{};
+  if(t.logId===x.id){
+   await sb.from('fishing_trip_drafts').delete().eq('user_id',currentUser.id);
+   localStorage.removeItem('currentFishingTrip');window._currentTrip={};window._lastBaitRecommendationId=null;renderTripSummary()
+  }
+  await Promise.all([renderLogs(),renderSpots()]);
+ }catch(e){alert('保存失败：'+(e?.message||e))}
+ finally{if(btn){btn.disabled=false;btn.textContent='保存作钓结果'}}
+}
 Object.assign(I18N_STATIC,{
 "作钓中 / 待填写结果":["낚시 중 / 결과 입력 대기","Fishing / result pending"],
 "已完成":["완료","Completed"],
 "使用饵料 / AI配方":["사용 미끼 / AI 배합","Used bait / AI recipe"],
 "本次作钓已保存到“钓鱼记录”。钓鱼结束后再填写鱼获结果。":["이번 낚시가 '낚시 기록'에 저장되었습니다. 낚시가 끝난 뒤 조과를 입력하세요.","This trip has been saved to Fishing History. Enter the catch result after fishing."]
+});
+</script><script>
+Object.assign(I18N_STATIC,{
+"这里仅用于查看当前作钓计划。钓鱼结束后，请到“钓鱼记录”中的对应记录填写鱼获结果。":["여기는 현재 낚시 계획만 확인합니다. 낚시가 끝난 뒤 '낚시 기록'의 해당 기록에서 조과를 입력하세요.","This page only shows the current trip plan. After fishing, enter the catch result in the matching Fishing History record."],
+"填写本次作钓结果":["이번 낚시 결과 입력","Enter this trip result"],
+"保存作钓结果":["낚시 결과 저장","Save trip result"],
+"鱼获结果：待填写":["조과 결과: 입력 대기","Catch result: pending"]
 });
 </script></body></html>
