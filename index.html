@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.20</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.21</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -117,7 +117,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.20":["낚시 찌 선택 도우미 v15.20","Fishing Float Assistant v15.20"],
+"钓鱼选漂助手 v15.21":["낚시 찌 선택 도우미 v15.21","Fishing Float Assistant v15.21"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -219,7 +219,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.20');
+ document.title=trStatic('钓鱼选漂助手 v15.21');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -2464,6 +2464,146 @@ Object.assign(I18N_STATIC,{
   "中文名称":["중문 이름","Chinese name"],
   "包装原文":["포장 원문","Original package text"],
   "日文→中文":["일본어→중국어","Japanese→Chinese"]
+ });
+})();
+</script><script>
+(function(){
+ const BRAND_MIN_V1521=.95;
+
+ function parseObjV1521(text){
+  let raw=String(text||'').trim();
+  const fenced=raw.match(/\`\`\`(?:json)?\s*([\s\S]*?)\`\`\`/i);
+  if(fenced)raw=fenced[1];
+  const a=raw.indexOf('{'),b=raw.lastIndexOf('}');
+  if(a<0||b<a)throw Error('AI返回格式无法解析');
+  return JSON.parse(raw.slice(a,b+1))
+ }
+ function validBrandEvidenceV1521(brand,evidence){
+  const b=normBaitTextV1518(brand),e=normBaitTextV1518(evidence);
+  if(!b||!e)return false;
+  return e.includes(b)||b.includes(e);
+ }
+ async function relocalizeBaitCropV1521(item,index,total,st){
+  if(!item?.cropImage)return item;
+  try{
+   if(st)st.textContent='正在校正第 '+(index+1)+'/'+total+' 个包装裁剪…';
+   const [head,b64]=item.cropImage.split(',');
+   const mime=(head.match(/data:(.*?);/)||[])[1]||'image/webp';
+   const prompt='你只做图像定位，不做商品知识推断。图中可能同时出现多个饵料包装。请找到最接近画面中心、面积最大且完整度最高的那一个单独包装，并返回它在当前裁剪图中的 bbox=[x,y,w,h]，坐标使用0到1000归一化整数。bbox应尽量只包含这个包装本体，不要把旁边其他包装包含进去；若无法明确分离，reliable=false。仅返回严格JSON：{"bbox":[x,y,w,h],"reliable":true或false,"visible_packages":整数}。不要markdown。';
+   const txt=await gemini([{type:'text',text:prompt},{type:'image',data:b64,mime_type:mime}],st);
+   const x=parseObjV1521(txt),box=x.bbox;
+   if(!x.reliable||!Array.isArray(box)||box.length<4)return {...item,relocalizeReliable:false,visiblePackages:Number(x.visible_packages||0)||0};
+   const refined=await cropBaitImageV1519(item.cropImage,{x:Number(box[0]),y:Number(box[1]),w:Number(box[2]),h:Number(box[3])});
+   return {...item,cropImage:refined||item.cropImage,relocalizeReliable:!!refined,visiblePackages:Number(x.visible_packages||0)||0,refinedBbox:box};
+  }catch(e){
+   return {...item,relocalizeReliable:false,relocalizeError:String(e?.message||e)}
+  }
+ }
+ async function identifyFinalBaitV1521(item,index,total,st){
+  if(!item?.cropImage)return item;
+  const [head,b64]=item.cropImage.split(',');
+  const mime=(head.match(/data:(.*?);/)||[])[1]||'image/webp';
+  if(st)st.textContent='正在最终识别第 '+(index+1)+'/'+total+' 个饵料…';
+  const prompt='你现在只识别这一张单独裁剪的淡水钓鱼饵料包装。不要参考图片外的其他商品。准确性优先，无法确认就留空。品牌规则最严格：只有当包装上能直接看见品牌文字或LOGO，而且你能给出与 brand 完全对应的 brand_evidence（必须是图片中实际可见的文字）时才允许填写 brand；否则 brand=""。brand_confidence 只有在品牌文字清楚、无遮挡、与商品本体对应时才能高于0.95。禁止仅凭产品名、包装配色、行业常识猜品牌。产品名称只读取包装上实际可见的主产品名；不要把旁边包装文字混入。判断 source_lang。若是日文，保留日文原名并翻译为自然简体中文。仅返回严格JSON：{"brand":"","brand_evidence":"","brand_confidence":0到1,"name_original":"","name_zh":"","type":"","flavor_original":"","flavor_zh":"","targets_original":"","targets_zh":"","source_lang":"zh|ja|ko|en|other","confidence":0到1}。不要markdown，不要解释。';
+  try{
+   const txt=await gemini([{type:'text',text:prompt},{type:'image',data:b64,mime_type:mime}],st);
+   const x=parseObjV1521(txt);
+   const bc=Number(x.brand_confidence||0)||0;
+   const evidence=String(x.brand_evidence||'').trim();
+   const rawBrand=String(x.brand||'').trim();
+   const safeBrand=(bc>=BRAND_MIN_V1521&&validBrandEvidenceV1521(rawBrand,evidence))?rawBrand:'';
+   const src=normalizeLangV1520(x.source_lang);
+   const orig=String(x.name_original||'').trim();
+   let zh=String(x.name_zh||'').trim(); if(!zh&&src==='zh')zh=orig;
+   const fo=String(x.flavor_original||'').trim(),fz=String(x.flavor_zh||'').trim()||(src==='zh'?fo:'');
+   const to=String(x.targets_original||'').trim(),tz=String(x.targets_zh||'').trim()||(src==='zh'?to:'');
+   return {...item,
+    brand:safeBrand,brandConfidence:bc,brandEvidence:evidence,
+    nameOriginal:orig||item.nameOriginal||item.name||'',nameZh:zh,
+    name:zh||orig||item.name||'',type:String(x.type||item.type||'').trim(),
+    flavorOriginal:fo,flavorZh:fz,flavor:fz||fo||'',
+    targetsOriginal:to,targetsZh:tz,targets:tz||to||'',
+    sourceLang:src,confidence:Number(x.confidence||0)||0,refined:true,refinementError:''
+   }
+  }catch(e){return {...item,brand:'',brandConfidence:0,brandEvidence:'',refined:false,refinementError:String(e?.message||e)}}
+ }
+
+ // More conservative card messaging.
+ const oldRender=renderBaitMultiV1518;
+ renderBaitMultiV1518=function(){
+  oldRender();
+  const box=$('baitMultiResults');if(!box)return;
+  const cards=[...box.querySelectorAll('.bait-multi-card')];
+  cards.forEach((card,i)=>{
+   const x=baitMultiCandidatesV1518[i];if(!x)return;
+   const note=card.querySelector('.bait-crop-note');
+   if(note&&x.relocalizeReliable)note.textContent='已二次校正裁剪，只保留目标包装';
+   const brandInput=[...card.querySelectorAll('.field')].find(el=>el.querySelector('label')?.textContent.startsWith('品牌'));
+   if(brandInput){
+    const label=brandInput.querySelector('label');
+    const bc=x.brandConfidence?Math.round(x.brandConfidence*100):0;
+    label.textContent=x.brand?('品牌（已验证 '+bc+'%）'):'品牌（未可靠识别，留空）';
+   }
+  })
+ };
+
+ // Override recognizer: detect -> crop -> relocalize crop -> final identify.
+ recognizeBait=async function(){
+  if(!baitImageData)return alert('请先拍照或选择图片');
+  const st=$('recognizeStatus');st.textContent='第一阶段：正在检测整张图片中的各个包装…';
+  if($('baitEdit'))$('baitEdit').style.display='none';
+  baitMultiCandidatesV1518=[];renderBaitMultiV1518();
+  try{
+   const [head,b64]=baitImageData.split(',');
+   const mime=(head.match(/data:(.*?);/)||[])[1]||'image/jpeg';
+   const p1='只做整图目标检测。找出每一个独立淡水钓鱼饵料包装，最多20个。重点是 bbox 准确，不要猜品牌。每个 bbox=[x,y,w,h] 使用0到1000归一化整数，尽量覆盖完整单包并减少相邻包装。仅返回严格JSON：{"items":[{"brand":"","brand_confidence":0,"name":"可见主产品名或空","type":"","flavor":"","targets":"","confidence":0到1,"bbox":[x,y,w,h]}]}。不要markdown。';
+   const txt=await gemini([{type:'text',text:p1},{type:'image',data:b64,mime_type:mime}],st);
+   baitMultiCandidatesV1518=cleanMultiBaitJSONV1518(txt);
+   if(!baitMultiCandidatesV1518.length)throw Error('没有识别出可保存的饵料包装。');
+   baitMultiCandidatesV1518.forEach(x=>{x.brand='';x.brandConfidence=0;x.brandEvidence=''});
+   st.textContent='第一阶段完成：找到 '+baitMultiCandidatesV1518.length+' 个，正在生成初始单包图片…';
+   await buildBaitCropsV1519(baitMultiCandidatesV1518,baitImageData);
+   renderBaitMultiV1518();
+
+   let doDeep=true;
+   if(baitMultiCandidatesV1518.length>8){
+    doDeep=confirm('识别到 '+baitMultiCandidatesV1518.length+' 个饵料。继续“裁剪校正 + 单包最终识别”会更准确，但耗时更长。\n\n确定：高精度识别\n取消：只保留初步结果');
+   }
+   if(doDeep){
+    const out=[];
+    for(let i=0;i<baitMultiCandidatesV1518.length;i++){
+      let x=await relocalizeBaitCropV1521(baitMultiCandidatesV1518[i],i,baitMultiCandidatesV1518.length,st);
+      x=await identifyFinalBaitV1521(x,i,baitMultiCandidatesV1518.length,st);
+      out.push(x);
+      baitMultiCandidatesV1518=out.concat(baitMultiCandidatesV1518.slice(i+1));
+      renderBaitMultiV1518();
+    }
+    baitMultiCandidatesV1518=out;
+   }else{
+    baitMultiCandidatesV1518.forEach(x=>{x.brand='';x.brandConfidence=0;x.nameOriginal=x.name||'';x.nameZh=x.name||''});
+   }
+
+   for(const x of baitMultiCandidatesV1518){if(findDuplicateBaitV1518(x)){x.selected=false;x._dupInit=true}}
+   renderBaitMultiV1518();
+   const relocalized=baitMultiCandidatesV1518.filter(x=>x.relocalizeReliable).length;
+   const brands=baitMultiCandidatesV1518.filter(x=>x.brand).length;
+   st.textContent='识别完成：'+baitMultiCandidatesV1518.length+' 个；'+relocalized+' 个完成二次裁剪校正；仅 '+brands+' 个品牌通过严格验证。';
+  }catch(e){st.textContent='识别失败：'+(e?.message||e)}
+ };
+
+ // Save only verified brands and keep evidence in metadata.
+ const oldSave=saveSelectedBaitsV1518;
+ saveSelectedBaitsV1518=async function(){
+  for(const x of baitMultiCandidatesV1518){
+   if(!(Number(x.brandConfidence||0)>=BRAND_MIN_V1521&&validBrandEvidenceV1521(x.brand,x.brandEvidence)))x.brand='';
+  }
+  return oldSave()
+ };
+
+ // v15.20 saver checks its own 0.80 threshold, but by here non-verified brands are already blank.
+ Object.assign(I18N_STATIC,{
+  "已二次校正裁剪，只保留目标包装":["2차 크롭 보정 완료","Crop refined to target package"],
+  "品牌（未可靠识别，留空）":["브랜드(신뢰도 부족, 비움)","Brand (not reliable, left blank)"]
  });
 })();
 </script></body></html>
