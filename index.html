@@ -720,7 +720,7 @@ function selectTripFloatV132(id,name,lead){
  window._currentTrip={...(window._currentTrip||{}),floatId:id||null,floatName:name,floatLead:Number(lead)};
  saveTripSession();
  const rec=Number((window._currentTrip||{}).recommendedLead||lead);
- $('owned').innerHTML="<p><b>请选择本次使用的浮漂：</b></p>"+(window._recommendedFloats||[]).slice(0,5).map(x=>floatPickHtmlV132(x,rec)).join('')
+ $('owned').innerHTML="<p><b>请选择本次使用的浮漂：</b></p>"+(window._recommendedFloats||[]).slice(0,10).map(x=>floatPickHtmlV132(x,rec)).join('')
 }
 function calculate(){
  const d=+$('depth').value||2,r=+$('rod').value||5.4,w=+$('wind').value,c=+$('current').value,b=$('bite').value,[autoM,sub]=lineRec(),m=+$('mainline').value||autoM;
@@ -732,7 +732,7 @@ function calculate(){
  const why=['基础值约 '+(Math.round(base*10)/10)+'g'];if(r>5.4)why.push('长竿增加抛投稳定性修正');if(w)why.push('风力上调');if(c)why.push('走水上调');if(b==='light')why.push('轻口下调灵敏度区间');
  $('reason').textContent='计算逻辑：'+why.join('；')+'。建议从优先值开始，现场每次约0.2~0.3g微调。';
  const floats=(window._floats||[]).map(x=>({...x,diff:Math.abs(Number(x.lead)-lead)})).sort((a,b)=>a.diff-b.diff);window._recommendedFloats=floats;
- $('owned').innerHTML=floats.length?"<p><b>请选择本次使用的浮漂：</b></p>"+floats.slice(0,5).map(x=>floatPickHtmlV132(x,lead)).join(''):"<p class='small'>漂盒还没有浮漂，将按推荐吃铅值记录。</p>";
+ $('owned').innerHTML=floats.length?"<p><b>请选择本次使用的浮漂：</b></p>"+floats.slice(0,10).map(x=>floatPickHtmlV132(x,lead)).join(''):"<p class='small'>漂盒还没有浮漂，将按推荐吃铅值记录。</p>";
  $('result').style.display='block';
  window._currentTrip={...(window._currentTrip||{}),depth:d,rod:r,mainLine:m,leaderLine:sub,recommendedLead:lead,fishCode:$('fish').value,fishText:{crucian:'鲫鱼',carp:'鲤鱼',mixed:'综合鱼',big:'大型鱼'}[$('fish').value]||'综合鱼'};
  if(!floats.length){window._currentTrip.floatId=null;window._currentTrip.floatName='';window._currentTrip.floatLead=lead}
