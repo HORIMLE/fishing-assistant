@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.19</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.20</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -117,7 +117,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.19":["낚시 찌 선택 도우미 v15.19","Fishing Float Assistant v15.19"],
+"钓鱼选漂助手 v15.20":["낚시 찌 선택 도우미 v15.20","Fishing Float Assistant v15.20"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -219,7 +219,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.19');
+ document.title=trStatic('钓鱼选漂助手 v15.20');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -2212,4 +2212,258 @@ Object.assign(I18N_STATIC,{
 "已自动裁剪对应包装":["해당 포장 자동 잘라내기 완료","Package auto-cropped"],
 "未取得可靠定位，暂用原图":["신뢰할 위치를 찾지 못해 원본 사용","Using original image because reliable bounds were not found"]
 });
+</script><script>
+(function(){
+ const BRAND_MIN_V1520=.80;
+
+ function normalizeLangV1520(v){
+  const x=String(v||'').toLowerCase();
+  if(/ja|japanese|日文|日本/.test(x))return 'ja';
+  if(/ko|korean|韩文|韩国/.test(x))return 'ko';
+  if(/zh|chinese|中文|中国/.test(x))return 'zh';
+  if(/en|english|英文/.test(x))return 'en';
+  return x||'unknown'
+ }
+ function parseStrictObjectV1520(text){
+  let raw=String(text||'').trim();
+  const fenced=raw.match(/\`\`\`(?:json)?\s*([\s\S]*?)\`\`\`/i);
+  if(fenced)raw=fenced[1];
+  const a=raw.indexOf('{'),b=raw.lastIndexOf('}');
+  if(a<0||b<a)throw Error('AI返回格式无法解析');
+  return JSON.parse(raw.slice(a,b+1))
+ }
+ async function refineOneBaitV1520(item,index,total,st){
+  if(!item?.cropImage)return item;
+  const [head,b64]=item.cropImage.split(',');
+  const mime=(head.match(/data:(.*?);/)||[])[1]||'image/webp';
+  if(st)st.textContent='正在精细识别第 '+(index+1)+'/'+total+' 个饵料…';
+  const prompt='你现在只看一个已经裁剪好的淡水钓鱼饵料包装。请进行第二次精细识别，准确性优先于填满字段。包装可能是中文、日文、韩文或英文。品牌字段特别严格：只有当包装上品牌文字/标志清晰可见且你有较高把握时才填写 brand；brand_confidence 低于0.80时 brand 必须返回空字符串，禁止根据产品名、包装风格或常识猜品牌。产品名尽量逐字读取。判断 source_lang 为 zh/ja/ko/en/other。若 source_lang=ja，则必须把产品名、味型、用途/鱼种翻译成自然简体中文，同时保留日文原文；中文包装的 *_zh 可以与原文相同。不要杜撰看不清的文字。仅返回严格JSON：{"brand":"","brand_confidence":0到1,"name_original":"","name_zh":"","type":"","flavor_original":"","flavor_zh":"","targets_original":"","targets_zh":"","source_lang":"zh|ja|ko|en|other","confidence":0到1}。不要markdown，不要解释。';
+  try{
+   const txt=await gemini([{type:'text',text:prompt},{type:'image',data:b64,mime_type:mime}],st);
+   const x=parseStrictObjectV1520(txt);
+   const brandConf=Number(x.brand_confidence||0)||0;
+   const src=normalizeLangV1520(x.source_lang);
+   const original=String(x.name_original||x.name||item.nameOriginal||item.name||'').trim();
+   let zh=String(x.name_zh||'').trim();
+   if(!zh&&src==='zh')zh=original;
+   const flavOrig=String(x.flavor_original||x.flavor||item.flavorOriginal||item.flavor||'').trim();
+   let flavZh=String(x.flavor_zh||'').trim(); if(!flavZh&&src==='zh')flavZh=flavOrig;
+   const tarOrig=String(x.targets_original||x.targets||item.targetsOriginal||item.targets||'').trim();
+   let tarZh=String(x.targets_zh||'').trim(); if(!tarZh&&src==='zh')tarZh=tarOrig;
+   return {
+    ...item,
+    brand:brandConf>=BRAND_MIN_V1520?String(x.brand||'').trim():'',
+    brandConfidence:brandConf,
+    nameOriginal:original,
+    nameZh:zh,
+    name:zh||original||item.name,
+    type:String(x.type||item.type||'').trim(),
+    flavorOriginal:flavOrig,
+    flavorZh:flavZh,
+    flavor:flavZh||flavOrig||item.flavor,
+    targetsOriginal:tarOrig,
+    targetsZh:tarZh,
+    targets:tarZh||tarOrig||item.targets,
+    sourceLang:src,
+    confidence:Number(x.confidence||item.confidence||0)||0,
+    refined:true,
+    refinementError:''
+   };
+  }catch(e){
+   return {...item,brand:'',brandConfidence:0,refined:false,refinementError:String(e?.message||e)}
+  }
+ }
+
+ const oldParser=cleanMultiBaitJSONV1518;
+ cleanMultiBaitJSONV1518=function(text){
+  const items=oldParser(text);
+  return items.map(x=>({
+    ...x,
+    brandConfidence:Number(x.brandConfidence||0)||0,
+    nameOriginal:x.name||'',
+    nameZh:'',
+    flavorOriginal:x.flavor||'',
+    flavorZh:'',
+    targetsOriginal:x.targets||'',
+    targetsZh:'',
+    sourceLang:'unknown',
+    refined:false
+  }))
+ };
+
+ // Replace result card renderer with bilingual fields and refinement status.
+ renderBaitMultiV1518=function(){
+  const box=$('baitMultiResults');if(!box)return;
+  if(!baitMultiCandidatesV1518.length){box.style.display='none';box.innerHTML='';return}
+  box.style.display='block';
+  box.innerHTML="<div class='bait-multi-toolbar'><div><b>识别到 "+baitMultiCandidatesV1518.length+" 个饵料</b><div class='small'>已采用整图定位 + 单包二次精细识别。品牌低置信度时自动留空。</div></div><button class='primary' style='margin:0;width:auto' onclick='saveSelectedBaitsV1518()'>批量保存已勾选</button></div>"+
+  "<div class='bait-multi-grid'>"+baitMultiCandidatesV1518.map((x,i)=>{
+   const dup=findDuplicateBaitV1518(x);
+   if(dup&&x._dupInit!==true){x.selected=false;x._dupInit=true}
+   const conf=x.confidence?Math.round(Math.min(1,x.confidence)*100):null;
+   const brandConf=x.brandConfidence?Math.round(Math.min(1,x.brandConfidence)*100):0;
+   const lang=x.sourceLang||'unknown';
+   return "<div class='bait-multi-card "+(dup?'duplicate':'')+"'>"+
+    "<div class='bait-multi-head'><label><input type='checkbox' "+(x.selected?'checked':'')+" onchange='updateBaitCandidateV1518("+i+",\"selected\",this.checked)'> 饵料 "+(i+1)+"</label>"+
+    "<div>"+(dup?"<span class='bait-dup-badge'>可能已存在</span>":"")+(x.refined?" <span class='pill'>精细识别完成</span>":" <span class='pill'>仅初次识别</span>")+(conf!==null?" <span class='bait-confidence'>"+conf+"%</span>":"")+"</div></div>"+
+    (x.cropImage?"<div class='bait-crop-wrap'><img src='"+x.cropImage+"' alt=''></div><div class='bait-crop-note'>"+(x.cropFallback?"未取得可靠定位，暂用原图":"已自动裁剪对应包装")+"</div>":"")+
+    "<div class='field'><label>品牌"+(brandConf?"（置信度 "+brandConf+"%）":"")+"</label><input value='"+escAttrV1518(x.brand)+"' placeholder='不确定时留空' oninput='updateBaitCandidateV1518("+i+",\"brand\",this.value,false)'></div>"+
+    "<div class='field'><label>中文名称</label><input value='"+escAttrV1518(x.nameZh||x.name)+"' oninput='updateBaitCandidateV1520("+i+",\"nameZh\",this.value)'></div>"+
+    "<div class='field'><label>包装原文"+(lang!=='unknown'?" · "+lang:"")+"</label><input value='"+escAttrV1518(x.nameOriginal||'')+"' oninput='updateBaitCandidateV1520("+i+",\"nameOriginal\",this.value)'></div>"+
+    "<div class='field'><label>类型/定位</label><input value='"+escAttrV1518(x.type)+"' oninput='updateBaitCandidateV1518("+i+",\"type\",this.value,false)'></div>"+
+    "<div class='field'><label>中文味型</label><input value='"+escAttrV1518(x.flavorZh||x.flavor)+"' oninput='updateBaitCandidateV1520("+i+",\"flavorZh\",this.value)'></div>"+
+    "<div class='field'><label>原文味型</label><input value='"+escAttrV1518(x.flavorOriginal||'')+"' oninput='updateBaitCandidateV1520("+i+",\"flavorOriginal\",this.value)'></div>"+
+    "<div class='field'><label>中文用途/鱼种</label><input value='"+escAttrV1518(x.targetsZh||x.targets)+"' oninput='updateBaitCandidateV1520("+i+",\"targetsZh\",this.value)'></div>"+
+    "<div class='field'><label>原文用途/鱼种</label><input value='"+escAttrV1518(x.targetsOriginal||'')+"' oninput='updateBaitCandidateV1520("+i+",\"targetsOriginal\",this.value)'></div>"+
+    (x.refinementError?"<div class='small' style='color:#a33'>二次识别失败："+escapeHtml(x.refinementError)+"</div>":"")+
+    "<button class='danger' style='margin-top:8px' onclick='removeBaitCandidateV1518("+i+")'>移除</button></div>"
+  }).join('')+"</div>";
+ };
+ window.updateBaitCandidateV1520=function(i,key,val){
+  const x=baitMultiCandidatesV1518[i];if(!x)return;x[key]=val;
+  if(key==='nameZh')x.name=val||x.nameOriginal||'';
+  if(key==='flavorZh')x.flavor=val||x.flavorOriginal||'';
+  if(key==='targetsZh')x.targets=val||x.targetsOriginal||'';
+ };
+
+ // Authoritative two-pass recognizer.
+ recognizeBait=async function(){
+  if(!baitImageData)return alert('请先拍照或选择图片');
+  const st=$('recognizeStatus');st.textContent='第一阶段：正在识别整张图片并定位每个包装…';
+  if($('baitEdit'))$('baitEdit').style.display='none';
+  baitMultiCandidatesV1518=[];renderBaitMultiV1518();
+  try{
+   const [head,b64]=baitImageData.split(',');
+   const mime=(head.match(/data:(.*?);/)||[])[1]||'image/jpeg';
+   const prompt='第一阶段只做整图检测和粗识别。识别每一个独立淡水钓鱼饵料包装，最多20个，并给出 bbox=[x,y,w,h]，坐标为0到1000归一化整数。不要重复同一包装。品牌不要猜：只有包装上品牌明显可见时填写，并返回 brand_confidence；低把握时 brand 为空。仅返回严格JSON：{"items":[{"brand":"","brand_confidence":0到1,"name":"包装上可见产品名","type":"","flavor":"","targets":"","confidence":0到1,"bbox":[x,y,w,h]}]}。不要markdown。';
+   const txt=await gemini([{type:'text',text:prompt},{type:'image',data:b64,mime_type:mime}],st);
+   baitMultiCandidatesV1518=cleanMultiBaitJSONV1518(txt);
+   if(!baitMultiCandidatesV1518.length)throw Error('没有识别出可保存的饵料包装。');
+   // Enforce conservative first-pass brand too.
+   for(const x of baitMultiCandidatesV1518){
+    if((Number(x.brandConfidence)||0)<BRAND_MIN_V1520)x.brand='';
+   }
+   st.textContent='第一阶段完成：找到 '+baitMultiCandidatesV1518.length+' 个，正在裁剪单个包装…';
+   await buildBaitCropsV1519(baitMultiCandidatesV1518,baitImageData);
+   renderBaitMultiV1518();
+
+   let doRefine=true;
+   if(baitMultiCandidatesV1518.length>8){
+    doRefine=confirm('识别到 '+baitMultiCandidatesV1518.length+' 个饵料。继续逐个精细识别会更准确，但速度会更慢。\n\n确定：继续精细识别\n取消：只保留第一次结果');
+   }
+   if(doRefine){
+    const refined=[];
+    for(let i=0;i<baitMultiCandidatesV1518.length;i++){
+     refined.push(await refineOneBaitV1520(baitMultiCandidatesV1518[i],i,baitMultiCandidatesV1518.length,st));
+     baitMultiCandidatesV1518=refined.concat(baitMultiCandidatesV1518.slice(i+1));
+     renderBaitMultiV1518();
+    }
+    baitMultiCandidatesV1518=refined;
+   }else{
+    for(const x of baitMultiCandidatesV1518){
+     if((Number(x.brandConfidence)||0)<BRAND_MIN_V1520)x.brand='';
+     x.nameOriginal=x.name||'';
+     x.nameZh=x.name||'';
+    }
+   }
+   for(const x of baitMultiCandidatesV1518){if(findDuplicateBaitV1518(x)){x.selected=false;x._dupInit=true}}
+   renderBaitMultiV1518();
+   const refinedCount=baitMultiCandidatesV1518.filter(x=>x.refined).length;
+   const jpCount=baitMultiCandidatesV1518.filter(x=>x.sourceLang==='ja').length;
+   st.textContent='识别完成：共 '+baitMultiCandidatesV1518.length+' 个；精细识别 '+refinedCount+' 个'+(jpCount?'；日文饵料 '+jpCount+' 个已生成中文翻译':'')+'。';
+  }catch(e){st.textContent='识别失败：'+(e?.message||e)}
+ };
+
+ // Authoritative save with bilingual columns and confidence metadata.
+ saveSelectedBaitsV1518=async function(){
+  const selected=baitMultiCandidatesV1518.filter(x=>x.selected&&(x.nameZh||x.nameOriginal||x.name||'').trim());
+  if(!selected.length)return alert('请至少勾选一个有名称的饵料。');
+  const st=$('recognizeStatus');st.textContent='正在保存 '+selected.length+' 个饵料…';
+  const uploadedPaths=[];
+  try{
+   if(currentUser){
+    const rows=[];
+    for(let idx=0;idx<selected.length;idx++){
+     const x=selected[idx];
+     let image_path='';
+     const img=x.cropImage||baitImageData;
+     if(img){image_path=await uploadBaitImage(img);if(image_path)uploadedPaths.push(image_path)}
+     const displayName=(x.nameZh||x.nameOriginal||x.name||'').trim();
+     const displayFlavor=(x.flavorZh||x.flavorOriginal||x.flavor||'').trim();
+     const targets=(x.targetsZh||x.targetsOriginal||x.targets||'').trim();
+     rows.push({
+      user_id:currentUser.id,
+      brand:(Number(x.brandConfidence||0)>=BRAND_MIN_V1520?x.brand:'')||null,
+      name:displayName,
+      name_original:x.nameOriginal||null,
+      name_zh:x.nameZh||null,
+      bait_type:x.type||null,
+      flavor:displayFlavor||null,
+      flavor_original:x.flavorOriginal||null,
+      flavor_zh:x.flavorZh||null,
+      target_fish:targets?targets.split(/[,，、/]/).map(v=>v.trim()).filter(Boolean):[],
+      targets_original:x.targetsOriginal||null,
+      targets_zh:x.targetsZh||null,
+      source_lang:x.sourceLang||null,
+      image_path:image_path||null,
+      ai_metadata:{
+       recognized:true,multi_image:true,two_pass:x.refined===true,individual_crop:!x.cropFallback,
+       source_item_index:x.sourceIndex??idx,confidence:x.confidence||null,brand_confidence:x.brandConfidence||0,bbox:x.bbox||null
+      }
+     })
+    }
+    const {error}=await sb.from('baits').insert(rows);
+    if(error){if(uploadedPaths.length)try{await sb.storage.from('fishing-images').remove(uploadedPaths)}catch(_){};throw error}
+   }else{
+    const a=JSON.parse(localStorage.baits||'[]');
+    selected.forEach(x=>a.push({
+     brand:Number(x.brandConfidence||0)>=BRAND_MIN_V1520?x.brand:'',
+     name:x.nameZh||x.nameOriginal||x.name,
+     nameOriginal:x.nameOriginal,nameZh:x.nameZh,type:x.type,
+     flavor:x.flavorZh||x.flavorOriginal||x.flavor,flavorOriginal:x.flavorOriginal,flavorZh:x.flavorZh,
+     targets:x.targetsZh||x.targetsOriginal||x.targets,targetsOriginal:x.targetsOriginal,targetsZh:x.targetsZh,
+     sourceLang:x.sourceLang,image:x.cropImage||baitImageData
+    }));
+    localStorage.baits=JSON.stringify(a)
+   }
+   const saved=selected.length;
+   baitMultiCandidatesV1518=[];renderBaitMultiV1518();
+   baitImageData='';baitImageQueue=[];baitQueueIndex=0;
+   if($('baitCamera'))$('baitCamera').value='';if($('baitGallery'))$('baitGallery').value='';
+   if($('baitPreview'))$('baitPreview').style.display='none';if($('baitQueue'))$('baitQueue').innerHTML='';
+   await renderBaits();
+   st.textContent='已保存 '+saved+' 个饵料。日文商品会同时保留原文和中文名称。';
+  }catch(e){st.textContent='批量保存失败：'+(e?.message||e)}
+ };
+
+ // Bilingual bait-library renderer.
+ renderBaits=async function(){
+  let a=[];
+  if(currentUser){
+   const {data,error}=await sb.from('baits').select('id,brand,name,name_original,name_zh,bait_type,flavor,flavor_original,flavor_zh,target_fish,targets_original,targets_zh,source_lang,image_path,ai_metadata').order('created_at',{ascending:false});
+   if(!error)a=await Promise.all((data||[]).map(async x=>({
+    id:x.id,brand:x.brand,name:x.name,nameOriginal:x.name_original||'',nameZh:x.name_zh||'',type:x.bait_type,
+    flavor:x.flavor,flavorOriginal:x.flavor_original||'',flavorZh:x.flavor_zh||'',targets:(x.target_fish||[]).join('、'),
+    targetsOriginal:x.targets_original||'',targetsZh:x.targets_zh||'',sourceLang:x.source_lang||'',brandConfidence:Number(x.ai_metadata?.brand_confidence||0),
+    image:x.image_path?await signedImage(x.image_path):'',image_path:x.image_path
+   })))
+  }else a=JSON.parse(localStorage.baits||'[]');
+  window._baits=a;
+  $('baitList').innerHTML=a.length?a.map((x,i)=>{
+   const display=x.nameZh||x.name||x.nameOriginal||'未命名';
+   const original=x.nameOriginal&&x.nameOriginal!==display?("<div class='small'>原文："+escapeHtml(x.nameOriginal)+"</div>"):'';
+   const brand=x.brand?escapeHtml(x.brand)+' · ':'';
+   const lang=x.sourceLang==='ja'?"<span class='pill'>日文→中文</span>":'';
+   return "<div class='item bait-card'>"+(x.image?"<img src='"+x.image+"'>":"<div></div>")+"<div><button class='danger' onclick='delBait("+i+")'>删除</button><b>"+brand+escapeHtml(display)+"</b>"+lang+original+"<span class='small'>"+escapeHtml(x.type||'未分类')+" · "+escapeHtml(x.flavorZh||x.flavor||'味型未知')+"<br>"+escapeHtml(x.targetsZh||x.targets||'')+"</span></div></div>"
+  }).join(''):"<div class='empty'>还没有饵料。先拍包装加入库存。</div>";
+ };
+
+ Object.assign(I18N_STATIC,{
+  "精细识别完成":["정밀 인식 완료","Detailed recognition complete"],
+  "仅初次识别":["1차 인식만","First pass only"],
+  "中文名称":["중문 이름","Chinese name"],
+  "包装原文":["포장 원문","Original package text"],
+  "日文→中文":["일본어→중국어","Japanese→Chinese"]
+ });
+})();
 </script></body></html>
