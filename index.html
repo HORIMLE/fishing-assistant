@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v9</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v9.1</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -39,9 +39,9 @@
 <div class='field'><label>效果评分</label><select id='logScore'><option value=''>未评分</option><option value='1'>1 - 很差</option><option value='2'>2 - 较差</option><option value='3'>3 - 一般</option><option value='4'>4 - 较好</option><option value='5'>5 - 很好</option></select></div>
 <div class='field full'><label>实际饵料配方</label><input id='logRecipe' placeholder='例如 蓝鲫40% + 九一八40% + 速攻20%'></div>
 <div class='field full'><label>备注</label><input id='memo' placeholder='鱼口变化、风浪、走水、调整过程等'></div>
-</div><button class='primary' onclick='addLog()'>保存本次作钓记录</button></div>
+</div><button id='saveLogBtn' class='primary' onclick='addLog()'>保存本次作钓记录</button></div>
 <div class='card'><h2>我的常用钓点</h2><div id='spotList'><div class='empty'>暂无钓点记录</div></div></div>
-<div class='card'><h2>历史作钓记录</h2><div id='logList'></div></div>
+<div id='logHistoryCard' class='card'><h2>历史作钓记录</h2><div id='logList'></div></div>
 </section>
 
 <section id='bait' class='panel'>
@@ -131,15 +131,35 @@ async function useLogCurrentConditions(){
   }catch(e){st.textContent='定位成功，但天气读取失败：'+e.message}
  },e=>{st.textContent=e.code===1?'定位权限被拒绝。请允许此网站使用位置。':e.code===2?'暂时无法取得当前位置，请确认手机定位已开启。':'定位超时，请重试。'}, {enableHighAccuracy:true,timeout:15000,maximumAge:180000})
 }
+let logSaving=false;
+function clearLogFormAfterSave(){
+ ['logFish','logWaterTemp','logRod','logMainLine','logLeaderLine','logLead','logCatchCount','logCatchWeight','logDuration','logRecipe','memo'].forEach(id=>{if($(id))$(id).value=''});
+ if($('logScore'))$('logScore').value='';
+ // 保留钓点、天气、气温、风速、水深，便于同一天连续作钓时复用现场条件
+}
 async function addLog(){
+ if(logSaving)return;
+ let btn=$('saveLogBtn');
  let x={place:$('place').value.trim(),waterType:$('logWaterType').value,fish:$('logFish').value.trim(),weather:$('logWeather').value.trim(),wind:$('logWind').value,temp:$('logTemp').value,waterTemp:$('logWaterTemp').value,depth:$('logDepth').value,rod:$('logRod').value,mainLine:$('logMainLine').value,leaderLine:$('logLeaderLine').value,lead:$('logLead').value,bite:$('logBite').value,current:$('logCurrent').value,method:$('logMethod').value,count:$('logCatchCount').value,weight:$('logCatchWeight').value,duration:$('logDuration').value,score:$('logScore').value,recipe:$('logRecipe').value.trim(),memo:$('memo').value.trim()};
  if(!x.place)return alert('请填写钓点名称，或先使用自动定位。');
- if(currentUser){
-  let coords=window._logCoords||window._baitCoords||null,spotId=await ensureSpot(x.place,x.waterType,x.depth,coords);
-  let {error}=await sb.from('fishing_logs').insert({user_id:currentUser.id,spot_id:spotId,location_name:x.place,target_fish:x.fish||null,latitude:coords?.lat??null,longitude:coords?.lon??null,water_depth_m:x.depth||null,rod_length_m:x.rod||null,main_line:x.mainLine||null,leader_line:x.leaderLine||null,float_buoyancy_g:x.lead||null,air_temp_c:x.temp||null,water_temp_c:x.waterTemp||null,season:currentSeason(),weather_condition:x.weather||null,wind_speed_kmh:x.wind||null,bite_condition:x.bite||null,current_condition:x.current||null,fishing_method:x.method||null,duration_minutes:x.duration||null,catch_count:x.count===''?null:Number(x.count),catch_weight_kg:x.weight||null,effectiveness_score:x.score||null,bait_recipe:{text:x.recipe},catch_result:{count:x.count===''?null:Number(x.count),weight_kg:x.weight===''?null:Number(x.weight)},notes:x.memo});
-  if(error)return alert('保存失败：'+error.message)
- }else{let a=JSON.parse(localStorage.logs||'[]');a.unshift({...x,date:new Date().toLocaleDateString()});localStorage.logs=JSON.stringify(a)}
- await Promise.all([renderLogs(),renderSpots()]);alert('本次作钓记录已保存。')
+ logSaving=true;if(btn){btn.disabled=true;btn.textContent='正在保存…'}
+ try{
+  if(currentUser){
+   let coords=window._logCoords||window._baitCoords||null,spotId=await ensureSpot(x.place,x.waterType,x.depth,coords);
+   let {error}=await sb.from('fishing_logs').insert({user_id:currentUser.id,spot_id:spotId,location_name:x.place,target_fish:x.fish||null,latitude:coords?.lat??null,longitude:coords?.lon??null,water_depth_m:x.depth||null,rod_length_m:x.rod||null,main_line:x.mainLine||null,leader_line:x.leaderLine||null,float_buoyancy_g:x.lead||null,air_temp_c:x.temp||null,water_temp_c:x.waterTemp||null,season:currentSeason(),weather_condition:x.weather||null,wind_speed_kmh:x.wind||null,bite_condition:x.bite||null,current_condition:x.current||null,fishing_method:x.method||null,duration_minutes:x.duration||null,catch_count:x.count===''?null:Number(x.count),catch_weight_kg:x.weight||null,effectiveness_score:x.score||null,bait_recipe:{text:x.recipe},catch_result:{count:x.count===''?null:Number(x.count),weight_kg:x.weight===''?null:Number(x.weight)},notes:x.memo});
+   if(error)throw error
+  }else{
+   let a=JSON.parse(localStorage.logs||'[]');a.unshift({...x,date:new Date().toLocaleDateString()});localStorage.logs=JSON.stringify(a)
+  }
+  await Promise.all([renderLogs(),renderSpots()]);
+  clearLogFormAfterSave();
+  $('logLocationStatus').textContent='保存成功。已跳转到历史记录，避免重复保存同一条记录。';
+  $('logHistoryCard')?.scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(e){
+  alert('保存失败：'+(e?.message||e))
+ }finally{
+  logSaving=false;if(btn){btn.disabled=false;btn.textContent='保存本次作钓记录'}
+ }
 }
 async function renderLogs(){
  let a=[];
