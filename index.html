@@ -1,10 +1,10 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v12.3</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v13</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
 
-.auth-screen{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px 14px;background:linear-gradient(180deg,#12372a 0,#176b4d 34%,#f3f5f1 34%)}.auth-box{width:min(100%,430px);background:#fff;border-radius:20px;padding:22px;box-shadow:0 12px 35px #0002}.auth-brand{text-align:center;margin-bottom:20px}.auth-brand .icon{font-size:44px}.auth-brand h1{margin:6px 0 4px;font-size:25px}.auth-brand p{margin:0;color:var(--muted);font-size:13px}.auth-link{border:0;background:none;color:var(--accent);font-weight:800;padding:10px 4px;font-size:14px}.auth-bottom{text-align:center;margin-top:10px}.app-shell{display:none}.account-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:10px 12px;border-bottom:1px solid var(--line);font-size:12px}.account-bar b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.logout-btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 10px;color:#a33;font-weight:700;white-space:nowrap}
-</style><script src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'></script></head><body><div id="authScreen" class="auth-screen"><div class="auth-box"><div class="auth-brand"><div class="icon">🎣</div><h1>钓鱼助手</h1><p>登录后进入你的钓鱼数据和 AI 助手</p></div><div id="loginView"><h2>登录</h2><div class="field"><label>邮箱</label><input id="loginEmail" type="email" inputmode="email" autocomplete="email" placeholder="请输入邮箱"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="请输入密码"></div><button class="primary" onclick="signIn()">登录</button><div class="auth-bottom"><button class="auth-link" type="button" onclick="requestPasswordReset()">忘记密码？重置密码</button><br>还没有账号？ <button class="auth-link" type="button" onclick="showAuthPane('register')">创建账号</button></div></div><div id="registerView" style="display:none"><h2>创建账号</h2><div class="field"><label>邮箱</label><input id="registerEmail" type="email" inputmode="email" autocomplete="email" placeholder="用于登录和邮箱确认"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="registerPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入密码</label><input id="registerPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="signUp()">创建账号</button><div class="auth-bottom">已有账号？ <button class="auth-link" type="button" onclick="showAuthPane('login')">返回登录</button></div></div><div id="resetView" style="display:none"><h2>设置新密码</h2><p class="auth-help">已通过密码重置链接验证。请输入新的登录密码。</p><div class="field"><label>新密码</label><input id="resetPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入新密码</label><input id="resetPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="updatePassword()">保存新密码</button></div><div id="authStatus" class="ai-status"></div></div></div><div id="appShell" class="app-shell"><header><h1>🎣 钓鱼选漂助手</h1><p>水深 · 线组 · 风浪 · 走水 · 竿长综合推荐</p></header><div class="account-bar"><b id="authUser">已登录</b><button class="logout-btn" onclick="signOut()">退出登录</button></div><main class="wrap"><div class='tabs'><button class='tab on' data-p='places'>钓场</button><button class='tab' data-p='calc'>选漂</button><button class='tab' data-p='bait'>AI饵料</button><button class='tab' data-p='log'>钓鱼记录</button><button class='tab' data-p='box'>我的漂盒</button><button class='tab' data-p='guide'>说明</button></div>
+.auth-screen{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px 14px;background:linear-gradient(180deg,#12372a 0,#176b4d 34%,#f3f5f1 34%)}.auth-box{width:min(100%,430px);background:#fff;border-radius:20px;padding:22px;box-shadow:0 12px 35px #0002}.auth-brand{text-align:center;margin-bottom:20px}.auth-brand .icon{font-size:44px}.auth-brand h1{margin:6px 0 4px;font-size:25px}.auth-brand p{margin:0;color:var(--muted);font-size:13px}.auth-link{border:0;background:none;color:var(--accent);font-weight:800;padding:10px 4px;font-size:14px}.auth-bottom{text-align:center;margin-top:10px}.app-shell{display:none}.account-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:10px 12px;border-bottom:1px solid var(--line);font-size:12px}.account-bar b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.logout-btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 10px;color:#a33;font-weight:700;white-space:nowrap}.lang-switch{position:fixed;right:10px;top:10px;z-index:9999;border:1px solid #ffffff55;background:#ffffffee;color:#16251f;border-radius:10px;padding:7px 9px;font-size:13px;font-weight:800;box-shadow:0 2px 10px #0002}
+</style><script src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'></script></head><body><select id="langSwitch" class="lang-switch" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select><div id="authScreen" class="auth-screen"><div class="auth-box"><div class="auth-brand"><div class="icon">🎣</div><h1>钓鱼助手</h1><p>登录后进入你的钓鱼数据和 AI 助手</p></div><div id="loginView"><h2>登录</h2><div class="field"><label>邮箱</label><input id="loginEmail" type="email" inputmode="email" autocomplete="email" placeholder="请输入邮箱"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="请输入密码"></div><button class="primary" onclick="signIn()">登录</button><div class="auth-bottom"><button class="auth-link" type="button" onclick="requestPasswordReset()">忘记密码？重置密码</button><br>还没有账号？ <button class="auth-link" type="button" onclick="showAuthPane('register')">创建账号</button></div></div><div id="registerView" style="display:none"><h2>创建账号</h2><div class="field"><label>邮箱</label><input id="registerEmail" type="email" inputmode="email" autocomplete="email" placeholder="用于登录和邮箱确认"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="registerPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入密码</label><input id="registerPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="signUp()">创建账号</button><div class="auth-bottom">已有账号？ <button class="auth-link" type="button" onclick="showAuthPane('login')">返回登录</button></div></div><div id="resetView" style="display:none"><h2>设置新密码</h2><p class="auth-help">已通过密码重置链接验证。请输入新的登录密码。</p><div class="field"><label>新密码</label><input id="resetPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入新密码</label><input id="resetPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="updatePassword()">保存新密码</button></div><div id="authStatus" class="ai-status"></div></div></div><div id="appShell" class="app-shell"><header><h1>🎣 钓鱼选漂助手</h1><p>水深 · 线组 · 风浪 · 走水 · 竿长综合推荐</p></header><div class="account-bar"><b id="authUser">已登录</b><button class="logout-btn" onclick="signOut()">退出登录</button></div><main class="wrap"><div class='tabs'><button class='tab on' data-p='places'>钓场</button><button class='tab' data-p='calc'>选漂</button><button class='tab' data-p='bait'>AI饵料</button><button class='tab' data-p='log'>钓鱼记录</button><button class='tab' data-p='box'>我的漂盒</button><button class='tab' data-p='guide'>说明</button></div>
 <section id='calc' class='panel'><div id='tripBungalowCard' class='card'><h2>🏠 钓鱼房 / 방가로（可选）</h2><p class='why' id='tripBungalowHint'>如果这次使用钓鱼房/방가로，选择“是”并填写房间号。保存后，下次在钓场目录中会显示“有钓鱼房”。</p><div class='grid'><div class='field'><label>本次使用钓鱼房</label><select id='tripUsedBungalow' onchange='updateTripRoomInfo()'><option value='0' selected>否</option><option value='1'>是</option></select></div><div class='field'><label>房间/钓位号</label><input id='tripRoomNo' placeholder='例如 3号 / 7번 / A동 2호' oninput='updateTripRoomInfo()' disabled></div><div class='field full'><label>位置备注（可选）</label><input id='tripRoomNote' placeholder='例如 左侧、最里面、桥旁' oninput='updateTripRoomInfo()' disabled></div></div></div><div class='card'><h2>今天怎么钓？</h2><div class='grid'>
 <div class='field'><label>水深（米）</label><input id='depth' type='number' step='.1' value='2.5'></div><div class='field'><label>目标鱼</label><select id='fish'><option value='crucian'>鲫鱼</option><option value='carp'>鲤鱼</option><option value='mixed'>综合鱼</option><option value='big'>大型鱼</option></select></div><div class='field rod-field'><label>鱼竿长度（点击选择）</label><input id='rod' type='hidden' value='5.4'><div class='rod-options' id='rodOptions'></div></div>
 <div class='field'><label>预计个体</label><select id='size'><option value='small'>小（＜300g）</option><option value='medium' selected>中（300g~1kg）</option><option value='large'>大（1~3kg）</option><option value='xl'>很大（3kg+）</option></select></div>
@@ -71,6 +71,134 @@
 </section>
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></main></div><script>
+const I18N_STATIC={
+"钓鱼选漂助手 v13":["낚시 찌 선택 도우미 v13","Fishing Float Assistant v13"],
+"钓鱼助手":["낚시 도우미","Fishing Assistant"],
+"登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
+"登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
+"忘记密码？重置密码":["비밀번호를 잊으셨나요? 재설정","Forgot password? Reset"],
+"还没有账号？":["아직 계정이 없나요?","No account yet?"],"创建账号":["계정 만들기","Create account"],
+"再次输入密码":["비밀번호 다시 입력","Confirm password"],"已有账号？":["이미 계정이 있나요?","Already have an account?"],
+"返回登录":["로그인으로 돌아가기","Back to sign in"],"设置新密码":["새 비밀번호 설정","Set new password"],
+"已通过密码重置链接验证。请输入新的登录密码。":["비밀번호 재설정 링크가 확인되었습니다. 새 비밀번호를 입력하세요.","The reset link is verified. Enter a new password."],
+"新密码":["새 비밀번호","New password"],"再次输入新密码":["새 비밀번호 다시 입력","Confirm new password"],"保存新密码":["새 비밀번호 저장","Save new password"],
+"🎣 钓鱼选漂助手":["🎣 낚시 찌 선택 도우미","🎣 Fishing Float Assistant"],
+"水深 · 线组 · 风浪 · 走水 · 竿长综合推荐":["수심 · 채비 · 바람/파도 · 유속 · 낚싯대 길이 종합 추천","Recommendations using depth · line setup · wind/waves · current · rod length"],
+"已登录":["로그인됨","Signed in"],"退出登录":["로그아웃","Sign out"],
+"钓场":["낚시터","Fishing Spots"],"选漂":["찌 선택","Float"],"AI饵料":["AI 미끼","AI Bait"],"钓鱼记录":["낚시 기록","History"],"我的漂盒":["내 찌","My Floats"],"说明":["안내","Guide"],
+"🏠 钓鱼房 / 방가로（可选）":["🏠 낚시방 / 방갈로 (선택)","🏠 Fishing Room / Bungalow (optional)"],
+"如果这次使用钓鱼房/방가로，选择“是”并填写房间号。保存后，下次在钓场目录中会显示“有钓鱼房”。":["이번에 낚시방/방갈로를 이용했다면 ‘예’를 선택하고 방 번호를 입력하세요. 저장 후 다음 검색부터 ‘낚시방 있음’으로 표시됩니다.","If you use a fishing room/bungalow, select Yes and enter the room number. It will be marked in the spot directory after saving."],
+"本次使用钓鱼房":["이번에 낚시방 사용","Use fishing room"],"否":["아니요","No"],"是":["예","Yes"],"房间/钓位号":["방/낚시자리 번호","Room / position no."],"位置备注（可选）":["위치 메모 (선택)","Position note (optional)"],
+"今天怎么钓？":["오늘 어떻게 낚을까요?","How to fish today?"],"水深（米）":["수심 (m)","Depth (m)"],"目标鱼":["대상어","Target fish"],
+"鲫鱼":["붕어","Crucian carp"],"鲤鱼":["잉어","Carp"],"综合鱼":["종합어종","Mixed"],"大型鱼":["대형어","Large fish"],
+"鱼竿长度（点击选择）":["낚싯대 길이 (선택)","Rod length (tap to select)"],"预计个体":["예상 크기","Expected size"],
+"小（＜300g）":["소형 (<300g)","Small (<300g)"],"中（300g~1kg）":["중형 (300g~1kg)","Medium (300g–1kg)"],"大（1~3kg）":["대형 (1~3kg)","Large (1–3kg)"],"很大（3kg+）":["초대형 (3kg+)","Very large (3kg+)"],
+"风":["바람","Wind"],"无/很小":["없음/매우 약함","None/very light"],"微风":["약한 바람","Light"],"明显":["뚜렷함","Noticeable"],"较大":["강함","Strong"],
+"走水":["유속","Current"],"无":["없음","None"],"轻微":["약함","Slight"],"较强":["강함","Strong"],
+"鱼口":["입질","Bite"],"正常":["보통","Normal"],"轻口":["약은 입질","Light bite"],"活跃":["활발","Active"],
+"钓法":["낚시 방식","Method"],"搓/拉饵钓底":["떡밥 바닥낚시","Bottom bait fishing"],"精细钓鲫":["섬세한 붕어낚시","Fine crucian fishing"],"玉米/颗粒守大鱼":["옥수수/펠릿 대물낚시","Corn/pellet for big fish"],
+"主线号（留空则自动推荐）":["원줄 호수 (비우면 자동 추천)","Main line size (blank = auto)"],"立即推荐":["추천하기","Recommend"],
+"推荐结果":["추천 결과","Recommendation"],"建议浮漂吃铅":["권장 찌 부력/납 무게","Recommended float lead"],
+"这是基于常见台钓经验建立的辅助模型，不是绝对公式。实际还应根据漂型、自重、饵重、线径、抛投距离和当天鱼情微调。":["일반적인 민물 찌낚시 경험에 기반한 보조 모델입니다. 찌 형태, 자중, 미끼 무게, 줄 굵기, 투척 거리와 당일 상황에 맞춰 조정하세요.","This is an aid based on common float-fishing practice, not an absolute formula. Fine-tune for float shape, self-weight, bait weight, line diameter, casting distance and conditions."],
+"下一步：AI配饵":["다음: AI 미끼 배합","Next: AI bait mix"],
+"浮漂名称":["찌 이름","Float name"],"吃铅（g）":["부력/납 (g)","Lead (g)"],"加入漂盒":["내 찌에 추가","Add float"],
+"📚 钓鱼记录":["📚 낚시 기록","📚 Fishing History"],"这里仅用于查看历史。钓场、选漂、AI配饵会自动形成“本次作钓”，结束时只需填写鱼获结果即可保存。":["여기는 기록 조회용입니다. 낚시터 → 찌 선택 → AI 미끼 과정이 자동으로 이번 출조에 저장되며, 종료 시 조과만 입력하면 됩니다.","This page is for history only. Spot, float and AI bait choices are carried into the current trip; at the end, enter only the catch result."],
+"我的常用钓点":["내 자주 가는 낚시터","My Frequent Spots"],"暂无钓点记录":["낚시터 기록이 없습니다","No spot records"],"历史作钓记录":["과거 낚시 기록","Fishing History"],
+"🤖 AI 饵料助手":["🤖 AI 미끼 도우미","🤖 AI Bait Assistant"],"拍摄或上传你现有的饵料包装，AI识别后加入“我的饵料库”。配饵时只从你的库存中选择。":["보유한 미끼 포장을 촬영하거나 업로드하면 AI가 인식해 내 미끼에 추가합니다. 배합은 보유 미끼만 사용합니다.","Photograph or upload your bait package. AI identifies it and adds it to your inventory; recommendations use only your stock."],
+"📷 添加我的饵料":["📷 내 미끼 추가","📷 Add My Bait"],"选择图片来源":["이미지 선택","Choose image source"],"📷 拍照识别":["📷 촬영 후 인식","📷 Take Photo"],"🖼️ 从相册选择":["🖼️ 갤러리에서 선택","🖼️ Choose from Gallery"],"AI识别当前图片":["현재 이미지 AI 인식","Recognize Image"],
+"品牌":["브랜드","Brand"],"名称":["이름","Name"],"类型/定位":["유형/용도","Type / role"],"味型":["향/맛","Flavor"],"适合鱼种/备注":["대상어/메모","Target fish / notes"],"确认加入我的饵料库":["내 미끼에 추가","Add to My Bait"],"我的饵料库":["내 미끼","My Bait"],"＋ 手动添加饵料":["＋ 미끼 직접 추가","＋ Add Bait Manually"],
+"🌦️ 按今天环境配饵":["🌦️ 오늘 환경에 맞춘 배합","🌦️ Bait for Today's Conditions"],"钓点":["낚시터","Fishing spot"],"草鱼":["초어","Grass carp"],"青鱼":["청어/대형 잉어과","Black carp"],"场景":["환경","Setting"],"野钓":["노지","Wild fishing"],"水库":["저수지","Reservoir"],"黑坑":["유료터","Commercial pond"],"河流":["하천","River"],
+"气温 ℃":["기온 ℃","Air temp ℃"],"水温 ℃（可选）":["수온 ℃ (선택)","Water temp ℃ (optional)"],"水深 m":["수심 m","Depth m"],"天气":["날씨","Weather"],"自动读取":["자동 읽기","Auto"],"晴":["맑음","Sunny"],"多云":["구름 많음","Cloudy"],"阴":["흐림","Overcast"],"小雨":["약한 비","Light rain"],"雨后":["비 온 뒤","After rain"],"雷雨":["뇌우","Thunderstorm"],"雪":["눈","Snow"],"雾":["안개","Fog"],"停口/很差":["입질 없음/매우 나쁨","No bite / very poor"],"季节（自动）":["계절 (자동)","Season (auto)"],"春":["봄","Spring"],"夏":["여름","Summer"],"秋":["가을","Autumn"],"冬":["겨울","Winter"],
+"📍 自动定位并读取当地天气":["📍 현재 위치 및 날씨 자동 불러오기","📍 Auto-locate & load weather"],"等待读取当前位置的实时天气…":["현재 위치의 실시간 날씨를 기다리는 중…","Waiting for real-time weather…"],"AI推荐现有饵料搭配":["보유 미끼로 AI 배합 추천","AI Recommend from My Bait"],
+"✅ 结束本次作钓":["✅ 이번 낚시 종료","✅ Finish This Trip"],"前面的钓场、选漂和AI配饵会自动保存到记录中。这里只填写实际结果。":["앞서 선택한 낚시터, 찌, AI 미끼가 기록에 자동 포함됩니다. 여기서는 실제 조과만 입력하세요.","Spot, float and AI bait choices are saved automatically. Enter only the actual result here."],
+"鱼获数量（尾）":["조과 (마릿수)","Catch count"],"鱼获重量（kg）":["조과 무게 (kg)","Catch weight (kg)"],"作钓时长（分钟）":["낚시 시간 (분)","Duration (min)"],"效果评分":["효과 점수","Effectiveness"],"未评分":["미평가","Not rated"],"1 - 很差":["1 - 매우 나쁨","1 - Very poor"],"2 - 较差":["2 - 나쁨","2 - Poor"],"3 - 一般":["3 - 보통","3 - Average"],"4 - 较好":["4 - 좋음","4 - Good"],"5 - 很好":["5 - 매우 좋음","5 - Very good"],"备注":["메모","Notes"],"保存本次鱼获":["이번 조과 저장","Save Catch"],
+"🎣 今天去哪钓？":["🎣 오늘 어디서 낚을까요?","🎣 Where to Fish Today?"],"先选择钓场，后面会按“钓场 → 选漂 → AI配饵 → 结束作钓”的顺序自动带入数据。":["먼저 낚시터를 선택하세요. 이후 낚시터 → 찌 선택 → AI 미끼 → 출조 종료 순서로 데이터가 자동 연결됩니다.","Choose a fishing spot first. Data then flows through Spot → Float → AI Bait → Finish Trip."],
+"🔎 手动搜索钓场":["🔎 낚시터 직접 검색","🔎 Manual Spot Search"],"名称/地区":["이름/지역","Name / area"],"搜索关键词":["검색어","Search keyword"],"手动搜索":["직접 검색","Search"],
+"📍 查找附近钓场":["📍 주변 낚시터 찾기","📍 Nearby Fishing Spots"],"搜索范围":["검색 반경","Search radius"],"结果排序":["정렬","Sort"],"按距离":["거리순","By distance"],"查找附近钓场":["주변 낚시터 찾기","Find Nearby Spots"],
+"🗺️ 区域钓场":["🗺️ 지역별 낚시터","🗺️ Fishing Spots by Area"],"按地区":["지역별","By area"],"地区":["지역","Region"],"选择地区":["지역 선택","Choose region"],"市/区/郡，可直接输入":["시/구/군 직접 입력","City / district / county"],"搜索该区域钓场":["이 지역 낚시터 검색","Search This Area"],
+"推荐模型":["추천 모델","Recommendation Model"],"基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。":["기본 부력은 원줄 호수와 수심의 경험식을 바탕으로 하며, 긴 대·바람·유속·약은 입질·대상어 크기로 보정합니다. 채비는 대상어와 크기를 먼저 고려한 뒤 환경에 맞춰 범위를 제시합니다.","Base lead uses an empirical relationship between main line size and depth, then adjusts for rod length, wind, current, light bites and fish size. Line setup is based on target fish and conditions."],
+"推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。":["추천은 ① 안정적인 캐스팅 ② 원줄의 빠른 정렬 ③ 찌 신호 구분을 우선합니다. 약은 입질에는 가볍게, 바람·파도·유속에는 무겁게 조정합니다.","Priority: ① stable casting ② quick line tension ③ readable float signals. Use less lead for light bites and more for wind, waves and current."],
+"请输入邮箱":["이메일을 입력하세요","Enter email"],"请输入密码":["비밀번호를 입력하세요","Enter password"],"用于登录和邮箱确认":["로그인 및 이메일 확인용","For sign-in and email verification"],"至少8位":["최소 8자","At least 8 characters"],"再次输入相同密码":["같은 비밀번호를 다시 입력","Re-enter the same password"],
+"例如 3号 / 7번 / A동 2호":["예: 3호 / 7번 / A동 2호","e.g. No.3 / Room 7 / A-2"],"例如 左侧、最里面、桥旁":["예: 왼쪽, 가장 안쪽, 다리 옆","e.g. left side, innermost, by the bridge"],
+"自动":["자동","Auto"],"例如 黄金眼 2号":["예: 황금안 2호","e.g. Golden Eye No.2"],"不知道可留空":["모르면 비워두세요","Leave blank if unknown"],"填写常用钓点名称；同地点会参考历史鱼获":["자주 가는 낚시터 이름을 입력하세요. 같은 장소의 과거 조과를 참고합니다.","Enter a fishing spot; history from the same place will be used."],
+"例如：송전낚시터 / 창리 / 용인 좌대":["예: 송전낚시터 / 창리 / 용인 좌대","e.g. 송전낚시터 / 창리 / 용인 좌대"],"例如：화성 / 용인 / 태안":["예: 화성 / 용인 / 태안","e.g. 화성 / 용인 / 태안"],
+"设为本次钓点":["이번 낚시터로 선택","Use for This Trip"],"📞 打电话":["📞 전화","📞 Call"],"Kakao地图":["Kakao 지도","Kakao Map"],"🌐 相关网站":["🌐 관련 웹사이트","🌐 Related Sites"],"🏠 有钓鱼房":["🏠 낚시방 있음","🏠 Fishing Room Available"]
+};
+
+const I18N_KEYS={
+"common.save_success":{zh:"保存成功",ko:"저장되었습니다",en:"Saved successfully"},
+"common.searching":{zh:"正在搜索…",ko:"검색 중…",en:"Searching…"},
+"common.loading":{zh:"正在加载…",ko:"불러오는 중…",en:"Loading…"},
+"errors.login_required":{zh:"请先登录。",ko:"먼저 로그인하세요.",en:"Please sign in first."},
+"errors.unknown":{zh:"未知错误",ko:"알 수 없는 오류",en:"Unknown error"},
+"places.no_results":{zh:"没有找到钓场。可尝试扩大范围或换一个地区名称。",ko:"낚시터를 찾지 못했습니다. 검색 범위를 넓히거나 다른 지역명을 입력해 보세요.",en:"No fishing spots found. Try a wider radius or another area."},
+"places.manual_required":{zh:"请输入钓场名称、地区或关键词。",ko:"낚시터 이름, 지역 또는 검색어를 입력하세요.",en:"Enter a fishing spot name, area, or keyword."}
+};
+let currentLang='zh-CN';
+const _i18nTextOriginal=new WeakMap(),_i18nAttrOriginal=new WeakMap();
+function normalizeLang(v){v=String(v||'').toLowerCase();return v.startsWith('ko')?'ko-KR':v.startsWith('zh')?'zh-CN':'en-US'}
+function langIndex(){return currentLang==='ko-KR'?0:currentLang==='en-US'?1:-1}
+function trStatic(src){
+ if(currentLang==='zh-CN')return src;
+ let row=I18N_STATIC[src];return row?row[langIndex()]:src
+}
+function t(key,params={}){
+ let row=I18N_KEYS[key];
+ if(!row){console.warn('[I18N Missing]',currentLang,key);return key}
+ let v=currentLang==='ko-KR'?row.ko:currentLang==='en-US'?row.en:row.zh;
+ return String(v).replace(/\{(\w+)\}/g,(_,k)=>params[k]??'{'+k+'}')
+}
+function aiLanguageInstruction(){return currentLang==='ko-KR'?'반드시 자연스러운 한국어로 답변하세요.':currentLang==='en-US'?'Respond in natural English.':'请使用简体中文回答。'}
+function translateTextNode(n){
+ if(!n||n.nodeType!==3)return;
+ let original=_i18nTextOriginal.get(n);
+ if(original===undefined){original=n.nodeValue;_i18nTextOriginal.set(n,original)}
+ let trimmed=String(original).trim();if(!trimmed)return;
+ let out=trStatic(trimmed);
+ let pre=String(original).match(/^\s*/)?.[0]||'',post=String(original).match(/\s*$/)?.[0]||'';
+ let next=pre+out+post;if(n.nodeValue!==next)n.nodeValue=next
+}
+function translateAttrs(el){
+ if(!el||el.nodeType!==1)return;
+ let originals=_i18nAttrOriginal.get(el)||{};
+ for(const a of ['placeholder','title','aria-label']){
+  if(!el.hasAttribute(a))continue;
+  if(originals[a]===undefined)originals[a]=el.getAttribute(a);
+  let src=originals[a],out=trStatic(String(src||'').trim());if(out&&el.getAttribute(a)!==out)el.setAttribute(a,out)
+ }
+ _i18nAttrOriginal.set(el,originals)
+}
+function applyI18n(root=document){
+ if(root.nodeType===3){translateTextNode(root);return}
+ if(root.nodeType===1)translateAttrs(root);
+ let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
+ if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
+ document.documentElement.lang=currentLang;
+ document.title=trStatic('钓鱼选漂助手 v13');
+ let sw=document.getElementById('langSwitch');if(sw)sw.value=currentLang
+}
+function setLanguage(lang){
+ currentLang=normalizeLang(lang);localStorage.appLang=currentLang;applyI18n(document);renderTripSummary?.();
+}
+function i18nAudit(){
+ if(!new URLSearchParams(location.search).has('i18ncheck'))return;
+ const unresolved=[];
+ const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
+ while(n=w.nextNode()){
+  const src=(_i18nTextOriginal.get(n)??n.nodeValue??'').trim();
+  if(!src||I18N_STATIC[src])continue;
+  if(/[\u3400-\u9fff]/.test(src)&&!n.parentElement?.closest('#nearbyPlaceList,#manualPlaceList,#regionPlaceList,#spotList,#logList'))unresolved.push(src)
+ }
+ console.warn('[I18N Audit] unresolved static texts:',[...new Set(unresolved)])
+}
+currentLang=normalizeLang(localStorage.appLang||navigator.language||'zh-CN');
+queueMicrotask(()=>{
+ const sw=document.getElementById('langSwitch');if(sw){sw.value=currentLang;sw.addEventListener('change',e=>setLanguage(e.target.value))}
+ applyI18n(document);
+ const mo=new MutationObserver(ms=>{for(const m of ms){if(m.type==='characterData')translateTextNode(m.target);for(const n of m.addedNodes)applyI18n(n)}});mo.observe(document.body,{subtree:true,childList:true,characterData:true});
+ setTimeout(i18nAudit,1200)
+});
+</script><script>
 const SUPABASE_URL='https://wgsifqmminmeuwwrtnvo.supabase.co';
 const SUPABASE_KEY='sb_publishable_J8TprO0b5N5B5grX9rZmHQ_d67s0S_u';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);let currentUser=null;
@@ -247,7 +375,7 @@ function extractGeminiText(data){let parts=data?.candidates?.[0]?.content?.parts
 async function geminiOnce(input,model){let {data,error}=await sb.functions.invoke('gemini-proxy',{body:{model,input}});if(error){let detail='';try{if(error.context){let j=await error.context.json();detail=j?.error?.message||j?.error||''}}catch(_){}let e=Error(detail||error.message||'Edge Function 调用失败');e.status=error.context?.status;throw e}if(data?.error){let e=Error(data.error.message||String(data.error));throw e}let text=extractGeminiText(data);if(!text)throw Error('AI已响应，但没有返回可读取的内容');return text}
 async function gemini(input,statusEl){let {model}=getAI();let models=[model,'gemini-3.7-flash'].filter((x,i,a)=>x&&a.indexOf(x)===i);let last;for(let mi=0;mi<models.length;mi++){for(let n=0;n<2;n++){try{if(statusEl)statusEl.textContent=mi?`主模型繁忙，正在尝试备用模型 ${models[mi]}…`:(n?'AI繁忙，正在自动重试…':`正在通过安全代理连接 ${models[mi]}…`);return await geminiOnce(input,models[mi])}catch(e){last=e;let retry=/high demand|overloaded|unavailable|503|resource exhausted|429/i.test(String(e.message)+' '+e.status);if(!retry)throw Error(friendlyAIError(e.message));if(n===0)await sleep(1800)}}}throw Error(friendlyAIError(last?.message||'AI服务暂时不可用'))}
 function cleanJSON(t){let m=t.match(/```(?:json)?\s*([\s\S]*?)```/i);if(m)t=m[1];let a=t.indexOf('{'),b=t.lastIndexOf('}');return JSON.parse(t.slice(a,b+1))}
-async function recognizeBait(){if(!baitImageData)return alert('请先拍照或选择图片');let st=$('recognizeStatus');st.textContent='正在识别包装…';try{let [head,b64]=baitImageData.split(',');let mime=(head.match(/data:(.*?);/)||[])[1]||'image/jpeg';let prompt='你是中国淡水台钓饵料识别助手。识别包装。只根据图片可见信息和可靠常识，不确定就写未知。仅返回JSON对象：brand品牌,name产品名,type基础饵/主攻饵/状态饵/添加剂等,flavor味型,targets适合鱼种和用途。不要markdown。';let t=await gemini([{type:'text',text:prompt},{type:'image',data:b64,mime_type:mime}],st);let x=cleanJSON(t);if(!x||typeof x!=='object')throw Error('AI返回格式无法解析');let brand=x.brand||x.品牌||'',name=x.name||x.product_name||x.产品名||x.名称||'',type=x.type||x.category||x.类型||x.定位||'',flavor=x.flavor||x.味型||'',targets=x.targets||x.target||x.适合鱼种||x.用途||'';if(!brand&&!name)throw Error('AI已返回结果，但没有识别出品牌或产品名称，请重试或手动填写');pendingBait={brand,name,type,flavor,targets};$('baitBrand').value=brand;$('baitName').value=name;$('baitType').value=type;$('baitFlavor').value=flavor;$('baitTargets').value=targets;$('baitEdit').style.display='block';st.textContent='识别完成，请确认/修改后保存。';}catch(e){st.textContent='识别失败：'+e.message}}
+async function recognizeBait(){if(!baitImageData)return alert('请先拍照或选择图片');let st=$('recognizeStatus');st.textContent='正在识别包装…';try{let [head,b64]=baitImageData.split(',');let mime=(head.match(/data:(.*?);/)||[])[1]||'image/jpeg';let prompt='你是中国淡水台钓饵料识别助手。识别包装。只根据图片可见信息和可靠常识，不确定就写未知。仅返回JSON对象：brand品牌,name产品名,type基础饵/主攻饵/状态饵/添加剂等,flavor味型,targets适合鱼种和用途。不要markdown。'+aiLanguageInstruction();let t=await gemini([{type:'text',text:prompt},{type:'image',data:b64,mime_type:mime}],st);let x=cleanJSON(t);if(!x||typeof x!=='object')throw Error('AI返回格式无法解析');let brand=x.brand||x.品牌||'',name=x.name||x.product_name||x.产品名||x.名称||'',type=x.type||x.category||x.类型||x.定位||'',flavor=x.flavor||x.味型||'',targets=x.targets||x.target||x.适合鱼种||x.用途||'';if(!brand&&!name)throw Error('AI已返回结果，但没有识别出品牌或产品名称，请重试或手动填写');pendingBait={brand,name,type,flavor,targets};$('baitBrand').value=brand;$('baitName').value=name;$('baitType').value=type;$('baitFlavor').value=flavor;$('baitTargets').value=targets;$('baitEdit').style.display='block';st.textContent='识别完成，请确认/修改后保存。';}catch(e){st.textContent='识别失败：'+e.message}}
 function manualBait(){baitImageData='';pendingBait={};$('baitBrand').value='';$('baitName').value='';$('baitType').value='';$('baitFlavor').value='';$('baitTargets').value='';$('baitEdit').style.display='block';$('recognizeStatus').textContent='手动录入模式：填写名称等信息后保存即可。';$('baitEdit').scrollIntoView({behavior:'smooth',block:'center'});}
 async function saveBait(){let x={brand:$('baitBrand').value.trim(),name:$('baitName').value.trim(),type:$('baitType').value.trim(),flavor:$('baitFlavor').value.trim(),targets:$('baitTargets').value.trim(),image:baitImageData};if(!x.name)return alert('至少填写饵料名称');if(currentUser){try{let image_path=await uploadBaitImage(x.image);let {error}=await sb.from('baits').insert({user_id:currentUser.id,brand:x.brand,name:x.name,bait_type:x.type,flavor:x.flavor,target_fish:x.targets?x.targets.split(/[,，、]/).map(v=>v.trim()).filter(Boolean):[],image_path,ai_metadata:{recognized:true}});if(error)throw error}catch(e){return alert('云端保存失败：'+e.message)}}else{let a=JSON.parse(localStorage.baits||'[]');a.push(x);localStorage.baits=JSON.stringify(a)}$('baitEdit').style.display='none';await renderBaits();if(baitImageQueue.length>1&&baitQueueIndex<baitImageQueue.length-1){baitQueueIndex++;showBaitQueue();$('recognizeStatus').textContent=`已保存。现在是第 ${baitQueueIndex+1}/${baitImageQueue.length} 张，可继续AI识别。`;}else{baitImageData='';baitImageQueue=[];baitQueueIndex=0;$('baitCamera').value='';$('baitGallery').value='';$('baitPreview').style.display='none';$('baitQueue').innerHTML='';$('recognizeStatus').textContent='已加入你的饵料库';}}
 async function renderBaits(){let a=[];if(currentUser){let {data,error}=await sb.from('baits').select('id,brand,name,bait_type,flavor,target_fish,image_path').order('created_at',{ascending:false});if(!error){a=await Promise.all((data||[]).map(async x=>({id:x.id,brand:x.brand,name:x.name,type:x.bait_type,flavor:x.flavor,targets:(x.target_fish||[]).join('、'),image:x.image_path?await signedImage(x.image_path):'',image_path:x.image_path})))}}else a=JSON.parse(localStorage.baits||'[]');window._baits=a;$('baitList').innerHTML=a.length?a.map((x,i)=>`<div class='item bait-card'>${x.image?`<img src='${x.image}'>`:'<div></div>'}<div><button class='danger' onclick='delBait(${i})'>删除</button><b>${escapeHtml(x.brand?x.brand+' · ':'')}${escapeHtml(x.name)}</b><span class='small'>${escapeHtml(x.type||'未分类')} · ${escapeHtml(x.flavor||'味型未知')}<br>${escapeHtml(x.targets||'')}</span></div></div>`).join(''):`<div class='empty'>还没有饵料。先拍包装加入库存。</div>`}
@@ -421,7 +549,7 @@ async function recommendBait(){
  let ranked=rankFishingHistory(history,rawEnv);renderHistoryInsight(ranked);
  let historySummary=ranked.slice(0,8).map(x=>({历史相似度:x._similarity,日期:x.fished_at,钓点:x.location_name,目标鱼:x.target_fish,气温:x.air_temp_c,水温:x.water_temp_c,季节:x.season,天气:x.weather_condition,风速:x.wind_speed_kmh,鱼口:x.bite_condition,走水:x.current_condition,钓法:x.fishing_method,是否방가로:x.used_bungalow,房间钓位:x.bungalow_room_no,位置备注:x.bungalow_position_note,实际配方:x.bait_recipe?.text||'',鱼获尾数:x.catch_count,鱼获重量kg:x.catch_weight_kg,作钓分钟:x.duration_minutes,每小时鱼获:x._rate,效果评分:x.effectiveness_score,备注:x.notes}));
  let confidence=ranked.length>=6?'较高':ranked.length>=3?'中等':ranked.length?'较低':'无历史';
- let prompt=`你是有经验的中国淡水台钓配饵助手。当前环境=${JSON.stringify(env)}。用户现有饵料=${JSON.stringify(stock)}。系统根据钓点、目标鱼、季节、气温、天气、鱼口、走水以及真实鱼获表现计算后的历史记录=${JSON.stringify(historySummary)}。历史数据置信度=${confidence}。必须只使用库存中的饵料，禁止推荐用户没有的商品。优先参考历史相似度高且每小时鱼获/效果评分较好的记录，但历史少于3条时只能轻量参考，不允许把一次好鱼获当成确定规律。若历史证据不足，再结合主流淡水台钓季节性原则和当前环境推荐。水温未知时明确说明，不得把气温当水温。输出简体中文，包含：历史依据与置信度、主方案(各饵百分比合计100%)、饵水比、拉饵或搓饵、开饵方法、推荐理由、备用方案、现场鱼口变化后的调整方法。不要保证一定有效。`;
+ let prompt=`你是有经验的中国淡水台钓配饵助手。当前环境=${JSON.stringify(env)}。用户现有饵料=${JSON.stringify(stock)}。系统根据钓点、目标鱼、季节、气温、天气、鱼口、走水以及真实鱼获表现计算后的历史记录=${JSON.stringify(historySummary)}。历史数据置信度=${confidence}。必须只使用库存中的饵料，禁止推荐用户没有的商品。优先参考历史相似度高且每小时鱼获/效果评分较好的记录，但历史少于3条时只能轻量参考，不允许把一次好鱼获当成确定规律。若历史证据不足，再结合主流淡水台钓季节性原则和当前环境推荐。水温未知时明确说明，不得把气温当水温。${aiLanguageInstruction()} 包含：历史依据与置信度、主方案(各饵百分比合计100%)、饵水比、拉饵或搓饵、开饵方法、推荐理由、备用方案、现场鱼口变化后的调整方法。不要保证一定有效。`;
  try{
   let t=await gemini(prompt,st);
   st.textContent=ranked.length?`已按历史相似度排序参考 ${ranked.length} 条记录，当前置信度：${confidence}。`:place?'当前钓点暂无可比历史，先按环境和季节推荐。':'当前未指定钓点，历史权重较低。';
@@ -435,7 +563,7 @@ async function recommendBait(){
  }catch(e){st.textContent='推荐失败：'+e.message}
 }
 async function finishFishingSession(){
- if(!currentUser)return alert('请先登录。');
+ if(!currentUser)return alert(t('errors.login_required'));
  let t=window._currentTrip||{},btn=$('finishTripBtn');
  if(!t.place)return alert('本次作钓没有钓场，请先选择钓场。');
  if(!t.baitText)return alert('请先完成AI配饵推荐。');
@@ -496,7 +624,7 @@ function fishingPlaceType(x){
 }
 function renderFishingPlaces(targetId,items){
  window._fishingPlaces=items||[];
- if(!items?.length){$(targetId).innerHTML=`<div class='empty'>没有找到钓场。可尝试扩大范围或换一个地区名称。</div>`;return}
+ if(!items?.length){$(targetId).innerHTML=`<div class='empty'>${t('places.no_results')}</div>`;return}
  const order=['낚시터','하우스','카페','기타'];
  const groups={낚시터:[],하우스:[],카페:[],기타:[]};
  items.forEach(x=>groups[fishingPlaceType(x)].push(x));
@@ -516,7 +644,7 @@ async function selectDiscoveredPlaceByKey(key){
 }
 async function searchManualFishingPlaces(){
  let q=$('manualPlaceQuery').value.trim(),st=$('manualPlaceStatus');
- if(!q)return st.textContent='请输入钓场名称、地区或关键词。';
+ if(!q)return st.textContent=t('places.manual_required');
  st.textContent=`正在搜索“${q}”…`;$('manualPlaceList').innerHTML='';
  try{
   let data=await invokeFishingPlaces({mode:'manual',query:q});
