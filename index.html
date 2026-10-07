@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.36</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.37</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -98,7 +98,7 @@
 .rod-inv-card{display:grid;grid-template-columns:76px 1fr;gap:10px;align-items:center}
 .rod-inv-card img{width:76px;height:76px;object-fit:cover;border-radius:10px;background:#eee}
 .owned-rod-pick{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
-</style><script src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'></script></head><body><div id="authScreen" class="auth-screen" style="display:flex!important"><div class="auth-box"><div class="auth-lang-row"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select></div><div class="auth-brand"><div class="icon">🎣</div><h1>钓鱼助手</h1><p>登录后进入你的钓鱼数据和 AI 助手</p></div><div id="loginView"><h2>登录</h2><div class="field"><label>邮箱</label><input id="loginEmail" type="email" inputmode="email" autocomplete="email" placeholder="请输入邮箱"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="请输入密码"></div><button class="primary" onclick="signIn()">登录</button><div class="auth-bottom"><button class="auth-link" type="button" onclick="requestPasswordReset()">忘记密码？重置密码</button><br>还没有账号？ <button class="auth-link" type="button" onclick="showAuthPane('register')">创建账号</button></div></div><div id="registerView" style="display:none"><h2>创建账号</h2><div class="field"><label>邮箱</label><input id="registerEmail" type="email" inputmode="email" autocomplete="email" placeholder="用于登录和邮箱确认"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="registerPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入密码</label><input id="registerPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="signUp()">创建账号</button><div class="auth-bottom">已有账号？ <button class="auth-link" type="button" onclick="showAuthPane('login')">返回登录</button></div></div><div id="resetView" style="display:none"><h2>设置新密码</h2><p class="auth-help">已通过密码重置链接验证。请输入新的登录密码。</p><div class="field"><label>新密码</label><input id="resetPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入新密码</label><input id="resetPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="updatePassword()">保存新密码</button></div><div id="authStatus" class="ai-status"></div></div></div><div id="appShell" class="app-shell" hidden style="display:none!important"><header><h1>🎣 钓鱼选漂助手</h1><p>水深 · 线组 · 风浪 · 走水 · 竿长综合推荐</p></header><div class="account-bar"><b id="authUser">已登录</b><div class="account-actions"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select><button class="logout-btn" onclick="signOut()">退出登录</button></div></div><main class="wrap"><div class='tabs'><button class='tab on' data-p='places'>钓场</button><button class='tab' data-p='calc'>选漂</button><button class='tab' data-p='bait'>AI饵料</button><button class='tab' data-p='trip'>本次作钓</button><button class='tab' data-p='stats'>统计</button><button class='tab' data-p='log'>钓鱼记录</button><button class='tab' data-p='community'>鱼获广场</button><button class='tab' data-p='box'>我的漂盒</button><button class='tab' data-p='rods'>我的鱼竿</button><button class='tab' data-p='guide'>说明</button></div>
+</style><script src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'></script></head><body><div id="authScreen" class="auth-screen" style="display:flex!important"><div class="auth-box"><div class="auth-lang-row"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select></div><div class="auth-brand"><div class="icon">🎣</div><h1>钓鱼助手</h1><p>登录后进入你的钓鱼数据和 AI 助手</p></div><div id="loginView"><h2>登录</h2><div class="field"><label>邮箱</label><input id="loginEmail" type="email" inputmode="email" autocomplete="email" placeholder="请输入邮箱"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="请输入密码"></div><button id="loginBtn" class="primary" type="button">登录</button><div class="auth-bottom"><button class="auth-link" type="button" onclick="requestPasswordReset()">忘记密码？重置密码</button><br>还没有账号？ <button class="auth-link" type="button" onclick="showAuthPane('register')">创建账号</button></div></div><div id="registerView" style="display:none"><h2>创建账号</h2><div class="field"><label>邮箱</label><input id="registerEmail" type="email" inputmode="email" autocomplete="email" placeholder="用于登录和邮箱确认"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="registerPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入密码</label><input id="registerPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="signUp()">创建账号</button><div class="auth-bottom">已有账号？ <button class="auth-link" type="button" onclick="showAuthPane('login')">返回登录</button></div></div><div id="resetView" style="display:none"><h2>设置新密码</h2><p class="auth-help">已通过密码重置链接验证。请输入新的登录密码。</p><div class="field"><label>新密码</label><input id="resetPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入新密码</label><input id="resetPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="updatePassword()">保存新密码</button></div><div id="authStatus" class="ai-status"></div><div id="authDiagV1537" class="auth-help" style="margin-top:8px;opacity:.7"></div></div></div><div id="appShell" class="app-shell" hidden style="display:none!important"><header><h1>🎣 钓鱼选漂助手</h1><p>水深 · 线组 · 风浪 · 走水 · 竿长综合推荐</p></header><div class="account-bar"><b id="authUser">已登录</b><div class="account-actions"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select><button class="logout-btn" onclick="signOut()">退出登录</button></div></div><main class="wrap"><div class='tabs'><button class='tab on' data-p='places'>钓场</button><button class='tab' data-p='calc'>选漂</button><button class='tab' data-p='bait'>AI饵料</button><button class='tab' data-p='trip'>本次作钓</button><button class='tab' data-p='stats'>统计</button><button class='tab' data-p='log'>钓鱼记录</button><button class='tab' data-p='community'>鱼获广场</button><button class='tab' data-p='box'>我的漂盒</button><button class='tab' data-p='rods'>我的鱼竿</button><button class='tab' data-p='guide'>说明</button></div>
 <section id='calc' class='panel'><div id='calcModeNotice' class='notice' style='display:none;margin-bottom:10px'></div><div id='tripBungalowCard' class='card'><h2>🏠 钓鱼房 / 방가로（可选）</h2><p class='why' id='tripBungalowHint'>如果这次使用钓鱼房/방가로，选择“是”并填写房间号。保存后，下次在钓场目录中会显示“有钓鱼房”。</p><div class='grid'><div class='field'><label>本次使用钓鱼房</label><select id='tripUsedBungalow' onchange='updateTripRoomInfo()'><option value='0' selected>否</option><option value='1'>是</option></select></div><div class='field'><label>房间/钓位号</label><input id='tripRoomNo' placeholder='例如 3号 / 7번 / A동 2호' oninput='updateTripRoomInfo()' disabled></div><div class='field full'><label>位置备注（可选）</label><input id='tripRoomNote' placeholder='例如 左侧、最里面、桥旁' oninput='updateTripRoomInfo()' disabled></div></div></div><div class='card'><h2>今天怎么钓？</h2><div class='grid'>
 <div class='field'><label>目标鱼</label><select id='fish'><option value='crucian'>鲫鱼</option><option value='carp'>鲤鱼</option><option value='mixed'>综合鱼</option><option value='big'>大型鱼</option></select></div><div class='field full'><label>鱼竿配置</label><p class='why'>每根鱼竿可以单独设置长度、主线、子线和浮漂。</p><div id='rodSetupList'></div><button type='button' class='secondary' onclick='addRodSetupV15()'>＋ 添加鱼竿</button><input id='rod' type='hidden' value='5.4'></div>
 <div class='field'><label>预计个体</label><select id='size'><option value='small'>小（＜300g）</option><option value='medium' selected>中（300g~1kg）</option><option value='large'>大（1~3kg）</option><option value='xl'>很大（3kg+）</option></select></div>
@@ -251,7 +251,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.36":["낚시 찌 선택 도우미 v15.36","Fishing Float Assistant v15.36"],
+"钓鱼选漂助手 v15.37":["낚시 찌 선택 도우미 v15.37","Fishing Float Assistant v15.37"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -353,7 +353,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.36');
+ document.title=trStatic('钓鱼选漂助手 v15.37');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -4120,5 +4120,80 @@ Object.assign(I18N_STATIC,{
  }));
 
  window.forceEnterAppV1536=forceEnterAppV1536;
+})();
+</script><script>
+(function(){
+ const BUILD_V1537='v15.37';
+ function diagV1537(msg){
+  const el=document.getElementById('authDiagV1537');
+  if(el)el.textContent='Build '+BUILD_V1537+' · '+location.origin+(msg?' · '+msg:'');
+  try{console.log('[AUTH '+BUILD_V1537+']',msg||'',location.href)}catch(_){}
+ }
+ async function directLoginV1537(){
+  const email=document.getElementById('loginEmail')?.value.trim()||'';
+  const password=document.getElementById('loginPassword')?.value||'';
+  const btn=document.getElementById('loginBtn');
+  if(!validEmail(email))return setAuthStatus('请输入正确的邮箱地址。','error');
+  if(!password)return setAuthStatus('请输入密码。','error');
+  if(btn){btn.disabled=true;btn.textContent='正在登录…'}
+  setAuthStatus('正在登录…');
+  diagV1537('点击已触发');
+  try{
+   const {data,error}=await sb.auth.signInWithPassword({email,password});
+   if(error)throw error;
+   diagV1537('认证成功');
+   let user=data?.session?.user||data?.user||null;
+   if(!user){
+    const {data:sdata,error:serr}=await sb.auth.getSession();
+    if(serr)throw serr;
+    user=sdata?.session?.user||null;
+   }
+   if(!user)throw Error('认证成功但没有取得用户会话。');
+   currentUser=user;
+   passwordRecoveryMode=false;
+   if(typeof forceEnterAppV1536==='function')forceEnterAppV1536(user);
+   else updateAuthUI();
+   setAuthStatus('');
+   diagV1537('已进入系统');
+   setTimeout(()=>refreshCloud().catch(e=>console.error('refreshCloud login',e)),0);
+  }catch(e){
+   const msg=authErrorCN(e?.message||e);
+   setAuthStatus('登录失败：'+msg,'error');
+   diagV1537('失败: '+msg);
+   console.error('[AUTH v15.37] login failed',e);
+  }finally{
+   if(btn){btn.disabled=false;btn.textContent='登录'}
+  }
+ }
+
+ // Explicit DOM binding: no dependency on inline onclick/global lookup.
+ window.signIn=directLoginV1537;
+ const btn=document.getElementById('loginBtn');
+ if(btn){
+  btn.addEventListener('click',function(e){
+   e.preventDefault();
+   directLoginV1537();
+  },false);
+ }
+ ['loginEmail','loginPassword'].forEach(id=>{
+  document.getElementById(id)?.addEventListener('keydown',e=>{
+   if(e.key==='Enter'){e.preventDefault();directLoginV1537()}
+  });
+ });
+
+ // Catch client-side runtime failures and expose them directly on the login screen.
+ window.addEventListener('error',e=>{
+  if(!document.body.classList.contains('authenticated')){
+   const msg=(e.message||'JavaScript error')+(e.filename?' @ '+e.filename.split('/').pop()+':'+e.lineno:'');
+   diagV1537('JS错误: '+msg);
+  }
+ });
+ window.addEventListener('unhandledrejection',e=>{
+  if(!document.body.classList.contains('authenticated')){
+   const r=e.reason;diagV1537('Promise错误: '+(r?.message||String(r||'unknown')));
+  }
+ });
+
+ diagV1537('准备就绪');
 })();
 </script></body></html>
