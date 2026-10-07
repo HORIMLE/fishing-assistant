@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.60</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.61</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -105,7 +105,7 @@
 .ai-product-option .small{line-height:1.45}
 .ai-product-option.selected{border:2px solid var(--accent);background:#eef8f3}
 
-/* v15.60 unified premium design system */
+/* v15.61 unified premium design system */
 :root{--bg:#f6f5f0;--card:#fffdfa;--ink:#17211d;--muted:#78817c;--accent:#174f3b;--accent-2:#103d2e;--soft:#edf1ed;--line:#e4e6e1;--warn:#8a6425;--danger:#9b443f;--radius:16px;--control-h:50px;--shadow:0 1px 2px #1020180a,0 8px 28px #1020180a}
 html{background:var(--bg)}body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Noto Sans SC","Noto Sans KR",sans-serif;letter-spacing:-.01em}
 header{background:var(--bg);color:var(--ink);padding:24px 20px 12px;border:0}header h1{font-size:25px;letter-spacing:-.04em;margin:0 0 5px}header p{color:var(--muted);opacity:1}
@@ -133,7 +133,7 @@ button,.primary,.secondary,.upload-btn,.logout-btn,.compact-btn,.voice-back-btn{
 .small,.why,.ai-status,.api-note,.auth-help,.rod-float-meta,.rod-depth-help{color:var(--muted)}
 @media(max-width:430px){header{padding:20px 16px 10px}.account-bar{padding:6px 16px 10px}.wrap{padding-left:10px;padding-right:10px}.card{padding:16px}.grid{gap:10px}.field input,.field select,.field textarea{font-size:16px}.tab{font-size:12px;padding:8px 11px}}
 
-/* v15.60 app information architecture */
+/* v15.61 app information architecture */
 body.authenticated .wrap{padding-bottom:104px}
 .app-nav-v1557{position:fixed;left:50%;bottom:max(10px,env(safe-area-inset-bottom));top:auto;transform:translateX(-50%);width:min(calc(100% - 20px),700px);height:66px;padding:6px 8px;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:#fffdfaf2;border:1px solid var(--line);border-radius:20px;box-shadow:0 12px 35px #10201818;backdrop-filter:blur(18px);z-index:50;overflow:visible}
 .app-nav-v1557 .tab{min-width:0;height:52px;padding:5px 2px;border:0!important;background:transparent!important;border-radius:14px;color:#7b847f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:700}
@@ -144,7 +144,7 @@ body.authenticated .wrap{padding-bottom:104px}
 .panel{animation:panelIn1557 .16s ease-out}@keyframes panelIn1557{from{opacity:.45;transform:translateY(3px)}to{opacity:1;transform:none}}
 @media(min-width:760px){.app-nav-v1557{bottom:16px}.more-nav-v1557{bottom:94px}}
 
-/* v15.60 visual language 2.0 */
+/* v15.61 visual language 2.0 */
 :root{--bg:#f2f0e9;--card:#faf9f5;--ink:#171b18;--muted:#747a75;--accent:#173f31;--line:#dedfd9;--radius:14px}
 .brand-head-v1558{padding-top:28px;padding-bottom:4px}.brand-kicker-v1558,.eyebrow-v1558{font-size:10px;line-height:1.2;letter-spacing:.18em;font-weight:800;color:#768079;text-transform:uppercase}.brand-head-v1558 h1{font-size:28px;font-weight:720;letter-spacing:-.055em;margin:7px 0 3px}.brand-head-v1558 p{font-size:13px}
 .home-hero-v1558{padding:34px 4px 18px}.home-hero-v1558>h2{font-size:34px;line-height:1.08;letter-spacing:-.06em;margin:10px 0 12px;font-weight:720}.home-hero-v1558>.why{max-width:440px;font-size:14px;line-height:1.65;margin-bottom:24px}
@@ -156,7 +156,7 @@ body.authenticated .wrap{padding-bottom:104px}
 .recipe{background:#ecefe9}.app-nav-v1557{background:#f9f8f3f2;border-radius:18px}.app-nav-v1557 .tab.on{background:#e8ece7!important;color:#173f31}
 @media(max-width:430px){.home-hero-v1558{padding-top:27px}.home-hero-v1558>h2{font-size:31px}.place-entry-card{min-height:150px;padding:17px}.place-entry-card b{font-size:18px}.page-intro-v1558{padding-top:26px}.page-intro-v1558 h2{font-size:29px}}
 
-/* v15.60 A concept — nature editorial */
+/* v15.61 A concept — nature editorial */
 :root{--bg:#f1efe7;--card:#f8f7f1;--ink:#17201b;--muted:#727970;--accent:#173e30;--accent-2:#244d3d;--line:#d9dbd3}
 body{background:var(--bg)}.wrap{max-width:760px;padding-left:18px;padding-right:18px}.brand-head-v1558{max-width:760px;margin:auto;padding:26px 18px 2px}.account-bar{max-width:760px;margin:auto}
 .a-home-v1559{margin:0 -18px}.a-hero-v1559{position:relative;min-height:380px;padding:66px 28px 42px;overflow:hidden;background:#173e30;color:#f5f2e9;border-radius:0 0 30px 30px}.a-hero-copy-v1559{position:relative;z-index:2;max-width:520px}.a-overline-v1559{font-size:10px;letter-spacing:.24em;font-weight:800;color:#aebfb4;margin-bottom:25px}.a-hero-v1559 h2{font-size:52px;line-height:.98;letter-spacing:-.075em;font-weight:620;margin:0 0 24px}.a-hero-v1559 h2 em{font-style:normal;color:#cbd6c8}.a-hero-v1559 p{max-width:390px;margin:0;color:#bdc9c0;font-size:14px;line-height:1.8}
@@ -167,7 +167,7 @@ body{background:var(--bg)}.wrap{max-width:760px;padding-left:18px;padding-right:
 #placeManualMode{padding-top:24px}#placeManualMode>.mode-header{background:transparent;border:0;padding:6px 2px 18px;border-bottom:1px solid #d2d5ce;border-radius:0}#placeManualMode .place-group{border:0;border-bottom:1px solid #d2d5ce;border-radius:0;background:transparent;margin:0}#placeManualMode .place-group summary{background:transparent;padding:18px 3px;font-size:15px}#placeManualMode .group-body{padding:4px 3px 22px!important}
 @media(max-width:430px){.a-hero-v1559{min-height:350px;padding:54px 22px 36px;border-radius:0 0 25px 25px}.a-hero-v1559 h2{font-size:45px}.a-start-v1559{padding-left:18px;padding-right:18px}.a-current-v1559,.a-philosophy-v1559{margin-left:18px!important;margin-right:18px!important}.a-philosophy-v1559{grid-template-columns:1fr;gap:4px}.a-philosophy-v1559 p{margin-top:10px}}
 
-/* v15.60 B — dark professional immersive */
+/* v15.61 B — dark professional immersive */
 :root{--bg:#090d0b;--card:#101613;--ink:#edf1ed;--muted:#89938d;--accent:#157759;--accent-2:#0f5d45;--line:#222c27;--warn:#c6a15b}
 html,body{background:#090d0b;color:var(--ink)}.brand-head-v1558{display:none}.account-bar{background:#090d0b;color:#7f8b84;border-bottom:1px solid #17201c;max-width:760px;margin:auto;padding-top:12px}.lang-switch-control,.logout-btn{background:#101613;border-color:#26312b;color:#aab3ae}.logout-btn{color:#c98d86}.wrap{max-width:760px;padding-top:0}
 .pro-home-v1560{margin:0 -18px}.pro-hero-v1560{height:390px;position:relative;overflow:hidden;border-radius:0 0 28px 28px;background:#111a16}.pro-photo-v1560{position:absolute;inset:0;background:radial-gradient(circle at 68% 28%,#4d6258 0,#253a31 20%,transparent 42%),linear-gradient(160deg,#15251e 0,#0d1612 48%,#1d3429 100%)}.pro-photo-v1560:after{content:'';position:absolute;left:-5%;right:-5%;bottom:34px;height:90px;border-top:1px solid #8da19655;border-radius:50%;box-shadow:0 -22px 0 #8da19610,0 -44px 0 #8da1960a;transform:skewX(-16deg)}.pro-shade-v1560{position:absolute;inset:0;background:linear-gradient(180deg,#0002,#0000 35%,#07100bcc 100%)}.pro-hero-content-v1560{position:absolute;inset:0;padding:60px 25px 28px;z-index:2}.pro-kicker-v1560{font-size:10px;letter-spacing:.26em;color:#a4b4aa;font-weight:800}.pro-hero-v1560 h2{font-size:43px;line-height:1.08;letter-spacing:-.065em;margin:22px 0 13px;font-weight:620;color:#f5f6f3}.pro-hero-v1560 p{font-size:13px;color:#a8b3ac}.pro-weather-v1560{position:absolute;right:25px;bottom:30px;display:grid;grid-template-columns:auto auto;column-gap:7px;align-items:center}.pro-weather-v1560 strong{font-size:30px;font-weight:400}.pro-weather-v1560 small{grid-column:1/-1;text-align:right;color:#8e9b94;font-size:10px}
@@ -179,6 +179,10 @@ html,body{background:#090d0b;color:var(--ink)}.brand-head-v1558{display:none}.ac
 .app-nav-v1557{background:#0c110ff2;border-color:#222d27;box-shadow:0 12px 35px #0008}.app-nav-v1557 .tab{color:#68756e}.app-nav-v1557 .tab.on{background:#13231b!important;color:#4fb08a}.more-nav-v1557{background:#0e1411;border-color:#26312b}.more-nav-v1557 button{background:#111814;color:#c9d1cc;border-color:#26312b}
 #placeManualMode{padding:18px}#placeManualMode>.mode-header{background:#101613!important}.voice-screen-v1526{background:#090d0b}.voice-screen-top,.voice-orb-wrap{background:#102c22}
 @media(max-width:430px){.pro-hero-v1560{height:365px}.pro-hero-v1560 h2{font-size:39px}.pro-actions-v1560{padding-left:14px;padding-right:14px}.pro-recommend-v1560,.pro-quick-v1560{padding-left:14px;padding-right:14px}}
+
+/* v15.61 exact B home + live weather */
+.pro-weather-v1560{display:none!important}.pro-weather-v1561{position:absolute;right:24px;bottom:28px;display:grid;grid-template-columns:24px auto;grid-template-rows:auto auto auto;column-gap:8px;align-items:center;border:0;background:transparent;color:#f2f5f2;padding:4px;text-align:right;min-height:0;border-radius:8px}.pro-weather-v1561:active{transform:none;background:#ffffff08}.pro-weather-icon-v1561{grid-row:1/3;font-size:23px;color:#d8e1dc}.pro-weather-v1561 strong{font-size:31px;line-height:1;font-weight:350;letter-spacing:-.05em}.pro-weather-v1561 small{font-size:10px;color:#c0cbc4;margin-top:4px}.pro-weather-v1561 em{grid-column:1/-1;font-style:normal;font-size:9px;color:#7f9087;margin-top:4px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pro-weather-v1561.loading{opacity:.65}
+.pro-recommend-card-v1560{width:100%;color:var(--ink);text-align:left}.pro-recommend-card-v1560>span{margin-left:12px}.pro-quick-grid-v1560 button,.pro-recommend-card-v1560{font-family:inherit}
 </style><script src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'></script></head><body><div id="authScreen" class="auth-screen" style="display:flex!important"><div class="auth-box"><div class="auth-lang-row"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select></div><div class="auth-brand"><div class="icon">🎣</div><h1>钓鱼助手</h1><p>登录后进入你的钓鱼数据和 AI 助手</p></div><div id="loginView"><h2>登录</h2><div class="field"><label>邮箱</label><input id="loginEmail" type="email" inputmode="email" autocomplete="email" placeholder="请输入邮箱"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="请输入密码"></div><button id="loginBtn" class="primary" type="button">登录</button><div class="auth-bottom"><button class="auth-link" type="button" onclick="requestPasswordReset()">忘记密码？重置密码</button><br>还没有账号？ <button class="auth-link" type="button" onclick="showAuthPane('register')">创建账号</button></div></div><div id="registerView" style="display:none"><h2>创建账号</h2><div class="field"><label>邮箱</label><input id="registerEmail" type="email" inputmode="email" autocomplete="email" placeholder="用于登录和邮箱确认"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="registerPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入密码</label><input id="registerPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="signUp()">创建账号</button><div class="auth-bottom">已有账号？ <button class="auth-link" type="button" onclick="showAuthPane('login')">返回登录</button></div></div><div id="resetView" style="display:none"><h2>设置新密码</h2><p class="auth-help">已通过密码重置链接验证。请输入新的登录密码。</p><div class="field"><label>新密码</label><input id="resetPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入新密码</label><input id="resetPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="updatePassword()">保存新密码</button></div><div id="authStatus" class="ai-status"></div><div id="authDiagV1537" class="auth-help" style="margin-top:8px;opacity:.7"></div></div></div><div id="appShell" class="app-shell" hidden style="display:none!important"><header class='brand-head-v1558'><div class='brand-kicker-v1558'>FISHING COMPANION</div><h1>钓鱼助手</h1><p>把复杂的准备，留给系统。</p></header><div class="account-bar"><b id="authUser">已登录</b><div class="account-actions"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select><button class="logout-btn" onclick="signOut()">退出登录</button></div></div><main class="wrap"><div class='tabs app-nav-v1557'>
 <button class='tab on' data-p='places'><span class='nav-icon'>⌖</span><span>钓场</span></button>
 <button class='tab' data-p='trip'><span class='nav-icon'>◉</span><span>作钓</span></button>
@@ -222,7 +226,7 @@ html,body{background:#090d0b;color:var(--ink)}.brand-head-v1558{display:none}.ac
 <div class='card'>
   <div class='grid'>
     <div class='field full'><label>鱼竿名称</label><input id='rodInvName' placeholder='例如：光威龙云 / 禧玛诺 18尺' onchange='autoLookupRodV1546()'></div>
-    <div class='field full'><button type='button' class='secondary' style='margin-top:0' onclick='lookupRodProductV1546()'>✨ AI查找型号和参数</button><div id='rodLookupStatusV1538' class='ai-status'></div><div class='small' id='rodAiBuildV1546' style='opacity:.65;margin-top:4px'>AI鱼竿向导 v15.60</div><div id='rodLookupResultsV1538'></div></div>
+    <div class='field full'><button type='button' class='secondary' style='margin-top:0' onclick='lookupRodProductV1546()'>✨ AI查找型号和参数</button><div id='rodLookupStatusV1538' class='ai-status'></div><div class='small' id='rodAiBuildV1546' style='opacity:.65;margin-top:4px'>AI鱼竿向导 v15.61</div><div id='rodLookupResultsV1538'></div></div>
     <div class='field'><label>品牌（可选）</label><input id='rodInvBrand' placeholder='例如：光威 / Shimano / 达亿瓦'></div>
     <div class='field'><label>型号/系列</label><input id='rodInvModel' placeholder='AI查找后可自动填写'></div><div class='field'><label>代数/版本</label><input id='rodInvGeneration' placeholder='例如：一代 / 二代 / 三代 / 2025款'></div><div class='field'><label>规格/变体</label><input id='rodInvVariant' placeholder='例如：轻量 / 竞技 / 大物'></div>
     <div class='field'><label>长度 m</label><select id='rodInvLength'><option value='2.7'>2.7 m</option><option value='3.6'>3.6 m</option><option value='3.9'>3.9 m</option><option value='4.2'>4.2 m</option><option value='4.5'>4.5 m</option><option value='4.8'>4.8 m</option><option value='5.4' selected>5.4 m</option><option value='5.7'>5.7 m</option><option value='6'>6 m</option><option value='6.3'>6.3 m</option><option value='6.6'>6.6 m</option><option value='7.2'>7.2 m</option><option value='7.5'>7.5 m</option><option value='8.1'>8.1 m</option><option value='9'>9 m</option></select></div>
@@ -275,15 +279,15 @@ html,body{background:#090d0b;color:var(--ink)}.brand-head-v1558{display:none}.ac
 <div id='placeModeChooser' class='pro-home-v1560'>
 <section class='pro-hero-v1560'>
  <div class='pro-photo-v1560'></div><div class='pro-shade-v1560'></div>
- <div class='pro-hero-content-v1560'><div class='pro-kicker-v1560'>FISHING ASSISTANT</div><h2>专注水边的<br>每一刻。</h2><p>更好的工具，更轻的决定。</p>
- <div class='pro-weather-v1560'><span>○</span><strong>18°</strong><small>今日环境</small></div></div>
+ <div class='pro-hero-content-v1560'><div class='pro-kicker-v1560'>FISHING ASSISTANT</div><h2>专注水边的<br>每一刻。</h2><p>更好的工具，更近的水域。</p>
+ <button id='homeWeatherV1561' class='pro-weather-v1561' type='button' onclick='loadHomeWeatherV1561(true)'><span id='homeWeatherIconV1561' class='pro-weather-icon-v1561'>○</span><strong id='homeWeatherTempV1561'>--°</strong><small id='homeWeatherTextV1561'>点击读取天气</small><em id='homeWeatherPlaceV1561'>当前位置</em></button></div>
 </section>
 <section class='pro-actions-v1560'>
  <button onclick="showPlaceEntryModeV1526('voice')"><span class='pro-action-icon-v1560'>◉</span><span><b>语音开始</b><small>说出钓场或目标鱼</small></span></button>
  <button onclick="showPlaceEntryModeV1526('manual')"><span class='pro-action-icon-v1560'>≡</span><span><b>手动设置</b><small>选择钓场和装备</small></span></button>
 </section>
 <div id='selectedTripPlace' class='pro-current-v1560 recipe' style='display:none'></div>
-<section class='pro-recommend-v1560'><div class='pro-section-title-v1560'><b>今日推荐</b><small>SMART START</small></div><div class='pro-recommend-card-v1560'><div><small>NEXT SESSION</small><strong>从熟悉的钓场开始</strong><p>选择钓场后，系统会结合你的装备与历史记录继续推荐。</p></div><span>→</span></div></section>
+<section class='pro-recommend-v1560'><div class='pro-section-title-v1560'><b>今日推荐</b><small>SMART START</small></div><button class='pro-recommend-card-v1560' onclick="showPlaceEntryModeV1526('manual')"><div><small id='homeRecommendMetaV1561'>NEXT SESSION</small><strong id='homeRecommendTitleV1561'>从熟悉的钓场开始</strong><p id='homeRecommendTextV1561'>选择钓场后，系统会结合天气、装备与历史记录继续推荐。</p></div><span>→</span></button></section>
 <section class='pro-quick-v1560'><div class='pro-section-title-v1560'><b>快速访问</b><small>QUICK ACCESS</small></div><div class='pro-quick-grid-v1560'><button data-pro-go='rods'>我的鱼竿 <span>→</span></button><button data-pro-go='box'>我的漂盒 <span>→</span></button><button data-pro-go='bait'>AI 饵料 <span>→</span></button><button data-pro-go='log'>钓鱼记录 <span>→</span></button></div></section>
 </div>
 <div id='placeManualMode' style='display:none'>
@@ -349,7 +353,7 @@ html,body{background:#090d0b;color:var(--ink)}.brand-head-v1558{display:none}.ac
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.60":["낚시 찌 선택 도우미 v15.60","Fishing Float Assistant v15.60"],
+"钓鱼选漂助手 v15.61":["낚시 찌 선택 도우미 v15.61","Fishing Float Assistant v15.61"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -451,7 +455,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.60');
+ document.title=trStatic('钓鱼选漂助手 v15.61');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -4662,7 +4666,7 @@ Object.assign(I18N_STATIC,{
    rows=rows.filter(r=>r.brand||r.series||r.generation||r.variant||r.model);
    rows=[...new Map(rows.map(r=>[[r.brand,r.series,r.generation,r.variant,r.model].map(x=>String(x||'').toLowerCase().replace(/\s+/g,'')).join('|'),r])).values()];
 
-   // v15.60: save quota/data. Do not automatically issue a second discovery request.
+   // v15.61: save quota/data. Do not automatically issue a second discovery request.
    // If only one version is found, show it immediately; the user can refine the search name if needed.
 
    window._rodWizardV1543.families=rows;
@@ -4743,7 +4747,7 @@ Object.assign(I18N_STATIC,{
    }
    if(!rows.length && best) rows=[best];
 
-   // v15.60: save quota/data — no four-way automatic subqueries.
+   // v15.61: save quota/data — no four-way automatic subqueries.
    // One main detail lookup + at most one focused specification lookup above.
    if(!detailFromCache&&rows.length)await rodCachePutV1552('detail',w.query,fam,len,{candidates:rows});
 
@@ -4785,8 +4789,8 @@ Object.assign(I18N_STATIC,{
    if(typeof window.lookupRodProductV1538!=='function')throw Error('鱼竿向导主函数未加载');
    return await window.lookupRodProductV1538();
   }catch(e){
-   if(st)st.textContent='AI查找失败[v15.60]：'+(e?.message||e);
-   console.error('[rod-ai v15.60]',e);
+   if(st)st.textContent='AI查找失败[v15.61]：'+(e?.message||e);
+   console.error('[rod-ai v15.61]',e);
   }
  };
  window.autoLookupRodV1546=function(){
@@ -4796,7 +4800,7 @@ Object.assign(I18N_STATIC,{
   window._rodAutoLookupTimerV1546=setTimeout(()=>window.lookupRodProductV1546(),180);
  };
  const b=document.getElementById('rodAiBuildV1546');
- if(b)b.textContent='AI鱼竿向导 v15.60 · '+location.host;
+ if(b)b.textContent='AI鱼竿向导 v15.61 · '+location.host;
 })();
 </script><script>
 (function(){
@@ -4806,4 +4810,21 @@ Object.assign(I18N_STATIC,{
  document.addEventListener('click',e=>{if(!e.target.closest('#moreNavV1557')&&!e.target.closest('.more-tab-v1557'))more?.classList.remove('open')});
  document.querySelectorAll('.app-nav-v1557 .tab[data-p]').forEach(b=>b.addEventListener('click',()=>{document.querySelector('.more-tab-v1557')?.classList.remove('on');more?.classList.remove('open')}));
 })();
-</script><script>(function(){document.querySelectorAll('[data-pro-go]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.proGo;const t=document.querySelector(".tab[data-p='"+p+"']");if(t)t.click();else{document.getElementById('moreNavV1557')?.querySelector("[data-p='"+p+"']")?.click()}}))})();</script></body></html>
+</script><script>(function(){document.querySelectorAll('[data-pro-go]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.proGo;const t=document.querySelector(".tab[data-p='"+p+"']");if(t)t.click();else{document.getElementById('moreNavV1557')?.querySelector("[data-p='"+p+"']")?.click()}}))})();</script><script>
+(function(){
+ function wxIconV1561(code){if(code===0)return '☼';if([1,2].includes(code))return '◒';if(code===3)return '●';if([45,48].includes(code))return '≋';if([71,73,75,77,85,86].includes(code))return '✳';if([95,96,99].includes(code))return 'ϟ';return '☂'}
+ window.loadHomeWeatherV1561=function(force){
+  const box=document.getElementById('homeWeatherV1561');if(!box||!navigator.geolocation)return;
+  const cached=localStorage.getItem('homeWeatherV1561');if(!force&&cached){try{const x=JSON.parse(cached);if(Date.now()-x.at<20*60*1000){renderHomeWeatherV1561(x);return}}catch(_){}}
+  box.classList.add('loading');document.getElementById('homeWeatherTextV1561').textContent='正在读取…';
+  navigator.geolocation.getCurrentPosition(async p=>{try{
+   const lat=p.coords.latitude,lon=p.coords.longitude;
+   const [wr,place]=await Promise.all([fetch('https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lon+'&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,relative_humidity_2m,surface_pressure&timezone=auto'),typeof reversePlace==='function'?reversePlace(lat,lon):Promise.resolve('')]);
+   if(!wr.ok)throw Error('weather');const w=await wr.json(),q=w.current||{};
+   const x={at:Date.now(),temp:q.temperature_2m,feel:q.apparent_temperature,code:q.weather_code,wind:q.wind_speed_10m,humidity:q.relative_humidity_2m,pressure:q.surface_pressure,place:place||'当前位置'};localStorage.setItem('homeWeatherV1561',JSON.stringify(x));renderHomeWeatherV1561(x);
+  }catch(e){document.getElementById('homeWeatherTextV1561').textContent='天气暂不可用';box.classList.remove('loading')}},e=>{document.getElementById('homeWeatherTextV1561').textContent=e.code===1?'点击允许定位':'定位暂不可用';box.classList.remove('loading')},{enableHighAccuracy:false,timeout:9000,maximumAge:600000});
+ };
+ window.renderHomeWeatherV1561=function(x){const box=document.getElementById('homeWeatherV1561');if(!box)return;const cn=typeof weatherCodeCN==='function'?weatherCodeCN(x.code):'天气';document.getElementById('homeWeatherIconV1561').textContent=wxIconV1561(x.code);document.getElementById('homeWeatherTempV1561').textContent=(x.temp??'--')+'°';document.getElementById('homeWeatherTextV1561').textContent=cn+' · 风 '+(x.wind??'-')+' km/h';document.getElementById('homeWeatherPlaceV1561').textContent=x.place||'当前位置';const meta=document.getElementById('homeRecommendMetaV1561'),title=document.getElementById('homeRecommendTitleV1561'),txt=document.getElementById('homeRecommendTextV1561');if(meta)meta.textContent=cn+' · '+(x.temp??'-')+'°C · '+(x.place||'当前位置');if(title)title.textContent=(x.wind!=null&&x.wind>=20)?'风偏大，优先选择避风钓位':'今天适合先从熟悉水域开始';if(txt)txt.textContent='当前风速 '+(x.wind??'-')+' km/h · 湿度 '+(x.humidity??'-')+'% · 气压 '+(x.pressure??'-')+' hPa。进入钓场后继续结合装备推荐。';box.classList.remove('loading')}
+ setTimeout(()=>{if(document.body.classList.contains('authenticated'))loadHomeWeatherV1561(false)},900);
+})();
+</script></body></html>
