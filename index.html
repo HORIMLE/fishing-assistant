@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.39</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.40</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -145,7 +145,7 @@
     <div class='field full'><label>鱼竿名称</label><input id='rodInvName' placeholder='例如：光威龙云 / 禧玛诺 18尺' onchange='autoLookupRodV1538()'></div>
     <div class='field full'><button type='button' class='secondary' style='margin-top:0' onclick='lookupRodProductV1538()'>✨ AI查找型号和参数</button><div id='rodLookupStatusV1538' class='ai-status'></div><div id='rodLookupResultsV1538'></div></div>
     <div class='field'><label>品牌（可选）</label><input id='rodInvBrand' placeholder='例如：光威 / Shimano / 达亿瓦'></div>
-    <div class='field'><label>型号/系列</label><input id='rodInvModel' placeholder='AI查找后可自动填写'></div>
+    <div class='field'><label>型号/系列</label><input id='rodInvModel' placeholder='AI查找后可自动填写'></div><div class='field'><label>代数/版本</label><input id='rodInvGeneration' placeholder='例如：一代 / 二代 / 三代 / 2025款'></div><div class='field'><label>规格/变体</label><input id='rodInvVariant' placeholder='例如：轻量 / 竞技 / 大物'></div>
     <div class='field'><label>长度 m</label><select id='rodInvLength'><option value='2.7'>2.7 m</option><option value='3.6'>3.6 m</option><option value='3.9'>3.9 m</option><option value='4.2'>4.2 m</option><option value='4.5'>4.5 m</option><option value='4.8'>4.8 m</option><option value='5.4' selected>5.4 m</option><option value='5.7'>5.7 m</option><option value='6'>6 m</option><option value='6.3'>6.3 m</option><option value='6.6'>6.6 m</option><option value='7.2'>7.2 m</option><option value='7.5'>7.5 m</option><option value='8.1'>8.1 m</option><option value='9'>9 m</option></select></div>
     <div class='field'><label>常用主线号</label><input id='rodInvMainLine' type='number' step='.1' placeholder='例如 1.5'></div>
     <div class='field'><label>常用子线号</label><input id='rodInvLeaderLine' type='number' step='.1' placeholder='例如 0.8'></div>
@@ -271,7 +271,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.39":["낚시 찌 선택 도우미 v15.39","Fishing Float Assistant v15.39"],
+"钓鱼选漂助手 v15.40":["낚시 찌 선택 도우미 v15.40","Fishing Float Assistant v15.40"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -373,7 +373,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.39');
+ document.title=trStatic('钓鱼选漂助手 v15.40');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -3705,9 +3705,9 @@ Object.assign(I18N_STATIC,{
  window.loadOwnedRodsV1532=async function(){
   let rows=[];
   if(currentUser){
-   const {data,error}=await sb.from('rods').select('id,name,brand,model_name,length_m,default_main_line,default_leader_line,hardness,action_tone,weight_g,sections,closed_length_cm,tip_diameter_mm,butt_diameter_mm,max_line_no,max_lure_g,notes,image_path,ai_lookup').order('created_at',{ascending:false});
+   const {data,error}=await sb.from('rods').select('id,name,brand,model_name,generation,variant_name,length_m,default_main_line,default_leader_line,hardness,action_tone,weight_g,sections,closed_length_cm,tip_diameter_mm,butt_diameter_mm,max_line_no,max_lure_g,notes,image_path,ai_lookup').order('created_at',{ascending:false});
    if(!error)rows=await Promise.all((data||[]).map(async x=>({
-    id:x.id,name:x.name,brand:x.brand||'',modelName:x.model_name||'',length:Number(x.length_m),mainLine:x.default_main_line==null?'':Number(x.default_main_line),
+    id:x.id,name:x.name,brand:x.brand||'',modelName:x.model_name||'',generation:x.generation||'',variantName:x.variant_name||'',length:Number(x.length_m),mainLine:x.default_main_line==null?'':Number(x.default_main_line),
     leaderLine:x.default_leader_line==null?'':Number(x.default_leader_line),
     hardness:x.hardness||'',actionTone:x.action_tone||'',
     weightG:x.weight_g==null?'':Number(x.weight_g),sections:x.sections==null?'':Number(x.sections),
@@ -3765,7 +3765,7 @@ Object.assign(I18N_STATIC,{
       maxLineNo:maxLine===''?'':Number(maxLine),maxLureG:maxLure===''?'':Number(maxLure),notes,image:rodPhotoDataV1532});
     localStorage.ownedRodsV1532=JSON.stringify(a)
    }
-   ['rodInvName','rodInvBrand','rodInvModel','rodInvMainLine','rodInvLeaderLine','rodInvNotes','rodInvHardness','rodInvAction','rodInvWeight','rodInvSections','rodInvClosedLength','rodInvTipDiameter','rodInvButtDiameter','rodInvMaxLine','rodInvMaxLure'].forEach(id=>{if($(id))$(id).value=''});
+   ['rodInvName','rodInvBrand','rodInvModel','rodInvGeneration','rodInvVariant','rodInvMainLine','rodInvLeaderLine','rodInvNotes','rodInvHardness','rodInvAction','rodInvWeight','rodInvSections','rodInvClosedLength','rodInvTipDiameter','rodInvButtDiameter','rodInvMaxLine','rodInvMaxLure'].forEach(id=>{if($(id))$(id).value=''});
    if($('rodInvLength'))$('rodInvLength').value='5.4';
    if($('rodInvPhoto'))$('rodInvPhoto').value='';
    if($('rodInvPhotoPreview'))$('rodInvPhotoPreview').style.display='none';
@@ -3912,6 +3912,8 @@ Object.assign(I18N_STATIC,{
   if($('rodInvName'))$('rodInvName').value=x.name||'';
   if($('rodInvBrand'))$('rodInvBrand').value=x.brand||'';
   if($('rodInvModel'))$('rodInvModel').value=x.modelName||'';
+  if($('rodInvGeneration'))$('rodInvGeneration').value=x.generation||'';
+  if($('rodInvVariant'))$('rodInvVariant').value=x.variantName||'';
   if($('rodInvLength'))$('rodInvLength').value=String(x.length||5.4);
   if($('rodInvMainLine'))$('rodInvMainLine').value=x.mainLine===''?'':x.mainLine;
   if($('rodInvLeaderLine'))$('rodInvLeaderLine').value=x.leaderLine===''?'':x.leaderLine;
@@ -3950,7 +3952,7 @@ Object.assign(I18N_STATIC,{
 
  // Final authoritative save: handles both create and update.
  addOwnedRodV1532=async function(){
-  const name=($('rodInvName')?.value||'').trim(),brand=($('rodInvBrand')?.value||'').trim();
+  const name=($('rodInvName')?.value||'').trim(),brand=($('rodInvBrand')?.value||'').trim(),modelName=($('rodInvModel')?.value||'').trim(),generation=($('rodInvGeneration')?.value||'').trim(),variantName=($('rodInvVariant')?.value||'').trim();
   const length=Number($('rodInvLength')?.value||0),main=$('rodInvMainLine')?.value,leader=$('rodInvLeaderLine')?.value,notes=($('rodInvNotes')?.value||'').trim();
   const hardness=($('rodInvHardness')?.value||'').trim(),actionTone=($('rodInvAction')?.value||'').trim();
   const weight=$('rodInvWeight')?.value,sections=$('rodInvSections')?.value,closedLen=$('rodInvClosedLength')?.value,tip=$('rodInvTipDiameter')?.value,butt=$('rodInvButtDiameter')?.value,maxLine=$('rodInvMaxLine')?.value,maxLure=$('rodInvMaxLure')?.value;
@@ -3959,7 +3961,7 @@ Object.assign(I18N_STATIC,{
   if(!(length>0))return st.textContent='请选择鱼竿长度。';
 
   const payload={
-    name,brand:brand||null,model_name:modelName||null,ai_lookup:window._selectedRodLookupV1538||{},length_m:length,
+    name,brand:brand||null,model_name:modelName||null,generation:generation||null,variant_name:variantName||null,ai_lookup:window._selectedRodLookupV1538||{},length_m:length,
     default_main_line:main===''?null:Number(main),default_leader_line:leader===''?null:Number(leader),
     hardness:hardness||null,action_tone:actionTone||null,
     weight_g:weight===''?null:Number(weight),sections:sections===''?null:Number(sections),
@@ -3997,7 +3999,7 @@ Object.assign(I18N_STATIC,{
     }else{
       const a=JSON.parse(localStorage.ownedRodsV1532||'[]');
       const obj={
-        id:editingId||('local-'+Date.now()),name,brand,length,
+        id:editingId||('local-'+Date.now()),name,brand,modelName,generation,variantName,length,
         mainLine:main===''?'':Number(main),leaderLine:leader===''?'':Number(leader),
         hardness,actionTone,weightG:weight===''?'':Number(weight),sections:sections===''?'':Number(sections),
         closedLengthCm:closedLen===''?'':Number(closedLen),tipDiameterMm:tip===''?'':Number(tip),
@@ -4033,7 +4035,7 @@ Object.assign(I18N_STATIC,{
   box.innerHTML=rows.length?rows.map((x,i)=>"<div class='item rod-inv-card'>"+
    (x.image?"<img src='"+x.image+"' alt=''>":"<div class='no-photo' style='width:76px;height:76px;display:flex;align-items:center;justify-content:center;background:#eef2ef;border-radius:10px'>🎣</div>")+
    "<div><div style='float:right;display:flex;gap:4px'><button class='secondary' style='width:auto;margin:0;padding:6px 9px' onclick='editOwnedRodV1535("+i+")'>修改</button><button class='danger' style='float:none;padding:6px 5px' onclick='deleteOwnedRodV1532("+i+")'>删除</button></div>"+
-   "<b>"+escapeHtml((x.brand?x.brand+' · ':'')+x.name)+"</b>"+
+   "<b>"+escapeHtml((x.brand?x.brand+' · ':'')+x.name)+"</b>"+"<div class='small'>"+escapeHtml([x.modelName,x.generation,x.variantName].filter(Boolean).join(' · '))+"</div>"+
    "<div class='small'>"+x.length+"m"+(x.hardness?" · "+escapeHtml(x.hardness):"")+(x.actionTone?" · "+escapeHtml(x.actionTone):"")+(x.mainLine!==''?" · 主线 "+x.mainLine:"")+(x.leaderLine!==''?" · 子线 "+x.leaderLine:"")+"</div>"+
    ((x.weightG!==''||x.sections!==''||x.closedLengthCm!==''||x.tipDiameterMm!==''||x.buttDiameterMm!=='')?"<div class='small'>"+(x.weightG!==''?"自重 "+x.weightG+"g ":"")+(x.sections!==''?"· "+x.sections+"节 ":"")+(x.closedLengthCm!==''?"· 收纳 "+x.closedLengthCm+"cm ":"")+(x.tipDiameterMm!==''?"· 先径 "+x.tipDiameterMm+"mm ":"")+(x.buttDiameterMm!==''?"· 元径 "+x.buttDiameterMm+"mm":"")+"</div>":"")+
    (x.maxLineNo!==''||x.maxLureG!==''?"<div class='small'>"+(x.maxLineNo!==''?"最大建议线号 "+x.maxLineNo:"")+(x.maxLureG!==''?" · 最大建议饵重 "+x.maxLureG+"g":"")+"</div>":"")+
@@ -4377,6 +4379,103 @@ Object.assign(I18N_STATIC,{
   "✨ AI查找型号和参数":["✨ AI로 모델/사양 찾기","✨ AI Find Model & Specs"],
   "型号/系列":["모델/시리즈","Model / Series"],
   "系列":["시리즈","Series"],"型号":["모델","Model"],"浮漂类型":["찌 유형","Float type"],"总长 cm":["전체 길이 cm","Length cm"],"材质":["재질","Material"]
+ });
+})();
+</script><script>
+(function(){
+ function v1540num(v){const n=Number(v);return Number.isFinite(n)?n:''}
+ function v1540pick(o,keys){for(const k of keys){if(o&&o[k]!==undefined&&o[k]!==null&&o[k]!=='')return o[k]}return ''}
+ function v1540normRod(r){
+  r=r||{};
+  return {
+   ...r,
+   brand:v1540pick(r,['brand','manufacturer','brandName']),
+   series:v1540pick(r,['series','seriesName','productLine']),
+   model:v1540pick(r,['model','modelName','sku']),
+   generation:v1540pick(r,['generation','generationName','gen','versionGeneration','代数','版本代数']),
+   variant:v1540pick(r,['variant','variantName','version','edition','subModel','规格']),
+   name:v1540pick(r,['name','productName','fullName']),
+   lengthM:v1540num(v1540pick(r,['lengthM','length_m','length','rodLengthM','rod_length_m'])),
+   hardness:v1540pick(r,['hardness','hardnessH','power']),
+   actionTone:v1540pick(r,['actionTone','action','tone','调性']),
+   weightG:v1540num(v1540pick(r,['weightG','weight_g','weight','selfWeightG'])),
+   sections:v1540num(v1540pick(r,['sections','sectionCount','节数'])),
+   closedLengthCm:v1540num(v1540pick(r,['closedLengthCm','closed_length_cm','closedLength','收纳长'])),
+   tipDiameterMm:v1540num(v1540pick(r,['tipDiameterMm','tip_diameter_mm','tipDiameter','先径'])),
+   buttDiameterMm:v1540num(v1540pick(r,['buttDiameterMm','butt_diameter_mm','buttDiameter','元径'])),
+   maxLineNo:v1540num(v1540pick(r,['maxLineNo','max_line_no','lineMax','最大线号'])),
+   maxLureG:v1540num(v1540pick(r,['maxLureG','max_lure_g','lureMaxG','最大饵重'])),
+   confidence:Number(v1540pick(r,['confidence','score'])||0),
+   sourceUrls:Array.isArray(r.sourceUrls)?r.sourceUrls:(Array.isArray(r.sources)?r.sources:[])
+  }
+ }
+ function v1540set(id,val){
+  const el=$(id);if(!el||val===undefined||val===null||val==='')return false;
+  const raw=String(val).trim();
+  if(el.tagName==='SELECT'){
+   const key=raw.toLowerCase().replace(/\s+/g,'');
+   let opt=[...el.options].find(o=>{
+    const a=String(o.value).toLowerCase().replace(/\s+/g,'');
+    const b=String(o.textContent).toLowerCase().replace(/\s+/g,'');
+    return a===key||b===key
+   });
+   if(!opt){
+    opt=document.createElement('option');
+    opt.value=raw;opt.textContent=raw;el.appendChild(opt)
+   }
+   el.value=opt.value;
+  }else el.value=raw;
+  el.dispatchEvent(new Event('change',{bubbles:true}));
+  return true
+ }
+
+ window.lookupRodProductV1538=async function(){
+  const q=($('rodInvName')?.value||'').trim(),st=$('rodLookupStatusV1538'),box=$('rodLookupResultsV1538');
+  if(!q)return st.textContent='请先填写鱼竿名称，例如：光威龙云轻量。';
+  st.textContent='正在查找“'+q+'”的代数、版本和具体规格…';box.innerHTML='';
+  try{
+   const prompt='请查找真实存在的淡水台钓/手竿产品。用户输入：'+JSON.stringify(q)+'。特别注意：同名系列可能存在一代、二代、三代、四代、年份款、轻量版、竞技版、大物版等多个代数或版本。必须先区分代数/版本，再区分长度规格。例如“光威龙云轻量”应尽可能列出能确认的不同代数/版本，再在每一代下面区分3.6m、4.5m、5.4m等长度。绝对不要把不同代或不同长度的参数拼在一起。最多15个候选。没有可靠依据的字段留空。返回严格JSON对象：{"candidates":[{"brand":"","series":"","model":"","generation":"","variant":"","name":"","lengthM":null,"hardness":"","actionTone":"","weightG":null,"sections":null,"closedLengthCm":null,"tipDiameterMm":null,"buttDiameterMm":null,"maxLineNo":null,"maxLureG":null,"confidence":0,"sourceUrls":["https://..."]}]}。候选名称必须能让用户明显看出是哪一代、哪个版本、哪个长度。';
+   const x=await geminiWebLookupV1538(prompt,st);
+   const rows=(Array.isArray(x.candidates)?x.candidates:[]).map(v1540normRod);
+   window._rodLookupCandidatesV1538=rows;
+   if(!rows.length){st.textContent='没有找到足够可靠的型号资料。可以换成更完整的名称，例如“光威 龙云 轻量 二代”。';return}
+   box.className='ai-product-results';
+   box.innerHTML=rows.map((r,i)=>{
+    const title=[r.brand,r.series,r.generation,r.variant,r.model].filter(Boolean).join(' · ')||r.name||('候选 '+(i+1));
+    const specs=[r.lengthM!==''?r.lengthM+'m':'',r.hardness,r.actionTone,r.weightG!==''?r.weightG+'g':'',r.sections!==''?r.sections+'节':''].filter(Boolean).join(' · ');
+    return "<button type='button' class='ai-product-option' onclick='selectRodLookupV1538("+i+")'><b>"+escapeHtml(title)+"</b><div class='small'>"+escapeHtml(specs)+"</div><div class='small'>可信度 "+Math.round((r.confidence||0)*100)+"%</div></button>"
+   }).join('');
+   st.textContent='找到 '+rows.length+' 个候选。请先确认“代数/版本”，再确认长度。选择后会自动填入可确认的参数。';
+  }catch(e){st.textContent='AI查找失败：'+(e?.message||e)}
+ };
+
+ window.selectRodLookupV1538=function(i){
+  const r=(window._rodLookupCandidatesV1538||[])[i];if(!r)return;
+  window._selectedRodLookupV1538={query:$('rodInvName')?.value||'',candidate:r,selectedAt:new Date().toISOString()};
+  const filled=[];
+  const fullName=r.name||[r.brand,r.series,r.generation,r.variant,r.model].filter(Boolean).join(' ');
+  if(v1540set('rodInvName',fullName))filled.push('名称');
+  if(v1540set('rodInvBrand',r.brand))filled.push('品牌');
+  if(v1540set('rodInvModel',[r.series,r.model].filter(Boolean).join(' ')))filled.push('型号/系列');
+  if(v1540set('rodInvGeneration',r.generation))filled.push('代数/版本');
+  if(v1540set('rodInvVariant',r.variant))filled.push('规格/变体');
+  if(r.lengthM!==''&&v1540set('rodInvLength',r.lengthM))filled.push('长度');
+  if(v1540set('rodInvHardness',r.hardness))filled.push('硬度');
+  if(v1540set('rodInvAction',r.actionTone))filled.push('调性');
+  if(r.weightG!==''&&v1540set('rodInvWeight',r.weightG))filled.push('自重');
+  if(r.sections!==''&&v1540set('rodInvSections',r.sections))filled.push('节数');
+  if(r.closedLengthCm!==''&&v1540set('rodInvClosedLength',r.closedLengthCm))filled.push('收纳长');
+  if(r.tipDiameterMm!==''&&v1540set('rodInvTipDiameter',r.tipDiameterMm))filled.push('先径');
+  if(r.buttDiameterMm!==''&&v1540set('rodInvButtDiameter',r.buttDiameterMm))filled.push('元径');
+  if(r.maxLineNo!==''&&v1540set('rodInvMaxLine',r.maxLineNo))filled.push('最大线号');
+  if(r.maxLureG!==''&&v1540set('rodInvMaxLure',r.maxLureG))filled.push('最大饵重');
+  document.querySelectorAll('#rodLookupResultsV1538 .ai-product-option').forEach((el,j)=>el.classList.toggle('selected',j===i));
+  $('rodLookupStatusV1538').textContent='已自动填写：'+(filled.length?filled.join('、'):'只识别到候选名称')+'。空白项目表示没有可靠资料，请不要当作0。';
+ };
+
+ Object.assign(I18N_STATIC,{
+  "代数/版本":["세대/버전","Generation / Version"],
+  "规格/变体":["사양/변형","Variant"]
  });
 })();
 </script></body></html>
