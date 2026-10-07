@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.58</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.59</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -105,7 +105,7 @@
 .ai-product-option .small{line-height:1.45}
 .ai-product-option.selected{border:2px solid var(--accent);background:#eef8f3}
 
-/* v15.58 unified premium design system */
+/* v15.59 unified premium design system */
 :root{--bg:#f6f5f0;--card:#fffdfa;--ink:#17211d;--muted:#78817c;--accent:#174f3b;--accent-2:#103d2e;--soft:#edf1ed;--line:#e4e6e1;--warn:#8a6425;--danger:#9b443f;--radius:16px;--control-h:50px;--shadow:0 1px 2px #1020180a,0 8px 28px #1020180a}
 html{background:var(--bg)}body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Noto Sans SC","Noto Sans KR",sans-serif;letter-spacing:-.01em}
 header{background:var(--bg);color:var(--ink);padding:24px 20px 12px;border:0}header h1{font-size:25px;letter-spacing:-.04em;margin:0 0 5px}header p{color:var(--muted);opacity:1}
@@ -133,7 +133,7 @@ button,.primary,.secondary,.upload-btn,.logout-btn,.compact-btn,.voice-back-btn{
 .small,.why,.ai-status,.api-note,.auth-help,.rod-float-meta,.rod-depth-help{color:var(--muted)}
 @media(max-width:430px){header{padding:20px 16px 10px}.account-bar{padding:6px 16px 10px}.wrap{padding-left:10px;padding-right:10px}.card{padding:16px}.grid{gap:10px}.field input,.field select,.field textarea{font-size:16px}.tab{font-size:12px;padding:8px 11px}}
 
-/* v15.58 app information architecture */
+/* v15.59 app information architecture */
 body.authenticated .wrap{padding-bottom:104px}
 .app-nav-v1557{position:fixed;left:50%;bottom:max(10px,env(safe-area-inset-bottom));top:auto;transform:translateX(-50%);width:min(calc(100% - 20px),700px);height:66px;padding:6px 8px;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:#fffdfaf2;border:1px solid var(--line);border-radius:20px;box-shadow:0 12px 35px #10201818;backdrop-filter:blur(18px);z-index:50;overflow:visible}
 .app-nav-v1557 .tab{min-width:0;height:52px;padding:5px 2px;border:0!important;background:transparent!important;border-radius:14px;color:#7b847f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:700}
@@ -144,7 +144,7 @@ body.authenticated .wrap{padding-bottom:104px}
 .panel{animation:panelIn1557 .16s ease-out}@keyframes panelIn1557{from{opacity:.45;transform:translateY(3px)}to{opacity:1;transform:none}}
 @media(min-width:760px){.app-nav-v1557{bottom:16px}.more-nav-v1557{bottom:94px}}
 
-/* v15.58 visual language 2.0 */
+/* v15.59 visual language 2.0 */
 :root{--bg:#f2f0e9;--card:#faf9f5;--ink:#171b18;--muted:#747a75;--accent:#173f31;--line:#dedfd9;--radius:14px}
 .brand-head-v1558{padding-top:28px;padding-bottom:4px}.brand-kicker-v1558,.eyebrow-v1558{font-size:10px;line-height:1.2;letter-spacing:.18em;font-weight:800;color:#768079;text-transform:uppercase}.brand-head-v1558 h1{font-size:28px;font-weight:720;letter-spacing:-.055em;margin:7px 0 3px}.brand-head-v1558 p{font-size:13px}
 .home-hero-v1558{padding:34px 4px 18px}.home-hero-v1558>h2{font-size:34px;line-height:1.08;letter-spacing:-.06em;margin:10px 0 12px;font-weight:720}.home-hero-v1558>.why{max-width:440px;font-size:14px;line-height:1.65;margin-bottom:24px}
@@ -155,6 +155,17 @@ body.authenticated .wrap{padding-bottom:104px}
 .card{border-color:#e1e1dc;background:#faf9f5;padding:19px}.card h2{font-size:16px;font-weight:720}.primary{background:#173f31;border-color:#173f31;border-radius:11px;font-weight:700}.secondary{border-color:#ccd2ce;background:transparent;border-radius:11px}.field label{font-size:11px;letter-spacing:.015em}.field input,.field select,.field textarea,input:not([type=checkbox]):not([type=radio]):not([type=file]),select,textarea{background:#f8f8f4;border-color:#d9dcd7;border-radius:10px;min-height:49px}
 .recipe{background:#ecefe9}.app-nav-v1557{background:#f9f8f3f2;border-radius:18px}.app-nav-v1557 .tab.on{background:#e8ece7!important;color:#173f31}
 @media(max-width:430px){.home-hero-v1558{padding-top:27px}.home-hero-v1558>h2{font-size:31px}.place-entry-card{min-height:150px;padding:17px}.place-entry-card b{font-size:18px}.page-intro-v1558{padding-top:26px}.page-intro-v1558 h2{font-size:29px}}
+
+/* v15.59 A concept — nature editorial */
+:root{--bg:#f1efe7;--card:#f8f7f1;--ink:#17201b;--muted:#727970;--accent:#173e30;--accent-2:#244d3d;--line:#d9dbd3}
+body{background:var(--bg)}.wrap{max-width:760px;padding-left:18px;padding-right:18px}.brand-head-v1558{max-width:760px;margin:auto;padding:26px 18px 2px}.account-bar{max-width:760px;margin:auto}
+.a-home-v1559{margin:0 -18px}.a-hero-v1559{position:relative;min-height:380px;padding:66px 28px 42px;overflow:hidden;background:#173e30;color:#f5f2e9;border-radius:0 0 30px 30px}.a-hero-copy-v1559{position:relative;z-index:2;max-width:520px}.a-overline-v1559{font-size:10px;letter-spacing:.24em;font-weight:800;color:#aebfb4;margin-bottom:25px}.a-hero-v1559 h2{font-size:52px;line-height:.98;letter-spacing:-.075em;font-weight:620;margin:0 0 24px}.a-hero-v1559 h2 em{font-style:normal;color:#cbd6c8}.a-hero-v1559 p{max-width:390px;margin:0;color:#bdc9c0;font-size:14px;line-height:1.8}
+.a-watermark-v1559{position:absolute;right:-45px;bottom:18px;width:280px;height:180px;opacity:.12;transform:rotate(-8deg)}.a-watermark-v1559 span{display:block;border-top:1px solid #fff;border-radius:50%;height:42px;margin-top:13px;transform:skewX(-24deg)}
+.a-start-v1559{padding:38px 22px 18px}.a-section-head-v1559{display:flex;justify-content:space-between;align-items:end;margin-bottom:13px}.a-section-head-v1559>span{font-size:20px;font-weight:700;letter-spacing:-.035em}.a-section-head-v1559 small{font-size:9px;letter-spacing:.18em;color:#8b918b;font-weight:800}
+.a-action-v1559{width:100%;min-height:94px;border:0;border-top:1px solid #cfd2cb;border-radius:0;background:transparent;color:var(--ink);display:grid;grid-template-columns:38px 1fr 30px;gap:10px;align-items:center;text-align:left;padding:15px 2px}.a-action-v1559:last-of-type{border-bottom:1px solid #cfd2cb}.a-action-main-v1559{color:#173e30}.a-action-index-v1559{align-self:start;padding-top:8px;font-size:10px;letter-spacing:.1em;color:#858c85;font-weight:800}.a-action-copy-v1559 b{display:block;font-size:21px;letter-spacing:-.045em;margin-bottom:6px}.a-action-copy-v1559 small{display:block;color:#777e77;font-size:12px;line-height:1.55;font-weight:500}.a-arrow-v1559{font-size:22px;text-align:right;font-weight:400}
+.a-current-v1559{margin:14px 22px!important}.a-philosophy-v1559{margin:28px 22px 16px;padding:30px 0 14px;border-top:1px solid #cfd2cb;display:grid;grid-template-columns:1.15fr .85fr;gap:24px}.a-philosophy-v1559 small{display:block;font-size:9px;letter-spacing:.16em;color:#899089;font-weight:800;margin-bottom:12px}.a-philosophy-v1559 strong{font-size:25px;line-height:1.25;letter-spacing:-.05em;font-weight:650}.a-philosophy-v1559 p{font-size:12px;line-height:1.75;color:#7a817a;margin:22px 0 0}
+#placeManualMode{padding-top:24px}#placeManualMode>.mode-header{background:transparent;border:0;padding:6px 2px 18px;border-bottom:1px solid #d2d5ce;border-radius:0}#placeManualMode .place-group{border:0;border-bottom:1px solid #d2d5ce;border-radius:0;background:transparent;margin:0}#placeManualMode .place-group summary{background:transparent;padding:18px 3px;font-size:15px}#placeManualMode .group-body{padding:4px 3px 22px!important}
+@media(max-width:430px){.a-hero-v1559{min-height:350px;padding:54px 22px 36px;border-radius:0 0 25px 25px}.a-hero-v1559 h2{font-size:45px}.a-start-v1559{padding-left:18px;padding-right:18px}.a-current-v1559,.a-philosophy-v1559{margin-left:18px!important;margin-right:18px!important}.a-philosophy-v1559{grid-template-columns:1fr;gap:4px}.a-philosophy-v1559 p{margin-top:10px}}
 </style><script src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'></script></head><body><div id="authScreen" class="auth-screen" style="display:flex!important"><div class="auth-box"><div class="auth-lang-row"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select></div><div class="auth-brand"><div class="icon">🎣</div><h1>钓鱼助手</h1><p>登录后进入你的钓鱼数据和 AI 助手</p></div><div id="loginView"><h2>登录</h2><div class="field"><label>邮箱</label><input id="loginEmail" type="email" inputmode="email" autocomplete="email" placeholder="请输入邮箱"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="请输入密码"></div><button id="loginBtn" class="primary" type="button">登录</button><div class="auth-bottom"><button class="auth-link" type="button" onclick="requestPasswordReset()">忘记密码？重置密码</button><br>还没有账号？ <button class="auth-link" type="button" onclick="showAuthPane('register')">创建账号</button></div></div><div id="registerView" style="display:none"><h2>创建账号</h2><div class="field"><label>邮箱</label><input id="registerEmail" type="email" inputmode="email" autocomplete="email" placeholder="用于登录和邮箱确认"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="registerPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入密码</label><input id="registerPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="signUp()">创建账号</button><div class="auth-bottom">已有账号？ <button class="auth-link" type="button" onclick="showAuthPane('login')">返回登录</button></div></div><div id="resetView" style="display:none"><h2>设置新密码</h2><p class="auth-help">已通过密码重置链接验证。请输入新的登录密码。</p><div class="field"><label>新密码</label><input id="resetPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入新密码</label><input id="resetPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="updatePassword()">保存新密码</button></div><div id="authStatus" class="ai-status"></div><div id="authDiagV1537" class="auth-help" style="margin-top:8px;opacity:.7"></div></div></div><div id="appShell" class="app-shell" hidden style="display:none!important"><header class='brand-head-v1558'><div class='brand-kicker-v1558'>FISHING COMPANION</div><h1>钓鱼助手</h1><p>把复杂的准备，留给系统。</p></header><div class="account-bar"><b id="authUser">已登录</b><div class="account-actions"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select><button class="logout-btn" onclick="signOut()">退出登录</button></div></div><main class="wrap"><div class='tabs app-nav-v1557'>
 <button class='tab on' data-p='places'><span class='nav-icon'>⌖</span><span>钓场</span></button>
 <button class='tab' data-p='trip'><span class='nav-icon'>◉</span><span>作钓</span></button>
@@ -198,7 +209,7 @@ body.authenticated .wrap{padding-bottom:104px}
 <div class='card'>
   <div class='grid'>
     <div class='field full'><label>鱼竿名称</label><input id='rodInvName' placeholder='例如：光威龙云 / 禧玛诺 18尺' onchange='autoLookupRodV1546()'></div>
-    <div class='field full'><button type='button' class='secondary' style='margin-top:0' onclick='lookupRodProductV1546()'>✨ AI查找型号和参数</button><div id='rodLookupStatusV1538' class='ai-status'></div><div class='small' id='rodAiBuildV1546' style='opacity:.65;margin-top:4px'>AI鱼竿向导 v15.58</div><div id='rodLookupResultsV1538'></div></div>
+    <div class='field full'><button type='button' class='secondary' style='margin-top:0' onclick='lookupRodProductV1546()'>✨ AI查找型号和参数</button><div id='rodLookupStatusV1538' class='ai-status'></div><div class='small' id='rodAiBuildV1546' style='opacity:.65;margin-top:4px'>AI鱼竿向导 v15.59</div><div id='rodLookupResultsV1538'></div></div>
     <div class='field'><label>品牌（可选）</label><input id='rodInvBrand' placeholder='例如：光威 / Shimano / 达亿瓦'></div>
     <div class='field'><label>型号/系列</label><input id='rodInvModel' placeholder='AI查找后可自动填写'></div><div class='field'><label>代数/版本</label><input id='rodInvGeneration' placeholder='例如：一代 / 二代 / 三代 / 2025款'></div><div class='field'><label>规格/变体</label><input id='rodInvVariant' placeholder='例如：轻量 / 竞技 / 大物'></div>
     <div class='field'><label>长度 m</label><select id='rodInvLength'><option value='2.7'>2.7 m</option><option value='3.6'>3.6 m</option><option value='3.9'>3.9 m</option><option value='4.2'>4.2 m</option><option value='4.5'>4.5 m</option><option value='4.8'>4.8 m</option><option value='5.4' selected>5.4 m</option><option value='5.7'>5.7 m</option><option value='6'>6 m</option><option value='6.3'>6.3 m</option><option value='6.6'>6.6 m</option><option value='7.2'>7.2 m</option><option value='7.5'>7.5 m</option><option value='8.1'>8.1 m</option><option value='9'>9 m</option></select></div>
@@ -248,18 +259,18 @@ body.authenticated .wrap{padding-bottom:104px}
 <button class='primary' onclick='generateStatsAI()'>生成AI经验总结</button><div id='statsAIStatus' class='ai-status'></div><div id='statsAIResult'></div></div>
 </section>
 <section id='places' class='panel on'>
-<div id='placeModeChooser' class='home-hero-v1558'>
-  <div class='eyebrow-v1558'>START A SESSION</div><h2>今天，怎么钓？</h2>
-  <p class='why'>选择一种方式开始。你只负责钓鱼，其余条件交给助手整理。</p>
-  <div class='place-entry-grid'>
-    <button class='place-entry-card' onclick="showPlaceEntryModeV1526('manual')">
-      <span class='place-entry-no-v1558'>01</span><b>手动设置</b><small>钓场 · 鱼竿 · 线组 · 环境</small>
-    </button>
-    <button class='place-entry-card voice' onclick="showPlaceEntryModeV1526('voice')">
-      <span class='place-entry-no-v1558'>02</span><b>语音开始</b><small>自然说出条件，由 AI 自动整理</small>
-    </button>
-  </div>
-  <div id='selectedTripPlace' class='recipe' style='display:none;margin-top:12px'></div>
+<div id='placeModeChooser' class='a-home-v1559'>
+ <section class='a-hero-v1559'>
+  <div class='a-hero-copy-v1559'><div class='a-overline-v1559'>FISHING / TODAY</div><h2>去水边，<br><em>简单一点。</em></h2><p>从钓场到线组、浮漂和饵料，把准备过程收进一个安静的流程。</p></div>
+  <div class='a-watermark-v1559' aria-hidden='true'><span></span><span></span><span></span></div>
+ </section>
+ <section class='a-start-v1559'>
+  <div class='a-section-head-v1559'><span>开始作钓</span><small>CHOOSE A WAY</small></div>
+  <button class='a-action-v1559 a-action-main-v1559' onclick="showPlaceEntryModeV1526('voice')"><span class='a-action-index-v1559'>01</span><span class='a-action-copy-v1559'><b>语音开始</b><small>告诉我钓点和目标鱼，剩下的逐步完成</small></span><span class='a-arrow-v1559'>↗</span></button>
+  <button class='a-action-v1559' onclick="showPlaceEntryModeV1526('manual')"><span class='a-action-index-v1559'>02</span><span class='a-action-copy-v1559'><b>手动设置</b><small>自己选择钓场、鱼竿、线组与环境</small></span><span class='a-arrow-v1559'>→</span></button>
+ </section>
+ <div id='selectedTripPlace' class='a-current-v1559 recipe' style='display:none'></div>
+ <section class='a-philosophy-v1559'><div><small>DESIGNED FOR THE WATER</small><strong>少一点操作，<br>多一点钓鱼。</strong></div><p>记录会留下，经验会累积。下一次出钓，不必从头开始。</p></section>
 </div>
 
 <div id='placeManualMode' style='display:none'>
@@ -325,7 +336,7 @@ body.authenticated .wrap{padding-bottom:104px}
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.58":["낚시 찌 선택 도우미 v15.58","Fishing Float Assistant v15.58"],
+"钓鱼选漂助手 v15.59":["낚시 찌 선택 도우미 v15.59","Fishing Float Assistant v15.59"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -427,7 +438,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.58');
+ document.title=trStatic('钓鱼选漂助手 v15.59');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -4638,7 +4649,7 @@ Object.assign(I18N_STATIC,{
    rows=rows.filter(r=>r.brand||r.series||r.generation||r.variant||r.model);
    rows=[...new Map(rows.map(r=>[[r.brand,r.series,r.generation,r.variant,r.model].map(x=>String(x||'').toLowerCase().replace(/\s+/g,'')).join('|'),r])).values()];
 
-   // v15.58: save quota/data. Do not automatically issue a second discovery request.
+   // v15.59: save quota/data. Do not automatically issue a second discovery request.
    // If only one version is found, show it immediately; the user can refine the search name if needed.
 
    window._rodWizardV1543.families=rows;
@@ -4719,7 +4730,7 @@ Object.assign(I18N_STATIC,{
    }
    if(!rows.length && best) rows=[best];
 
-   // v15.58: save quota/data — no four-way automatic subqueries.
+   // v15.59: save quota/data — no four-way automatic subqueries.
    // One main detail lookup + at most one focused specification lookup above.
    if(!detailFromCache&&rows.length)await rodCachePutV1552('detail',w.query,fam,len,{candidates:rows});
 
@@ -4761,8 +4772,8 @@ Object.assign(I18N_STATIC,{
    if(typeof window.lookupRodProductV1538!=='function')throw Error('鱼竿向导主函数未加载');
    return await window.lookupRodProductV1538();
   }catch(e){
-   if(st)st.textContent='AI查找失败[v15.58]：'+(e?.message||e);
-   console.error('[rod-ai v15.58]',e);
+   if(st)st.textContent='AI查找失败[v15.59]：'+(e?.message||e);
+   console.error('[rod-ai v15.59]',e);
   }
  };
  window.autoLookupRodV1546=function(){
@@ -4772,7 +4783,7 @@ Object.assign(I18N_STATIC,{
   window._rodAutoLookupTimerV1546=setTimeout(()=>window.lookupRodProductV1546(),180);
  };
  const b=document.getElementById('rodAiBuildV1546');
- if(b)b.textContent='AI鱼竿向导 v15.58 · '+location.host;
+ if(b)b.textContent='AI鱼竿向导 v15.59 · '+location.host;
 })();
 </script><script>
 (function(){
