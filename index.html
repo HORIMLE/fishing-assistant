@@ -1,4 +1,4 @@
-<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.37</title><style>
+<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1,viewport-fit=cover'><meta name='theme-color' content='#12372a'><title>钓鱼选漂助手 v15.38</title><style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16251f;--muted:#65736d;--accent:#176b4d;--line:#dfe6e1;--warn:#8a5a10}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--ink)}header{padding:22px 18px 18px;background:#12372a;color:white}header h1{margin:0 0 5px;font-size:24px}header p{margin:0;opacity:.78;font-size:13px}.wrap{max-width:680px;margin:auto;padding:14px 12px 88px}.tabs{display:flex;gap:6px;position:sticky;top:0;padding:8px 0;background:var(--bg);z-index:3;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;min-width:82px}.tab{border:0;background:#e4e9e5;padding:10px 4px;border-radius:11px;font-weight:700;color:#52605a}.tab.on{background:var(--accent);color:white}.card{background:var(--card);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px #0000000c}.card h2{font-size:18px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:white}.rod-field{grid-column:1/-1}.rod-options{display:flex;flex-wrap:wrap;gap:8px}.rod-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#f7f9f7;color:var(--ink);font-size:13px;font-weight:800;padding:0}.rod-btn.on{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 2px 8px #176b4d33}.rod-unit{font-size:10px;font-weight:600;display:block;opacity:.75}.full{grid-column:1/-1}.primary{width:100%;border:0;border-radius:12px;padding:14px;font-size:17px;font-weight:800;background:var(--accent);color:white;margin-top:14px}.result{display:none}.hero{font-size:29px;font-weight:900;margin:3px 0}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:#e7f3ed;color:#155f45;font-size:12px;font-weight:700;margin:3px 3px 3px 0}.why{font-size:13px;color:var(--muted);line-height:1.55}.notice{font-size:12px;color:var(--warn);background:#fff7e7;padding:10px;border-radius:10px;margin-top:12px}.item{border-top:1px solid var(--line);padding:11px 0}.item:first-child{border-top:0}.item b{display:block}.small{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}.danger{float:right;border:0;background:none;color:#a33}.place-group{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:#fff}.place-group summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;display:flex;justify-content:space-between;align-items:center;background:#f7f9f7}.place-group summary::-webkit-details-marker{display:none}.place-group summary:after{content:'⌄';font-size:18px;color:var(--muted)}.place-group[open] summary:after{content:'⌃'}.place-group .group-body{padding:0 12px}.group-count{font-size:12px;color:var(--muted);font-weight:700}.panel{display:none}.panel.on{display:block}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.wrap{padding-left:10px;padding-right:10px}.card{padding:14px}.tab{font-size:12px}}
 
 .bait-photo{width:100%;max-height:240px;object-fit:contain;border-radius:12px;background:#eef2ef;margin-top:10px;display:none}.ai-status{font-size:13px;color:var(--muted);margin-top:10px;white-space:pre-wrap}.secondary{width:100%;border:1px solid var(--accent);border-radius:12px;padding:12px;font-size:15px;font-weight:800;background:white;color:var(--accent);margin-top:9px}.bait-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center}.bait-card img{width:68px;height:68px;object-fit:cover;border-radius:10px;background:#eee}.recipe{background:#eef7f2;border-radius:12px;padding:13px;margin-top:10px;line-height:1.6}.api-note{font-size:11px;color:var(--muted);line-height:1.5}.upload-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field .upload-btn{display:flex;align-items:center;justify-content:center;height:52px;margin:0;padding:0 10px;line-height:1.2;text-align:center;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer}.camera-btn{background:var(--accent);color:white}.gallery-btn{background:white;color:var(--accent);border:1px solid var(--accent)}.hidden-file{display:none}.queue{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:4px}.queue img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid transparent}.queue img.active{border-color:var(--accent)}.auth-switch{display:flex;gap:6px;background:#eef2ef;padding:4px;border-radius:12px;margin-bottom:14px}.auth-switch button{flex:1;border:0;border-radius:9px;padding:10px;background:transparent;font-weight:800;color:var(--muted)}.auth-switch button.on{background:white;color:var(--accent);box-shadow:0 1px 5px #0001}.auth-pane{display:none}.auth-pane.on{display:block}.auth-help{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}.auth-error{color:#a33}.auth-ok{color:var(--accent)}
@@ -98,6 +98,12 @@
 .rod-inv-card{display:grid;grid-template-columns:76px 1fr;gap:10px;align-items:center}
 .rod-inv-card img{width:76px;height:76px;object-fit:cover;border-radius:10px;background:#eee}
 .owned-rod-pick{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+
+.ai-product-results{display:grid;gap:8px;margin-top:8px}
+.ai-product-option{border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px;text-align:left;width:100%}
+.ai-product-option b{display:block;margin-bottom:4px}
+.ai-product-option .small{line-height:1.45}
+.ai-product-option.selected{border:2px solid var(--accent);background:#eef8f3}
 </style><script src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'></script></head><body><div id="authScreen" class="auth-screen" style="display:flex!important"><div class="auth-box"><div class="auth-lang-row"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select></div><div class="auth-brand"><div class="icon">🎣</div><h1>钓鱼助手</h1><p>登录后进入你的钓鱼数据和 AI 助手</p></div><div id="loginView"><h2>登录</h2><div class="field"><label>邮箱</label><input id="loginEmail" type="email" inputmode="email" autocomplete="email" placeholder="请输入邮箱"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="请输入密码"></div><button id="loginBtn" class="primary" type="button">登录</button><div class="auth-bottom"><button class="auth-link" type="button" onclick="requestPasswordReset()">忘记密码？重置密码</button><br>还没有账号？ <button class="auth-link" type="button" onclick="showAuthPane('register')">创建账号</button></div></div><div id="registerView" style="display:none"><h2>创建账号</h2><div class="field"><label>邮箱</label><input id="registerEmail" type="email" inputmode="email" autocomplete="email" placeholder="用于登录和邮箱确认"></div><div class="field" style="margin-top:10px"><label>密码</label><input id="registerPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入密码</label><input id="registerPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="signUp()">创建账号</button><div class="auth-bottom">已有账号？ <button class="auth-link" type="button" onclick="showAuthPane('login')">返回登录</button></div></div><div id="resetView" style="display:none"><h2>设置新密码</h2><p class="auth-help">已通过密码重置链接验证。请输入新的登录密码。</p><div class="field"><label>新密码</label><input id="resetPassword" type="password" autocomplete="new-password" placeholder="至少8位"></div><div class="field" style="margin-top:10px"><label>再次输入新密码</label><input id="resetPassword2" type="password" autocomplete="new-password" placeholder="再次输入相同密码"></div><button class="primary" onclick="updatePassword()">保存新密码</button></div><div id="authStatus" class="ai-status"></div><div id="authDiagV1537" class="auth-help" style="margin-top:8px;opacity:.7"></div></div></div><div id="appShell" class="app-shell" hidden style="display:none!important"><header><h1>🎣 钓鱼选漂助手</h1><p>水深 · 线组 · 风浪 · 走水 · 竿长综合推荐</p></header><div class="account-bar"><b id="authUser">已登录</b><div class="account-actions"><select class="lang-switch-control" aria-label="Language"><option value="zh-CN">中文</option><option value="ko-KR">한국어</option><option value="en-US">English</option></select><button class="logout-btn" onclick="signOut()">退出登录</button></div></div><main class="wrap"><div class='tabs'><button class='tab on' data-p='places'>钓场</button><button class='tab' data-p='calc'>选漂</button><button class='tab' data-p='bait'>AI饵料</button><button class='tab' data-p='trip'>本次作钓</button><button class='tab' data-p='stats'>统计</button><button class='tab' data-p='log'>钓鱼记录</button><button class='tab' data-p='community'>鱼获广场</button><button class='tab' data-p='box'>我的漂盒</button><button class='tab' data-p='rods'>我的鱼竿</button><button class='tab' data-p='guide'>说明</button></div>
 <section id='calc' class='panel'><div id='calcModeNotice' class='notice' style='display:none;margin-bottom:10px'></div><div id='tripBungalowCard' class='card'><h2>🏠 钓鱼房 / 방가로（可选）</h2><p class='why' id='tripBungalowHint'>如果这次使用钓鱼房/방가로，选择“是”并填写房间号。保存后，下次在钓场目录中会显示“有钓鱼房”。</p><div class='grid'><div class='field'><label>本次使用钓鱼房</label><select id='tripUsedBungalow' onchange='updateTripRoomInfo()'><option value='0' selected>否</option><option value='1'>是</option></select></div><div class='field'><label>房间/钓位号</label><input id='tripRoomNo' placeholder='例如 3号 / 7번 / A동 2호' oninput='updateTripRoomInfo()' disabled></div><div class='field full'><label>位置备注（可选）</label><input id='tripRoomNote' placeholder='例如 左侧、最里面、桥旁' oninput='updateTripRoomInfo()' disabled></div></div></div><div class='card'><h2>今天怎么钓？</h2><div class='grid'>
 <div class='field'><label>目标鱼</label><select id='fish'><option value='crucian'>鲫鱼</option><option value='carp'>鲤鱼</option><option value='mixed'>综合鱼</option><option value='big'>大型鱼</option></select></div><div class='field full'><label>鱼竿配置</label><p class='why'>每根鱼竿可以单独设置长度、主线、子线和浮漂。</p><div id='rodSetupList'></div><button type='button' class='secondary' onclick='addRodSetupV15()'>＋ 添加鱼竿</button><input id='rod' type='hidden' value='5.4'></div>
@@ -106,7 +112,19 @@
 <div class='field'><label>鱼口</label><select id='bite'><option value='normal'>正常</option><option value='light'>轻口</option><option value='active'>活跃</option></select></div><div class='field'><label>钓法</label><select id='method'><option value='bottom'>搓/拉饵钓底</option><option value='fine'>精细钓鲫</option><option value='corn'>玉米/颗粒守大鱼</option></select></div>
 <input id='mainline' type='hidden' value=''></div><button class='primary' onclick='calculate()'>立即推荐</button></div>
 <div id='result' class='card result'><h2>推荐结果</h2><div class='small'>建议浮漂吃铅</div><div class='hero' id='lead'></div><div id='tags'></div><p class='why' id='reason'></p><div id='owned'></div><div class='notice'>这是基于常见台钓经验建立的辅助模型，不是绝对公式。实际还应根据漂型、自重、饵重、线径、抛投距离和当天鱼情微调。</div><button class='primary' onclick='goToBaitFromFloat()'>下一步：AI配饵</button></div></section>
-<section id='box' class='panel'><div class='card'><h2>我的漂盒</h2><div class='grid'><div class='field'><label>浮漂名称</label><input id='floatName' placeholder='例如 黄金眼 2号'></div><div class='field'><label>吃铅（g）</label><input id='floatLead' type='number' step='.01' placeholder='2.35'></div><div class='field full'><label>浮漂照片（可选）</label><input id='floatPhoto' type='file' accept='image/*' capture='environment' onchange='selectFloatPhoto(event)'><img id='floatPhotoPreview' class='bait-photo' style='max-width:130px;margin-top:8px'></div></div><button class='primary' onclick='addFloat()'>加入漂盒</button></div><div class='card' id='floatList'></div></section>
+<section id='box' class='panel'><div class='card'><h2>我的漂盒</h2><div class='grid'>
+<div class='field full'><label>浮漂名称</label><input id='floatName' placeholder='例如 黄金眼 2号' onchange='autoLookupFloatV1538()'></div>
+<div class='field full'><button type='button' class='secondary' style='margin-top:0' onclick='lookupFloatProductV1538()'>✨ AI查找型号和参数</button><div id='floatLookupStatusV1538' class='ai-status'></div><div id='floatLookupResultsV1538'></div></div>
+<div class='field'><label>品牌</label><input id='floatBrand' placeholder='例如 黄金眼'></div>
+<div class='field'><label>系列</label><input id='floatSeries' placeholder='系列名称'></div>
+<div class='field'><label>型号</label><input id='floatModel' placeholder='例如 2号'></div>
+<div class='field'><label>吃铅（g）</label><input id='floatLead' type='number' step='.01' placeholder='2.35'></div>
+<div class='field'><label>浮漂类型</label><input id='floatTypeV1538' placeholder='枣核 / 长身 / 行程等'></div>
+<div class='field'><label>总长 cm</label><input id='floatLengthV1538' type='number' step='.1' placeholder='例如 45'></div>
+<div class='field'><label>材质</label><input id='floatMaterialV1538' placeholder='纳米 / 巴尔杉木等'></div>
+<div class='field full'><label>备注</label><input id='floatNotesV1538' placeholder='适用水深、鱼情等'></div>
+<div class='field full'><label>浮漂照片（可选）</label><input id='floatPhoto' type='file' accept='image/*' capture='environment' onchange='selectFloatPhoto(event)'><img id='floatPhotoPreview' class='bait-photo' style='max-width:130px;margin-top:8px'></div>
+</div><button class='primary' onclick='addFloat()'>加入漂盒</button></div><div class='card' id='floatList'></div></section>
 <section id='rods' class='panel'>
 <div class='card'>
   <h2>🎣 我的鱼竿</h2>
@@ -124,8 +142,10 @@
 </div>
 <div class='card'>
   <div class='grid'>
-    <div class='field'><label>鱼竿名称</label><input id='rodInvName' placeholder='例如：禧玛诺 18尺 / 5.4米鲫鱼竿'></div>
-    <div class='field'><label>品牌（可选）</label><input id='rodInvBrand' placeholder='例如：Shimano / 达亿瓦'></div>
+    <div class='field full'><label>鱼竿名称</label><input id='rodInvName' placeholder='例如：光威龙云 / 禧玛诺 18尺' onchange='autoLookupRodV1538()'></div>
+    <div class='field full'><button type='button' class='secondary' style='margin-top:0' onclick='lookupRodProductV1538()'>✨ AI查找型号和参数</button><div id='rodLookupStatusV1538' class='ai-status'></div><div id='rodLookupResultsV1538'></div></div>
+    <div class='field'><label>品牌（可选）</label><input id='rodInvBrand' placeholder='例如：光威 / Shimano / 达亿瓦'></div>
+    <div class='field'><label>型号/系列</label><input id='rodInvModel' placeholder='AI查找后可自动填写'></div>
     <div class='field'><label>长度 m</label><select id='rodInvLength'><option value='2.7'>2.7 m</option><option value='3.6'>3.6 m</option><option value='3.9'>3.9 m</option><option value='4.2'>4.2 m</option><option value='4.5'>4.5 m</option><option value='4.8'>4.8 m</option><option value='5.4' selected>5.4 m</option><option value='5.7'>5.7 m</option><option value='6'>6 m</option><option value='6.3'>6.3 m</option><option value='6.6'>6.6 m</option><option value='7.2'>7.2 m</option><option value='7.5'>7.5 m</option><option value='8.1'>8.1 m</option><option value='9'>9 m</option></select></div>
     <div class='field'><label>常用主线号</label><input id='rodInvMainLine' type='number' step='.1' placeholder='例如 1.5'></div>
     <div class='field'><label>常用子线号</label><input id='rodInvLeaderLine' type='number' step='.1' placeholder='例如 0.8'></div>
@@ -251,7 +271,7 @@
 <section id='guide' class='panel'><div class='card'><h2>推荐模型</h2><p class='why'>基础吃铅从“主线号 + 水深”的经验关系出发，再对长竿、风、走水、轻口以及目标鱼大小进行修正。线组则根据目标鱼和个体先确定，再结合环境给出区间。</p><p class='why'>推荐时优先保证：①能顺利抛到钓点；②主线能较快绷直；③浮漂信号仍有足够分辨率。轻口时偏小，风浪和走水时偏大。</p></div></section>
 </main></div><script>
 const I18N_STATIC={
-"钓鱼选漂助手 v15.37":["낚시 찌 선택 도우미 v15.37","Fishing Float Assistant v15.37"],
+"钓鱼选漂助手 v15.38":["낚시 찌 선택 도우미 v15.38","Fishing Float Assistant v15.38"],
 "钓鱼助手":["낚시 도우미","Fishing Assistant"],
 "登录后进入你的钓鱼数据和 AI 助手":["로그인 후 내 낚시 데이터와 AI 도우미를 이용하세요","Sign in to access your fishing data and AI assistant"],
 "登录":["로그인","Sign in"],"邮箱":["이메일","Email"],"密码":["비밀번호","Password"],
@@ -353,7 +373,7 @@ function applyI18n(root=document){
  let w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode())translateTextNode(n);
  if(root.querySelectorAll)root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(translateAttrs);
  document.documentElement.lang=currentLang;
- document.title=trStatic('钓鱼选漂助手 v15.37');
+ document.title=trStatic('钓鱼选漂助手 v15.38');
  document.querySelectorAll('.lang-switch-control').forEach(sw=>sw.value=currentLang)
 }
 function setLanguage(lang){
@@ -3685,9 +3705,9 @@ Object.assign(I18N_STATIC,{
  window.loadOwnedRodsV1532=async function(){
   let rows=[];
   if(currentUser){
-   const {data,error}=await sb.from('rods').select('id,name,brand,length_m,default_main_line,default_leader_line,hardness,action_tone,weight_g,sections,closed_length_cm,tip_diameter_mm,butt_diameter_mm,max_line_no,max_lure_g,notes,image_path').order('created_at',{ascending:false});
+   const {data,error}=await sb.from('rods').select('id,name,brand,model_name,length_m,default_main_line,default_leader_line,hardness,action_tone,weight_g,sections,closed_length_cm,tip_diameter_mm,butt_diameter_mm,max_line_no,max_lure_g,notes,image_path,ai_lookup').order('created_at',{ascending:false});
    if(!error)rows=await Promise.all((data||[]).map(async x=>({
-    id:x.id,name:x.name,brand:x.brand||'',length:Number(x.length_m),mainLine:x.default_main_line==null?'':Number(x.default_main_line),
+    id:x.id,name:x.name,brand:x.brand||'',modelName:x.model_name||'',length:Number(x.length_m),mainLine:x.default_main_line==null?'':Number(x.default_main_line),
     leaderLine:x.default_leader_line==null?'':Number(x.default_leader_line),
     hardness:x.hardness||'',actionTone:x.action_tone||'',
     weightG:x.weight_g==null?'':Number(x.weight_g),sections:x.sections==null?'':Number(x.sections),
@@ -3696,7 +3716,7 @@ Object.assign(I18N_STATIC,{
     buttDiameterMm:x.butt_diameter_mm==null?'':Number(x.butt_diameter_mm),
     maxLineNo:x.max_line_no==null?'':Number(x.max_line_no),
     maxLureG:x.max_lure_g==null?'':Number(x.max_lure_g),
-    notes:x.notes||'',image_path:x.image_path,
+    notes:x.notes||'',aiLookup:x.ai_lookup||{},image_path:x.image_path,
     image:x.image_path?await signedImage(x.image_path):''
    })))
   }else{
@@ -3716,7 +3736,7 @@ Object.assign(I18N_STATIC,{
    (x.notes?"<div class='small'>"+escapeHtml(x.notes)+"</div>":"")+"</div></div>").join(''):"<div class='empty'>还没有保存鱼竿。</div>";
  };
  window.addOwnedRodV1532=async function(){
-  const name=($('rodInvName')?.value||'').trim(),brand=($('rodInvBrand')?.value||'').trim();
+  const name=($('rodInvName')?.value||'').trim(),brand=($('rodInvBrand')?.value||'').trim(),modelName=($('rodInvModel')?.value||'').trim();
   const length=Number($('rodInvLength')?.value||0),main=$('rodInvMainLine')?.value,leader=$('rodInvLeaderLine')?.value,notes=($('rodInvNotes')?.value||'').trim();
   const hardness=($('rodInvHardness')?.value||'').trim(),actionTone=($('rodInvAction')?.value||'').trim();
   const weight=$('rodInvWeight')?.value,sections=$('rodInvSections')?.value,closedLen=$('rodInvClosedLength')?.value,tip=$('rodInvTipDiameter')?.value,butt=$('rodInvButtDiameter')?.value,maxLine=$('rodInvMaxLine')?.value,maxLure=$('rodInvMaxLure')?.value;
@@ -3745,7 +3765,7 @@ Object.assign(I18N_STATIC,{
       maxLineNo:maxLine===''?'':Number(maxLine),maxLureG:maxLure===''?'':Number(maxLure),notes,image:rodPhotoDataV1532});
     localStorage.ownedRodsV1532=JSON.stringify(a)
    }
-   ['rodInvName','rodInvBrand','rodInvMainLine','rodInvLeaderLine','rodInvNotes','rodInvHardness','rodInvAction','rodInvWeight','rodInvSections','rodInvClosedLength','rodInvTipDiameter','rodInvButtDiameter','rodInvMaxLine','rodInvMaxLure'].forEach(id=>{if($(id))$(id).value=''});
+   ['rodInvName','rodInvBrand','rodInvModel','rodInvMainLine','rodInvLeaderLine','rodInvNotes','rodInvHardness','rodInvAction','rodInvWeight','rodInvSections','rodInvClosedLength','rodInvTipDiameter','rodInvButtDiameter','rodInvMaxLine','rodInvMaxLure'].forEach(id=>{if($(id))$(id).value=''});
    if($('rodInvLength'))$('rodInvLength').value='5.4';
    if($('rodInvPhoto'))$('rodInvPhoto').value='';
    if($('rodInvPhotoPreview'))$('rodInvPhotoPreview').style.display='none';
@@ -3891,6 +3911,7 @@ Object.assign(I18N_STATIC,{
 
   if($('rodInvName'))$('rodInvName').value=x.name||'';
   if($('rodInvBrand'))$('rodInvBrand').value=x.brand||'';
+  if($('rodInvModel'))$('rodInvModel').value=x.modelName||'';
   if($('rodInvLength'))$('rodInvLength').value=String(x.length||5.4);
   if($('rodInvMainLine'))$('rodInvMainLine').value=x.mainLine===''?'':x.mainLine;
   if($('rodInvLeaderLine'))$('rodInvLeaderLine').value=x.leaderLine===''?'':x.leaderLine;
@@ -3938,7 +3959,7 @@ Object.assign(I18N_STATIC,{
   if(!(length>0))return st.textContent='请选择鱼竿长度。';
 
   const payload={
-    name,brand:brand||null,length_m:length,
+    name,brand:brand||null,model_name:modelName||null,ai_lookup:window._selectedRodLookupV1538||{},length_m:length,
     default_main_line:main===''?null:Number(main),default_leader_line:leader===''?null:Number(leader),
     hardness:hardness||null,action_tone:actionTone||null,
     weight_g:weight===''?null:Number(weight),sections:sections===''?null:Number(sections),
@@ -4195,5 +4216,142 @@ Object.assign(I18N_STATIC,{
  });
 
  diagV1537('准备就绪');
+})();
+</script><script>
+(function(){
+ window._rodLookupCandidatesV1538=[];
+ window._floatLookupCandidatesV1538=[];
+ window._selectedRodLookupV1538=null;
+ window._selectedFloatLookupV1538=null;
+
+ function parseLookupJsonV1538(text){
+  let raw=String(text||'').trim();
+  const m=raw.match(/\`\`\`(?:json)?\s*([\s\S]*?)\`\`\`/i);if(m)raw=m[1];
+  const a=raw.indexOf('{'),b=raw.lastIndexOf('}');if(a<0||b<a)throw Error('AI返回格式无法解析');
+  return JSON.parse(raw.slice(a,b+1))
+ }
+ async function geminiWebLookupV1538(prompt,statusEl){
+  const {data,error}=await sb.functions.invoke('gemini-proxy',{
+   body:{model:'gemini-3.8-flash',input:prompt,googleSearch:true,generationConfig:{responseMimeType:'application/json'}}
+  });
+  if(error)throw error;
+  const txt=extractGeminiText(data)||data?.text||'';
+  if(!txt)throw Error('AI没有返回可读取内容');
+  return parseLookupJsonV1538(txt)
+ }
+ function nV1538(v){const n=Number(v);return Number.isFinite(n)?n:''}
+ function setIfOptionV1538(id,val){
+  const el=$(id);if(!el||val==null||val==='')return;
+  if(el.tagName==='SELECT'){
+   const target=String(val).toLowerCase();
+   const opt=[...el.options].find(o=>String(o.value).toLowerCase()===target||o.textContent.toLowerCase()===target);
+   if(opt)el.value=opt.value;
+  }else el.value=val
+ }
+
+ window.lookupRodProductV1538=async function(){
+  const q=($('rodInvName')?.value||'').trim(),st=$('rodLookupStatusV1538'),box=$('rodLookupResultsV1538');
+  if(!q)return st.textContent='请先填写鱼竿名称，例如：光威龙云。';
+  st.textContent='正在联网查找“'+q+'”的型号和规格…';box.innerHTML='';
+  try{
+   const prompt='请使用Google搜索查找真实存在的淡水台钓/手竿产品。用户输入：'+JSON.stringify(q)+'。重点查找中国、韩国、日本可见的官方商品页、品牌官网、主流商城或可信钓具资料。不要凭常识编造参数。同一系列如果有多个长度/硬度/版本，请拆成可选择的候选，最多8个。找不到的字段必须为空。返回严格JSON对象：{"candidates":[{"brand":"","series":"","model":"","name":"","lengthM":null,"hardness":"","actionTone":"","weightG":null,"sections":null,"closedLengthCm":null,"tipDiameterMm":null,"buttDiameterMm":null,"maxLineNo":null,"maxLureG":null,"confidence":0,"sourceUrls":["https://..."]}]}。name应是适合保存的完整商品名。参数必须对应这个候选具体型号/长度，不要把其他长度的数据混进来。';
+   const x=await geminiWebLookupV1538(prompt,st);
+   const rows=Array.isArray(x.candidates)?x.candidates:[];
+   window._rodLookupCandidatesV1538=rows;
+   if(!rows.length){st.textContent='没有找到足够可靠的型号资料。你仍可以手动填写。';return}
+   box.className='ai-product-results';
+   box.innerHTML=rows.map((r,i)=>"<button type='button' class='ai-product-option' onclick='selectRodLookupV1538("+i+")'><b>"+escapeHtml((r.brand?r.brand+' · ':'')+(r.series||r.model||r.name||('候选 '+(i+1))))+"</b><div class='small'>"+escapeHtml([r.model,r.lengthM?String(r.lengthM)+'m':'',r.hardness,r.actionTone,r.weightG?String(r.weightG)+'g':''].filter(Boolean).join(' · '))+"</div><div class='small'>可信度 "+Math.round((Number(r.confidence)||0)*100)+"%</div></button>").join('');
+   st.textContent='找到 '+rows.length+' 个可能型号，请选择与你手上鱼竿一致的一项。';
+  }catch(e){st.textContent='AI查找失败：'+(e?.message||e)}
+ };
+ window.autoLookupRodV1538=function(){
+  const q=($('rodInvName')?.value||'').trim();
+  if(q.length>=2&&!window._editingRodIdV1535)setTimeout(()=>lookupRodProductV1538(),100)
+ };
+ window.selectRodLookupV1538=function(i){
+  const r=window._rodLookupCandidatesV1538[i];if(!r)return;
+  window._selectedRodLookupV1538={query:$('rodInvName')?.value||'',candidate:r,selectedAt:new Date().toISOString()};
+  setIfOptionV1538('rodInvName',r.name||[r.brand,r.series,r.model].filter(Boolean).join(' '));
+  setIfOptionV1538('rodInvBrand',r.brand);
+  setIfOptionV1538('rodInvModel',[r.series,r.model].filter(Boolean).join(' '));
+  setIfOptionV1538('rodInvLength',r.lengthM);
+  setIfOptionV1538('rodInvHardness',r.hardness);
+  setIfOptionV1538('rodInvAction',r.actionTone);
+  setIfOptionV1538('rodInvWeight',r.weightG);
+  setIfOptionV1538('rodInvSections',r.sections);
+  setIfOptionV1538('rodInvClosedLength',r.closedLengthCm);
+  setIfOptionV1538('rodInvTipDiameter',r.tipDiameterMm);
+  setIfOptionV1538('rodInvButtDiameter',r.buttDiameterMm);
+  setIfOptionV1538('rodInvMaxLine',r.maxLineNo);
+  setIfOptionV1538('rodInvMaxLure',r.maxLureG);
+  document.querySelectorAll('#rodLookupResultsV1538 .ai-product-option').forEach((el,j)=>el.classList.toggle('selected',j===i));
+  $('rodLookupStatusV1538').textContent='已选择该型号并自动填写。请确认参数后保存。';
+ };
+
+ window.lookupFloatProductV1538=async function(){
+  const q=($('floatName')?.value||'').trim(),st=$('floatLookupStatusV1538'),box=$('floatLookupResultsV1538');
+  if(!q)return st.textContent='请先填写浮漂名称，例如：黄金眼某系列。';
+  st.textContent='正在联网查找“'+q+'”的系列、型号和吃铅参数…';box.innerHTML='';
+  try{
+   const prompt='请使用Google搜索查找真实存在的淡水台钓浮漂产品。用户输入：'+JSON.stringify(q)+'。优先品牌官网、官方旗舰店、可信钓具商城或产品规格资料。一个系列若有1号/2号/3号或不同吃铅量，请拆成独立候选，最多10个。不要猜测；找不到的字段为空。返回严格JSON对象：{"candidates":[{"brand":"","series":"","model":"","name":"","buoyancyG":null,"floatType":"","lengthCm":null,"material":"","notes":"","confidence":0,"sourceUrls":["https://..."]}]}。buoyancyG必须对应该具体型号，不能把同系列其他号数混入。';
+   const x=await geminiWebLookupV1538(prompt,st),rows=Array.isArray(x.candidates)?x.candidates:[];
+   window._floatLookupCandidatesV1538=rows;
+   if(!rows.length){st.textContent='没有找到足够可靠的浮漂型号资料。你仍可以手动填写。';return}
+   box.className='ai-product-results';
+   box.innerHTML=rows.map((r,i)=>"<button type='button' class='ai-product-option' onclick='selectFloatLookupV1538("+i+")'><b>"+escapeHtml((r.brand?r.brand+' · ':'')+(r.series||r.name||('候选 '+(i+1))))+"</b><div class='small'>"+escapeHtml([r.model,r.buoyancyG!=null?('吃铅 '+r.buoyancyG+'g'):'',r.floatType,r.lengthCm?String(r.lengthCm)+'cm':'',r.material].filter(Boolean).join(' · '))+"</div><div class='small'>可信度 "+Math.round((Number(r.confidence)||0)*100)+"%</div></button>").join('');
+   st.textContent='找到 '+rows.length+' 个可能型号，请选择你实际拥有的那一支。';
+  }catch(e){st.textContent='AI查找失败：'+(e?.message||e)}
+ };
+ window.autoLookupFloatV1538=function(){
+  const q=($('floatName')?.value||'').trim();if(q.length>=2)setTimeout(()=>lookupFloatProductV1538(),100)
+ };
+ window.selectFloatLookupV1538=function(i){
+  const r=window._floatLookupCandidatesV1538[i];if(!r)return;
+  window._selectedFloatLookupV1538={query:$('floatName')?.value||'',candidate:r,selectedAt:new Date().toISOString()};
+  setIfOptionV1538('floatName',r.name||[r.brand,r.series,r.model].filter(Boolean).join(' '));
+  setIfOptionV1538('floatBrand',r.brand);setIfOptionV1538('floatSeries',r.series);setIfOptionV1538('floatModel',r.model);
+  setIfOptionV1538('floatLead',r.buoyancyG);setIfOptionV1538('floatTypeV1538',r.floatType);setIfOptionV1538('floatLengthV1538',r.lengthCm);setIfOptionV1538('floatMaterialV1538',r.material);setIfOptionV1538('floatNotesV1538',r.notes);
+  document.querySelectorAll('#floatLookupResultsV1538 .ai-product-option').forEach((el,j)=>el.classList.toggle('selected',j===i));
+  $('floatLookupStatusV1538').textContent='已选择该型号并自动填写。请确认吃铅等参数后保存。';
+ };
+
+ // Final float save/render with AI-filled fields.
+ addFloat=async function(){
+  const name=$('floatName').value.trim(),lead=Number($('floatLead').value);
+  if(!name||!(lead>0))return alert('请填写浮漂名称和吃铅。');
+  const brand=($('floatBrand')?.value||'').trim(),series=($('floatSeries')?.value||'').trim(),model=($('floatModel')?.value||'').trim();
+  const type=($('floatTypeV1538')?.value||'').trim(),len=$('floatLengthV1538')?.value,material=($('floatMaterialV1538')?.value||'').trim(),notes=($('floatNotesV1538')?.value||'').trim();
+  if(currentUser){
+   try{
+    const image_path=await uploadFloatImageV132(floatImageDataV132);
+    const {error}=await sb.from('floats').insert({
+     user_id:currentUser.id,name,brand:brand||null,series_name:series||null,model_name:model||null,buoyancy_g:lead,
+     float_type:type||null,length_cm:len===''?null:Number(len),material:material||null,notes:notes||null,
+     image_path,ai_lookup:window._selectedFloatLookupV1538||{}
+    });if(error)throw error
+   }catch(e){return alert('保存浮漂失败：'+e.message)}
+  }else{
+   const a=JSON.parse(localStorage.floats||'[]');a.push({name,brand,series,model,lead,type,lengthCm:len===''?'':Number(len),material,notes,image:floatImageDataV132,aiLookup:window._selectedFloatLookupV1538||{}});localStorage.floats=JSON.stringify(a)
+  }
+  ['floatName','floatBrand','floatSeries','floatModel','floatLead','floatTypeV1538','floatLengthV1538','floatMaterialV1538','floatNotesV1538'].forEach(id=>{if($(id))$(id).value=''});
+  if($('floatPhoto'))$('floatPhoto').value='';if($('floatPhotoPreview'))$('floatPhotoPreview').style.display='none';
+  if($('floatLookupResultsV1538'))$('floatLookupResultsV1538').innerHTML='';if($('floatLookupStatusV1538'))$('floatLookupStatusV1538').textContent='';
+  floatImageDataV132='';window._selectedFloatLookupV1538=null;await renderFloats()
+ };
+ renderFloats=async function(){
+  let a=[];
+  if(currentUser){
+   const {data,error}=await sb.from('floats').select('id,name,brand,series_name,model_name,buoyancy_g,float_type,length_cm,material,notes,image_path,ai_lookup').order('created_at',{ascending:false});
+   if(!error)a=await Promise.all((data||[]).map(async x=>({id:x.id,name:x.name,brand:x.brand||'',series:x.series_name||'',model:x.model_name||'',lead:Number(x.buoyancy_g),type:x.float_type||'',lengthCm:x.length_cm==null?'':Number(x.length_cm),material:x.material||'',notes:x.notes||'',aiLookup:x.ai_lookup||{},image_path:x.image_path,image:x.image_path?await signedImage(x.image_path):''})))
+  }else a=JSON.parse(localStorage.floats||'[]');
+  window._floats=a;
+  $('floatList').innerHTML=a.length?a.map((x,i)=>"<div class='item float-card'>"+(x.image?"<img class='float-photo' src='"+x.image+"' alt=''>":"<div class='no-photo'>🎣</div>")+"<div><button class='danger' onclick='delFloat("+i+")'>删除</button><b>"+escapeHtml((x.brand?x.brand+' · ':'')+x.name)+"</b><span class='small'>"+escapeHtml([x.series,x.model,'吃铅 '+x.lead+'g',x.type,x.lengthCm?x.lengthCm+'cm':'',x.material].filter(Boolean).join(' · '))+"</span>"+(x.notes?"<span class='small'>"+escapeHtml(x.notes)+"</span>":"")+"</div></div>").join(''):"<div class='empty'>还没有录入浮漂</div>"
+ };
+
+ Object.assign(I18N_STATIC,{
+  "✨ AI查找型号和参数":["✨ AI로 모델/사양 찾기","✨ AI Find Model & Specs"],
+  "型号/系列":["모델/시리즈","Model / Series"],
+  "系列":["시리즈","Series"],"型号":["모델","Model"],"浮漂类型":["찌 유형","Float type"],"总长 cm":["전체 길이 cm","Length cm"],"材质":["재질","Material"]
+ });
 })();
 </script></body></html>
