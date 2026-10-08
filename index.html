@@ -329,7 +329,7 @@ body{background:#020807}.account-bar{display:none}.wrap{max-width:430px;padding:
 </div>
 </section>
 <section id='log' class='panel b-page-v1567'><header class='b-page-head-v1567'><div><small>JOURNAL</small><h2>钓鱼记录</h2><p>把每次鱼情变成下一次判断的依据。</p></div></header><section class='position-lab-v161'><div class='b-block-head-v1567'><h3>钓位档案</h3><small>POSITION MEMORY</small></div><p>记录同一钓场里的具体位置、水深和底型。下次回来直接参考自己的真实经验。</p><div class='grid'><div class='field full'><label>钓场</label><input id='positionVenueV161' placeholder='例如：松田湖'></div><div class='field'><label>钓位名称</label><input id='positionNameV161' placeholder='例如：7号位 / 东岸'></div><div class='field'><label>水深 m</label><input id='positionDepthV161' type='number' step='.1' placeholder='2.5'></div><div class='field'><label>底型</label><select id='positionBottomV161'><option value=''>未记录</option><option>泥底</option><option>沙底</option><option>碎石</option><option>硬底</option><option>草区</option><option>斜坡</option><option>未知</option></select></div><div class='field'><label>水流</label><input id='positionCurrentV161' placeholder='无 / 轻微 / 明显'></div><div class='field full'><label>结构与备注</label><input id='positionNoteV161' placeholder='树荫、进水口、障碍物、向阳等'></div></div><button id='positionSaveBtnV161' class='secondary' onclick='savePositionV161()'>＋ 保存钓位</button><button id='positionCancelEditV161' class='secondary' style='display:none' onclick='cancelPositionEditV161()'>取消编辑</button><div id='positionStatusV161' class='ai-status'></div><label style="display:block;margin:12px 0">本次作钓关联钓位 <select id="tripPositionChoiceV168" onchange="setTripPositionV168(this.value)"><option value="">未选择具体钓位</option></select></label><small id='positionHistoryStatusV161' style='display:block;margin:8px 0;opacity:.7'>钓位统计仅计算已关联的历史记录。</small><div id='positionListV161' class='position-list-v161'></div></section><section class='b-block-v1567'><div class='b-block-head-v1567'><h3>常用钓点</h3><small>FREQUENT SPOTS</small></div><div id='spotList' class='b-spot-grid-v1567'><div class='empty'>暂无钓点记录</div></div></section><section id='logHistoryCard' class='b-block-v1567'><div class='b-block-head-v1567'><h3>历史记录</h3><small>HISTORY</small></div><div id='logList' class='b-history-v1567'></div></section></section>
-<section id='community' class='panel b-page-v1567'><header class='b-page-head-v1567'><div><small>CATCH FEED</small><h2>渔获分享</h2><p>看看钓友今天从水边带回了什么。</p></div><button class='b-icon-btn-v1567' onclick='renderCatchFeedV1523()'>↻</button></header><div id='catchFeed' class='b-feed-v1567'></div></section>
+<section id='community' class='panel b-page-v1567'><header class='b-page-head-v1567'><div><small>CATCH FEED</small><h2>渔获分享</h2><p>看看钓友今天从水边带回了什么。</p></div><button class='b-icon-btn-v1567' onclick='renderCatchFeedV1523()'>↻</button></header><div class='card' style='margin-bottom:12px'><button class='primary' type='button' onclick='toggleStandaloneCatchV174()'>＋ 独立发布渔获</button><div id='standaloneCatchFormV174' hidden style='margin-top:12px'><p class='small'>无需创建作钓记录，可直接发布照片与渔获心得。</p><div class='field'><label>钓场（可选）</label><input id='standaloneCatchPlaceV174' maxlength='100' placeholder='填写钓场名称'></div><div class='field'><label>目标鱼（可选）</label><input id='standaloneCatchFishV174' maxlength='60' placeholder='鲫鱼、鲤鱼等'></div><div class='field'><label>渔获尾数（可选）</label><input id='standaloneCatchCountV174' type='number' min='0' max='100000' step='1' placeholder='0'></div><div class='field'><label>分享内容</label><textarea id='standaloneCatchCaptionV174' maxlength='300' rows='3' placeholder='分享今天的鱼获与心得'></textarea></div><div class='field'><label>渔获照片（最多5张）</label><input id='standaloneCatchPhotosV174' type='file' accept='image/*' multiple onchange='previewStandaloneCatchV174(event)'></div><div id='standaloneCatchPreviewV174' class='catch-share-preview'></div><div id='standaloneCatchStatusV174' class='small'></div><button id='standaloneCatchSubmitV174' type='button' class='primary' onclick='publishStandaloneCatchV174()'>发布到渔获广场</button></div></div><div id='catchFeed' class='b-feed-v1567'></div></section>
 
 <section id='bait' class='panel b-page-v1567'><header class='b-page-head-v1567'><div><small>BAIT LAB</small><h2>AI 饵料</h2><p>识别库存、结合现场条件配饵，并把实际效果留给下一次。</p></div></header><div id='baitModeNotice' class='notice' style='display:none;margin-bottom:10px'></div>
 <div class='card'><h2>🤖 AI 饵料助手</h2><p class='why'>拍摄或上传你现有的饵料包装，AI识别后加入“我的饵料库”。配饵时只从你的库存中选择。</p><div id='currentTripSummary' class='recipe' style='display:none'></div></div>
@@ -3202,6 +3202,59 @@ Object.assign(I18N_STATIC,{
   const {error}=await sb.storage.from('fishing-images').upload(path,blob,{contentType:'image/webp',upsert:false});
   if(error)throw error;return path
  }
+ let standaloneCatchImagesV174=[];
+ window.toggleStandaloneCatchV174=function(){
+  const form=$('standaloneCatchFormV174');if(form)form.hidden=!form.hidden;
+ };
+ window.previewStandaloneCatchV174=async function(e){
+  const files=[...(e.target.files||[])];
+  if(files.length>5||files.some(f=>!f.type.startsWith('image/'))){alert('请选择最多5张图片');e.target.value='';return}
+  const userId=currentUser?.id,images=[];
+  const status=$('standaloneCatchStatusV174');if(status)status.textContent='正在处理图片…';
+  try{
+   for(const file of files){try{images.push(await compressImage(file,1600,.84))}catch(_){images.push(await fileToDataURL(file)}}
+   if(currentUser?.id!==userId)return;
+   standaloneCatchImagesV174=images;
+   $('standaloneCatchPreviewV174').innerHTML=images.map(x=>"<img src='"+x+"'>").join('');
+   if(status)status.textContent='已选择 '+images.length+' 张图片';
+  }catch(err){if(status)status.textContent='图片处理失败：'+err.message}
+ };
+ window.publishStandaloneCatchV174=async function(){
+  if(!currentUser)return alert('请先登录');
+  const btn=$('standaloneCatchSubmitV174'),status=$('standaloneCatchStatusV174');
+  if(btn.disabled)return;
+  const caption=$('standaloneCatchCaptionV174').value.trim();
+  const place=$('standaloneCatchPlaceV174').value.trim(),fish=$('standaloneCatchFishV174').value.trim();
+  const countRaw=$('standaloneCatchCountV174').value.trim();
+  const count=countRaw===''?null:Number(countRaw);
+  if(count!==null&&(!Number.isInteger(count)||count<0||count>100000))return alert('渔获尾数必须为0至100000的整数');
+  if(!caption&&!standaloneCatchImagesV174.length)return alert('请填写分享内容或选择照片');
+  const userId=currentUser.id,uploaded=[];
+  let persisted=false;btn.disabled=true;status.textContent='正在发布…';
+  try{
+   for(const img of standaloneCatchImagesV174){
+    if(currentUser?.id!==userId)throw new Error('账号已切换');
+    const blob=await dataUrlToBlob(img);
+    const path=userId+'/share/'+Date.now()+'-'+Math.random().toString(36).slice(2)+'.webp';
+    const {error}=await sb.storage.from('fishing-images').upload(path,blob,{contentType:'image/webp',upsert:false});
+    if(error)throw error;uploaded.push(path);
+   }
+   const author=await myDisplayNameV1523();
+   if(currentUser?.id!==userId)throw new Error('账号已切换');
+   const {error}=await sb.from('catch_posts').insert({user_id:userId,fishing_log_id:null,author_name:author,caption:caption||null,image_paths:uploaded,location_name:place||null,target_fish:fish||null,catch_count:count});
+   if(error)throw error;persisted=true;
+   if(currentUser?.id!==userId)return;
+   standaloneCatchImagesV174=[];
+   for(const id of ['standaloneCatchCaptionV174','standaloneCatchPlaceV174','standaloneCatchFishV174','standaloneCatchCountV174','standaloneCatchPhotosV174'])$(id).value='';
+   $('standaloneCatchPreviewV174').innerHTML='';
+   status.textContent='发布成功';
+   $('standaloneCatchFormV174').hidden=true;
+   await renderCatchFeedV1523();
+  }catch(e){
+   if(!persisted&&uploaded.length)try{const result=await sb.storage.from('fishing-images').remove(uploaded);if(result.error)console.warn('独立分享图片清理失败',result.error)}catch(err){console.warn(err)}
+   if(currentUser?.id===userId)status.textContent='发布失败：'+(e?.message||e);
+  }finally{btn.disabled=false}
+ };
  window.shareCatchLogV1523=async function(i){
   const log=(window._logs||[])[i];if(!log||!currentUser)return;
   if(log.status!=='completed')return alert('请先填写并保存本次作钓结果后再分享。');
@@ -3356,13 +3409,13 @@ Object.assign(I18N_STATIC,{
   const requestId=++catchFeedRequestSequenceV170,userId=currentUser.id;
   const active=()=>requestId===catchFeedRequestSequenceV170&&currentUser?.id===userId;
   box.innerHTML="<div class='card'><div class='ai-status'>正在加载鱼获广场…</div></div>";
-  const {data:posts,error}=await sb.from('catch_posts').select('id,user_id,fishing_log_id,author_name,caption,image_paths,created_at').order('created_at',{ascending:false}).limit(50);
+  const {data:posts,error}=await sb.from('catch_posts').select('id,user_id,fishing_log_id,author_name,caption,image_paths,created_at,location_name,target_fish,catch_count').order('created_at',{ascending:false}).limit(50);
   if(!active())return;
   if(error){box.innerHTML="<div class='card'>加载失败："+escapeHtml(error.message)+"</div>";return}
   if(!posts?.length){box.innerHTML="<div class='card empty'>还没有共享鱼获。完成作钓后可以从“钓鱼记录”分享。</div>";return}
-  const postIds=posts.map(x=>x.id),logIds=posts.map(x=>x.fishing_log_id);
+  const postIds=posts.map(x=>x.id),logIds=posts.map(x=>x.fishing_log_id).filter(Boolean);
   const [logsResult,likesResult,commentsResult]=await Promise.all([
-   sb.from('fishing_logs').select('id,fished_at,location_name,target_fish,catch_count,catch_weight_kg,duration_minutes').in('id',logIds),
+   logIds.length?sb.from('fishing_logs').select('id,fished_at,location_name,target_fish,catch_count,catch_weight_kg,duration_minutes').in('id',logIds):Promise.resolve({data:[],error:null}),
    sb.from('catch_post_likes').select('post_id,user_id').in('post_id',postIds),
    sb.from('catch_post_comments').select('id,post_id,user_id,author_name,body,created_at').in('post_id',postIds).order('created_at',{ascending:true})
   ]);
@@ -3377,7 +3430,7 @@ Object.assign(I18N_STATIC,{
    if(!active())return;
   }
   box.innerHTML=posts.map(p=>{
-   const l=lm.get(p.fishing_log_id)||{},pl=(likes||[]).filter(x=>x.post_id===p.id),pc=(comments||[]).filter(x=>x.post_id===p.id);
+   const l=lm.get(p.fishing_log_id)||{location_name:p.location_name,target_fish:p.target_fish,catch_count:p.catch_count},pl=(likes||[]).filter(x=>x.post_id===p.id),pc=(comments||[]).filter(x=>x.post_id===p.id);
    const liked=pl.some(x=>x.user_id===currentUser.id),own=p.user_id===currentUser.id;
    const imgs=(p.image_paths||[]).map(path=>signed[path]).filter(Boolean);
    return "<div class='feed-card'><div class='feed-head'><div><b>"+escapeHtml(p.author_name||'钓友')+"</b><div class='small'>"+new Date(p.created_at).toLocaleString()+"</div></div>"+(own?"<button class='danger' onclick='deleteCatchPostV1523("+JSON.stringify(p.id)+")'>删除分享</button>":"")+"</div>"+
