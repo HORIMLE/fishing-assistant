@@ -3307,7 +3307,7 @@ Object.assign(I18N_STATIC,{
    }
    const author=await myDisplayNameV1523();
    if(currentUser?.id!==shareUserId)throw new Error('账号已切换，请重新分享');
-   const payload={user_id:shareUserId,fishing_log_id:log.id,author_name:author,caption:caption||null,image_paths:imagePaths,updated_at:new Date().toISOString()};
+   const payload={user_id:shareUserId,fishing_log_id:log.id,author_name:author,caption:caption||null,image_paths:imagePaths,location_name:String(log.location_name||'').slice(0,150)||null,target_fish:String(log.target_fish||'').slice(0,100)||null,catch_count:Number.isInteger(Number(log.catch_count))&&log.catch_count!==null&&log.catch_count!==''?Number(log.catch_count):null,updated_at:new Date().toISOString()};
    const {data,error}=existing
     ?await sb.from('catch_posts').update(payload).eq('id',existing).eq('user_id',shareUserId).select('id').single()
     :await sb.from('catch_posts').insert(payload).select('id').single();
@@ -3555,7 +3555,7 @@ Object.assign(I18N_STATIC,{
   }
   const hasNext=posts.length>catchFeedPageSizeV182;
   const visiblePosts=posts.slice(0,catchFeedPageSizeV182);
-  const postIds=visiblePosts.map(x=>x.id),logIds=visiblePosts.map(x=>x.fishing_log_id).filter(Boolean);
+  const postIds=visiblePosts.map(x=>x.id),logIds=visiblePosts.filter(x=>x.user_id===userId&&x.fishing_log_id).map(x=>x.fishing_log_id);
   const [logsResult,likesResult,commentsResult]=await Promise.all([
    logIds.length?sb.from('fishing_logs').select('id,fished_at,location_name,target_fish,catch_count,catch_weight_kg,duration_minutes').in('id',logIds):Promise.resolve({data:[],error:null}),
    sb.from('catch_post_likes').select('post_id,user_id').in('post_id',postIds),
