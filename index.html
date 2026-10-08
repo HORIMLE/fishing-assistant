@@ -3198,11 +3198,20 @@ Object.assign(I18N_STATIC,{
   const box=$('sharePreview_'+i);
   if(box)box.innerHTML=imgs.map(x=>"<img src='"+x+"'>").join('');
  };
+ function catchShareImageBlobV181(dataUrl){
+  return dataUrlToBlob(dataUrl).then(blob=>{
+   const mime=blob.type.toLowerCase();
+   const extensions={'image/webp':'webp','image/jpeg':'jpg','image/png':'png','image/gif':'gif'};
+   if(!extensions[mime])throw new Error('仅支持 JPEG、PNG、WebP 或 GIF 图片');
+   if(blob.size>10*1024*1024)throw new Error('图片超过10MB，请压缩后重试');
+   return {blob,mime,extension:extensions[mime]};
+  })
+ }
  async function uploadCatchShareImageV1523(dataUrl){
   if(!currentUser||!dataUrl)return '';
-  const blob=await dataUrlToBlob(dataUrl);
-  const path=currentUser.id+'/share/'+Date.now()+'-'+Math.random().toString(36).slice(2)+'.webp';
-  const {error}=await sb.storage.from('fishing-images').upload(path,blob,{contentType:'image/webp',upsert:false});
+  const {blob,mime,extension}=await catchShareImageBlobV181(dataUrl);
+  const path=currentUser.id+'/share/'+Date.now()+'-'+Math.random().toString(36).slice(2)+'.'+extension;
+  const {error}=await sb.storage.from('fishing-images').upload(path,blob,{contentType:mime,upsert:false});
   if(error)throw error;return path
  }
  let standaloneCatchImagesV174=[];
@@ -3246,9 +3255,9 @@ Object.assign(I18N_STATIC,{
   try{
    for(const img of standaloneCatchImagesV174){
     if(currentUser?.id!==userId)throw new Error('账号已切换');
-    const blob=await dataUrlToBlob(img);
-    const path=userId+'/share/'+Date.now()+'-'+Math.random().toString(36).slice(2)+'.webp';
-    const {error}=await sb.storage.from('fishing-images').upload(path,blob,{contentType:'image/webp',upsert:false});
+    const {blob,mime,extension}=await catchShareImageBlobV181(img);
+    const path=userId+'/share/'+Date.now()+'-'+Math.random().toString(36).slice(2)+'.'+extension;
+    const {error}=await sb.storage.from('fishing-images').upload(path,blob,{contentType:mime,upsert:false});
     if(error)throw error;uploaded.push(path);
    }
    const author=await myDisplayNameV1523();
@@ -3461,9 +3470,9 @@ Object.assign(I18N_STATIC,{
    for(const file of files){
     if(currentUser?.id!==userId)throw new Error('账号已切换');
     let image;try{image=await compressImage(file,1600,.84)}catch(_){image=await fileToDataURL(file)}
-    const blob=await dataUrlToBlob(image);
-    const path=userId+'/share/'+Date.now()+'-'+Math.random().toString(36).slice(2)+'.webp';
-    const {error:uploadError}=await sb.storage.from('fishing-images').upload(path,blob,{contentType:'image/webp',upsert:false});
+    const {blob,mime,extension}=await catchShareImageBlobV181(image);
+    const path=userId+'/share/'+Date.now()+'-'+Math.random().toString(36).slice(2)+'.'+extension;
+    const {error:uploadError}=await sb.storage.from('fishing-images').upload(path,blob,{contentType:mime,upsert:false});
     if(uploadError)throw uploadError;
     uploaded.push(path);
    }
