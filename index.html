@@ -926,29 +926,29 @@ function historyPerformance(row){
  return {rate:rate===null?null:Number(rate.toFixed(2)),score:Math.min(40,Math.round(p))}
 }
 function historySimilarity(row,env){
- let score=0,possible=0; // 仅按当前已提供的环境条件归一化相似度
- if(env.place){possible+=25;if(row.location_name&&row.location_name.trim().toLocaleLowerCase()===env.place.trim().toLocaleLowerCase())score+=25}
- if(env.fish){possible+=20;if(row.target_fish===env.fish)score+=20}
- if(env.season){possible+=12;if(row.season===env.season)score+=12}
+ let score=0,possible=0,evidenceFields=0; // 仅按当前已提供的环境条件归一化相似度
+ if(env.place){possible+=25;if(row.location_name&&row.location_name.trim().toLocaleLowerCase()===env.place.trim().toLocaleLowerCase()){score+=25;evidenceFields++}}
+ if(env.fish){possible+=20;if(row.target_fish===env.fish){score+=20;evidenceFields++}}
+ if(env.season){possible+=12;if(row.season===env.season){score+=12;evidenceFields++}}
  let rt=num(row.air_temp_c),ct=num(env.temp);
- if(ct!==null){possible+=18;if(rt!==null){let d=Math.abs(rt-ct);score+=d<=2?18:d<=5?12:d<=8?6:0}}
- if(env.weather){possible+=8;if(row.weather_condition===env.weather)score+=8}
- if(env.bite){possible+=5;if(row.bite_condition===env.bite)score+=5}
- if(env.current){possible+=5;if(row.current_condition===env.current)score+=5}
+ if(ct!==null){possible+=18;if(rt!==null){evidenceFields++;let d=Math.abs(rt-ct);score+=d<=2?18:d<=5?12:d<=8?6:0}}
+ if(env.weather){possible+=8;if(row.weather_condition===env.weather){score+=8;evidenceFields++}}
+ if(env.bite){possible+=5;if(row.bite_condition===env.bite){score+=5;evidenceFields++}}
+ if(env.current){possible+=5;if(row.current_condition===env.current){score+=5;evidenceFields++}}
  const depth=num(row.water_depth_m),targetDepth=num(env.depth);
- if(targetDepth!==null){possible+=12;if(depth!==null){const d=Math.abs(depth-targetDepth);score+=d<=0.5?12:d<=1.5?7:0}}
+ if(targetDepth!==null){possible+=12;if(depth!==null){evidenceFields++;const d=Math.abs(depth-targetDepth);score+=d<=0.5?12:d<=1.5?7:0}}
  let water=num(row.water_temp_c),targetWater=num(env.waterTemp);
- if(targetWater!==null){possible+=15;if(water!==null){const d=Math.abs(water-targetWater);score+=d<=2?15:d<=5?9:0}}
+ if(targetWater!==null){possible+=15;if(water!==null){evidenceFields++;const d=Math.abs(water-targetWater);score+=d<=2?15:d<=5?9:0}}
  let perf=historyPerformance(row);
  const evidence=[row.rod_length_m!=null?'鱼竿 '+row.rod_length_m+'m':null,row.main_line?'主线 '+row.main_line:null,row.leader_line?'子线 '+row.leader_line:null,row.float_buoyancy_g!=null?'浮漂吃铅 '+row.float_buoyancy_g+'g':null].filter(Boolean);
- return {...row,_similarity:possible?Math.min(100,Math.round(score/possible*100)):0,_performance:perf.score,_rate:perf.rate,_equipment:evidence}
+ return {...row,_similarity:possible?Math.min(100,Math.round(score/possible*100)):0,_performance:perf.score,_rate:perf.rate,_equipment:evidence,_evidenceFields:evidenceFields}
 }
 function rankFishingHistory(rows,env){
  return (rows||[]).map(x=>historySimilarity(x,env)).sort((a,b)=>b._similarity-a._similarity||b._performance-a._performance)
 }
 function summarizePersonalTackleV161(ranked){
  const groups=new Map();
- for(const row of (ranked||[]).filter(x=>x._similarity>=50)){
+ for(const row of (ranked||[]).filter(x=>x._similarity>=50&&x._evidenceFields>=2)){
   const parts=[
    ['鱼竿长度',num(row.rod_length_m),'m'],
    ['主线',row.main_line,''],
@@ -971,7 +971,7 @@ function summarizePersonalTackleV161(ranked){
 function renderHistoryInsight(ranked){
  let box=$('historyInsight');if(!box)return;
  if(!ranked.length){box.style.display='block';box.innerHTML='<b>历史学习：</b> 当前钓点暂无可比记录。';return}
- let top=ranked.slice(0,3),relevant=ranked.filter(x=>x._similarity>=50).length,confidence=relevant>=6?'较高':relevant>=3?'中等':'较低';
+ let top=ranked.slice(0,3),relevant=ranked.filter(x=>x._similarity>=50&&x._evidenceFields>=2).length,confidence=relevant>=6?'较高':relevant>=3?'中等':'较低';
  const tackle=summarizePersonalTackleV161(ranked);
  box.style.display='block';
  box.innerHTML=`<b>历史学习：${ranked.length} 条记录（较相似 ${relevant} 条）· 置信度${confidence}</b><br>`+top.map((x,i)=>`#${i+1} 相似度 ${x._similarity}% · ${x._rate!==null?x._rate+'尾/小时':'无时长效率'} · ${escapeHtml(x.bait_recipe?.text||'未记录配方')} · ${escapeHtml(x._equipment.join(' / ')||'未记录装备')}`).join('<br>')+(tackle.length?'<br><b>相似环境的装备使用记录：</b><br>'+tackle.slice(0,4).map(x=>escapeHtml(x.type+' '+x.value)+' · '+x.samples+'次'+(x.measured?' · 有效效率样本'+x.measured+'次':'')).join('<br>'):'')+(relevant<3?'<br><span class="small">相似记录不足3条，装备配置仅供参考，不能据此判定哪种装备更好。</span>':'')
@@ -979,19 +979,19 @@ function renderHistoryInsight(ranked){
 async function getSimilarFishingHistory(place,fish){
  if(!currentUser)return[];
  const userId=currentUser.id,rows=[],pageSize=100;
- for(let offset=0;offset<500;offset+=pageSize){
+ for(let offset=0;offset<=500;offset+=pageSize){
   let q=sb.from('fishing_logs')
    .select('id,fished_at,spot_id,position_id,location_name,target_fish,water_depth_m,rod_length_m,rod_setups,main_line,leader_line,float_buoyancy_g,air_temp_c,water_temp_c,season,weather_condition,wind_speed_kmh,bite_condition,current_condition,fishing_method,used_bungalow,bungalow_room_no,bungalow_position_note,bait_recipe,catch_count,catch_weight_kg,duration_minutes,effectiveness_score,notes')
    .eq('user_id',userId).eq('trip_status','completed')
    .order('fished_at',{ascending:false}).order('id',{ascending:true})
-   .range(offset,offset+pageSize-1);
+   .range(offset,offset===500?offset:offset+pageSize-1);
   if(place)q=q.eq('location_name',place);
   const result=await q;
   if(result.error){console.warn('个人经验读取失败',result.error);throw new Error('个人历史记录读取失败，请稍后重试')}
   if(currentUser?.id!==userId)return[];
+  if(offset===500&&result.data?.length)throw new Error('历史记录超过500条分析上限，已停止使用不完整的样本');
   rows.push(...(result.data||[]));
   if((result.data||[]).length<pageSize)break;
-  if(offset+pageSize>=500)throw new Error('历史记录超过本次分析上限，已停止使用不完整的样本');
  }
  return rows;
 }
@@ -1040,7 +1040,7 @@ async function recommendBait(){
  if(historyFailed&&$('historyInsight'))$('historyInsight').textContent='个人历史读取失败，无法确认经验是否完整；本次推荐不引用历史记录。';
  let historySummary=ranked.slice(0,8).map(x=>({历史相似度:x._similarity,历史表现评分:x._performance,日期:x.fished_at,水深米:x.water_depth_m,鱼竿米:x.rod_length_m,主线:x.main_line,子线:x.leader_line,浮漂吃铅克:x.float_buoyancy_g,多竿配置:x.rod_setups,钓点:x.location_name,目标鱼:x.target_fish,气温:x.air_temp_c,水温:x.water_temp_c,季节:x.season,天气:x.weather_condition,风速:x.wind_speed_kmh,鱼口:x.bite_condition,走水:x.current_condition,钓法:x.fishing_method,是否방가로:x.used_bungalow,房间钓位:x.bungalow_room_no,位置备注:x.bungalow_position_note,实际配方:x.bait_recipe?.text||'',鱼获尾数:x.catch_count,鱼获重量kg:x.catch_weight_kg,作钓分钟:x.duration_minutes,每小时鱼获:x._rate,效果评分:x.effectiveness_score,备注:x.notes}));
  let tackleSummary=summarizePersonalTackleV161(ranked);
- let relevantCount=ranked.filter(x=>x._similarity>=50).length;
+ let relevantCount=ranked.filter(x=>x._similarity>=50&&x._evidenceFields>=2).length;
  let confidence=relevantCount>=6?'较高':relevantCount>=3?'中等':relevantCount?'较低':'无充分相似历史';
 
  let rule='';
