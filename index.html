@@ -3403,7 +3403,7 @@ Object.assign(I18N_STATIC,{
    const {error}=await sb.from('catch_post_comments').insert({post_id:postId,user_id:userId,author_name:author,body});
    if(currentUser?.id!==userId)return;
    if(error)throw error;
-   el.value='';await renderCatchFeedV1523();
+   el.value='';catchFeedCommentDraftsV183.delete(postId);await renderCatchFeedV1523();
   }catch(e){if(currentUser?.id===userId)alert('评论失败：'+(e?.message||e))}
   finally{pendingCatchCommentsV172.delete(postId)}
  };
@@ -3508,19 +3508,41 @@ Object.assign(I18N_STATIC,{
   }catch(e){if(currentUser?.id===userId)alert('移除照片失败：'+(e?.message||e))}
   finally{pendingCatchPhotoRemovalsV178.delete(postId);unlockCatchPostV180(postId)}
  };
- let catchFeedRequestSequenceV170=0,catchFeedPageV182=0;
+ let catchFeedRequestSequenceV170=0,catchFeedPageV182=0,catchFeedOwnerV183=null;
  const catchFeedPageSizeV182=20;
+ const catchFeedCommentDraftsV183=new Map(),catchFeedExpandedV183=new Set();
+ function rememberCatchFeedUiV183(box){
+  for(const details of box.querySelectorAll('details[id^="catchComments_"]')){
+   const id=details.id.slice('catchComments_'.length);
+   if(details.open)catchFeedExpandedV183.add(id);else catchFeedExpandedV183.delete(id);
+   const input=details.querySelector('input');if(input)catchFeedCommentDraftsV183.set(id,input.value);
+  }
+ }
+ function restoreCatchFeedUiV183(box){
+  for(const details of box.querySelectorAll('details[id^="catchComments_"]')){
+   const id=details.id.slice('catchComments_'.length);
+   details.open=catchFeedExpandedV183.has(id);
+   const input=details.querySelector('input');if(input)input.value=catchFeedCommentDraftsV183.get(id)||'';
+  }
+ }
+
  window.changeCatchFeedPageV182=function(delta){
-  catchFeedPageV182=Math.max(0,catchFeedPageV182+delta);
+  const next=Math.max(0,catchFeedPageV182+delta);
+  if(next===catchFeedPageV182)return;
+  catchFeedPageV182=next;
+  catchFeedExpandedV183.clear();catchFeedCommentDraftsV183.clear();
   renderCatchFeedV1523();
  };
  window.toggleCatchCommentsV182=function(postId){
   const details=document.getElementById('catchComments_'+postId);
-  if(details){details.open=!details.open;if(details.open)details.querySelector('input')?.focus()}
+  if(details){details.open=!details.open;if(details.open){catchFeedExpandedV183.add(postId);details.querySelector('input')?.focus()}else catchFeedExpandedV183.delete(postId)}
  };
  window.renderCatchFeedV1523=async function(){
   const box=$('catchFeed');if(!box||!currentUser)return;
-  const requestId=++catchFeedRequestSequenceV170,userId=currentUser.id;
+  const userId=currentUser.id;
+  if(catchFeedOwnerV183!==userId){catchFeedOwnerV183=userId;catchFeedPageV182=0;catchFeedExpandedV183.clear();catchFeedCommentDraftsV183.clear()}
+  rememberCatchFeedUiV183(box);
+  const requestId=++catchFeedRequestSequenceV170;
   const active=()=>requestId===catchFeedRequestSequenceV170&&currentUser?.id===userId;
   box.innerHTML="<div class='card'><div class='ai-status'>正在加载鱼获广场…</div></div>";
   const from=catchFeedPageV182*catchFeedPageSizeV182;
@@ -3564,7 +3586,8 @@ Object.assign(I18N_STATIC,{
   }).join('')+"<div class='feed-pagination' style='display:flex;justify-content:center;align-items:center;gap:12px;margin:16px 0'>"+
    (catchFeedPageV182>0?"<button class='secondary' style='width:auto' onclick='changeCatchFeedPageV182(-1)'>上一页</button>":'')+
    "<span>第 "+(catchFeedPageV182+1)+" 页</span>"+
-   (hasNext?"<button class='secondary' style='width:auto' onclick='changeCatchFeedPageV182(1)'>下一页</button>":'')+"</div>"
+   (hasNext?"<button class='secondary' style='width:auto' onclick='changeCatchFeedPageV182(1)'>下一页</button>":'')+"</div>";
+  restoreCatchFeedUiV183(box);
  };
 
  document.querySelector(".tab[data-p='community']")?.addEventListener('click',()=>setTimeout(renderCatchFeedV1523,60));
