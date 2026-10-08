@@ -5038,6 +5038,7 @@ async function loadPositionsV161(){
   // Read every page; never present a truncated sample as complete history.
   const history=[],pageSize=500;let historyError=null;
   for(let offset=0;offset<100000;offset+=pageSize){
+   if(requestId!==window._positionLoadRequestV161||currentUser?.id!==userId)return;
    const result=await sb.from('fishing_logs').select('position_id,catch_count,catch_weight_kg,fished_at,trip_status').eq('user_id',currentUser.id).in('position_id',data.map(p=>p.id)).eq('trip_status','completed').order('fished_at',{ascending:false}).range(offset,offset+pageSize-1);
    if(result.error){historyError=result.error;break}
    history.push(...(result.data||[]));
@@ -5045,7 +5046,7 @@ async function loadPositionsV161(){
    if(offset+pageSize>=100000){historyError=new Error('历史记录超过安全分页上限');break}
   }
   if(requestId!==window._positionLoadRequestV161||currentUser?.id!==userId)return;
-  if(historyError){const status=document.getElementById('positionHistoryStatusV161');if(status)status.textContent='历史统计暂时无法读取，以下统计值可能不是最新数据。'}
+  if(historyError){const status=document.getElementById('positionHistoryStatusV161');if(status)status.textContent='历史统计读取不完整，以下为档案中保存的旧统计值，不能视为最新结果。'}
   if(!historyError){
    const aggregates=new Map();
    for(const h of history||[]){const a=aggregates.get(h.position_id)||{visits:0,fish:0,best:null,last:null};a.visits++;a.fish+=Number(h.catch_count)||0;const w=Number(h.catch_weight_kg);if(h.catch_weight_kg!=null&&Number.isFinite(w))a.best=Math.max(a.best??0,w);if(h.fished_at&&(!a.last||h.fished_at>a.last))a.last=h.fished_at;aggregates.set(h.position_id,a)}
@@ -5055,20 +5056,33 @@ async function loadPositionsV161(){
  if(!data?.length&&historyStatus)historyStatus.textContent='暂无钓位档案。';
  if(data?.length){
   const status=document.getElementById('positionHistoryStatusV161');
-  if(status&&!status.textContent.includes('暂时无法读取')&&!status.textContent.includes('无法确认'))status.textContent='钓位统计来自已关联的历史作钓记录；未关联的旧记录不会自动归入钓位。';
+  if(status&&!status.textContent.includes('读取不完整')&&!status.textContent.includes('无法确认'))status.textContent='钓位统计来自已关联的历史作钓记录；未关联的旧记录不会自动归入钓位。';
  }
  box.innerHTML=data?.length?data.map(x=>"<div class='position-card-v161'><b><span>"+escapeHtml(x.venue_name)+" · "+escapeHtml(x.position_name)+"</span><button onclick=\"deletePositionV161('"+x.id+"')\">删除</button></b><small>"+[x.depth_m!=null?'水深 '+x.depth_m+'m':null,x.bottom_type,x.current_note,x.visit_count?'去过 '+x.visit_count+' 次':null,x.catch_count?'累计 '+x.catch_count+' 尾':null,x.best_weight_kg?'最大 '+x.best_weight_kg+'kg':null].filter(Boolean).map(escapeHtml).join(' · ')+"</small>"+(x.structure_note?"<small>"+escapeHtml(x.structure_note)+"</small>":"")+"</div>").join(''):"<div class='empty'>还没有钓位档案。第一次记录后，这里会成为你的私人钓位库。</div>"
 }
 async function savePositionV161(){
  if(!currentUser)return alert('请先登录。');const venue=$('positionVenueV161').value.trim(),name=$('positionNameV161').value.trim(),st=$('positionStatusV161');if(venue.length>120||name.length>80){st.textContent='钓场名称最多120字，钓位名称最多80字。';return}if(!venue||!name){st.textContent='请填写钓场和钓位名称。';return}
- st.textContent='正在检查重复档案…';const {data:existing,error:checkError}=await sb.from('fishing_positions').select('id,venue_name,position_name').eq('user_id',currentUser.id).ilike('venue_name',venue).ilike('position_name',name).limit(20);
+ st.textContent='正在检查重复档案…';const {data:existing,error:checkError}=await sb.from('fishing_positions').select('id,venue_name,position_name').eq('user_id',currentUser.id).limit(1000);
  if(checkError){st.textContent='重复档案检查失败，请稍后重试：'+checkError.message;return}
  if((existing||[]).some(p=>p.venue_name.trim().toLocaleLowerCase()===venue.toLocaleLowerCase()&&p.position_name.trim().toLocaleLowerCase()===name.toLocaleLowerCase())){st.textContent='该钓场已有同名钓位，请使用已有档案。';return}
  st.textContent='正在保存…';const depth=$('positionDepthV161').value;
  const {error}=await sb.from('fishing_positions').insert({user_id:currentUser.id,venue_name:venue,position_name:name,depth_m:depth===''?null:Number(depth),bottom_type:$('positionBottomV161').value||null,current_note:$('positionCurrentV161').value.trim()||null,structure_note:$('positionNoteV161').value.trim()||null});
  if(error){st.textContent='保存失败：'+error.message;return}st.textContent='已加入你的钓位档案。';['positionNameV161','positionDepthV161','positionCurrentV161','positionNoteV161'].forEach(id=>$(id).value='');$('positionBottomV161').value='';loadPositionsV161()
 }
-async function deletePositionV161(id){if(!currentUser)return;if(!confirm('确定删除这个钓位档案？关联的作钓记录不会删除，但关联关系可能因数据库外键设置而受影响。'))return;const {error}=await sb.from('fishing_positions').delete().eq('id',id).eq('user_id',currentUser.id);if(error){$('positionStatusV161').textContent='删除失败：'+error.message;return}loadPositionsV161()}
+async function deletePositionV161(id){
+ if(!currentUser)return;
+ const userId=currentUser.id,st=$('positionStatusV161');
+ const {count,error:checkError}=await sb.from('fishing_logs').select('id',{count:'exact',head:true}).eq('user_id',userId).eq('position_id',id);
+ if(checkError){if(st)st.textContent='无法确认该钓位是否关联历史记录，已取消删除：'+checkError.message;return}
+ if(count>0){if(st)st.textContent='该钓位已关联 '+count+' 条作钓记录。为保护历史数据，暂不允许删除；请保留档案。';return}
+ if(!confirm('此钓位没有关联的作钓记录，确定删除档案？'))return;
+ if(currentUser?.id!==userId)return;
+ const {data,error}=await sb.from('fishing_positions').delete().eq('id',id).eq('user_id',userId).select('id');
+ if(error){if(st)st.textContent='删除失败：'+error.message;return}
+ if(!data?.length){if(st)st.textContent='没有删除任何钓位，请刷新后重试。';return}
+ const trip=window._currentTrip;if(trip?.positionId===id&&!trip.logId){trip.positionId=null;saveTripSession()}
+ if(st)st.textContent='钓位档案已删除。';await loadPositionsV161();
+}
 function syncPositionVenueV161(){const t=window._currentTrip||{},v=typeof t.place==='string'?t.place:(t.place?.name||t.placeName||'');if(v&&$('positionVenueV161')&&!$('positionVenueV161').value)$('positionVenueV161').value=v}
 const oldOpenV161=window.openPanel;window.openPanel=function(id){oldOpenV161(id);if(id==='log')setTimeout(()=>{syncPositionVenueV161();loadPositionsV161()},60)};
 setTimeout(()=>{syncPositionVenueV161();loadPositionsV161()},1100);
