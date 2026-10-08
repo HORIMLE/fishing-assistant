@@ -3508,17 +3508,32 @@ Object.assign(I18N_STATIC,{
   }catch(e){if(currentUser?.id===userId)alert('移除照片失败：'+(e?.message||e))}
   finally{pendingCatchPhotoRemovalsV178.delete(postId);unlockCatchPostV180(postId)}
  };
- let catchFeedRequestSequenceV170=0;
+ let catchFeedRequestSequenceV170=0,catchFeedPageV182=0;
+ const catchFeedPageSizeV182=20;
+ window.changeCatchFeedPageV182=function(delta){
+  catchFeedPageV182=Math.max(0,catchFeedPageV182+delta);
+  renderCatchFeedV1523();
+ };
+ window.toggleCatchCommentsV182=function(postId){
+  const details=document.getElementById('catchComments_'+postId);
+  if(details){details.open=!details.open;if(details.open)details.querySelector('input')?.focus()}
+ };
  window.renderCatchFeedV1523=async function(){
   const box=$('catchFeed');if(!box||!currentUser)return;
   const requestId=++catchFeedRequestSequenceV170,userId=currentUser.id;
   const active=()=>requestId===catchFeedRequestSequenceV170&&currentUser?.id===userId;
   box.innerHTML="<div class='card'><div class='ai-status'>正在加载鱼获广场…</div></div>";
-  const {data:posts,error}=await sb.from('catch_posts').select('id,user_id,fishing_log_id,author_name,caption,image_paths,created_at,location_name,target_fish,catch_count').order('created_at',{ascending:false}).limit(50);
+  const from=catchFeedPageV182*catchFeedPageSizeV182;
+  const {data:posts,error}=await sb.from('catch_posts').select('id,user_id,fishing_log_id,author_name,caption,image_paths,created_at,location_name,target_fish,catch_count').order('created_at',{ascending:false}).order('id',{ascending:false}).range(from,from+catchFeedPageSizeV182);
   if(!active())return;
   if(error){box.innerHTML="<div class='card'>加载失败："+escapeHtml(error.message)+"</div>";return}
-  if(!posts?.length){box.innerHTML="<div class='card empty'>还没有共享鱼获。完成作钓后可以从“钓鱼记录”分享。</div>";return}
-  const postIds=posts.map(x=>x.id),logIds=posts.map(x=>x.fishing_log_id).filter(Boolean);
+  if(!posts?.length){
+   if(catchFeedPageV182>0){catchFeedPageV182--;return renderCatchFeedV1523()}
+   box.innerHTML="<div class='card empty'>还没有共享鱼获。完成作钓后可以从“钓鱼记录”分享。</div>";return
+  }
+  const hasNext=posts.length>catchFeedPageSizeV182;
+  const visiblePosts=posts.slice(0,catchFeedPageSizeV182);
+  const postIds=visiblePosts.map(x=>x.id),logIds=visiblePosts.map(x=>x.fishing_log_id).filter(Boolean);
   const [logsResult,likesResult,commentsResult]=await Promise.all([
    logIds.length?sb.from('fishing_logs').select('id,fished_at,location_name,target_fish,catch_count,catch_weight_kg,duration_minutes').in('id',logIds):Promise.resolve({data:[],error:null}),
    sb.from('catch_post_likes').select('post_id,user_id').in('post_id',postIds),
@@ -3530,11 +3545,11 @@ Object.assign(I18N_STATIC,{
   const logs=logsResult.data||[],likes=likesResult.data||[],comments=commentsResult.data||[];
   const lm=new Map(logs.map(x=>[x.id,x]));
   const signed={};
-  for(const p of posts)for(const path of (p.image_paths||[]))if(!signed[path]){
+  for(const p of visiblePosts)for(const path of (p.image_paths||[]))if(!signed[path]){
    try{signed[path]=await signedImage(path)}catch(e){console.warn('鱼获图片加载失败',e);signed[path]=''}
    if(!active())return;
   }
-  box.innerHTML=posts.map(p=>{
+  box.innerHTML=visiblePosts.map(p=>{
    const l=lm.get(p.fishing_log_id)||{location_name:p.location_name,target_fish:p.target_fish,catch_count:p.catch_count},pl=(likes||[]).filter(x=>x.post_id===p.id),pc=(comments||[]).filter(x=>x.post_id===p.id);
    const liked=pl.some(x=>x.user_id===currentUser.id),own=p.user_id===currentUser.id;
    const imgs=(p.image_paths||[]).map(path=>signed[path]).filter(Boolean);
@@ -3542,11 +3557,14 @@ Object.assign(I18N_STATIC,{
     "<div style='margin-top:8px'><b>"+escapeHtml(l.location_name||'未填写钓场')+" · "+escapeHtml(l.target_fish||'')+"</b><div class='small'>"+(l.catch_count??'-')+"尾"+(l.catch_weight_kg?' · '+l.catch_weight_kg+'kg':'')+(l.duration_minutes?' · '+l.duration_minutes+'分钟':'')+"</div></div>"+
     (p.caption?"<div style='margin-top:8px;white-space:pre-wrap'>"+escapeHtml(p.caption)+"</div>":"")+
     (imgs.length?"<div class='feed-images "+(imgs.length===1?'one':'')+"'>"+(p.image_paths||[]).map((path,i)=>signed[path]?"<div style='position:relative'><img src='"+escapeHtml(signed[path])+"' loading='lazy' style='width:100%'>"+(own?"<button type='button' class='danger' style='position:absolute;right:5px;top:5px;background:white;border-radius:8px;padding:5px' onclick='removeCatchPostPhotoV178("+JSON.stringify(p.id)+","+i+")'>移除</button>":"")+"</div>":'').join('')+"</div>":"")+
-    "<div class='feed-actions'><button onclick='toggleCatchLikeV1523("+JSON.stringify(p.id)+","+liked+")'>"+(liked?'❤️':'🤍')+" "+pl.length+"</button><button type='button'>💬 "+pc.length+"</button></div>"+
-    "<details style='margin-top:8px'><summary style='cursor:pointer;font-weight:800'>评论 "+pc.length+"</summary><div style='margin-top:8px'>"+
+    "<div class='feed-actions'><button onclick='toggleCatchLikeV1523("+JSON.stringify(p.id)+","+liked+")'>"+(liked?'❤️':'🤍')+" "+pl.length+"</button><button type='button' onclick='toggleCatchCommentsV182("+JSON.stringify(p.id)+")'>💬 "+pc.length+"</button></div>"+
+    "<details id='catchComments_"+p.id+"' style='margin-top:8px'><summary style='cursor:pointer;font-weight:800'>评论 "+pc.length+"</summary><div style='margin-top:8px'>"+
       pc.map(c=>"<div class='feed-comment'><b>"+escapeHtml(c.author_name||'钓友')+"</b> "+escapeHtml(c.body)+(c.user_id===currentUser.id?" <button class='danger' style='float:none' onclick='deleteCatchCommentV1523("+JSON.stringify(c.id)+")'>删除</button>":"")+"</div>").join('')+
       "<div style='display:flex;gap:6px;margin-top:8px'><input id='comment_"+p.id+"' maxlength='500' placeholder='写评论…' style='flex:1;padding:10px;border:1px solid var(--line);border-radius:10px'><button class='secondary' style='width:auto;margin:0' onclick='addCatchCommentV1523("+JSON.stringify(p.id)+")'>发送</button></div></div></details></div>"
-  }).join('')
+  }).join('')+"<div class='feed-pagination' style='display:flex;justify-content:center;align-items:center;gap:12px;margin:16px 0'>"+
+   (catchFeedPageV182>0?"<button class='secondary' style='width:auto' onclick='changeCatchFeedPageV182(-1)'>上一页</button>":'')+
+   "<span>第 "+(catchFeedPageV182+1)+" 页</span>"+
+   (hasNext?"<button class='secondary' style='width:auto' onclick='changeCatchFeedPageV182(1)'>下一页</button>":'')+"</div>"
  };
 
  document.querySelector(".tab[data-p='community']")?.addEventListener('click',()=>setTimeout(renderCatchFeedV1523,60));
