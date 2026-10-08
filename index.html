@@ -1047,7 +1047,10 @@ async function normalizeBaitLanguageV158(text,st){
   return cleaned||text
  }catch(_){return text}
 }
+let baitRecommendationSequenceV163=0;
 async function recommendBait(){
+ const requestId=++baitRecommendationSequenceV163,requestUserId=currentUser?.id||null;
+ const isCurrent=()=>requestId===baitRecommendationSequenceV163&&(currentUser?.id||null)===requestUserId;
  let a=window._baits||JSON.parse(localStorage.baits||'[]');
  let mode=$('baitRecommendMode')?.value||'inventory';
  if(mode==='inventory'&&!a.length)return alert('请先加入至少一种你现有的饵料，或切换到“韩国可购买饵料”。');
@@ -1058,7 +1061,7 @@ async function recommendBait(){
  let stock=a.map((x,i)=>({id:i+1,brand:String(x.brand||'').slice(0,80),name:String(x.name||'').slice(0,100),type:String(x.type||'').slice(0,80),flavor:String(x.flavor||'').slice(0,80),targets:String(x.targets||'').slice(0,120)}));
  let history=[],historyFailed=false;
  let historyPartial=false;
- try{const result=await getSimilarFishingHistory(place,fish);history=result.rows;historyPartial=result.partial}catch(e){historyFailed=true;st.textContent='个人经验读取失败：'+e.message+'；本次不使用历史数据。'}
+ try{const result=await getSimilarFishingHistory(place,fish);if(!isCurrent())return;history=result.rows;historyPartial=result.partial}catch(e){if(!isCurrent())return;historyFailed=true;st.textContent='个人经验读取失败：'+e.message+'；本次不使用历史数据。'}
  let ranked=rankFishingHistory(history,rawEnv);renderHistoryInsight(ranked);
  if(historyPartial&&$('historyInsight'))$('historyInsight').insertAdjacentHTML('beforeend','<br><span class="small">历史数据较多：本次使用同钓场与近期跨钓场抽样，统计并非全部历史。</span>');
  if(historyFailed&&$('historyInsight'))$('historyInsight').textContent='个人历史读取失败，无法确认经验是否完整；本次推荐不引用历史记录。';
@@ -1081,7 +1084,8 @@ async function recommendBait(){
 
  try{
   let text=await gemini(prompt,st);
-  if(baitHasLanguageMixV158(text)){st.textContent='正在统一推荐结果语言…';text=await normalizeBaitLanguageV158(text,st)}
+  if(!isCurrent())return;
+  if(baitHasLanguageMixV158(text)){st.textContent='正在统一推荐结果语言…';text=await normalizeBaitLanguageV158(text,st);if(!isCurrent())return}
   st.textContent=historyFailed?'个人历史读取失败，本次仅依据当前环境推荐。':relevantCount>=3?`参考 ${relevantCount} 条较相似的个人记录，当前置信度：${confidence}。`:'相似的个人历史样本不足3条，本次以当前环境为主进行推荐。';
   $('baitRecipe').innerHTML=`<div class='recipe'>${escapeHtml(text).replace(/\n/g,'<br>')}</div>`;
   if(mode!=='inventory'&&$('baitShoppingLinks')){
