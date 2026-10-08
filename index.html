@@ -3413,6 +3413,7 @@ Object.assign(I18N_STATIC,{
  window.deleteCatchPostV1523=async function(postId){
   if(!currentUser||pendingPostDeletesV173.has(postId))return;
   if(!confirm('确定删除这条共享鱼获吗？'))return;
+  if(!lockCatchPostV180(postId))return alert('帖子正在更新，请稍后重试');
   const userId=currentUser.id;pendingPostDeletesV173.add(postId);
   try{
    await deleteOwnedCatchPostV173(postId,userId);
@@ -3420,12 +3421,16 @@ Object.assign(I18N_STATIC,{
    await renderCatchFeedV1523();
    if($('logList'))await decorateLogShareV1523();
   }catch(e){if(currentUser?.id===userId)alert('删除分享失败：'+(e?.message||e))}
-  finally{pendingPostDeletesV173.delete(postId)}
+  finally{pendingPostDeletesV173.delete(postId);unlockCatchPostV180(postId)}
  };
+ const catchPostMutationLocksV180=new Set();
+ function lockCatchPostV180(id){if(catchPostMutationLocksV180.has(id))return false;catchPostMutationLocksV180.add(id);return true}
+ function unlockCatchPostV180(id){catchPostMutationLocksV180.delete(id)}
  const pendingCatchEditsV177=new Set();
  window.editCatchPostCaptionV177=async function(postId){
   if(!currentUser||pendingCatchEditsV177.has(postId))return;
   const userId=currentUser.id;
+  if(!lockCatchPostV180(postId))return alert('帖子正在更新，请稍后重试');
   pendingCatchEditsV177.add(postId);
   try{
    const {data,error}=await sb.from('catch_posts').select('caption').eq('id',postId).eq('user_id',userId).single();
@@ -3439,13 +3444,14 @@ Object.assign(I18N_STATIC,{
    if(updateError)throw updateError;
    if(currentUser?.id===userId)await renderCatchFeedV1523();
   }catch(e){if(currentUser?.id===userId)alert('修改分享失败：'+(e?.message||e))}
-  finally{pendingCatchEditsV177.delete(postId)}
+  finally{pendingCatchEditsV177.delete(postId);unlockCatchPostV180(postId)}
  };
  const pendingCatchPhotoAddsV179=new Set();
  window.addCatchPostPhotosV179=async function(postId,input){
   if(!currentUser||pendingCatchPhotoAddsV179.has(postId))return;
   const files=[...(input?.files||[])];if(!files.length)return;
   if(files.length>5||files.some(f=>!f.type.startsWith('image/'))){alert('最多选择5张图片文件');input.value='';return}
+  if(!lockCatchPostV180(postId)){input.value='';return alert('帖子正在更新，请稍后重试')}
   const userId=currentUser.id,uploaded=[];pendingCatchPhotoAddsV179.add(postId);
   try{
    const {data,error}=await sb.from('catch_posts').select('image_paths').eq('id',postId).eq('user_id',userId).single();
@@ -3469,12 +3475,13 @@ Object.assign(I18N_STATIC,{
   }catch(e){
    if(uploaded.length)try{const {error:cleanupError}=await sb.storage.from('fishing-images').remove(uploaded);if(cleanupError)console.warn('新增照片回滚清理失败',cleanupError)}catch(err){console.warn(err)}
    if(currentUser?.id===userId)alert('添加照片失败：'+(e?.message||e));
-  }finally{pendingCatchPhotoAddsV179.delete(postId);if(input)input.value=''}
+  }finally{pendingCatchPhotoAddsV179.delete(postId);unlockCatchPostV180(postId);if(input)input.value=''}
  };
  const pendingCatchPhotoRemovalsV178=new Set();
  window.removeCatchPostPhotoV178=async function(postId,photoIndex){
   if(!currentUser||pendingCatchPhotoRemovalsV178.has(postId))return;
   if(!confirm('确定移除这张鱼获照片吗？此操作无法撤销。'))return;
+  if(!lockCatchPostV180(postId))return alert('帖子正在更新，请稍后重试');
   const userId=currentUser.id;pendingCatchPhotoRemovalsV178.add(postId);
   try{
    const {data,error}=await sb.from('catch_posts').select('image_paths').eq('id',postId).eq('user_id',userId).single();
@@ -3490,7 +3497,7 @@ Object.assign(I18N_STATIC,{
    }
    if(currentUser?.id===userId)await renderCatchFeedV1523();
   }catch(e){if(currentUser?.id===userId)alert('移除照片失败：'+(e?.message||e))}
-  finally{pendingCatchPhotoRemovalsV178.delete(postId)}
+  finally{pendingCatchPhotoRemovalsV178.delete(postId);unlockCatchPostV180(postId)}
  };
  let catchFeedRequestSequenceV170=0;
  window.renderCatchFeedV1523=async function(){
