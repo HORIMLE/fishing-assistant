@@ -934,10 +934,13 @@ function historySimilarity(row,env){
  if(row.weather_condition&&env.weather&&row.weather_condition===env.weather)score+=8;
  if(row.bite_condition&&env.bite&&row.bite_condition===env.bite)score+=5;
  if(row.current_condition&&env.current&&row.current_condition===env.current)score+=5;
+ const depth=num(row.water_depth_m),targetDepth=num(env.depth);
+ if(depth!==null&&targetDepth!==null){const d=Math.abs(depth-targetDepth);score+=d<=0.5?12:d<=1.5?7:0}
  let water=num(row.water_temp_c),targetWater=num(env.waterTemp);
  if(water!==null&&targetWater!==null){const d=Math.abs(water-targetWater);score+=d<=2?15:d<=5?9:0}
  let perf=historyPerformance(row);
- return {...row,_similarity:Math.min(100,Math.round(score)),_performance:perf.score,_rate:perf.rate}
+ const evidence=[row.rod_length_m!=null?'鱼竿 '+row.rod_length_m+'m':null,row.main_line?'主线 '+row.main_line:null,row.leader_line?'子线 '+row.leader_line:null,row.float_buoyancy_g!=null?'浮漂吃铅 '+row.float_buoyancy_g+'g':null].filter(Boolean);
+ return {...row,_similarity:Math.min(100,Math.round(score)),_performance:perf.score,_rate:perf.rate,_equipment:evidence}
 }
 function rankFishingHistory(rows,env){
  return (rows||[]).map(x=>historySimilarity(x,env)).sort((a,b)=>b._similarity-a._similarity||b._performance-a._performance)
@@ -947,7 +950,7 @@ function renderHistoryInsight(ranked){
  if(!ranked.length){box.style.display='block';box.innerHTML='<b>历史学习：</b> 当前钓点暂无可比记录。';return}
  let top=ranked.slice(0,3),confidence=ranked.length>=6?'较高':ranked.length>=3?'中等':'较低';
  box.style.display='block';
- box.innerHTML=`<b>历史学习：${ranked.length} 条 · 置信度${confidence}</b><br>`+top.map((x,i)=>`#${i+1} 相似度 ${x._similarity}% · ${x._rate!==null?x._rate+'尾/小时':'无时长效率'} · ${escapeHtml(x.bait_recipe?.text||'未记录配方')}`).join('<br>')+(ranked.length<3?'<br><span class="small">记录还少，当前只做轻量参考；数据增加后权重会更可靠。</span>':'')
+ box.innerHTML=`<b>历史学习：${ranked.length} 条 · 置信度${confidence}</b><br>`+top.map((x,i)=>`#${i+1} 相似度 ${x._similarity}% · ${x._rate!==null?x._rate+'尾/小时':'无时长效率'} · ${escapeHtml(x.bait_recipe?.text||'未记录配方')} · ${escapeHtml(x._equipment.join(' / ')||'未记录装备')}`).join('<br>')+(ranked.length<3?'<br><span class="small">记录还少，当前只做轻量参考；数据增加后权重会更可靠。</span>':'')
 }
 async function getSimilarFishingHistory(place,fish){
  if(!currentUser)return[];
@@ -1010,7 +1013,7 @@ async function recommendBait(){
  let history=[];
  try{history=await getSimilarFishingHistory(place,fish)}catch(e){st.textContent='个人经验读取失败：'+e.message+'；本次不使用历史数据。'}
  let ranked=rankFishingHistory(history,rawEnv);renderHistoryInsight(ranked);
- let historySummary=ranked.slice(0,8).map(x=>({历史相似度:x._similarity,历史表现评分:x._performance,日期:x.fished_at,钓点:x.location_name,目标鱼:x.target_fish,气温:x.air_temp_c,水温:x.water_temp_c,季节:x.season,天气:x.weather_condition,风速:x.wind_speed_kmh,鱼口:x.bite_condition,走水:x.current_condition,钓法:x.fishing_method,是否방가로:x.used_bungalow,房间钓位:x.bungalow_room_no,位置备注:x.bungalow_position_note,实际配方:x.bait_recipe?.text||'',鱼获尾数:x.catch_count,鱼获重量kg:x.catch_weight_kg,作钓分钟:x.duration_minutes,每小时鱼获:x._rate,效果评分:x.effectiveness_score,备注:x.notes}));
+ let historySummary=ranked.slice(0,8).map(x=>({历史相似度:x._similarity,历史表现评分:x._performance,日期:x.fished_at,水深米:x.water_depth_m,鱼竿米:x.rod_length_m,主线:x.main_line,子线:x.leader_line,浮漂吃铅克:x.float_buoyancy_g,多竿配置:x.rod_setups,钓点:x.location_name,目标鱼:x.target_fish,气温:x.air_temp_c,水温:x.water_temp_c,季节:x.season,天气:x.weather_condition,风速:x.wind_speed_kmh,鱼口:x.bite_condition,走水:x.current_condition,钓法:x.fishing_method,是否방가로:x.used_bungalow,房间钓位:x.bungalow_room_no,位置备注:x.bungalow_position_note,实际配方:x.bait_recipe?.text||'',鱼获尾数:x.catch_count,鱼获重量kg:x.catch_weight_kg,作钓分钟:x.duration_minutes,每小时鱼获:x._rate,效果评分:x.effectiveness_score,备注:x.notes}));
  let confidence=ranked.length>=6?'较高':ranked.length>=3?'中等':ranked.length?'较低':'无历史';
 
  let rule='';
@@ -1021,7 +1024,7 @@ async function recommendBait(){
  }else{
    rule='优先使用用户库存中的饵料；只有库存不足以组成合理方案时，才补充在韩国较常见、通常可通过韩国钓具店、Naver Shopping、Coupang等渠道购买到的商品或商品类型。补充商品必须单独标注“需要购买”。不确定韩国是否常见销售时不要编造。';
  }
- let prompt=`你是熟悉韩国淡水钓鱼环境的配饵助手。当前环境=${JSON.stringify(env)}。用户现有饵料=${JSON.stringify(stock)}。系统根据钓点、目标鱼、季节、气温、天气、鱼口、走水以及真实鱼获表现计算后的历史记录=${JSON.stringify(historySummary)}。历史数据置信度=${confidence}。${rule} 优先参考用户本人历史相似度高且每小时鱼获/效果评分较好的已完成记录，但历史少于3条时只能轻量参考。水温未知时必须明确说明，不得把气温当水温。${aiLanguageInstruction()} ${baitOutputLanguagePolicyV158()} 输出必须包含：1)历史依据与置信度；2)主方案，各饵百分比合计100%；3)每个商品标注“已有”或“需要购买”；4)饵水比；5)拉饵或搓饵；6)开饵方法；7)推荐理由；8)备用方案；9)现场鱼口变化后的调整方法。韩国商品如果保留韩文官方名，只允许写成【官方韩文商品名】，其余描述必须使用当前界面语言。不要保证一定有效。`;
+ let prompt=`你是熟悉韩国淡水钓鱼环境的配饵助手。当前环境=${JSON.stringify(env)}。用户现有饵料=${JSON.stringify(stock)}。系统根据钓点、目标鱼、季节、气温、天气、鱼口、走水以及真实鱼获表现计算后的历史记录=${JSON.stringify(historySummary)}。历史数据置信度=${confidence}。${rule} 优先参考用户本人历史相似度高且每小时鱼获/效果评分较好的已完成记录；如历史中存在鱼竿、主线、子线、浮漂吃铅数据，说明哪些配置曾经有效，但不可凭空补充缺失的配置，但历史少于3条时只能轻量参考。水温未知时必须明确说明，不得把气温当水温。${aiLanguageInstruction()} ${baitOutputLanguagePolicyV158()} 输出必须包含：1)历史依据与置信度；2)主方案，各饵百分比合计100%；3)每个商品标注“已有”或“需要购买”；4)饵水比；5)拉饵或搓饵；6)开饵方法；7)推荐理由；8)备用方案；9)现场鱼口变化后的调整方法。韩国商品如果保留韩文官方名，只允许写成【官方韩文商品名】，其余描述必须使用当前界面语言。不要保证一定有效。`;
 
  try{
   let text=await gemini(prompt,st);
