@@ -946,6 +946,15 @@ function historySimilarity(row,env){
 function rankFishingHistory(rows,env){
  return (rows||[]).map(x=>historySimilarity(x,env)).sort((a,b)=>b._similarity-a._similarity||b._performance-a._performance)
 }
+function personalHistoryConfidenceV162(ranked){
+ const comparable=(ranked||[]).filter(x=>x._similarity>=50&&x._evidenceFields>=2);
+ const n=comparable.length;
+ return {count:n,label:n>=6?'较高':n>=3?'中等':n?'较低':'无充分相似历史',usable:n>=3};
+}
+function selectPersonalEvidenceV162(ranked){
+ const eligible=(ranked||[]).filter(x=>x._similarity>=50&&x._evidenceFields>=2);
+ return eligible.sort((a,b)=>b._similarity-a._similarity||b._performance-a._performance).slice(0,8);
+}
 function summarizePersonalTackleV161(ranked){
  const groups=new Map();
  for(const row of (ranked||[]).filter(x=>x._similarity>=50&&x._evidenceFields>=2)){
@@ -971,7 +980,8 @@ function summarizePersonalTackleV161(ranked){
 function renderHistoryInsight(ranked){
  let box=$('historyInsight');if(!box)return;
  if(!ranked.length){box.style.display='block';box.innerHTML='<b>历史学习：</b> 当前钓点暂无可比记录。';return}
- let top=ranked.slice(0,3),relevant=ranked.filter(x=>x._similarity>=50&&x._evidenceFields>=2).length,confidence=relevant>=6?'较高':relevant>=3?'中等':'较低';
+ const quality=personalHistoryConfidenceV162(ranked),relevant=quality.count,confidence=quality.label;
+ let top=selectPersonalEvidenceV162(ranked).slice(0,3);
  const tackle=summarizePersonalTackleV161(ranked);
  box.style.display='block';
  box.innerHTML=`<b>历史学习：${ranked.length} 条记录（较相似 ${relevant} 条）· 置信度${confidence}</b><br>`+top.map((x,i)=>`#${i+1} 相似度 ${x._similarity}% · ${x._rate!==null?x._rate+'尾/小时':'无时长效率'} · ${escapeHtml(x.bait_recipe?.text||'未记录配方')} · ${escapeHtml(x._equipment.join(' / ')||'未记录装备')}`).join('<br>')+(tackle.length?'<br><b>相似环境的装备使用记录：</b><br>'+tackle.slice(0,4).map(x=>escapeHtml(x.type+' '+x.value)+' · '+x.samples+'次'+(x.measured?' · 有效效率样本'+x.measured+'次':'')).join('<br>'):'')+(relevant<3?'<br><span class="small">相似记录不足3条，装备配置仅供参考，不能据此判定哪种装备更好。</span>':'')
@@ -1038,11 +1048,11 @@ async function recommendBait(){
  try{history=await getSimilarFishingHistory(place,fish)}catch(e){historyFailed=true;st.textContent='个人经验读取失败：'+e.message+'；本次不使用历史数据。'}
  let ranked=rankFishingHistory(history,rawEnv);renderHistoryInsight(ranked);
  if(historyFailed&&$('historyInsight'))$('historyInsight').textContent='个人历史读取失败，无法确认经验是否完整；本次推荐不引用历史记录。';
- let historySummary=ranked.filter(x=>x._similarity>=50&&x._evidenceFields>=2).slice(0,8).map(x=>({历史相似度:x._similarity,历史表现评分:x._performance,日期:x.fished_at,水深米:x.water_depth_m,鱼竿米:x.rod_length_m,主线:x.main_line,子线:x.leader_line,浮漂吃铅克:x.float_buoyancy_g,多竿配置:x.rod_setups,钓点:x.location_name,目标鱼:x.target_fish,气温:x.air_temp_c,水温:x.water_temp_c,季节:x.season,天气:x.weather_condition,风速:x.wind_speed_kmh,鱼口:x.bite_condition,走水:x.current_condition,钓法:x.fishing_method,是否방가로:x.used_bungalow,房间钓位:x.bungalow_room_no,位置备注:x.bungalow_position_note,实际配方:x.bait_recipe?.text||'',鱼获尾数:x.catch_count,鱼获重量kg:x.catch_weight_kg,作钓分钟:x.duration_minutes,每小时鱼获:x._rate,效果评分:x.effectiveness_score,备注:x.notes}));
+ let historySummary=selectPersonalEvidenceV162(ranked).map(x=>({历史相似度:x._similarity,历史表现评分:x._performance,日期:x.fished_at,水深米:x.water_depth_m,鱼竿米:x.rod_length_m,主线:x.main_line,子线:x.leader_line,浮漂吃铅克:x.float_buoyancy_g,多竿配置:x.rod_setups,钓点:x.location_name,目标鱼:x.target_fish,气温:x.air_temp_c,水温:x.water_temp_c,季节:x.season,天气:x.weather_condition,风速:x.wind_speed_kmh,鱼口:x.bite_condition,走水:x.current_condition,钓法:x.fishing_method,是否방가로:x.used_bungalow,房间钓位:x.bungalow_room_no,位置备注:x.bungalow_position_note,实际配方:x.bait_recipe?.text||'',鱼获尾数:x.catch_count,鱼获重量kg:x.catch_weight_kg,作钓分钟:x.duration_minutes,每小时鱼获:x._rate,效果评分:x.effectiveness_score,备注:x.notes}));
  let tackleSummary=summarizePersonalTackleV161(ranked);
- let relevantCount=ranked.filter(x=>x._similarity>=50&&x._evidenceFields>=2).length;
- let confidence=relevantCount>=6?'较高':relevantCount>=3?'中等':relevantCount?'较低':'无充分相似历史';
- if(relevantCount<3){historySummary=[];tackleSummary=[]}
+ const quality=personalHistoryConfidenceV162(ranked),relevantCount=quality.count;
+ let confidence=quality.label;
+ if(!quality.usable){historySummary=[];tackleSummary=[]}
 
  let rule='';
  if(mode==='inventory'){
