@@ -3441,6 +3441,27 @@ Object.assign(I18N_STATIC,{
   }catch(e){if(currentUser?.id===userId)alert('修改分享失败：'+(e?.message||e))}
   finally{pendingCatchEditsV177.delete(postId)}
  };
+ const pendingCatchPhotoRemovalsV178=new Set();
+ window.removeCatchPostPhotoV178=async function(postId,photoIndex){
+  if(!currentUser||pendingCatchPhotoRemovalsV178.has(postId))return;
+  if(!confirm('确定移除这张鱼获照片吗？此操作无法撤销。'))return;
+  const userId=currentUser.id;pendingCatchPhotoRemovalsV178.add(postId);
+  try{
+   const {data,error}=await sb.from('catch_posts').select('image_paths').eq('id',postId).eq('user_id',userId).single();
+   if(error)throw error;
+   if(currentUser?.id!==userId)return;
+   const paths=Array.isArray(data?.image_paths)?data.image_paths:[];
+   if(!Number.isInteger(photoIndex)||photoIndex<0||photoIndex>=paths.length)throw new Error('照片已发生变化，请刷新后重试');
+   const removed=paths[photoIndex],remaining=paths.filter((_,i)=>i!==photoIndex);
+   const {error:updateError}=await sb.from('catch_posts').update({image_paths:remaining,updated_at:new Date().toISOString()}).eq('id',postId).eq('user_id',userId);
+   if(updateError)throw updateError;
+   if(typeof removed==='string'&&removed.startsWith(userId+'/share/')){
+    try{const {error:storageError}=await sb.storage.from('fishing-images').remove([removed]);if(storageError)console.warn('照片已从帖子移除，但云端文件清理失败',storageError)}catch(e){console.warn('云端照片清理失败',e)}
+   }
+   if(currentUser?.id===userId)await renderCatchFeedV1523();
+  }catch(e){if(currentUser?.id===userId)alert('移除照片失败：'+(e?.message||e))}
+  finally{pendingCatchPhotoRemovalsV178.delete(postId)}
+ };
  let catchFeedRequestSequenceV170=0;
  window.renderCatchFeedV1523=async function(){
   const box=$('catchFeed');if(!box||!currentUser)return;
@@ -3474,7 +3495,7 @@ Object.assign(I18N_STATIC,{
    return "<div class='feed-card'><div class='feed-head'><div><b>"+escapeHtml(p.author_name||'钓友')+"</b><div class='small'>"+new Date(p.created_at).toLocaleString()+"</div></div>"+(own?"<div style='display:flex;gap:6px'><button class='secondary' style='width:auto;margin:0' onclick='editCatchPostCaptionV177("+JSON.stringify(p.id)+")'>编辑文字</button><button class='danger' onclick='deleteCatchPostV1523("+JSON.stringify(p.id)+")'>删除分享</button></div>":"")+"</div>"+
     "<div style='margin-top:8px'><b>"+escapeHtml(l.location_name||'未填写钓场')+" · "+escapeHtml(l.target_fish||'')+"</b><div class='small'>"+(l.catch_count??'-')+"尾"+(l.catch_weight_kg?' · '+l.catch_weight_kg+'kg':'')+(l.duration_minutes?' · '+l.duration_minutes+'分钟':'')+"</div></div>"+
     (p.caption?"<div style='margin-top:8px;white-space:pre-wrap'>"+escapeHtml(p.caption)+"</div>":"")+
-    (imgs.length?"<div class='feed-images "+(imgs.length===1?'one':'')+"'>"+imgs.map(url=>"<img src='"+url+"' loading='lazy'>").join('')+"</div>":"")+
+    (imgs.length?"<div class='feed-images "+(imgs.length===1?'one':'')+"'>"+(p.image_paths||[]).map((path,i)=>signed[path]?"<div style='position:relative'><img src='"+escapeHtml(signed[path])+"' loading='lazy' style='width:100%'>"+(own?"<button type='button' class='danger' style='position:absolute;right:5px;top:5px;background:white;border-radius:8px;padding:5px' onclick='removeCatchPostPhotoV178("+JSON.stringify(p.id)+","+i+")'>移除</button>":"")+"</div>":'').join('')+"</div>":"")+
     "<div class='feed-actions'><button onclick='toggleCatchLikeV1523("+JSON.stringify(p.id)+","+liked+")'>"+(liked?'❤️':'🤍')+" "+pl.length+"</button><button type='button'>💬 "+pc.length+"</button></div>"+
     "<details style='margin-top:8px'><summary style='cursor:pointer;font-weight:800'>评论 "+pc.length+"</summary><div style='margin-top:8px'>"+
       pc.map(c=>"<div class='feed-comment'><b>"+escapeHtml(c.author_name||'钓友')+"</b> "+escapeHtml(c.body)+(c.user_id===currentUser.id?" <button class='danger' style='float:none' onclick='deleteCatchCommentV1523("+JSON.stringify(c.id)+")'>删除</button>":"")+"</div>").join('')+
