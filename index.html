@@ -3165,6 +3165,7 @@ Object.assign(I18N_STATIC,{
 (function(){
  window._catchShareImagesV1523=window._catchShareImagesV1523||{};
  window._myCatchPostsV1523=window._myCatchPostsV1523||{};
+ const catchShareDraftOwnersV176=new Map(),catchSharePreviewSequencesV176=new Map();
 
  async function myDisplayNameV1523(){
   if(!currentUser)return '钓友';
@@ -3185,12 +3186,14 @@ Object.assign(I18N_STATIC,{
   if(selected.length>5){alert('一次最多选择5张照片，请重新选择');e.target.value='';return}
   const files=selected.filter(f=>f.type.startsWith('image/'));
   if(files.length!==selected.length){alert('只能选择图片文件');e.target.value='';return}
-  const userId=currentUser?.id||null;
+  const userId=currentUser?.id||null,previewId=(catchSharePreviewSequencesV176.get(log.id)||0)+1;
+  catchSharePreviewSequencesV176.set(log.id,previewId);
   const imgs=[];
   for(const file of files){
    try{imgs.push(await compressImage(file,1600,.84))}catch(_){imgs.push(await fileToDataURL(file))}
   }
-  if((currentUser?.id||null)!==userId)return;
+  if((currentUser?.id||null)!==userId||catchSharePreviewSequencesV176.get(log.id)!==previewId)return;
+  catchShareDraftOwnersV176.set(log.id,userId);
   window._catchShareImagesV1523[log.id]=imgs;
   const box=$('sharePreview_'+i);
   if(box)box.innerHTML=imgs.map(x=>"<img src='"+x+"'>").join('');
@@ -3267,6 +3270,8 @@ Object.assign(I18N_STATIC,{
  window.shareCatchLogV1523=async function(i){
   const log=(window._logs||[])[i];if(!log||!currentUser)return;
   if(log.status!=='completed')return alert('请先填写并保存本次作钓结果后再分享。');
+  const draftOwner=catchShareDraftOwnersV176.get(log.id);
+  if(draftOwner&&draftOwner!==currentUser.id){delete window._catchShareImagesV1523[log.id];catchShareDraftOwnersV176.delete(log.id);return alert('账号已切换，请重新选择鱼获照片')}
   const imgs=window._catchShareImagesV1523[log.id]||[];
   const caption=($('shareCaption_'+i)?.value||'').trim();
   const existing=window._myCatchPostsV1523[log.id];
@@ -3302,6 +3307,8 @@ Object.assign(I18N_STATIC,{
    if(currentUser?.id!==shareUserId)return;
    window._myCatchPostsV1523[log.id]=data.id;
    window._catchShareImagesV1523[log.id]=[];
+   catchShareDraftOwnersV176.delete(log.id);
+   catchSharePreviewSequencesV176.delete(log.id);
    try{await decorateLogShareV1523()}catch(e){console.warn('分享成功但列表刷新失败',e)}
    alert('已分享到鱼获广场。')
   }catch(e){
@@ -3333,6 +3340,9 @@ Object.assign(I18N_STATIC,{
    await deleteOwnedCatchPostV173(postId,userId);
    if(currentUser?.id!==userId)return;
    delete window._myCatchPostsV1523[log.id];
+   delete window._catchShareImagesV1523[log.id];
+   catchShareDraftOwnersV176.delete(log.id);
+   catchSharePreviewSequencesV176.delete(log.id);
    await decorateLogShareV1523();await renderCatchFeedV1523();
   }catch(e){if(currentUser?.id===userId)alert('取消分享失败：'+(e?.message||e))}
   finally{pendingPostDeletesV173.delete(postId)}
