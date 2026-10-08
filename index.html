@@ -5021,7 +5021,15 @@ async function loadPositionsV161(){
  const box=$('positionListV161');if(!box||!currentUser)return;
  const requestId=window._positionLoadRequestV161=(window._positionLoadRequestV161||0)+1,userId=currentUser.id;
  const historyStatus=$('positionHistoryStatusV161');if(historyStatus)historyStatus.textContent='正在读取钓位档案…';
- const {data,error}=await sb.from('fishing_positions').select('id,venue_name,position_name,depth_m,bottom_type,current_note,structure_note,visit_count,catch_count,best_weight_kg,last_fished_at').eq('user_id',currentUser.id).order('updated_at',{ascending:false});
+ const data=[];let error=null;
+ for(let offset=0;offset<100000;offset+=500){
+  if(requestId!==window._positionLoadRequestV161||currentUser?.id!==userId)return;
+  const result=await sb.from('fishing_positions').select('id,venue_name,position_name,depth_m,bottom_type,current_note,structure_note,visit_count,catch_count,best_weight_kg,last_fished_at').eq('user_id',userId).order('updated_at',{ascending:false}).order('id',{ascending:true}).range(offset,offset+499);
+  if(result.error){error=result.error;break}
+  data.push(...(result.data||[]));
+  if((result.data||[]).length<500)break;
+  if(offset+500>=100000){error=new Error('钓位数量超过读取上限');break}
+ }
  if(requestId!==window._positionLoadRequestV161||currentUser?.id!==userId)return;
  if(error){const status=$('positionHistoryStatusV161');if(status)status.textContent='钓位读取失败，无法确认统计是否最新。';box.innerHTML="<div class='empty'>钓位读取失败，请稍后重试。</div>";return}
  const activeTrip=window._currentTrip||{};
@@ -5030,19 +5038,21 @@ async function loadPositionsV161(){
  const positionChoices=document.getElementById('tripPositionChoiceV168');
  if(positionChoices)positionChoices.disabled=Boolean(activeTrip.planSaved&&activeTrip.logId);
  if(positionChoices){
-  const choices=(data||[]).filter(p=>p.venue_name===activeVenue);
+  const venueKey=String(activeVenue||'').trim().toLocaleLowerCase();
+  const choices=(data||[]).filter(p=>String(p.venue_name||'').trim().toLocaleLowerCase()===venueKey);
   positionChoices.innerHTML='<option value="">未选择具体钓位</option>'+choices.map(p=>'<option value="'+p.id+'">'+escapeHtml(p.position_name)+'</option>').join('');
   positionChoices.value=choices.some(p=>p.id===activeTrip.positionId)?activeTrip.positionId:'';
+  if(activeTrip.positionId&&!choices.some(p=>p.id===activeTrip.positionId)&&!activeTrip.logId){activeTrip.positionId=null;saveTripSession()}
  }
 
  if(!error&&data?.length){
   // Read every page; never present a truncated sample as complete history.
-  const aggregates=new Map(),pageSize=500;let historyError=null;
+  const aggregates=new Map(),knownPositionIds=new Set(data.map(p=>p.id)),pageSize=500;let historyError=null;
   for(let offset=0;offset<100000;offset+=pageSize){
    if(requestId!==window._positionLoadRequestV161||currentUser?.id!==userId)return;
-   const result=await sb.from('fishing_logs').select('position_id,catch_count,catch_weight_kg,fished_at,trip_status').eq('user_id',currentUser.id).in('position_id',data.map(p=>p.id)).eq('trip_status','completed').order('fished_at',{ascending:false}).range(offset,offset+pageSize-1);
+   const result=await sb.from('fishing_logs').select('position_id,catch_count,catch_weight_kg,fished_at,trip_status').eq('user_id',userId).eq('trip_status','completed').not('position_id','is',null).order('fished_at',{ascending:false}).order('id',{ascending:true}).range(offset,offset+pageSize-1);
    if(result.error){historyError=result.error;break}
-   for(const h of result.data||[]){const a=aggregates.get(h.position_id)||{visits:0,fish:0,best:null,last:null};a.visits++;a.fish+=Number(h.catch_count)||0;const w=Number(h.catch_weight_kg);if(h.catch_weight_kg!=null&&Number.isFinite(w))a.best=Math.max(a.best??0,w);if(h.fished_at&&(!a.last||h.fished_at>a.last))a.last=h.fished_at;aggregates.set(h.position_id,a)}
+   for(const h of result.data||[]){if(!knownPositionIds.has(h.position_id))continue;const a=aggregates.get(h.position_id)||{visits:0,fish:0,best:null,last:null};a.visits++;a.fish+=Number(h.catch_count)||0;const w=Number(h.catch_weight_kg);if(h.catch_weight_kg!=null&&Number.isFinite(w))a.best=Math.max(a.best??0,w);if(h.fished_at&&(!a.last||h.fished_at>a.last))a.last=h.fished_at;aggregates.set(h.position_id,a)}
    if((result.data||[]).length<pageSize)break;
    if(offset+pageSize>=100000){historyError=new Error('历史记录超过安全分页上限');break}
   }
