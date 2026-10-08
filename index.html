@@ -5064,8 +5064,16 @@ async function savePositionV161(){
  if(window._positionSaveBusyV161)return;window._positionSaveBusyV161=true;
  try{
  const userId=currentUser.id;
- st.textContent='正在检查重复档案…';const {data:existing,error:checkError}=await sb.from('fishing_positions').select('id,venue_name,position_name').eq('user_id',currentUser.id).limit(1000);
- if(checkError){st.textContent='重复档案检查失败，请稍后重试：'+checkError.message;return}
+ st.textContent='正在检查重复档案…';
+ const existing=[];let checkError=null;
+ for(let offset=0;offset<100000;offset+=500){
+  const result=await sb.from('fishing_positions').select('id,venue_name,position_name').eq('user_id',userId).order('id').range(offset,offset+499);
+  if(result.error){checkError=result.error;break}
+  existing.push(...(result.data||[]));
+  if((result.data||[]).length<500)break;
+  if(offset+500>=100000){checkError=new Error('档案数量超过检查上限');break}
+ }
+ if(checkError){st.textContent='重复档案检查未完成，已取消保存：'+checkError.message;return}
  if(currentUser?.id!==userId){st.textContent='登录状态已变化，请重新操作。';return}
  if((existing||[]).some(p=>p.venue_name.trim().toLocaleLowerCase()===venue.toLocaleLowerCase()&&p.position_name.trim().toLocaleLowerCase()===name.toLocaleLowerCase())){st.textContent='该钓场已有同名钓位，请使用已有档案。';return}
  st.textContent='正在保存…';const depth=$('positionDepthV161').value;
