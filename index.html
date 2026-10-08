@@ -3181,11 +3181,16 @@ Object.assign(I18N_STATIC,{
  }
  window.selectCatchShareImagesV1523=async function(i,e){
   const log=(window._logs||[])[i];if(!log)return;
-  const files=[...(e.target.files||[])].slice(0,5);
+  const selected=[...(e.target.files||[])];
+  if(selected.length>5){alert('一次最多选择5张照片，请重新选择');e.target.value='';return}
+  const files=selected.filter(f=>f.type.startsWith('image/'));
+  if(files.length!==selected.length){alert('只能选择图片文件');e.target.value='';return}
+  const userId=currentUser?.id||null;
   const imgs=[];
   for(const file of files){
    try{imgs.push(await compressImage(file,1600,.84))}catch(_){imgs.push(await fileToDataURL(file))}
   }
+  if((currentUser?.id||null)!==userId)return;
   window._catchShareImagesV1523[log.id]=imgs;
   const box=$('sharePreview_'+i);
   if(box)box.innerHTML=imgs.map(x=>"<img src='"+x+"'>").join('');
@@ -3209,6 +3214,7 @@ Object.assign(I18N_STATIC,{
   if(btn){btn.disabled=true;btn.textContent='正在分享…'}
   const uploaded=[];
   const shareUserId=currentUser.id;
+  let persisted=false;
   try{
    let imagePaths=[];
    if(existing){
@@ -3230,14 +3236,17 @@ Object.assign(I18N_STATIC,{
     ?await sb.from('catch_posts').update(payload).eq('id',existing).eq('user_id',shareUserId).select('id').single()
     :await sb.from('catch_posts').insert(payload).select('id').single();
    if(error)throw error;
+   persisted=true;
    if(currentUser?.id!==shareUserId)return;
    window._myCatchPostsV1523[log.id]=data.id;
    window._catchShareImagesV1523[log.id]=[];
-   await decorateLogShareV1523();
+   try{await decorateLogShareV1523()}catch(e){console.warn('分享成功但列表刷新失败',e)}
    alert('已分享到鱼获广场。')
   }catch(e){
-   if(uploaded.length)try{await sb.storage.from('fishing-images').remove(uploaded)}catch(_){}
-   alert('分享失败：'+(e?.message||e))
+   if(!persisted&&uploaded.length){
+    try{const {error:cleanupError}=await sb.storage.from('fishing-images').remove(uploaded);if(cleanupError)console.warn('上传失败后的图片清理失败',cleanupError)}catch(cleanupError){console.warn('上传失败后的图片清理失败',cleanupError)}
+   }
+   if(currentUser?.id===shareUserId)alert('分享失败：'+(e?.message||e))
   }finally{if(btn){btn.disabled=false;btn.textContent=existing?'更新分享':'分享鱼获'}}
  };
  const pendingPostDeletesV173=new Set();
