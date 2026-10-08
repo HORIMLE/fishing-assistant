@@ -3203,24 +3203,33 @@ Object.assign(I18N_STATIC,{
   if(error)throw error;return path
  }
  let standaloneCatchImagesV174=[];
+ let standaloneCatchOwnerV175=null,standaloneCatchPreviewSeqV175=0;
+ function resetStandaloneCatchDraftV175(){
+  standaloneCatchImagesV174=[];standaloneCatchOwnerV175=null;standaloneCatchPreviewSeqV175++;
+  const preview=$('standaloneCatchPreviewV174');if(preview)preview.innerHTML='';
+  const input=$('standaloneCatchPhotosV174');if(input)input.value='';
+ }
  window.toggleStandaloneCatchV174=function(){
+  if(standaloneCatchOwnerV175&&standaloneCatchOwnerV175!==currentUser?.id)resetStandaloneCatchDraftV175();
   const form=$('standaloneCatchFormV174');if(form)form.hidden=!form.hidden;
  };
  window.previewStandaloneCatchV174=async function(e){
   const files=[...(e.target.files||[])];
   if(files.length>5||files.some(f=>!f.type.startsWith('image/'))){alert('请选择最多5张图片');e.target.value='';return}
-  const userId=currentUser?.id,images=[];
+  const userId=currentUser?.id,images=[],previewId=++standaloneCatchPreviewSeqV175;
   const status=$('standaloneCatchStatusV174');if(status)status.textContent='正在处理图片…';
   try{
    for(const file of files){try{images.push(await compressImage(file,1600,.84))}catch(_){images.push(await fileToDataURL(file)}}
-   if(currentUser?.id!==userId)return;
+   if(currentUser?.id!==userId||previewId!==standaloneCatchPreviewSeqV175)return;
+   standaloneCatchOwnerV175=userId;
    standaloneCatchImagesV174=images;
    $('standaloneCatchPreviewV174').innerHTML=images.map(x=>"<img src='"+x+"'>").join('');
    if(status)status.textContent='已选择 '+images.length+' 张图片';
-  }catch(err){if(status)status.textContent='图片处理失败：'+err.message}
+  }catch(err){if(status&&previewId===standaloneCatchPreviewSeqV175&&currentUser?.id===userId)status.textContent='图片处理失败：'+err.message}
  };
  window.publishStandaloneCatchV174=async function(){
   if(!currentUser)return alert('请先登录');
+  if(standaloneCatchOwnerV175&&standaloneCatchOwnerV175!==currentUser.id){resetStandaloneCatchDraftV175();return alert('账号已切换，请重新选择照片')}
   const btn=$('standaloneCatchSubmitV174'),status=$('standaloneCatchStatusV174');
   if(btn.disabled)return;
   const caption=$('standaloneCatchCaptionV174').value.trim();
@@ -3244,7 +3253,7 @@ Object.assign(I18N_STATIC,{
    const {error}=await sb.from('catch_posts').insert({user_id:userId,fishing_log_id:null,author_name:author,caption:caption||null,image_paths:uploaded,location_name:place||null,target_fish:fish||null,catch_count:count});
    if(error)throw error;persisted=true;
    if(currentUser?.id!==userId)return;
-   standaloneCatchImagesV174=[];
+   resetStandaloneCatchDraftV175();
    for(const id of ['standaloneCatchCaptionV174','standaloneCatchPlaceV174','standaloneCatchFishV174','standaloneCatchCountV174','standaloneCatchPhotosV174'])$(id).value='';
    $('standaloneCatchPreviewV174').innerHTML='';
    status.textContent='发布成功';
