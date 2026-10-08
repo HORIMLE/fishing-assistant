@@ -991,20 +991,21 @@ async function getSimilarFishingHistory(place,fish){
  const userId=currentUser.id,pageSize=100,columns='id,fished_at,spot_id,position_id,location_name,target_fish,water_depth_m,rod_length_m,rod_setups,main_line,leader_line,float_buoyancy_g,air_temp_c,water_temp_c,season,weather_condition,wind_speed_kmh,bite_condition,current_condition,fishing_method,used_bungalow,bungalow_room_no,bungalow_position_note,bait_recipe,catch_count,catch_weight_kg,duration_minutes,effectiveness_score,notes';
  async function readHistory(limit,venue){
   const rows=[];
+  // 每批最多 100 条；多读一条仅用于判定是否存在未纳入的记录。
   for(let offset=0;offset<=limit;offset+=pageSize){
+   const remaining=limit-offset,requestCount=Math.min(pageSize,remaining+1);
    let q=sb.from('fishing_logs').select(columns)
     .eq('user_id',userId).eq('trip_status','completed')
     .order('fished_at',{ascending:false}).order('id',{ascending:true})
-    .range(offset,Math.min(offset+pageSize-1,limit));
+    .range(offset,offset+requestCount-1);
    if(venue)q=q.eq('location_name',venue);
    const result=await q;
    if(result.error){console.warn('个人经验读取失败',result.error);throw new Error('个人历史记录读取失败，请稍后重试')}
    if(currentUser?.id!==userId)throw new Error('用户已切换，请重新生成推荐');
    const batch=result.data||[];
-   const remaining=limit-offset;
    if(batch.length>remaining){rows.push(...batch.slice(0,remaining));return {rows,truncated:true}}
    rows.push(...batch);
-   if(batch.length<Math.min(pageSize,remaining+1))break;
+   if(batch.length<requestCount)break;
   }
   return {rows,truncated:false};
  }
