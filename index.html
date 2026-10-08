@@ -5078,7 +5078,7 @@ async function savePositionV161(){
  if((existing||[]).some(p=>p.venue_name.trim().toLocaleLowerCase()===venue.toLocaleLowerCase()&&p.position_name.trim().toLocaleLowerCase()===name.toLocaleLowerCase())){st.textContent='该钓场已有同名钓位，请使用已有档案。';return}
  st.textContent='正在保存…';const depth=$('positionDepthV161').value;
  const {error}=await sb.from('fishing_positions').insert({user_id:userId,venue_name:venue,position_name:name,depth_m:depth===''?null:Number(depth),bottom_type:$('positionBottomV161').value||null,current_note:$('positionCurrentV161').value.trim()||null,structure_note:$('positionNoteV161').value.trim()||null});
- if(error){st.textContent='保存失败：'+error.message;return}st.textContent='已加入你的钓位档案。';['positionNameV161','positionDepthV161','positionCurrentV161','positionNoteV161'].forEach(id=>$(id).value='');$('positionBottomV161').value='';loadPositionsV161()
+ if(error){st.textContent=error.code==='23505'?'该钓场已有同名钓位，请使用已有档案。':'保存失败：'+error.message;return}if(currentUser?.id!==userId)return;st.textContent='已加入你的钓位档案。';['positionNameV161','positionDepthV161','positionCurrentV161','positionNoteV161'].forEach(id=>$(id).value='');$('positionBottomV161').value='';loadPositionsV161()
  }catch(e){st.textContent='保存失败：'+(e?.message||'未知错误')}finally{window._positionSaveBusyV161=false}
 }
 async function deletePositionV161(id){
