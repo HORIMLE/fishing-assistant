@@ -998,7 +998,7 @@ async function getSimilarFishingHistory(place,fish){
     .eq('user_id',userId).eq('trip_status','completed')
     .order('fished_at',{ascending:false}).order('id',{ascending:true})
     .range(offset,offset+requestCount-1);
-   if(venue)q=excludeVenue?q.or('location_name.is.null,location_name.neq.'+venue.replace(/[,.()\\]/g,'')):q.eq('location_name',venue);
+   if(venue)q=excludeVenue?q.neq('location_name',venue):q.eq('location_name',venue);
    const result=await q;
    if(result.error){console.warn('个人经验读取失败',result.error);throw new Error('个人历史记录读取失败，请稍后重试')}
    if(currentUser?.id!==userId)throw new Error('用户已切换，请重新生成推荐');
