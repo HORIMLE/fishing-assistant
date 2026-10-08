@@ -3285,21 +3285,32 @@ Object.assign(I18N_STATIC,{
   if(data?.image_paths?.length)try{await sb.storage.from('fishing-images').remove(data.image_paths)}catch(_){}
   renderCatchFeedV1523();if($('logList'))decorateLogShareV1523()
  };
+ let catchFeedRequestSequenceV170=0;
  window.renderCatchFeedV1523=async function(){
   const box=$('catchFeed');if(!box||!currentUser)return;
+  const requestId=++catchFeedRequestSequenceV170,userId=currentUser.id;
+  const active=()=>requestId===catchFeedRequestSequenceV170&&currentUser?.id===userId;
   box.innerHTML="<div class='card'><div class='ai-status'>正在加载鱼获广场…</div></div>";
   const {data:posts,error}=await sb.from('catch_posts').select('id,user_id,fishing_log_id,author_name,caption,image_paths,created_at').order('created_at',{ascending:false}).limit(50);
+  if(!active())return;
   if(error){box.innerHTML="<div class='card'>加载失败："+escapeHtml(error.message)+"</div>";return}
   if(!posts?.length){box.innerHTML="<div class='card empty'>还没有共享鱼获。完成作钓后可以从“钓鱼记录”分享。</div>";return}
   const postIds=posts.map(x=>x.id),logIds=posts.map(x=>x.fishing_log_id);
-  const [{data:logs},{data:likes},{data:comments}]=await Promise.all([
+  const [logsResult,likesResult,commentsResult]=await Promise.all([
    sb.from('fishing_logs').select('id,fished_at,location_name,target_fish,catch_count,catch_weight_kg,duration_minutes').in('id',logIds),
    sb.from('catch_post_likes').select('post_id,user_id').in('post_id',postIds),
    sb.from('catch_post_comments').select('id,post_id,user_id,author_name,body,created_at').in('post_id',postIds).order('created_at',{ascending:true})
   ]);
-  const lm=new Map((logs||[]).map(x=>[x.id,x]));
+  if(!active())return;
+  const relatedError=logsResult.error||likesResult.error||commentsResult.error;
+  if(relatedError){box.innerHTML="<div class='card'>鱼获详情加载失败，请稍后重试："+escapeHtml(relatedError.message)+"</div>";return}
+  const logs=logsResult.data||[],likes=likesResult.data||[],comments=commentsResult.data||[];
+  const lm=new Map(logs.map(x=>[x.id,x]));
   const signed={};
-  for(const p of posts)for(const path of (p.image_paths||[]))if(!signed[path])signed[path]=await signedImage(path);
+  for(const p of posts)for(const path of (p.image_paths||[]))if(!signed[path]){
+   try{signed[path]=await signedImage(path)}catch(e){console.warn('鱼获图片加载失败',e);signed[path]=''}
+   if(!active())return;
+  }
   box.innerHTML=posts.map(p=>{
    const l=lm.get(p.fishing_log_id)||{},pl=(likes||[]).filter(x=>x.post_id===p.id),pc=(comments||[]).filter(x=>x.post_id===p.id);
    const liked=pl.some(x=>x.user_id===currentUser.id),own=p.user_id===currentUser.id;
