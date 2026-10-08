@@ -3566,13 +3566,22 @@ Object.assign(I18N_STATIC,{
   if(relatedError){box.innerHTML="<div class='card'>鱼获详情加载失败，请稍后重试："+escapeHtml(relatedError.message)+"</div>";return}
   const logs=logsResult.data||[],likes=likesResult.data||[],comments=commentsResult.data||[];
   const lm=new Map(logs.map(x=>[x.id,x]));
-  const signed={};
-  for(const p of visiblePosts)for(const path of (p.image_paths||[]))if(!signed[path]){
-   try{signed[path]=await signedImage(path)}catch(e){console.warn('鱼获图片加载失败',e);signed[path]=''}
+  const likesByPost=new Map(),commentsByPost=new Map();
+  for(const like of likes){if(!likesByPost.has(like.post_id))likesByPost.set(like.post_id,[]);likesByPost.get(like.post_id).push(like)}
+  for(const comment of comments){if(!commentsByPost.has(comment.post_id))commentsByPost.set(comment.post_id,[]);commentsByPost.get(comment.post_id).push(comment)}
+  const signed=Object.create(null);
+  const imagePaths=[...new Set(visiblePosts.flatMap(p=>Array.isArray(p.image_paths)?p.image_paths:[]).filter(path=>typeof path==='string'&&path.length>0))];
+  // 有界并发签发图片链接，避免逐张等待，也避免一次请求过多导致限流。
+  for(let offset=0;offset<imagePaths.length;offset+=6){
+   const batch=imagePaths.slice(offset,offset+6);
+   const urls=await Promise.all(batch.map(async path=>{
+    try{return await signedImage(path)}catch(e){console.warn('鱼获图片加载失败',e);return ''}
+   }));
    if(!active())return;
+   batch.forEach((path,i)=>{signed[path]=urls[i]||''});
   }
   box.innerHTML=visiblePosts.map(p=>{
-   const l=lm.get(p.fishing_log_id)||{location_name:p.location_name,target_fish:p.target_fish,catch_count:p.catch_count},pl=(likes||[]).filter(x=>x.post_id===p.id),pc=(comments||[]).filter(x=>x.post_id===p.id);
+   const l=lm.get(p.fishing_log_id)||{location_name:p.location_name,target_fish:p.target_fish,catch_count:p.catch_count},pl=likesByPost.get(p.id)||[],pc=commentsByPost.get(p.id)||[];
    const liked=pl.some(x=>x.user_id===currentUser.id),own=p.user_id===currentUser.id;
    const imgs=(p.image_paths||[]).map(path=>signed[path]).filter(Boolean);
    return "<div class='feed-card'><div class='feed-head'><div><b>"+escapeHtml(p.author_name||'钓友')+"</b><div class='small'>"+new Date(p.created_at).toLocaleString()+"</div></div>"+(own?"<div style='display:flex;gap:6px;flex-wrap:wrap'><label class='secondary' style='width:auto;margin:0;padding:8px;cursor:pointer'>添加照片<input type='file' accept='image/*' multiple style='display:none' onchange='addCatchPostPhotosV179("+JSON.stringify(p.id)+",this)'></label><button class='secondary' style='width:auto;margin:0' onclick='editCatchPostCaptionV177("+JSON.stringify(p.id)+")'>编辑文字</button><button class='danger' onclick='deleteCatchPostV1523("+JSON.stringify(p.id)+")'>删除分享</button></div>":"")+"</div>"+
