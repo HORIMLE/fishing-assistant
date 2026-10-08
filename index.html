@@ -5031,7 +5031,7 @@ async function loadPositionsV161(){
   if(offset+500>=100000){error=new Error('钓位数量超过读取上限');break}
  }
  if(requestId!==window._positionLoadRequestV161||currentUser?.id!==userId)return;
- if(error){const status=$('positionHistoryStatusV161');if(status)status.textContent='钓位读取失败，无法确认统计是否最新。';box.innerHTML="<div class='empty'>钓位读取失败，请稍后重试。</div>";return}
+ if(error){window._positionCacheV161=[];const status=$('positionHistoryStatusV161');if(status)status.textContent='钓位读取失败，无法确认统计是否最新。';box.innerHTML="<div class='empty'>钓位读取失败，请稍后重试。</div>";return}
  const activeTrip=window._currentTrip||{};
  const activeVenue=typeof activeTrip.place==='string'?activeTrip.place:(activeTrip.place?.name||activeTrip.placeName||'');
  if(historyStatus)historyStatus.textContent='正在读取钓位历史统计…';
@@ -5068,15 +5068,17 @@ async function loadPositionsV161(){
   if(status&&!status.textContent.includes('读取不完整')&&!status.textContent.includes('无法确认'))status.textContent='钓位统计来自已关联的历史作钓记录；未关联的旧记录不会自动归入钓位。';
  }
  window._positionCacheV161=data||[];
- box.innerHTML=data?.length?data.map(x=>"<div class='position-card-v161'><b><span>"+escapeHtml(x.venue_name)+" · "+escapeHtml(x.position_name)+"</span><button onclick=\"editPositionV161('"+x.id+"')\">编辑</button><button onclick=\"deletePositionV161('"+x.id+"')\">删除</button></b><small>"+[x.depth_m!=null?'水深 '+x.depth_m+'m':null,x.bottom_type,x.current_note,x.visit_count?'去过 '+x.visit_count+' 次':null,x.catch_count?'累计 '+x.catch_count+' 尾':null,x.best_weight_kg?'最大 '+x.best_weight_kg+'kg':null].filter(Boolean).map(escapeHtml).join(' · ')+"</small>"+(x.structure_note?"<small>"+escapeHtml(x.structure_note)+"</small>":"")+"</div>").join(''):"<div class='empty'>还没有钓位档案。第一次记录后，这里会成为你的私人钓位库。</div>"
+ box.innerHTML=data?.length?data.map(x=>"<div class='position-card-v161'><b><span>"+escapeHtml(x.venue_name)+" · "+escapeHtml(x.position_name)+"</span><button onclick=\"editPositionV161('"+x.id+"')\">编辑</button><button onclick=\"deletePositionV161('"+x.id+"')\">删除</button></b><small>"+[x.depth_m!=null?'水深 '+x.depth_m+'m':null,x.bottom_type,x.current_note,x.visit_count?'去过 '+x.visit_count+' 次':null,x.catch_count?'累计 '+x.catch_count+' 尾':null,x.best_weight_kg!=null?'单次总渔获最高 '+x.best_weight_kg+'kg':null].filter(Boolean).map(escapeHtml).join(' · ')+"</small>"+(x.structure_note?"<small>"+escapeHtml(x.structure_note)+"</small>":"")+"</div>").join(''):"<div class='empty'>还没有钓位档案。第一次记录后，这里会成为你的私人钓位库。</div>"
 }
 function cancelPositionEditV161(){
+ if(window._positionSaveBusyV161)return;
  window._editingPositionV161=null;
  $('positionSaveBtnV161').textContent='＋ 保存钓位';$('positionCancelEditV161').style.display='none';
  ['positionNameV161','positionDepthV161','positionCurrentV161','positionNoteV161'].forEach(id=>$(id).value='');
  $('positionBottomV161').value='';
 }
 function editPositionV161(id){
+ if(window._positionSaveBusyV161)return;
  const p=(window._positionCacheV161||[]).find(x=>x.id===id);if(!p)return;
  window._editingPositionV161=id;
  $('positionVenueV161').value=p.venue_name||'';$('positionNameV161').value=p.position_name||'';
@@ -5091,19 +5093,19 @@ async function savePositionV161(){
  if(window._positionSaveBusyV161)return;window._positionSaveBusyV161=true;
  try{
  const userId=currentUser.id,editingId=window._editingPositionV161;
- st.textContent='正在保存…';
  if(currentUser?.id!==userId){st.textContent='登录状态已变化，请重新操作。';return}
  st.textContent='正在保存…';const depth=$('positionDepthV161').value;
+ if(depth!==''&&(!Number.isFinite(Number(depth))||Number(depth)<0||Number(depth)>1000)){st.textContent='水深请输入 0～1000 米的有效数值。';return}
  const payload={venue_name:venue,position_name:name,depth_m:depth===''?null:Number(depth),bottom_type:$('positionBottomV161').value||null,current_note:$('positionCurrentV161').value.trim()||null,structure_note:$('positionNoteV161').value.trim()||null};
  const {data:saved,error}=editingId
   ?await sb.from('fishing_positions').update(payload).eq('id',editingId).eq('user_id',userId).select('id')
   :await sb.from('fishing_positions').insert({...payload,user_id:userId}).select('id');
  if(!error&&!saved?.length){st.textContent='没有保存任何钓位，请刷新后重试。';return}
- if(error){st.textContent=error.code==='23505'?'该钓场已有同名钓位，请使用已有档案。':'保存失败：'+error.message;return}if(currentUser?.id!==userId)return;st.textContent=editingId?'钓位档案已更新。':'已加入你的钓位档案。';cancelPositionEditV161();loadPositionsV161()
+ if(error){st.textContent=error.code==='23505'?'该钓场已有同名钓位，请使用已有档案。':'保存失败：'+error.message;return}if(currentUser?.id!==userId)return;st.textContent=editingId?'钓位档案已更新。':'已加入你的钓位档案。';window._editingPositionV161=null;$('positionSaveBtnV161').textContent='＋ 保存钓位';$('positionCancelEditV161').style.display='none';['positionNameV161','positionDepthV161','positionCurrentV161','positionNoteV161'].forEach(id=>$(id).value='');$('positionBottomV161').value='';loadPositionsV161()
  }catch(e){st.textContent='保存失败：'+(e?.message||'未知错误')}finally{window._positionSaveBusyV161=false}
 }
 async function deletePositionV161(id){
- if(!currentUser)return;
+ if(!currentUser||window._positionSaveBusyV161)return;
  const userId=currentUser.id,st=$('positionStatusV161');
  const {count,error:checkError}=await sb.from('fishing_logs').select('id',{count:'exact',head:true}).eq('user_id',userId).eq('position_id',id);
  if(checkError){if(st)st.textContent='无法确认该钓位是否关联历史记录，已取消删除：'+checkError.message;return}
