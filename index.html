@@ -5022,6 +5022,7 @@ async function loadPositionsV161(){
  const {data,error}=await sb.from('fishing_positions').select('id,venue_name,position_name,depth_m,bottom_type,current_note,structure_note,visit_count,catch_count,best_weight_kg,last_fished_at').eq('user_id',currentUser.id).order('updated_at',{ascending:false});
  const activeTrip=window._currentTrip||{};
  const activeVenue=typeof activeTrip.place==='string'?activeTrip.place:(activeTrip.place?.name||activeTrip.placeName||'');
+ const historyStatus=document.getElementById('positionHistoryStatusV161');if(historyStatus)historyStatus.textContent='正在读取钓位历史统计…';
  const positionChoices=document.getElementById('tripPositionChoiceV168');
  if(positionChoices)positionChoices.disabled=Boolean(activeTrip.planSaved&&activeTrip.logId);
  if(positionChoices){
@@ -5031,7 +5032,15 @@ async function loadPositionsV161(){
  }
 
  if(!error&&data?.length){
-  const {data:history, error:historyError}=await sb.from('fishing_logs').select('position_id,catch_count,catch_weight_kg,fished_at,trip_status').eq('user_id',currentUser.id).in('position_id',data.map(p=>p.id)).eq('trip_status','completed').limit(1000);
+  // Read every page; never present a truncated sample as complete history.
+  const history=[],pageSize=500;let historyError=null;
+  for(let offset=0;offset<100000;offset+=pageSize){
+   const result=await sb.from('fishing_logs').select('position_id,catch_count,catch_weight_kg,fished_at,trip_status').eq('user_id',currentUser.id).in('position_id',data.map(p=>p.id)).eq('trip_status','completed').order('fished_at',{ascending:false}).range(offset,offset+pageSize-1);
+   if(result.error){historyError=result.error;break}
+   history.push(...(result.data||[]));
+   if((result.data||[]).length<pageSize)break;
+   if(offset+pageSize>=100000){historyError=new Error('历史记录超过安全分页上限');break}
+  }
   if(historyError){const status=document.getElementById('positionHistoryStatusV161');if(status)status.textContent='历史统计暂时无法读取，以下统计值可能不是最新数据。'}
   if(!historyError){
    const aggregates=new Map();
@@ -5042,7 +5051,7 @@ async function loadPositionsV161(){
  if(error){const status=document.getElementById('positionHistoryStatusV161');if(status)status.textContent='钓位读取失败，无法确认统计是否最新。';box.innerHTML="<div class='empty'>钓位读取失败，请稍后重试。</div>";return}
  if(data?.length){
   const status=document.getElementById('positionHistoryStatusV161');
-  if(status&&!status.textContent.includes('暂时无法读取'))status.textContent='钓位统计来自已关联的历史作钓记录；未关联的旧记录不会自动归入钓位。';
+  if(status&&!status.textContent.includes('暂时无法读取')&&!status.textContent.includes('无法确认'))status.textContent='钓位统计来自已关联的历史作钓记录；未关联的旧记录不会自动归入钓位。';
  }
  box.innerHTML=data?.length?data.map(x=>"<div class='position-card-v161'><b><span>"+escapeHtml(x.venue_name)+" · "+escapeHtml(x.position_name)+"</span><button onclick=\"deletePositionV161('"+x.id+"')\">删除</button></b><small>"+[x.depth_m!=null?'水深 '+x.depth_m+'m':null,x.bottom_type,x.current_note,x.visit_count?'去过 '+x.visit_count+' 次':null,x.catch_count?'累计 '+x.catch_count+' 尾':null,x.best_weight_kg?'最大 '+x.best_weight_kg+'kg':null].filter(Boolean).map(escapeHtml).join(' · ')+"</small>"+(x.structure_note?"<small>"+escapeHtml(x.structure_note)+"</small>":"")+"</div>").join(''):"<div class='empty'>还没有钓位档案。第一次记录后，这里会成为你的私人钓位库。</div>"
 }
