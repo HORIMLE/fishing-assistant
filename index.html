@@ -5019,7 +5019,10 @@ setTimeout(()=>{syncSessionV160();initPrepV160()},800);
 /* v16.12 personal position memory */
 async function loadPositionsV161(){
  const box=$('positionListV161');if(!box||!currentUser)return;
+ const requestId=window._positionLoadRequestV161=(window._positionLoadRequestV161||0)+1,userId=currentUser.id;
  const {data,error}=await sb.from('fishing_positions').select('id,venue_name,position_name,depth_m,bottom_type,current_note,structure_note,visit_count,catch_count,best_weight_kg,last_fished_at').eq('user_id',currentUser.id).order('updated_at',{ascending:false});
+ if(requestId!==window._positionLoadRequestV161||currentUser?.id!==userId)return;
+ if(error){const status=$('positionHistoryStatusV161');if(status)status.textContent='钓位读取失败，无法确认统计是否最新。';box.innerHTML="<div class='empty'>钓位读取失败，请稍后重试。</div>";return}
  const activeTrip=window._currentTrip||{};
  const activeVenue=typeof activeTrip.place==='string'?activeTrip.place:(activeTrip.place?.name||activeTrip.placeName||'');
  const historyStatus=document.getElementById('positionHistoryStatusV161');if(historyStatus)historyStatus.textContent='正在读取钓位历史统计…';
@@ -5041,6 +5044,7 @@ async function loadPositionsV161(){
    if((result.data||[]).length<pageSize)break;
    if(offset+pageSize>=100000){historyError=new Error('历史记录超过安全分页上限');break}
   }
+  if(requestId!==window._positionLoadRequestV161||currentUser?.id!==userId)return;
   if(historyError){const status=document.getElementById('positionHistoryStatusV161');if(status)status.textContent='历史统计暂时无法读取，以下统计值可能不是最新数据。'}
   if(!historyError){
    const aggregates=new Map();
@@ -5048,7 +5052,7 @@ async function loadPositionsV161(){
    for(const p of data){const a=aggregates.get(p.id);if(a){p.visit_count=a.visits;p.catch_count=a.fish;p.best_weight_kg=a.best;p.last_fished_at=a.last}else{p.visit_count=0;p.catch_count=0;p.best_weight_kg=null;p.last_fished_at=null}}
   }
  }
- if(error){const status=document.getElementById('positionHistoryStatusV161');if(status)status.textContent='钓位读取失败，无法确认统计是否最新。';box.innerHTML="<div class='empty'>钓位读取失败，请稍后重试。</div>";return}
+ if(!data?.length&&historyStatus)historyStatus.textContent='暂无钓位档案。';
  if(data?.length){
   const status=document.getElementById('positionHistoryStatusV161');
   if(status&&!status.textContent.includes('暂时无法读取')&&!status.textContent.includes('无法确认'))status.textContent='钓位统计来自已关联的历史作钓记录；未关联的旧记录不会自动归入钓位。';
@@ -5056,12 +5060,15 @@ async function loadPositionsV161(){
  box.innerHTML=data?.length?data.map(x=>"<div class='position-card-v161'><b><span>"+escapeHtml(x.venue_name)+" · "+escapeHtml(x.position_name)+"</span><button onclick=\"deletePositionV161('"+x.id+"')\">删除</button></b><small>"+[x.depth_m!=null?'水深 '+x.depth_m+'m':null,x.bottom_type,x.current_note,x.visit_count?'去过 '+x.visit_count+' 次':null,x.catch_count?'累计 '+x.catch_count+' 尾':null,x.best_weight_kg?'最大 '+x.best_weight_kg+'kg':null].filter(Boolean).map(escapeHtml).join(' · ')+"</small>"+(x.structure_note?"<small>"+escapeHtml(x.structure_note)+"</small>":"")+"</div>").join(''):"<div class='empty'>还没有钓位档案。第一次记录后，这里会成为你的私人钓位库。</div>"
 }
 async function savePositionV161(){
- if(!currentUser)return alert('请先登录。');const venue=$('positionVenueV161').value.trim(),name=$('positionNameV161').value.trim(),st=$('positionStatusV161');if(!venue||!name){st.textContent='请填写钓场和钓位名称。';return}
+ if(!currentUser)return alert('请先登录。');const venue=$('positionVenueV161').value.trim(),name=$('positionNameV161').value.trim(),st=$('positionStatusV161');if(venue.length>120||name.length>80){st.textContent='钓场名称最多120字，钓位名称最多80字。';return}if(!venue||!name){st.textContent='请填写钓场和钓位名称。';return}
+ st.textContent='正在检查重复档案…';const {data:existing,error:checkError}=await sb.from('fishing_positions').select('id,venue_name,position_name').eq('user_id',currentUser.id).ilike('venue_name',venue).ilike('position_name',name).limit(20);
+ if(checkError){st.textContent='重复档案检查失败，请稍后重试：'+checkError.message;return}
+ if((existing||[]).some(p=>p.venue_name.trim().toLocaleLowerCase()===venue.toLocaleLowerCase()&&p.position_name.trim().toLocaleLowerCase()===name.toLocaleLowerCase())){st.textContent='该钓场已有同名钓位，请使用已有档案。';return}
  st.textContent='正在保存…';const depth=$('positionDepthV161').value;
  const {error}=await sb.from('fishing_positions').insert({user_id:currentUser.id,venue_name:venue,position_name:name,depth_m:depth===''?null:Number(depth),bottom_type:$('positionBottomV161').value||null,current_note:$('positionCurrentV161').value.trim()||null,structure_note:$('positionNoteV161').value.trim()||null});
  if(error){st.textContent='保存失败：'+error.message;return}st.textContent='已加入你的钓位档案。';['positionNameV161','positionDepthV161','positionCurrentV161','positionNoteV161'].forEach(id=>$(id).value='');$('positionBottomV161').value='';loadPositionsV161()
 }
-async function deletePositionV161(id){if(!currentUser)return;if(!confirm('确定删除这个钓位档案？关联的作钓记录不会删除。'))return;const {error}=await sb.from('fishing_positions').delete().eq('id',id).eq('user_id',currentUser.id);if(error){$('positionStatusV161').textContent='删除失败：'+error.message;return}loadPositionsV161()}
+async function deletePositionV161(id){if(!currentUser)return;if(!confirm('确定删除这个钓位档案？关联的作钓记录不会删除，但关联关系可能因数据库外键设置而受影响。'))return;const {error}=await sb.from('fishing_positions').delete().eq('id',id).eq('user_id',currentUser.id);if(error){$('positionStatusV161').textContent='删除失败：'+error.message;return}loadPositionsV161()}
 function syncPositionVenueV161(){const t=window._currentTrip||{},v=typeof t.place==='string'?t.place:(t.place?.name||t.placeName||'');if(v&&$('positionVenueV161')&&!$('positionVenueV161').value)$('positionVenueV161').value=v}
 const oldOpenV161=window.openPanel;window.openPanel=function(id){oldOpenV161(id);if(id==='log')setTimeout(()=>{syncPositionVenueV161();loadPositionsV161()},60)};
 setTimeout(()=>{syncPositionVenueV161();loadPositionsV161()},1100);
