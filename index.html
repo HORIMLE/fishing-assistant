@@ -5018,7 +5018,8 @@ setTimeout(()=>{syncSessionV160();initPrepV160()},800);
 </script><script>
 /* v16.12 personal position memory */
 async function loadPositionsV161(){
- const box=$('positionListV161');if(!box||!currentUser)return;
+ const box=$('positionListV161');if(!box)return;
+ if(!currentUser){window._positionLoadRequestV161=(window._positionLoadRequestV161||0)+1;window._positionCacheV161=[];box.innerHTML="<div class='empty'>登录后查看你的钓位档案。</div>";const choice=$('tripPositionChoiceV168');if(choice)choice.innerHTML='<option value="">未选择具体钓位</option>';return}
  const requestId=window._positionLoadRequestV161=(window._positionLoadRequestV161||0)+1,userId=currentUser.id;
  const historyStatus=$('positionHistoryStatusV161');if(historyStatus)historyStatus.textContent='正在读取钓位档案…';
  const data=[];let error=null;
@@ -5042,7 +5043,7 @@ async function loadPositionsV161(){
   const choices=(data||[]).filter(p=>String(p.venue_name||'').trim().toLocaleLowerCase()===venueKey);
   positionChoices.innerHTML='<option value="">未选择具体钓位</option>'+choices.map(p=>'<option value="'+p.id+'">'+escapeHtml(p.position_name)+'</option>').join('');
   positionChoices.value=choices.some(p=>p.id===activeTrip.positionId)?activeTrip.positionId:'';
-  if(activeTrip.positionId&&!choices.some(p=>p.id===activeTrip.positionId)&&!activeTrip.logId){activeTrip.positionId=null;saveTripSession()}
+  if(venueKey&&activeTrip.positionId&&!choices.some(p=>p.id===activeTrip.positionId)&&!activeTrip.logId){activeTrip.positionId=null;saveTripSession()}
  }
 
  if(!error&&data?.length){
@@ -5107,6 +5108,8 @@ async function savePositionV161(){
 async function deletePositionV161(id){
  if(!currentUser||window._positionSaveBusyV161)return;
  const userId=currentUser.id,st=$('positionStatusV161');
+ if(window._positionDeleteBusyV161)return;window._positionDeleteBusyV161=true;
+ try{
  const {count,error:checkError}=await sb.from('fishing_logs').select('id',{count:'exact',head:true}).eq('user_id',userId).eq('position_id',id);
  if(checkError){if(st)st.textContent='无法确认该钓位是否关联历史记录，已取消删除：'+checkError.message;return}
  if(count>0){if(st)st.textContent='该钓位已关联 '+count+' 条作钓记录。为保护历史数据，暂不允许删除；请保留档案。';return}
@@ -5118,6 +5121,8 @@ async function deletePositionV161(id){
  const trip=window._currentTrip;if(trip?.positionId===id&&!trip.logId){trip.positionId=null;saveTripSession()}
  if(window._editingPositionV161===id)cancelPositionEditV161();
  if(st)st.textContent='钓位档案已删除。';await loadPositionsV161();
+ }catch(e){if(st)st.textContent='删除操作失败：'+(e?.message||'未知错误')}
+ finally{window._positionDeleteBusyV161=false}
 }
 function syncPositionVenueV161(){const t=window._currentTrip||{},v=typeof t.place==='string'?t.place:(t.place?.name||t.placeName||'');if(v&&$('positionVenueV161')&&!$('positionVenueV161').value)$('positionVenueV161').value=v}
 const oldOpenV161=window.openPanel;window.openPanel=function(id){oldOpenV161(id);if(id==='log')setTimeout(()=>{syncPositionVenueV161();loadPositionsV161()},60)};
