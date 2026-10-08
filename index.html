@@ -919,6 +919,7 @@ function historyPerformance(row){
  let duration=num(row.duration_minutes),count=num(row.catch_count);
  let rate=duration!==null&&duration>0&&count!==null&&count>=0?count/(duration/60):null;
  let rating=num(row.effectiveness_score);
+ if(rating!==null&&(rating<0||rating>5))rating=null;
  let p=0;
  if(rate!==null)p+=Math.min(20,rate*4);
  if(rating!==null)p+=rating*4;
@@ -948,9 +949,9 @@ function rankFishingHistory(rows,env){
 function renderHistoryInsight(ranked){
  let box=$('historyInsight');if(!box)return;
  if(!ranked.length){box.style.display='block';box.innerHTML='<b>历史学习：</b> 当前钓点暂无可比记录。';return}
- let top=ranked.slice(0,3),confidence=ranked.length>=6?'较高':ranked.length>=3?'中等':'较低';
+ let top=ranked.slice(0,3),relevant=ranked.filter(x=>x._similarity>=50).length,confidence=relevant>=6?'较高':relevant>=3?'中等':'较低';
  box.style.display='block';
- box.innerHTML=`<b>历史学习：${ranked.length} 条 · 置信度${confidence}</b><br>`+top.map((x,i)=>`#${i+1} 相似度 ${x._similarity}% · ${x._rate!==null?x._rate+'尾/小时':'无时长效率'} · ${escapeHtml(x.bait_recipe?.text||'未记录配方')} · ${escapeHtml(x._equipment.join(' / ')||'未记录装备')}`).join('<br>')+(ranked.length<3?'<br><span class="small">记录还少，当前只做轻量参考；数据增加后权重会更可靠。</span>':'')
+ box.innerHTML=`<b>历史学习：${ranked.length} 条记录（较相似 ${relevant} 条）· 置信度${confidence}</b><br>`+top.map((x,i)=>`#${i+1} 相似度 ${x._similarity}% · ${x._rate!==null?x._rate+'尾/小时':'无时长效率'} · ${escapeHtml(x.bait_recipe?.text||'未记录配方')} · ${escapeHtml(x._equipment.join(' / ')||'未记录装备')}`).join('<br>')+(ranked.length<3?'<br><span class="small">记录还少，当前只做轻量参考；数据增加后权重会更可靠。</span>':'')
 }
 async function getSimilarFishingHistory(place,fish){
  if(!currentUser)return[];
@@ -968,8 +969,7 @@ async function getSimilarFishingHistory(place,fish){
   rows.push(...(result.data||[]));
   if((result.data||[]).length<pageSize)break;
  }
- const sameFish=fish?rows.filter(x=>x.target_fish===fish):[];
- return sameFish.length?sameFish:rows;
+ return rows;
 }
 async function autoLoadConditions(){
  try{
@@ -1010,11 +1010,13 @@ async function recommendBait(){
  let rawEnv={place,fish,temp:$('baitTemp').value,waterTemp:$('baitWaterTemp').value,weather:$('baitWeather').value,bite:$('baitBite').value,current:$('baitCurrent').value,season:$('baitSeason').value,scene:$('baitScene').value,depth:$('baitDepth').value,recommendMode:mode};
  let env={钓点:place||'未填写',目标鱼:fish,场景:rawEnv.scene,气温:rawEnv.temp?rawEnv.temp+'℃':'未知',水温:rawEnv.waterTemp?rawEnv.waterTemp+'℃':'未知，不得把气温当水温',水深:rawEnv.depth+'m',天气:rawEnv.weather||'未知',鱼口:rawEnv.bite,走水:rawEnv.current,季节:rawEnv.season};
  let stock=a.map((x,i)=>({id:i+1,brand:x.brand,name:x.name,type:x.type,flavor:x.flavor,targets:x.targets}));
- let history=[];
- try{history=await getSimilarFishingHistory(place,fish)}catch(e){st.textContent='个人经验读取失败：'+e.message+'；本次不使用历史数据。'}
+ let history=[],historyFailed=false;
+ try{history=await getSimilarFishingHistory(place,fish)}catch(e){historyFailed=true;st.textContent='个人经验读取失败：'+e.message+'；本次不使用历史数据。'}
  let ranked=rankFishingHistory(history,rawEnv);renderHistoryInsight(ranked);
+ if(historyFailed&&$('historyInsight'))$('historyInsight').textContent='个人历史读取失败，无法确认经验是否完整；本次推荐不引用历史记录。';
  let historySummary=ranked.slice(0,8).map(x=>({历史相似度:x._similarity,历史表现评分:x._performance,日期:x.fished_at,水深米:x.water_depth_m,鱼竿米:x.rod_length_m,主线:x.main_line,子线:x.leader_line,浮漂吃铅克:x.float_buoyancy_g,多竿配置:x.rod_setups,钓点:x.location_name,目标鱼:x.target_fish,气温:x.air_temp_c,水温:x.water_temp_c,季节:x.season,天气:x.weather_condition,风速:x.wind_speed_kmh,鱼口:x.bite_condition,走水:x.current_condition,钓法:x.fishing_method,是否방가로:x.used_bungalow,房间钓位:x.bungalow_room_no,位置备注:x.bungalow_position_note,实际配方:x.bait_recipe?.text||'',鱼获尾数:x.catch_count,鱼获重量kg:x.catch_weight_kg,作钓分钟:x.duration_minutes,每小时鱼获:x._rate,效果评分:x.effectiveness_score,备注:x.notes}));
- let confidence=ranked.length>=6?'较高':ranked.length>=3?'中等':ranked.length?'较低':'无历史';
+ let relevantCount=ranked.filter(x=>x._similarity>=50).length;
+ let confidence=relevantCount>=6?'较高':relevantCount>=3?'中等':relevantCount?'较低':'无充分相似历史';
 
  let rule='';
  if(mode==='inventory'){
