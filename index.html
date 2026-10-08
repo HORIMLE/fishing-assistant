@@ -914,9 +914,10 @@ async function useCurrentConditions(auto=false){
    st.textContent=msg;
  },{enableHighAccuracy:true,timeout:15000,maximumAge:300000})
 }
-function num(v){let n=Number(v);return Number.isFinite(n)?n:null}
+function num(v){if(v===null||v===undefined||String(v).trim()==='')return null;let n=Number(v);return Number.isFinite(n)?n:null}
 function historyPerformance(row){
- let rate=row.duration_minutes&&Number(row.duration_minutes)>0?Number(row.catch_count||0)/(Number(row.duration_minutes)/60):null;
+ let duration=num(row.duration_minutes),count=num(row.catch_count);
+ let rate=duration!==null&&duration>0&&count!==null&&count>=0?count/(duration/60):null;
  let rating=num(row.effectiveness_score);
  let p=0;
  if(rate!==null)p+=Math.min(20,rate*4);
@@ -924,7 +925,8 @@ function historyPerformance(row){
  return {rate:rate===null?null:Number(rate.toFixed(2)),score:Math.min(40,Math.round(p))}
 }
 function historySimilarity(row,env){
- let score=20; // 同钓点记录基础权重
+ let score=0; // 环境匹配度与渔获表现分开计算，避免将好渔获误标为相似环境
+ if(row.location_name&&env.place&&row.location_name.trim().toLocaleLowerCase()===env.place.trim().toLocaleLowerCase())score+=25;
  if(row.target_fish&&env.fish&&row.target_fish===env.fish)score+=20;
  if(row.season&&env.season&&row.season===env.season)score+=12;
  let rt=num(row.air_temp_c),ct=num(env.temp);
@@ -932,11 +934,13 @@ function historySimilarity(row,env){
  if(row.weather_condition&&env.weather&&row.weather_condition===env.weather)score+=8;
  if(row.bite_condition&&env.bite&&row.bite_condition===env.bite)score+=5;
  if(row.current_condition&&env.current&&row.current_condition===env.current)score+=5;
- let perf=historyPerformance(row);score+=perf.score;
- return {...row,_similarity:Math.min(100,Math.round(score)),_rate:perf.rate}
+ let water=num(row.water_temp_c),targetWater=num(env.waterTemp);
+ if(water!==null&&targetWater!==null){const d=Math.abs(water-targetWater);score+=d<=2?15:d<=5?9:0}
+ let perf=historyPerformance(row);
+ return {...row,_similarity:Math.min(100,Math.round(score)),_performance:perf.score,_rate:perf.rate}
 }
 function rankFishingHistory(rows,env){
- return (rows||[]).map(x=>historySimilarity(x,env)).sort((a,b)=>b._similarity-a._similarity)
+ return (rows||[]).map(x=>historySimilarity(x,env)).sort((a,b)=>b._similarity-a._similarity||b._performance-a._performance)
 }
 function renderHistoryInsight(ranked){
  let box=$('historyInsight');if(!box)return;
@@ -945,7 +949,31 @@ function renderHistoryInsight(ranked){
  box.style.display='block';
  box.innerHTML=`<b>历史学习：${ranked.length} 条 · 置信度${confidence}</b><br>`+top.map((x,i)=>`#${i+1} 相似度 ${x._similarity}% · ${x._rate!==null?x._rate+'尾/小时':'无时长效率'} · ${escapeHtml(x.bait_recipe?.text||'未记录配方')}`).join('<br>')+(ranked.length<3?'<br><span class="small">记录还少，当前只做轻量参考；数据增加后权重会更可靠。</span>':'')
 }
-async function getSimilarFishingHistory(place,fish){if(!currentUser)return[];let q=sb.from('fishing_logs').select('fished_at,spot_id,location_name,target_fish,air_temp_c,water_temp_c,season,weather_condition,wind_speed_kmh,bite_condition,current_condition,fishing_method,used_bungalow,bungalow_room_no,bungalow_position_note,bait_recipe,catch_count,catch_weight_kg,duration_minutes,effectiveness_score,notes').order('fished_at',{ascending:false}).limit(20);if(place){let {data:spot}=await sb.from('fishing_spots').select('id').ilike('name',place).limit(1).maybeSingle();q=spot?.id?q.eq('spot_id',spot.id):q.ilike('location_name',place)}let {data,error}=await q;if(error)return[];let rows=data||[];if(fish){let same=rows.filter(x=>!x.target_fish||x.target_fish===fish);if(same.length)rows=same}return rows.slice(0,10)}
+async function getSimilarFishingHistory(place,fish){
+ if(!currentUser)return[];
+ const userId=currentUser.id,rows=[],pageSize=100;
+ let spotId=null;
+ if(place){
+  const spot=await sb.from('fishing_spots').select('id').eq('name',place).limit(1).maybeSingle();
+  if(spot.error)console.warn('历史钓点查询失败',spot.error);
+  else spotId=spot.data?.id||null;
+ }
+ for(let offset=0;offset<500;offset+=pageSize){
+  let q=sb.from('fishing_logs')
+   .select('id,fished_at,spot_id,position_id,location_name,target_fish,water_depth_m,rod_length_m,rod_setups,main_line,leader_line,float_buoyancy_g,air_temp_c,water_temp_c,season,weather_condition,wind_speed_kmh,bite_condition,current_condition,fishing_method,used_bungalow,bungalow_room_no,bungalow_position_note,bait_recipe,catch_count,catch_weight_kg,duration_minutes,effectiveness_score,notes')
+   .eq('user_id',userId).eq('trip_status','completed')
+   .order('fished_at',{ascending:false}).order('id',{ascending:true})
+   .range(offset,offset+pageSize-1);
+  if(place)q=spotId?q.or('spot_id.eq.'+spotId+',location_name.eq.'+JSON.stringify(place)):q.eq('location_name',place);
+  const result=await q;
+  if(result.error){console.warn('个人经验读取失败',result.error);throw new Error('个人历史记录读取失败，请稍后重试')}
+  if(currentUser?.id!==userId)return[];
+  rows.push(...(result.data||[]));
+  if((result.data||[]).length<pageSize)break;
+ }
+ const sameFish=fish?rows.filter(x=>x.target_fish===fish):[];
+ return sameFish.length?sameFish:rows;
+}
 async function autoLoadConditions(){
  try{
   if(!navigator.geolocation||!window.isSecureContext)return;
@@ -985,9 +1013,10 @@ async function recommendBait(){
  let rawEnv={place,fish,temp:$('baitTemp').value,waterTemp:$('baitWaterTemp').value,weather:$('baitWeather').value,bite:$('baitBite').value,current:$('baitCurrent').value,season:$('baitSeason').value,scene:$('baitScene').value,depth:$('baitDepth').value,recommendMode:mode};
  let env={钓点:place||'未填写',目标鱼:fish,场景:rawEnv.scene,气温:rawEnv.temp?rawEnv.temp+'℃':'未知',水温:rawEnv.waterTemp?rawEnv.waterTemp+'℃':'未知，不得把气温当水温',水深:rawEnv.depth+'m',天气:rawEnv.weather||'未知',鱼口:rawEnv.bite,走水:rawEnv.current,季节:rawEnv.season};
  let stock=a.map((x,i)=>({id:i+1,brand:x.brand,name:x.name,type:x.type,flavor:x.flavor,targets:x.targets}));
- let history=await getSimilarFishingHistory(place,fish);
+ let history=[];
+ try{history=await getSimilarFishingHistory(place,fish)}catch(e){st.textContent='个人经验读取失败：'+e.message+'；本次不使用历史数据。'}
  let ranked=rankFishingHistory(history,rawEnv);renderHistoryInsight(ranked);
- let historySummary=ranked.slice(0,8).map(x=>({历史相似度:x._similarity,日期:x.fished_at,钓点:x.location_name,目标鱼:x.target_fish,气温:x.air_temp_c,水温:x.water_temp_c,季节:x.season,天气:x.weather_condition,风速:x.wind_speed_kmh,鱼口:x.bite_condition,走水:x.current_condition,钓法:x.fishing_method,是否방가로:x.used_bungalow,房间钓位:x.bungalow_room_no,位置备注:x.bungalow_position_note,实际配方:x.bait_recipe?.text||'',鱼获尾数:x.catch_count,鱼获重量kg:x.catch_weight_kg,作钓分钟:x.duration_minutes,每小时鱼获:x._rate,效果评分:x.effectiveness_score,备注:x.notes}));
+ let historySummary=ranked.slice(0,8).map(x=>({历史相似度:x._similarity,历史表现评分:x._performance,日期:x.fished_at,钓点:x.location_name,目标鱼:x.target_fish,气温:x.air_temp_c,水温:x.water_temp_c,季节:x.season,天气:x.weather_condition,风速:x.wind_speed_kmh,鱼口:x.bite_condition,走水:x.current_condition,钓法:x.fishing_method,是否방가로:x.used_bungalow,房间钓位:x.bungalow_room_no,位置备注:x.bungalow_position_note,实际配方:x.bait_recipe?.text||'',鱼获尾数:x.catch_count,鱼获重量kg:x.catch_weight_kg,作钓分钟:x.duration_minutes,每小时鱼获:x._rate,效果评分:x.effectiveness_score,备注:x.notes}));
  let confidence=ranked.length>=6?'较高':ranked.length>=3?'中等':ranked.length?'较低':'无历史';
 
  let rule='';
@@ -998,7 +1027,7 @@ async function recommendBait(){
  }else{
    rule='优先使用用户库存中的饵料；只有库存不足以组成合理方案时，才补充在韩国较常见、通常可通过韩国钓具店、Naver Shopping、Coupang等渠道购买到的商品或商品类型。补充商品必须单独标注“需要购买”。不确定韩国是否常见销售时不要编造。';
  }
- let prompt=`你是熟悉韩国淡水钓鱼环境的配饵助手。当前环境=${JSON.stringify(env)}。用户现有饵料=${JSON.stringify(stock)}。系统根据钓点、目标鱼、季节、气温、天气、鱼口、走水以及真实鱼获表现计算后的历史记录=${JSON.stringify(historySummary)}。历史数据置信度=${confidence}。${rule} 优先参考历史相似度高且每小时鱼获/效果评分较好的记录，但历史少于3条时只能轻量参考。水温未知时必须明确说明，不得把气温当水温。${aiLanguageInstruction()} ${baitOutputLanguagePolicyV158()} 输出必须包含：1)历史依据与置信度；2)主方案，各饵百分比合计100%；3)每个商品标注“已有”或“需要购买”；4)饵水比；5)拉饵或搓饵；6)开饵方法；7)推荐理由；8)备用方案；9)现场鱼口变化后的调整方法。韩国商品如果保留韩文官方名，只允许写成【官方韩文商品名】，其余描述必须使用当前界面语言。不要保证一定有效。`;
+ let prompt=`你是熟悉韩国淡水钓鱼环境的配饵助手。当前环境=${JSON.stringify(env)}。用户现有饵料=${JSON.stringify(stock)}。系统根据钓点、目标鱼、季节、气温、天气、鱼口、走水以及真实鱼获表现计算后的历史记录=${JSON.stringify(historySummary)}。历史数据置信度=${confidence}。${rule} 优先参考用户本人历史相似度高且每小时鱼获/效果评分较好的已完成记录，但历史少于3条时只能轻量参考。水温未知时必须明确说明，不得把气温当水温。${aiLanguageInstruction()} ${baitOutputLanguagePolicyV158()} 输出必须包含：1)历史依据与置信度；2)主方案，各饵百分比合计100%；3)每个商品标注“已有”或“需要购买”；4)饵水比；5)拉饵或搓饵；6)开饵方法；7)推荐理由；8)备用方案；9)现场鱼口变化后的调整方法。韩国商品如果保留韩文官方名，只允许写成【官方韩文商品名】，其余描述必须使用当前界面语言。不要保证一定有效。`;
 
  try{
   let text=await gemini(prompt,st);
