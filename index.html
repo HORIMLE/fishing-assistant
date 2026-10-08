@@ -3204,22 +3204,31 @@ Object.assign(I18N_STATIC,{
   const caption=($('shareCaption_'+i)?.value||'').trim();
   const existing=window._myCatchPostsV1523[log.id];
   if(!existing&&!imgs.length)return alert('第一次分享请至少选择一张鱼获照片。');
-  const btn=event?.currentTarget;if(btn){btn.disabled=true;btn.textContent='正在分享…'}
+  const btn=$('sharePhotos_'+i)?.closest('.catch-share-box')?.querySelector('button.secondary');
+  if(btn?.disabled)return;
+  if(btn){btn.disabled=true;btn.textContent='正在分享…'}
   const uploaded=[];
+  const shareUserId=currentUser.id;
   try{
    let imagePaths=[];
    if(existing){
     const {data}=await sb.from('catch_posts').select('image_paths').eq('id',existing).single();
     imagePaths=data?.image_paths||[];
    }
-   for(const d of imgs){const p=await uploadCatchShareImageV1523(d);if(p){uploaded.push(p);imagePaths.push(p)}}
+   for(const d of imgs){
+    if(currentUser?.id!==shareUserId)throw new Error('账号已切换，请重新分享');
+    const p=await uploadCatchShareImageV1523(d);
+    if(p){uploaded.push(p);imagePaths.push(p)}
+   }
    imagePaths=imagePaths.slice(-5);
    const author=await myDisplayNameV1523();
-   const payload={user_id:currentUser.id,fishing_log_id:log.id,author_name:author,caption:caption||null,image_paths:imagePaths,updated_at:new Date().toISOString()};
+   if(currentUser?.id!==shareUserId)throw new Error('账号已切换，请重新分享');
+   const payload={user_id:shareUserId,fishing_log_id:log.id,author_name:author,caption:caption||null,image_paths:imagePaths,updated_at:new Date().toISOString()};
    const {data,error}=existing
     ?await sb.from('catch_posts').update(payload).eq('id',existing).eq('user_id',currentUser.id).select('id').single()
     :await sb.from('catch_posts').insert(payload).select('id').single();
    if(error)throw error;
+   if(currentUser?.id!==shareUserId)return;
    window._myCatchPostsV1523[log.id]=data.id;
    window._catchShareImagesV1523[log.id]=[];
    await decorateLogShareV1523();
