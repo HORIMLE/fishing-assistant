@@ -3240,14 +3240,31 @@ Object.assign(I18N_STATIC,{
    alert('分享失败：'+(e?.message||e))
   }finally{if(btn){btn.disabled=false;btn.textContent=existing?'更新分享':'分享鱼获'}}
  };
+ const pendingPostDeletesV173=new Set();
+ async function deleteOwnedCatchPostV173(postId,userId){
+  // 先读取所有权范围内的图片，再删除帖子；删除失败时绝不清理云端图片。
+  const {data,error:readError}=await sb.from('catch_posts').select('id,image_paths').eq('id',postId).eq('user_id',userId).single();
+  if(readError)throw readError;
+  const {error:deleteError}=await sb.from('catch_posts').delete().eq('id',postId).eq('user_id',userId);
+  if(deleteError)throw deleteError;
+  const paths=(Array.isArray(data?.image_paths)?data.image_paths:[]).filter(p=>typeof p==='string'&&p.startsWith(userId+'/share/'));
+  if(paths.length){
+   const {error:storageError}=await sb.storage.from('fishing-images').remove(paths);
+   if(storageError)console.warn('分享已删除，但部分云端图片清理失败',storageError);
+  }
+ }
  window.unshareCatchV1523=async function(i){
-  const log=(window._logs||[])[i],postId=log&&window._myCatchPostsV1523[log.id];if(!postId)return;
+  const log=(window._logs||[])[i],postId=log&&window._myCatchPostsV1523[log.id];
+  if(!postId||!currentUser||pendingPostDeletesV173.has(postId))return;
   if(!confirm('确定从鱼获广场取消分享吗？本地钓鱼记录不会删除。'))return;
-  const {data}=await sb.from('catch_posts').select('image_paths').eq('id',postId).single();
-  const {error}=await sb.from('catch_posts').delete().eq('id',postId).eq('user_id',currentUser.id);
-  if(error)return alert(error.message);
-  if(data?.image_paths?.length)try{await sb.storage.from('fishing-images').remove(data.image_paths)}catch(_){}
-  delete window._myCatchPostsV1523[log.id];await decorateLogShareV1523();renderCatchFeedV1523()
+  const userId=currentUser.id;pendingPostDeletesV173.add(postId);
+  try{
+   await deleteOwnedCatchPostV173(postId,userId);
+   if(currentUser?.id!==userId)return;
+   delete window._myCatchPostsV1523[log.id];
+   await decorateLogShareV1523();await renderCatchFeedV1523();
+  }catch(e){if(currentUser?.id===userId)alert('取消分享失败：'+(e?.message||e))}
+  finally{pendingPostDeletesV173.delete(postId)}
  };
  async function decorateLogShareV1523(){
   if(!currentUser||!$('logList'))return;
@@ -3313,12 +3330,16 @@ Object.assign(I18N_STATIC,{
   finally{pendingCatchDeletesV172.delete(commentId)}
  };
  window.deleteCatchPostV1523=async function(postId){
+  if(!currentUser||pendingPostDeletesV173.has(postId))return;
   if(!confirm('确定删除这条共享鱼获吗？'))return;
-  const {data}=await sb.from('catch_posts').select('image_paths').eq('id',postId).single();
-  const {error}=await sb.from('catch_posts').delete().eq('id',postId).eq('user_id',currentUser.id);
-  if(error)return alert(error.message);
-  if(data?.image_paths?.length)try{await sb.storage.from('fishing-images').remove(data.image_paths)}catch(_){}
-  renderCatchFeedV1523();if($('logList'))decorateLogShareV1523()
+  const userId=currentUser.id;pendingPostDeletesV173.add(postId);
+  try{
+   await deleteOwnedCatchPostV173(postId,userId);
+   if(currentUser?.id!==userId)return;
+   await renderCatchFeedV1523();
+   if($('logList'))await decorateLogShareV1523();
+  }catch(e){if(currentUser?.id===userId)alert('删除分享失败：'+(e?.message||e))}
+  finally{pendingPostDeletesV173.delete(postId)}
  };
  let catchFeedRequestSequenceV170=0;
  window.renderCatchFeedV1523=async function(){
