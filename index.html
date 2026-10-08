@@ -3284,20 +3284,33 @@ Object.assign(I18N_STATIC,{
   }catch(e){if(currentUser?.id===userId)alert('点赞操作失败：'+(e?.message||e))}
   finally{pendingCatchLikesV171.delete(postId)}
  };
+ const pendingCatchCommentsV172=new Set();
  window.addCatchCommentV1523=async function(postId){
-  if(!currentUser)return;
+  if(!currentUser||pendingCatchCommentsV172.has(postId))return;
   const el=$('comment_'+postId),body=(el?.value||'').trim();if(!body)return;
   const userId=currentUser.id;
-  const author=await myDisplayNameV1523();
-  if(currentUser?.id!==userId)return;
-  const {error}=await sb.from('catch_post_comments').insert({post_id:postId,user_id:userId,author_name:author,body});
-  if(currentUser?.id!==userId)return;
-  if(error)return alert('评论失败：'+error.message);
-  el.value='';renderCatchFeedV1523()
+  pendingCatchCommentsV172.add(postId);
+  try{
+   const author=await myDisplayNameV1523();
+   if(currentUser?.id!==userId)return;
+   const {error}=await sb.from('catch_post_comments').insert({post_id:postId,user_id:userId,author_name:author,body});
+   if(currentUser?.id!==userId)return;
+   if(error)throw error;
+   el.value='';await renderCatchFeedV1523();
+  }catch(e){if(currentUser?.id===userId)alert('评论失败：'+(e?.message||e))}
+  finally{pendingCatchCommentsV172.delete(postId)}
  };
+ const pendingCatchDeletesV172=new Set();
  window.deleteCatchCommentV1523=async function(commentId){
-  const {error}=await sb.from('catch_post_comments').delete().eq('id',commentId).eq('user_id',currentUser.id);
-  if(error)return alert(error.message);renderCatchFeedV1523()
+  if(!currentUser||pendingCatchDeletesV172.has(commentId))return;
+  const userId=currentUser.id;
+  pendingCatchDeletesV172.add(commentId);
+  try{
+   const {error}=await sb.from('catch_post_comments').delete().eq('id',commentId).eq('user_id',userId);
+   if(error)throw error;
+   if(currentUser?.id===userId)await renderCatchFeedV1523();
+  }catch(e){if(currentUser?.id===userId)alert('删除评论失败：'+(e?.message||e))}
+  finally{pendingCatchDeletesV172.delete(commentId)}
  };
  window.deleteCatchPostV1523=async function(postId){
   if(!confirm('确定删除这条共享鱼获吗？'))return;
