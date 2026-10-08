@@ -987,9 +987,9 @@ function renderHistoryInsight(ranked){
  box.innerHTML=`<b>历史学习：${ranked.length} 条记录（较相似 ${relevant} 条）· 置信度${confidence}</b><br>`+top.map((x,i)=>`#${i+1} 相似度 ${x._similarity}% · ${x._rate!==null?x._rate+'尾/小时':'无时长效率'} · ${escapeHtml(x.bait_recipe?.text||'未记录配方')} · ${escapeHtml(x._equipment.join(' / ')||'未记录装备')}`).join('<br>')+(tackle.length?'<br><b>相似环境的装备使用记录：</b><br>'+tackle.slice(0,4).map(x=>escapeHtml(x.type+' '+x.value)+' · '+x.samples+'次'+(x.measured?' · 有效效率样本'+x.measured+'次':'')).join('<br>'):'')+(relevant<3?'<br><span class="small">相似记录不足3条，装备配置仅供参考，不能据此判定哪种装备更好。</span>':'')
 }
 async function getSimilarFishingHistory(place,fish){
- if(!currentUser)return[];
+ if(!currentUser)return {rows:[],partial:false};
  const userId=currentUser.id,pageSize=100,columns='id,fished_at,spot_id,position_id,location_name,target_fish,water_depth_m,rod_length_m,rod_setups,main_line,leader_line,float_buoyancy_g,air_temp_c,water_temp_c,season,weather_condition,wind_speed_kmh,bite_condition,current_condition,fishing_method,used_bungalow,bungalow_room_no,bungalow_position_note,bait_recipe,catch_count,catch_weight_kg,duration_minutes,effectiveness_score,notes';
- async function readHistory(limit,venue){
+ async function readHistory(limit,venue,excludeVenue=false){
   const rows=[];
   // 每批最多 100 条；多读一条仅用于判定是否存在未纳入的记录。
   for(let offset=0;offset<=limit;offset+=pageSize){
@@ -998,7 +998,7 @@ async function getSimilarFishingHistory(place,fish){
     .eq('user_id',userId).eq('trip_status','completed')
     .order('fished_at',{ascending:false}).order('id',{ascending:true})
     .range(offset,offset+requestCount-1);
-   if(venue)q=q.eq('location_name',venue);
+   if(venue)q=excludeVenue?q.or('location_name.is.null,location_name.neq.'+venue.replace(/[,.()\\]/g,'')):q.eq('location_name',venue);
    const result=await q;
    if(result.error){console.warn('个人经验读取失败',result.error);throw new Error('个人历史记录读取失败，请稍后重试')}
    if(currentUser?.id!==userId)throw new Error('用户已切换，请重新生成推荐');
@@ -1009,10 +1009,10 @@ async function getSimilarFishingHistory(place,fish){
   }
   return {rows,truncated:false};
  }
- // 同钓场与跨钓场历史分开抽样，避免只读取当前钓场导致季节/水温经验缺失。
+ // 同钓场与其他钓场分别抽样，确保跨钓场名额不被当前钓场的记录占用。
  // 两组结果以记录 ID 去重；任一组截断时都不声称取得了完整历史。
  const same=place?await readHistory(250,place):{rows:[],truncated:false};
- const recent=await readHistory(place?250:500,null);
+ const recent=await readHistory(place?250:500,place||null,!!place);
  const merged=new Map();
  for(const row of [...same.rows,...recent.rows])merged.set(row.id,row);
  return {rows:[...merged.values()],partial:same.truncated||recent.truncated};
