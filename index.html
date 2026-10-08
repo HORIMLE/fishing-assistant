@@ -3562,8 +3562,9 @@ Object.assign(I18N_STATIC,{
    sb.from('catch_post_comments').select('id,post_id,user_id,author_name,body,created_at').in('post_id',postIds).order('created_at',{ascending:true})
   ]);
   if(!active())return;
-  const relatedError=logsResult.error||likesResult.error||commentsResult.error;
-  if(relatedError){box.innerHTML="<div class='card'>鱼获详情加载失败，请稍后重试："+escapeHtml(relatedError.message)+"</div>";return}
+  const relatedError=likesResult.error||commentsResult.error;
+  if(relatedError){box.innerHTML="<div class='card'>鱼获互动数据加载失败，请稍后重试："+escapeHtml(relatedError.message)+"</div>";return}
+  if(logsResult.error)console.warn('部分关联作钓记录不可访问，使用公开分享信息显示',logsResult.error);
   const logs=logsResult.data||[],likes=likesResult.data||[],comments=commentsResult.data||[];
   const lm=new Map(logs.map(x=>[x.id,x]));
   const likesByPost=new Map(),commentsByPost=new Map();
@@ -3581,7 +3582,10 @@ Object.assign(I18N_STATIC,{
    batch.forEach((path,i)=>{signed[path]=urls[i]||''});
   }
   box.innerHTML=visiblePosts.map(p=>{
-   const l=lm.get(p.fishing_log_id)||{location_name:p.location_name,target_fish:p.target_fish,catch_count:p.catch_count},pl=likesByPost.get(p.id)||[],pc=commentsByPost.get(p.id)||[];
+   // 社区公开字段优先；私有作钓记录只用于作者可访问的补充信息。
+   const privateLog=p.user_id===userId?lm.get(p.fishing_log_id):null;
+   const l={location_name:p.location_name||privateLog?.location_name,target_fish:p.target_fish||privateLog?.target_fish,catch_count:p.catch_count??privateLog?.catch_count,catch_weight_kg:privateLog?.catch_weight_kg,duration_minutes:privateLog?.duration_minutes};
+   const pl=likesByPost.get(p.id)||[],pc=commentsByPost.get(p.id)||[];
    const liked=pl.some(x=>x.user_id===currentUser.id),own=p.user_id===currentUser.id;
    const imgs=(p.image_paths||[]).map(path=>signed[path]).filter(Boolean);
    return "<div class='feed-card'><div class='feed-head'><div><b>"+escapeHtml(p.author_name||'钓友')+"</b><div class='small'>"+new Date(p.created_at).toLocaleString()+"</div></div>"+(own?"<div style='display:flex;gap:6px;flex-wrap:wrap'><label class='secondary' style='width:auto;margin:0;padding:8px;cursor:pointer'>添加照片<input type='file' accept='image/*' multiple style='display:none' onchange='addCatchPostPhotosV179("+JSON.stringify(p.id)+",this)'></label><button class='secondary' style='width:auto;margin:0' onclick='editCatchPostCaptionV177("+JSON.stringify(p.id)+")'>编辑文字</button><button class='danger' onclick='deleteCatchPostV1523("+JSON.stringify(p.id)+")'>删除分享</button></div>":"")+"</div>"+
