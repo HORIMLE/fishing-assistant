@@ -328,7 +328,7 @@ body{background:#020807}.account-bar{display:none}.wrap{max-width:430px;padding:
   <div id='rodInvStatus' class='ai-status'></div>
 </div>
 </section>
-<section id='log' class='panel b-page-v1567'><header class='b-page-head-v1567'><div><small>JOURNAL</small><h2>钓鱼记录</h2><p>把每次鱼情变成下一次判断的依据。</p></div></header><section class='position-lab-v161'><div class='b-block-head-v1567'><h3>钓位档案</h3><small>POSITION MEMORY</small></div><p>记录同一钓场里的具体位置、水深和底型。下次回来直接参考自己的真实经验。</p><div class='grid'><div class='field full'><label>钓场</label><input id='positionVenueV161' placeholder='例如：松田湖'></div><div class='field'><label>钓位名称</label><input id='positionNameV161' placeholder='例如：7号位 / 东岸'></div><div class='field'><label>水深 m</label><input id='positionDepthV161' type='number' step='.1' placeholder='2.5'></div><div class='field'><label>底型</label><select id='positionBottomV161'><option value=''>未记录</option><option>泥底</option><option>沙底</option><option>碎石</option><option>硬底</option><option>草区</option><option>斜坡</option><option>未知</option></select></div><div class='field'><label>水流</label><input id='positionCurrentV161' placeholder='无 / 轻微 / 明显'></div><div class='field full'><label>结构与备注</label><input id='positionNoteV161' placeholder='树荫、进水口、障碍物、向阳等'></div></div><button class='secondary' onclick='savePositionV161()'>＋ 保存钓位</button><div id='positionStatusV161' class='ai-status'></div><label style="display:block;margin:12px 0">本次作钓关联钓位 <select id="tripPositionChoiceV168" onchange="setTripPositionV168(this.value)"><option value="">未选择具体钓位</option></select></label><small id='positionHistoryStatusV161' style='display:block;margin:8px 0;opacity:.7'>钓位统计仅计算已关联的历史记录。</small><div id='positionListV161' class='position-list-v161'></div></section><section class='b-block-v1567'><div class='b-block-head-v1567'><h3>常用钓点</h3><small>FREQUENT SPOTS</small></div><div id='spotList' class='b-spot-grid-v1567'><div class='empty'>暂无钓点记录</div></div></section><section id='logHistoryCard' class='b-block-v1567'><div class='b-block-head-v1567'><h3>历史记录</h3><small>HISTORY</small></div><div id='logList' class='b-history-v1567'></div></section></section>
+<section id='log' class='panel b-page-v1567'><header class='b-page-head-v1567'><div><small>JOURNAL</small><h2>钓鱼记录</h2><p>把每次鱼情变成下一次判断的依据。</p></div></header><section class='position-lab-v161'><div class='b-block-head-v1567'><h3>钓位档案</h3><small>POSITION MEMORY</small></div><p>记录同一钓场里的具体位置、水深和底型。下次回来直接参考自己的真实经验。</p><div class='grid'><div class='field full'><label>钓场</label><input id='positionVenueV161' placeholder='例如：松田湖'></div><div class='field'><label>钓位名称</label><input id='positionNameV161' placeholder='例如：7号位 / 东岸'></div><div class='field'><label>水深 m</label><input id='positionDepthV161' type='number' step='.1' placeholder='2.5'></div><div class='field'><label>底型</label><select id='positionBottomV161'><option value=''>未记录</option><option>泥底</option><option>沙底</option><option>碎石</option><option>硬底</option><option>草区</option><option>斜坡</option><option>未知</option></select></div><div class='field'><label>水流</label><input id='positionCurrentV161' placeholder='无 / 轻微 / 明显'></div><div class='field full'><label>结构与备注</label><input id='positionNoteV161' placeholder='树荫、进水口、障碍物、向阳等'></div></div><button id='positionSaveBtnV161' class='secondary' onclick='savePositionV161()'>＋ 保存钓位</button><button id='positionCancelEditV161' class='secondary' style='display:none' onclick='cancelPositionEditV161()'>取消编辑</button><div id='positionStatusV161' class='ai-status'></div><label style="display:block;margin:12px 0">本次作钓关联钓位 <select id="tripPositionChoiceV168" onchange="setTripPositionV168(this.value)"><option value="">未选择具体钓位</option></select></label><small id='positionHistoryStatusV161' style='display:block;margin:8px 0;opacity:.7'>钓位统计仅计算已关联的历史记录。</small><div id='positionListV161' class='position-list-v161'></div></section><section class='b-block-v1567'><div class='b-block-head-v1567'><h3>常用钓点</h3><small>FREQUENT SPOTS</small></div><div id='spotList' class='b-spot-grid-v1567'><div class='empty'>暂无钓点记录</div></div></section><section id='logHistoryCard' class='b-block-v1567'><div class='b-block-head-v1567'><h3>历史记录</h3><small>HISTORY</small></div><div id='logList' class='b-history-v1567'></div></section></section>
 <section id='community' class='panel b-page-v1567'><header class='b-page-head-v1567'><div><small>CATCH FEED</small><h2>渔获分享</h2><p>看看钓友今天从水边带回了什么。</p></div><button class='b-icon-btn-v1567' onclick='renderCatchFeedV1523()'>↻</button></header><div id='catchFeed' class='b-feed-v1567'></div></section>
 
 <section id='bait' class='panel b-page-v1567'><header class='b-page-head-v1567'><div><small>BAIT LAB</small><h2>AI 饵料</h2><p>识别库存、结合现场条件配饵，并把实际效果留给下一次。</p></div></header><div id='baitModeNotice' class='notice' style='display:none;margin-bottom:10px'></div>
@@ -5067,18 +5067,39 @@ async function loadPositionsV161(){
   const status=document.getElementById('positionHistoryStatusV161');
   if(status&&!status.textContent.includes('读取不完整')&&!status.textContent.includes('无法确认'))status.textContent='钓位统计来自已关联的历史作钓记录；未关联的旧记录不会自动归入钓位。';
  }
- box.innerHTML=data?.length?data.map(x=>"<div class='position-card-v161'><b><span>"+escapeHtml(x.venue_name)+" · "+escapeHtml(x.position_name)+"</span><button onclick=\"deletePositionV161('"+x.id+"')\">删除</button></b><small>"+[x.depth_m!=null?'水深 '+x.depth_m+'m':null,x.bottom_type,x.current_note,x.visit_count?'去过 '+x.visit_count+' 次':null,x.catch_count?'累计 '+x.catch_count+' 尾':null,x.best_weight_kg?'最大 '+x.best_weight_kg+'kg':null].filter(Boolean).map(escapeHtml).join(' · ')+"</small>"+(x.structure_note?"<small>"+escapeHtml(x.structure_note)+"</small>":"")+"</div>").join(''):"<div class='empty'>还没有钓位档案。第一次记录后，这里会成为你的私人钓位库。</div>"
+ window._positionCacheV161=data||[];
+ box.innerHTML=data?.length?data.map(x=>"<div class='position-card-v161'><b><span>"+escapeHtml(x.venue_name)+" · "+escapeHtml(x.position_name)+"</span><button onclick=\"editPositionV161('"+x.id+"')\">编辑</button><button onclick=\"deletePositionV161('"+x.id+"')\">删除</button></b><small>"+[x.depth_m!=null?'水深 '+x.depth_m+'m':null,x.bottom_type,x.current_note,x.visit_count?'去过 '+x.visit_count+' 次':null,x.catch_count?'累计 '+x.catch_count+' 尾':null,x.best_weight_kg?'最大 '+x.best_weight_kg+'kg':null].filter(Boolean).map(escapeHtml).join(' · ')+"</small>"+(x.structure_note?"<small>"+escapeHtml(x.structure_note)+"</small>":"")+"</div>").join(''):"<div class='empty'>还没有钓位档案。第一次记录后，这里会成为你的私人钓位库。</div>"
+}
+function cancelPositionEditV161(){
+ window._editingPositionV161=null;
+ $('positionSaveBtnV161').textContent='＋ 保存钓位';$('positionCancelEditV161').style.display='none';
+ ['positionNameV161','positionDepthV161','positionCurrentV161','positionNoteV161'].forEach(id=>$(id).value='');
+ $('positionBottomV161').value='';
+}
+function editPositionV161(id){
+ const p=(window._positionCacheV161||[]).find(x=>x.id===id);if(!p)return;
+ window._editingPositionV161=id;
+ $('positionVenueV161').value=p.venue_name||'';$('positionNameV161').value=p.position_name||'';
+ $('positionDepthV161').value=p.depth_m??'';$('positionBottomV161').value=p.bottom_type||'';
+ $('positionCurrentV161').value=p.current_note||'';$('positionNoteV161').value=p.structure_note||'';
+ $('positionSaveBtnV161').textContent='保存修改';$('positionCancelEditV161').style.display='';
+ $('positionStatusV161').textContent='正在编辑钓位档案。';
+ $('positionVenueV161').scrollIntoView({behavior:'smooth',block:'center'});
 }
 async function savePositionV161(){
  if(!currentUser)return alert('请先登录。');const venue=$('positionVenueV161').value.trim(),name=$('positionNameV161').value.trim(),st=$('positionStatusV161');if(venue.length>120||name.length>80){st.textContent='钓场名称最多120字，钓位名称最多80字。';return}if(!venue||!name){st.textContent='请填写钓场和钓位名称。';return}
  if(window._positionSaveBusyV161)return;window._positionSaveBusyV161=true;
  try{
- const userId=currentUser.id;
+ const userId=currentUser.id,editingId=window._editingPositionV161;
  st.textContent='正在保存…';
  if(currentUser?.id!==userId){st.textContent='登录状态已变化，请重新操作。';return}
  st.textContent='正在保存…';const depth=$('positionDepthV161').value;
- const {error}=await sb.from('fishing_positions').insert({user_id:userId,venue_name:venue,position_name:name,depth_m:depth===''?null:Number(depth),bottom_type:$('positionBottomV161').value||null,current_note:$('positionCurrentV161').value.trim()||null,structure_note:$('positionNoteV161').value.trim()||null});
- if(error){st.textContent=error.code==='23505'?'该钓场已有同名钓位，请使用已有档案。':'保存失败：'+error.message;return}if(currentUser?.id!==userId)return;st.textContent='已加入你的钓位档案。';['positionNameV161','positionDepthV161','positionCurrentV161','positionNoteV161'].forEach(id=>$(id).value='');$('positionBottomV161').value='';loadPositionsV161()
+ const payload={venue_name:venue,position_name:name,depth_m:depth===''?null:Number(depth),bottom_type:$('positionBottomV161').value||null,current_note:$('positionCurrentV161').value.trim()||null,structure_note:$('positionNoteV161').value.trim()||null};
+ const {data:saved,error}=editingId
+  ?await sb.from('fishing_positions').update(payload).eq('id',editingId).eq('user_id',userId).select('id')
+  :await sb.from('fishing_positions').insert({...payload,user_id:userId}).select('id');
+ if(!error&&!saved?.length){st.textContent='没有保存任何钓位，请刷新后重试。';return}
+ if(error){st.textContent=error.code==='23505'?'该钓场已有同名钓位，请使用已有档案。':'保存失败：'+error.message;return}if(currentUser?.id!==userId)return;st.textContent=editingId?'钓位档案已更新。':'已加入你的钓位档案。';cancelPositionEditV161();loadPositionsV161()
  }catch(e){st.textContent='保存失败：'+(e?.message||'未知错误')}finally{window._positionSaveBusyV161=false}
 }
 async function deletePositionV161(id){
@@ -5093,6 +5114,7 @@ async function deletePositionV161(id){
  if(error){if(st)st.textContent='删除失败：'+error.message;return}
  if(!data?.length){if(st)st.textContent='没有删除任何钓位，请刷新后重试。';return}
  const trip=window._currentTrip;if(trip?.positionId===id&&!trip.logId){trip.positionId=null;saveTripSession()}
+ if(window._editingPositionV161===id)cancelPositionEditV161();
  if(st)st.textContent='钓位档案已删除。';await loadPositionsV161();
 }
 function syncPositionVenueV161(){const t=window._currentTrip||{},v=typeof t.place==='string'?t.place:(t.place?.name||t.placeName||'');if(v&&$('positionVenueV161')&&!$('positionVenueV161').value)$('positionVenueV161').value=v}
