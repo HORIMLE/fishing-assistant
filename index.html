@@ -5019,7 +5019,7 @@ setTimeout(()=>{syncSessionV160();initPrepV160()},800);
 /* v16.12 personal position memory */
 async function loadPositionsV161(){
  const box=$('positionListV161');if(!box||!currentUser)return;
- const {data,error}=await sb.from('fishing_positions').select('id,venue_name,position_name,depth_m,bottom_type,current_note,structure_note,visit_count,catch_count,best_weight_kg,last_fished_at').order('updated_at',{ascending:false});
+ const {data,error}=await sb.from('fishing_positions').select('id,venue_name,position_name,depth_m,bottom_type,current_note,structure_note,visit_count,catch_count,best_weight_kg,last_fished_at').eq('user_id',currentUser.id).order('updated_at',{ascending:false});
  const activeTrip=window._currentTrip||{};
  const activeVenue=typeof activeTrip.place==='string'?activeTrip.place:(activeTrip.place?.name||activeTrip.placeName||'');
  const positionChoices=document.getElementById('tripPositionChoiceV168');
@@ -5031,7 +5031,7 @@ async function loadPositionsV161(){
  }
 
  if(!error&&data?.length){
-  const {data:history, error:historyError}=await sb.from('fishing_logs').select('position_id,catch_count,catch_weight_kg,fished_at,trip_status').in('position_id',data.map(p=>p.id)).eq('trip_status','completed').limit(1000);
+  const {data:history, error:historyError}=await sb.from('fishing_logs').select('position_id,catch_count,catch_weight_kg,fished_at,trip_status').eq('user_id',currentUser.id).in('position_id',data.map(p=>p.id)).eq('trip_status','completed').limit(1000);
   if(historyError){const status=document.getElementById('positionHistoryStatusV161');if(status)status.textContent='历史统计暂时无法读取，以下统计值可能不是最新数据。'}
   if(!historyError){
    const aggregates=new Map();
@@ -5039,7 +5039,7 @@ async function loadPositionsV161(){
    for(const p of data){const a=aggregates.get(p.id);if(a){p.visit_count=a.visits;p.catch_count=a.fish;p.best_weight_kg=a.best;p.last_fished_at=a.last}else{p.visit_count=0;p.catch_count=0;p.best_weight_kg=null;p.last_fished_at=null}}
   }
  }
- if(error){box.innerHTML="<div class='empty'>钓位读取失败，请稍后重试。</div>";return}
+ if(error){const status=document.getElementById('positionHistoryStatusV161');if(status)status.textContent='钓位读取失败，无法确认统计是否最新。';box.innerHTML="<div class='empty'>钓位读取失败，请稍后重试。</div>";return}
  if(data?.length){
   const status=document.getElementById('positionHistoryStatusV161');
   if(status&&!status.textContent.includes('暂时无法读取'))status.textContent='钓位统计来自已关联的历史作钓记录；未关联的旧记录不会自动归入钓位。';
