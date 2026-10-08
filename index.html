@@ -3212,20 +3212,22 @@ Object.assign(I18N_STATIC,{
   try{
    let imagePaths=[];
    if(existing){
-    const {data}=await sb.from('catch_posts').select('image_paths').eq('id',existing).single();
-    imagePaths=data?.image_paths||[];
+    const {data,error:readError}=await sb.from('catch_posts').select('image_paths').eq('id',existing).eq('user_id',shareUserId).single();
+    if(readError)throw readError;
+    imagePaths=Array.isArray(data?.image_paths)?data.image_paths:[];
    }
+   if(imgs.length>5)throw new Error('一次最多选择5张图片');
+   if(imagePaths.length+imgs.length>5)throw new Error('最多保留5张鱼获照片，请先取消旧分享再重新上传');
    for(const d of imgs){
     if(currentUser?.id!==shareUserId)throw new Error('账号已切换，请重新分享');
     const p=await uploadCatchShareImageV1523(d);
     if(p){uploaded.push(p);imagePaths.push(p)}
    }
-   imagePaths=imagePaths.slice(-5);
    const author=await myDisplayNameV1523();
    if(currentUser?.id!==shareUserId)throw new Error('账号已切换，请重新分享');
    const payload={user_id:shareUserId,fishing_log_id:log.id,author_name:author,caption:caption||null,image_paths:imagePaths,updated_at:new Date().toISOString()};
    const {data,error}=existing
-    ?await sb.from('catch_posts').update(payload).eq('id',existing).eq('user_id',currentUser.id).select('id').single()
+    ?await sb.from('catch_posts').update(payload).eq('id',existing).eq('user_id',shareUserId).select('id').single()
     :await sb.from('catch_posts').insert(payload).select('id').single();
    if(error)throw error;
    if(currentUser?.id!==shareUserId)return;
@@ -3268,17 +3270,28 @@ Object.assign(I18N_STATIC,{
  const oldRenderLogsV1523=renderLogs;
  renderLogs=async function(){await oldRenderLogsV1523();await decorateLogShareV1523()};
 
+ const pendingCatchLikesV171=new Set();
  window.toggleCatchLikeV1523=async function(postId,liked){
-  if(!currentUser)return;
-  if(liked)await sb.from('catch_post_likes').delete().eq('post_id',postId).eq('user_id',currentUser.id);
-  else await sb.from('catch_post_likes').insert({post_id:postId,user_id:currentUser.id});
-  renderCatchFeedV1523()
+  if(!currentUser||pendingCatchLikesV171.has(postId))return;
+  const userId=currentUser.id;
+  pendingCatchLikesV171.add(postId);
+  try{
+   const result=liked
+    ?await sb.from('catch_post_likes').delete().eq('post_id',postId).eq('user_id',userId)
+    :await sb.from('catch_post_likes').insert({post_id:postId,user_id:userId});
+   if(result.error)throw result.error;
+   if(currentUser?.id===userId)await renderCatchFeedV1523();
+  }catch(e){if(currentUser?.id===userId)alert('点赞操作失败：'+(e?.message||e))}
+  finally{pendingCatchLikesV171.delete(postId)}
  };
  window.addCatchCommentV1523=async function(postId){
   if(!currentUser)return;
   const el=$('comment_'+postId),body=(el?.value||'').trim();if(!body)return;
+  const userId=currentUser.id;
   const author=await myDisplayNameV1523();
-  const {error}=await sb.from('catch_post_comments').insert({post_id:postId,user_id:currentUser.id,author_name:author,body});
+  if(currentUser?.id!==userId)return;
+  const {error}=await sb.from('catch_post_comments').insert({post_id:postId,user_id:userId,author_name:author,body});
+  if(currentUser?.id!==userId)return;
   if(error)return alert('评论失败：'+error.message);
   el.value='';renderCatchFeedV1523()
  };
