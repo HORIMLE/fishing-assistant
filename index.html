@@ -952,19 +952,13 @@ function renderHistoryInsight(ranked){
 async function getSimilarFishingHistory(place,fish){
  if(!currentUser)return[];
  const userId=currentUser.id,rows=[],pageSize=100;
- let spotId=null;
- if(place){
-  const spot=await sb.from('fishing_spots').select('id').eq('name',place).limit(1).maybeSingle();
-  if(spot.error)console.warn('历史钓点查询失败',spot.error);
-  else spotId=spot.data?.id||null;
- }
  for(let offset=0;offset<500;offset+=pageSize){
   let q=sb.from('fishing_logs')
    .select('id,fished_at,spot_id,position_id,location_name,target_fish,water_depth_m,rod_length_m,rod_setups,main_line,leader_line,float_buoyancy_g,air_temp_c,water_temp_c,season,weather_condition,wind_speed_kmh,bite_condition,current_condition,fishing_method,used_bungalow,bungalow_room_no,bungalow_position_note,bait_recipe,catch_count,catch_weight_kg,duration_minutes,effectiveness_score,notes')
    .eq('user_id',userId).eq('trip_status','completed')
    .order('fished_at',{ascending:false}).order('id',{ascending:true})
    .range(offset,offset+pageSize-1);
-  if(place)q=spotId?q.or('spot_id.eq.'+spotId+',location_name.eq.'+JSON.stringify(place)):q.eq('location_name',place);
+  if(place)q=q.eq('location_name',place);
   const result=await q;
   if(result.error){console.warn('个人经验读取失败',result.error);throw new Error('个人历史记录读取失败，请稍后重试')}
   if(currentUser?.id!==userId)return[];
