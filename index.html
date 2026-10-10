@@ -1216,11 +1216,11 @@ function renderPlaceMapActionsV1571(actionId,items,center){
 }
 function renderPlaceMapV1571(mapId,actionId,items,center){
  const el=$(mapId);if(!el)return;el.classList.add('on');renderPlaceMapActionsV1571(actionId,items,center);
- if(!window.kakao?.maps){el.innerHTML="<div class='map-error-v1569'>Kakao地图 SDK 未加载。请确认 JavaScript Key 与网站域名设置。</div>";return}
+ if(!window.kakao?.maps){el.classList.remove('on');el.innerHTML='';const actions=$(actionId);if(actions)actions.insertAdjacentHTML('beforeend',"<small>内嵌地图不可用，请点击 Kakao 地图查看</small>");return}
  kakao.maps.load(()=>{
   const valid=(items||[]).filter(x=>Number.isFinite(Number(x.y))&&Number.isFinite(Number(x.x)));
   const base=center?new kakao.maps.LatLng(center.lat,center.lon):(valid[0]?new kakao.maps.LatLng(Number(valid[0].y),Number(valid[0].x)):new kakao.maps.LatLng(37.5665,126.9780));
-  if(!placeMapsV1571[mapId])placeMapsV1571[mapId]=new kakao.maps.Map(el,{center:base,level:7});
+  try{if(!placeMapsV1571[mapId])placeMapsV1571[mapId]=new kakao.maps.Map(el,{center:base,level:7})}catch(e){console.warn('Kakao地图初始化失败',e);el.classList.remove('on');el.innerHTML='';return}
   (placeMarkersV1571[mapId]||[]).forEach(m=>m.setMap(null));placeMarkersV1571[mapId]=[];
   if(placeInfosV1571[mapId])placeInfosV1571[mapId].close();placeMarkerIndexV1572[mapId]={};
   const map=placeMapsV1571[mapId],bounds=new kakao.maps.LatLngBounds();
@@ -1231,7 +1231,8 @@ function renderPlaceMapV1571(mapId,actionId,items,center){
    const info=new kakao.maps.InfoWindow({content:"<div class='kakao-pop-v1569'><b>"+escapeHtml(x.name||'钓场')+"</b><small>"+escapeHtml((d?d+' · ':'')+(x.address||''))+"</small><div><button onclick='selectDiscoveredPlaceByKey("+JSON.stringify(key)+")'>本次钓点</button><a target='_blank' rel='noopener' href='"+kakaoPlaceMapUrlV1569(x)+"'>软件浏览</a><a target='_blank' rel='noopener' href='"+kakaoPlaceRouteUrlV1569(x)+"'>路线</a></div></div>"});
    kakao.maps.event.addListener(m,'click',()=>{if(placeInfosV1571[mapId])placeInfosV1571[mapId].close();info.open(map,m);placeInfosV1571[mapId]=info})
   });
-  setTimeout(()=>{map.relayout();if(valid.length||center)map.setBounds(bounds)},80)
+  setTimeout(()=>{try{if(el.isConnected){map.relayout();if(valid.length||center)map.setBounds(bounds)}}catch(e){console.warn('Kakao地图布局失败',e)}},180);
+  setTimeout(()=>{if(!el.isConnected||!el.closest('details[open]'))return;const loaded=[...el.querySelectorAll('img')].some(img=>img.complete&&img.naturalWidth>0);if(!loaded){el.classList.remove('on');el.innerHTML='';const actions=$(actionId);if(actions&&!actions.querySelector('.map-fallback-v186'))actions.insertAdjacentHTML('beforeend',"<small class='map-fallback-v186'>地图加载失败，请点击 Kakao 地图查看</small>")}},4000)
  })
 }
 function highlightPlaceCardV1572(key){document.querySelectorAll('.place-result-card-v1572').forEach(x=>x.classList.toggle('map-on',x.dataset.placeKey===key))}
