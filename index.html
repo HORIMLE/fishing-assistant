@@ -394,7 +394,7 @@ body{background:#020807}.account-bar{display:none}.wrap{max-width:430px;padding:
     <summary><span>📍 查找附近钓场</span><span class='group-count'>GPS</span></summary>
     <div class='group-body' style='padding:12px'>
       <div class='grid'>
-        <div class='field'><label>搜索范围</label><select id='placeRadius'><option value='5000'>5 km</option><option value='10000' selected>10 km</option><option value='20000'>20 km</option><option value='30000'>30 km</option><option value='50000'>50 km</option><option value='100000'>100 km</option></select></div>
+        <div class='field'><label>搜索范围</label><select id='placeRadius'><option value='5000'>5 km</option><option value='10000' selected>10 km</option><option value='20000'>20 km</option><option value='50000'>50 km</option></select></div>
         <div class='field'><label>结果排序</label><select disabled><option>按距离</option></select></div>
       </div>
       <button class='primary' onclick='searchNearbyFishingPlaces()'>查找附近钓场</button>
@@ -1148,14 +1148,25 @@ function phoneHref(phone){
 function fishingPlaceKey(x){
  return String(x?.id||`${x?.name||''}|${x?.x||''}|${x?.y||''}`)
 }
+function fishingPlaceAreaV184(x){
+ const raw=x?.water_area_m2??x?.area_m2??x?.water_surface_area_m2;
+ if(raw===null||raw===undefined||raw==='')return {label:'暂无面积数据',source:''};
+ const sqm=Number(raw);
+ if(!Number.isFinite(sqm)||sqm<=0)return {label:'暂无面积数据',source:''};
+ const unit=sqm>=10000?(sqm/10000).toLocaleString('zh-CN',{maximumFractionDigits:2})+' ha':Math.round(sqm).toLocaleString('zh-CN')+' ㎡';
+ const source=String(x?.area_source||'').trim().slice(0,60);
+ const estimated=x?.area_estimated===true||/estimated|estimate|估算|추정/i.test(source);
+ return {label:(estimated?'约 ':'')+unit,source:source||'面积来源未注明'}
+}
 function fishingPlaceCard(x,mapId){
  const key=fishingPlaceKey(x);
  window._placeLookup=window._placeLookup||{};
  window._placeLookup[key]=x;
  let d=x.distance!=null?(x.distance<1000?Math.round(x.distance)+'m':(x.distance/1000).toFixed(1)+'km'):'';
  let roomBadge=x.has_room_history===true?'<span class="pill">🏠 有钓鱼房</span>':'';
+ const area=fishingPlaceAreaV184(x);
  let webUrl='https://search.naver.com/search.naver?query='+encodeURIComponent((x.name||'')+' 낚시터'); let routeUrl=(Number.isFinite(Number(x.y))&&Number.isFinite(Number(x.x)))?'https://map.kakao.com/link/to/'+encodeURIComponent(x.name||'钓场')+','+Number(x.y)+','+Number(x.x):'';
- return `<div class='item place-result-card-v1572' data-place-key='${escapeHtml(key)}' onclick="focusPlaceOnMapV1572('${escapeHtml(mapId||'')}','${escapeHtml(key)}',event)"><b>${escapeHtml(x.name||'未命名钓场')}</b><div class='small'>${d?d+' · ':''}${escapeHtml(x.address||'地址未知')}</div>${roomBadge?`<div style='margin-top:6px'>${roomBadge}</div>`:''}${x.phone?`<div class='small'>☎ ${escapeHtml(x.phone)}</div>`:''}<div style='display:flex;flex-wrap:wrap;gap:8px;margin-top:8px'><button class='secondary' style='margin:0;padding:8px;flex:1' onclick='selectDiscoveredPlaceByKey(${JSON.stringify(key)})'>设为本次钓点</button>${x.phone?`<a class='secondary' style='margin:0;padding:8px;flex:1;text-align:center;text-decoration:none' href='${phoneHref(x.phone)}'>📞 打电话</a>`:''}${x.place_url?`<a class='secondary' style='margin:0;padding:8px;flex:1;text-align:center;text-decoration:none' target='_blank' rel='noopener' href='${x.place_url}'>Kakao地图</a>`:''}${routeUrl?`<a class='secondary' style='margin:0;padding:8px;flex:1;text-align:center;text-decoration:none' target='_blank' rel='noopener' href='${routeUrl}'>路线导航</a>`:''}<a class='secondary' style='margin:0;padding:8px;flex:1;text-align:center;text-decoration:none' target='_blank' rel='noopener' href='${webUrl}'>🌐 相关网站</a></div></div>`
+ return `<div class='item place-result-card-v1572' data-place-key='${escapeHtml(key)}' onclick="focusPlaceOnMapV1572('${escapeHtml(mapId||'')}','${escapeHtml(key)}',event)"><b>${escapeHtml(x.name||'未命名钓场')}</b><div class='small'>${d?d+' · ':''}${escapeHtml(x.address||'地址未知')}</div><div class='small' style='margin-top:5px'>🌊 水域面积：${escapeHtml(area.label)}${area.source?' · '+escapeHtml(area.source):''}</div>${roomBadge?`<div style='margin-top:6px'>${roomBadge}</div>`:''}${x.phone?`<div class='small'>☎ ${escapeHtml(x.phone)}</div>`:''}<div style='display:flex;flex-wrap:wrap;gap:8px;margin-top:8px'><button class='secondary' style='margin:0;padding:8px;flex:1' onclick='selectDiscoveredPlaceByKey(${JSON.stringify(key)})'>设为本次钓点</button>${x.phone?`<a class='secondary' style='margin:0;padding:8px;flex:1;text-align:center;text-decoration:none' href='${phoneHref(x.phone)}'>📞 打电话</a>`:''}${x.place_url?`<a class='secondary' style='margin:0;padding:8px;flex:1;text-align:center;text-decoration:none' target='_blank' rel='noopener' href='${x.place_url}'>Kakao地图</a>`:''}${routeUrl?`<a class='secondary' style='margin:0;padding:8px;flex:1;text-align:center;text-decoration:none' target='_blank' rel='noopener' href='${routeUrl}'>路线导航</a>`:''}<a class='secondary' style='margin:0;padding:8px;flex:1;text-align:center;text-decoration:none' target='_blank' rel='noopener' href='${webUrl}'>🌐 相关网站</a></div></div>`
 }
 function fishingPlaceType(x){
  const t=((x?.name||'')+' '+(x?.category||'')).toLowerCase();
@@ -1227,9 +1238,9 @@ function highlightPlaceCardV1572(key){document.querySelectorAll('.place-result-c
 function focusPlaceOnMapV1572(mapId,key,e){if(e&&e.target.closest('button,a'))return;const o=placeMarkerIndexV1572[mapId]?.[key],map=placeMapsV1571[mapId];if(!o||!map)return;map.panTo(o.marker.getPosition());map.setLevel(Math.min(map.getLevel(),5));if(placeInfosV1571[mapId])placeInfosV1571[mapId].close();o.info.open(map,o.marker);placeInfosV1571[mapId]=o.info;highlightPlaceCardV1572(key);$(mapId)?.scrollIntoView({behavior:'smooth',block:'center'})}
 function renderNearbyMapV1568(lat,lon,items,radius){renderPlaceMapV1571('nearbyMapV1568','nearbyPlaceMapActionsV1571',items,{lat,lon})}
 async function searchNearbyFishingPlaces(){
- let st=$('nearbyPlaceStatus'),radius=Number($('placeRadius').value)||10000;if(!window.isSecureContext)return st.textContent='附近搜索需要 HTTPS 网站。';if(!navigator.geolocation)return st.textContent='当前浏览器不支持定位。';
+ let st=$('nearbyPlaceStatus'),radius=Number($('placeRadius').value)||10000;if(![5000,10000,20000,50000].includes(radius))radius=10000;if(!window.isSecureContext)return st.textContent='附近搜索需要 HTTPS 网站。';if(!navigator.geolocation)return st.textContent='当前浏览器不支持定位。';
  st.textContent='正在定位并搜索附近钓场…';$('nearbyPlaceList').innerHTML='';
- navigator.geolocation.getCurrentPosition(async pos=>{try{let lat=pos.coords.latitude,lon=pos.coords.longitude;window._nearbyCenterV1573={lat,lon};let data=await invokeFishingPlaces({mode:'nearby',lat,lon,radius}),items=await enrichFishingPlaces(data.items||[]);renderFishingPlaces('nearbyPlaceList',items);const g=window._placeGroupsV1573?.nearbyPlaceList||{};st.textContent=`${Math.round(radius/1000)}km 搜索结果 · ${placeGroupSummaryV1573(g)}`}catch(e){st.textContent='搜索失败：'+e.message}},e=>{st.textContent=e.code===1?'定位权限被拒绝，请允许此网站使用位置。':e.code===2?'无法取得当前位置，请确认手机定位已开启。':'定位超时，请重试。'},{enableHighAccuracy:true,timeout:15000,maximumAge:300000})
+ navigator.geolocation.getCurrentPosition(async pos=>{try{let lat=pos.coords.latitude,lon=pos.coords.longitude;window._nearbyCenterV1573={lat,lon};let data=await invokeFishingPlaces({mode:'nearby',lat,lon,radius}),items=await enrichFishingPlaces(data.items||[]);items=items.filter(x=>{const d=Number(x.distance);return x.distance==null||!Number.isFinite(d)||(d>=0&&d<=radius)});renderFishingPlaces('nearbyPlaceList',items);const g=window._placeGroupsV1573?.nearbyPlaceList||{};st.textContent=`${Math.round(radius/1000)}km 搜索结果 · ${placeGroupSummaryV1573(g)}`}catch(e){st.textContent='搜索失败：'+e.message}},e=>{st.textContent=e.code===1?'定位权限被拒绝，请允许此网站使用位置。':e.code===2?'无法取得当前位置，请确认手机定位已开启。':'定位超时，请重试。'},{enableHighAccuracy:true,timeout:15000,maximumAge:300000})
 }
 async function searchRegionFishingPlaces(){
  let region=$('regionQuery').value.trim(),st=$('regionPlaceStatus');if(!region)return st.textContent='请输入地区，例如：화성、용인、태안。';st.textContent=`正在搜索“${region}”区域钓场…`;$('regionPlaceList').innerHTML='';
