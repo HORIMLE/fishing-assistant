@@ -373,7 +373,7 @@ body{background:#020807}.account-bar{display:none}.wrap{max-width:430px;padding:
  <button data-b-go='box' class='float'><span class='pic'>│<i>◆</i>│</span><b>浮漂</b><small>管理我的浮漂</small></button>
  <button data-b-go='bait' class='bait'><span class='pic'>R</span><b>饵料</b><small>管理我的饵料</small></button>
 </div></section>
-<section class='b-section-v1564'><div class='b-head-v1563'><h3>附近钓场</h3><button onclick="showPlaceEntryModeV1526('manual')">更多 ›</button></div><div id='homeNearbyV1564' class='b-nearby-v1564'><button class='b-home-loading-v1564 home-location-optin-v1575' onclick='loadHomeNearbyV1575()'>📍 点击读取位置并查找附近钓场</button></div></section>
+<section class='b-section-v1564'><div class='b-head-v1563'><h3>附近钓场</h3><button onclick="showPlaceEntryModeV1526('manual')">更多 ›</button></div><div style='display:flex;align-items:center;gap:8px;margin:0 0 10px'><label for='homePlaceRadiusV185' style='font-size:12px;white-space:nowrap'>搜索范围</label><select id='homePlaceRadiusV185' aria-label='附近钓场搜索范围' onchange='loadHomeNearbyV1575()' style='width:auto;flex:1;max-width:170px;margin:0;padding:8px;border-radius:10px'><option value='5000'>5 km</option><option value='10000' selected>10 km</option><option value='20000'>20 km</option><option value='50000'>50 km</option></select></div><div id='homeNearbyV1564' class='b-nearby-v1564'><button class='b-home-loading-v1564 home-location-optin-v1575' onclick='loadHomeNearbyV1575()'>📍 点击读取位置并查找附近钓场</button></div></section>
 <section class='b-section-v1564'><div class='b-head-v1563'><h3>渔获分享</h3><button data-b-go='community'>更多 ›</button></div><div id='homeCatchV1564' class='b-share-v1564'><div class='b-home-loading-v1564'>正在读取最新分享…</div></div></section>
 </div>
 <div id='placeManualMode' style='display:none'>
@@ -5334,11 +5334,11 @@ Object.assign(I18N_STATIC,{
   if(!window.isSecureContext||!navigator.geolocation){box.innerHTML="<button class='b-home-loading-v1564' onclick=\"showPlaceEntryModeV1526('manual')\">当前位置不可用 · 点击手动查找钓场</button>";return}
   box.innerHTML="<div class='b-home-loading-v1564'>正在定位并搜索附近钓场…</div>";
   navigator.geolocation.getCurrentPosition(async pos=>{try{
-    const lat=pos.coords.latitude,lon=pos.coords.longitude,radius=20000;
+    const lat=pos.coords.latitude,lon=pos.coords.longitude,radius=Number(document.getElementById('homePlaceRadiusV185')?.value)||10000;
     const data=await invokeFishingPlaces({mode:'nearby',lat,lon,radius});
-    const items=(data.items||[]).map(x=>({...x,_d:x.distance!=null?Number(x.distance):((x.y!=null&&x.x!=null)?distanceMeters(lat,lon,Number(x.y),Number(x.x)):null)})).sort((a,b)=>(a._d??Infinity)-(b._d??Infinity)).slice(0,3);
-    if(!items.length){box.innerHTML="<button class='b-home-loading-v1564' onclick=\"showPlaceEntryModeV1526('manual')\">20 km 内没有找到钓场 · 点击扩大搜索</button>";return}
-    box.innerHTML=items.map((x,i)=>"<button class='b-nearby-card-v1564' onclick=\"selectPlaceV146("+encodeURIComponent(JSON.stringify(x))+")\"><span class='photo' style=\"background-image:url('"+lakeImgs[i%3]+"')\"></span><span class='txt'><b>"+escapeHtml(x.name||'钓场')+"</b><small>"+(x._d!=null?(x._d/1000).toFixed(1)+' km · ':'')+escapeHtml(x.category||x.water_type||'钓场')+"</small></span></button>").join('');
+    const items=(data.items||[]).map(x=>({...x,_d:x.distance!=null?Number(x.distance):((x.y!=null&&x.x!=null)?distanceMeters(lat,lon,Number(x.y),Number(x.x)):null)})).filter(x=>x._d==null||(Number.isFinite(x._d)&&x._d>=0&&x._d<=radius)).sort((a,b)=>(a._d??Infinity)-(b._d??Infinity)).slice(0,3);
+    if(!items.length){box.innerHTML="<button class='b-home-loading-v1564' onclick=\"showPlaceEntryModeV1526('manual')\">'+(radius/1000)+' km 内没有找到钓场 · 点击扩大搜索</button>";return}
+    box.innerHTML=items.map((x,i)=>"<button class='b-nearby-card-v1564' onclick=\"selectPlaceV146("+encodeURIComponent(JSON.stringify(x))+")\"><span class='photo' style=\"background-image:url('"+lakeImgs[i%3]+"')\"></span><span class='txt'><b>"+escapeHtml(x.name||'钓场')+"</b><small>"+(x._d!=null?(x._d/1000).toFixed(1)+' km · ':'')+escapeHtml(x.category||x.water_type||'钓场')+"</small><small>🌊 水域面积："+escapeHtml(fishingPlaceAreaV184(x).label)+"</small></span></button>").join('');
   }catch(e){box.innerHTML="<button class='b-home-loading-v1564' onclick=\"showPlaceEntryModeV1526('manual')\">附近钓场读取失败 · 点击重试</button>"}},e=>{box.innerHTML="<button class='b-home-loading-v1564' onclick='refreshHomeV1564()'>"+(e.code===1?'需要允许位置权限 · 点击重试':'无法取得当前位置 · 点击重试')+"</button>"},{enableHighAccuracy:true,timeout:15000,maximumAge:300000});
  }
  async function homeCatchV1564(){
